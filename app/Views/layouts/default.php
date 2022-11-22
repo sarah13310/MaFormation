@@ -225,7 +225,7 @@
                             <li>
                                 <a href="#!" class="text-white">Profil</a>
                             </li>
-                           
+
                         </ul>
                     </div>
                     <!--Grid column-->
@@ -250,7 +250,6 @@
                         </ul>
                     </div>
                     <!--Grid column-->
-
                 </div>
 
                 <!--Grid row-->
@@ -262,7 +261,7 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             <p><a class="text-white" href="https://maformation.com/">Termes et conditions générales</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;<a class="text-white" href="https://maformation.com/">Mentions légales</a></p>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a class="text-white" href="https://maformation.com/">Mentions légales</a></p>
         </div>
         <!-- Copyright -->
     </footer>
