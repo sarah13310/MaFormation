@@ -36,15 +36,23 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
+// admin
 $routes->get('/admin', 'Admin::index');
+$routes->get('/admin/profil', 'Admin::profile');
 $routes->get('/contact', 'Contact::index');
-$routes->get('/login', 'Login::index');
-$routes->get('/signin', 'Login::signin');
+
+// user
+$routes->match(['get','post'],'login', 'User::login');//login user
+$routes->match(['get','post'],'/forgetpassword', 'User::forgetpassword');//login user
+$routes->match(['get','post'],'signin', 'User::signin');//signin user
+
 // menu a propos
 $routes->get('/formateurs', 'Former::index');
 $routes->get('/faq', 'FAQ::index');
 $routes->get('/formations', 'Training::index');
 $routes->get('/financement', 'Funding::index');
+
 // menu actualités
 $routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
