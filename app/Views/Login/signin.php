@@ -1,119 +1,88 @@
+
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
-<div>
-    <h1><?= $title ?></h1>
+<?php require_once ("util.php"); ?>
+
+<div class="container d-flex align-items-center justify-content-center">
     <form class="" action="/signin" method="post">
-        <div>
-            <div>
-                <label for="name">Nom</label>
-                <input type="text" name="name" id="name" value="<?= set_value('name') ?>">
-            </div>
-            <div>
-                <label for="firstname">Prénom</label>
-                <input type="text" name="firstname" id="firstname" value="<?= set_value('firstname') ?>">
-            </div>
-            <div>
-                <label for="address">Adresse</label>
-                <input type="textarea" name="address" id="address" value="<?= set_value('address') ?>">
-            </div>
-            <div>
-                <label for="city">Ville</label>
-                <input type="text" name="city" id="city" value="<?= set_value('city') ?>">
-            </div>
-            <div>
-                <label for="cp">Code postal</label>
-                <input type="text" name="cp" id="cp" value="<?= set_value('cp') ?>">
-            </div>
-            <div>
-                <label for="phone">Téléphone</label>
-                <input type="text" name="phone" id="phone" value="<?= set_value('phone') ?>">
-            </div>
-            <div>
-                <label for="mail">E-mail</label>
-                <input type="text" name="mail" id="mail" value="<?= set_value('mail') ?>">
-            </div>
-            <div>
-                <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password" value="<?= set_value('password') ?>">
-            </div>
-            <div>
-                <label for="password_confirm">Confirmer mot de passe</label>
-                <input type="password" name="password_confirm" id="password_confirm" value="">
-            </div>
-            <div>
-                <label for="type">Vous êtes :</label>
-                <select id="dropDownId" name="index" onchange="display()">
-                    <option value="1" selected="selected">---</option>
-                    <option value="2">Un formateur</option>
-                    <option value="3">Une entreprise</option>
-                    <option value="4">Un particulier</option>
-                </select>
-                <div id="snone">
-                </div>
-                <div id="sformer" style="display: none;">
-                    <div>
-                        <label for="f_name">Nom de la certification</label>
-                        <input type="text" name="f_name" id="f_name" value="<?= set_value('f_name') ?>">
+        <h3><?= $title ?></h3>
+        <hr>
+        <div class="row">
+            <div class="col-xs-3 col-12 mt-0 from-wrapper ">
+                <?php if (session()->get('success')) : ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= session()->get('success') ?>
                     </div>
-                    <div>
-                        <label for="f_content">Contenu de la certification</label>
-                        <input type="textarea" name="f_content" id="f_content" value="<?= set_value('f_content') ?>">
+                <?php endif;?>
+                <?php if (session()->getFlashdata('infos') !== null) : ?>
+                    <div class="alert alert-warning alert-dismissible fade show js-alert" role="alert">
+                        <strong>Login : </strong><?= session()->getFlashdata('infos') ?>
+                        <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div>
-                        <label for="f_date">Date de la certification</label>
-                        <input type="date" name="f_date" id="f_date" value="<?= set_value('f_date') ?>">
+                <?php endif;?>
+                <div class="row">
+                    <div class="col-xs-4 col-6 mt-2 ">
+                        <input class="form-control mb-2" type="text" name="name" id="name" placeholder="Votre Nom (*)" value="<?= set_value('name') ?>">
+                        <input class="form-control mb-2" type="text" name="firstname" id="firstname" placeholder="Prénom (*)" value="<?= set_value('firstname') ?>">
+                        <input class="form-control mb-2" type="textarea" name="address" id="address" placeholder="Adresse" value="<?= set_value('address') ?>">
+                        <input class="form-control mb-2" type="text" name="city" id="city" placeholder="Ville" value="<?= set_value('city') ?>">
+                        <input class="form-control mb-2" type="text" name="cp" id="cp" placeholder="Code postal" value="<?= set_value('cp') ?>">
+                        <input class="form-control mb-2" type="text" name="country" id="country" placeholder="Pays" value="<?= set_value('country') ?>">
+                        <input class="form-control mb-2" type="text" name="phone" id="phone" placeholder="Téléphone" value="<?= set_value('phone') ?>">
+                        <input class="form-control mb-2" type="text" name="mail" id="mail" placeholder="E-mail (*)" value="<?= set_value('mail') ?>">
+                        <input class="form-control mb-2" type="password" name="password" id="password" placeholder="Mot de passe (*)" value="<?= set_value('password') ?>">
+                        <input class="form-control mb-2" type="password" name="password_confirm" placeholder="Confirmer mot de passe (*)" id="password_confirm" value="">
                     </div>
-                    <div>
-                        <label for="f_location">Lieu de la certification</label>
-                        <input type="text" name="f_location" id="f_location" value="<?= set_value('f_location') ?>">
+                    <div class="col-xs-4 col-6 mt-2 ">
+                        <select class="form-select mb-2" id="dropDownId" name="index" onchange="display()">
+                            <?= createOptionType();?>                           
+                        </select>
+                        <div id="snone">
+                        </div>
+                        <div id="sformer" style="display: none;">
+                            <input class="form-control mb-2" type="text" name="f_name" id="f_name" placeholder="Titre de la certification (*)" value="<?= set_value('f_name') ?>">
+                            <input class="form-control mb-2" type="textarea" name="f_content" id="f_content" placeholder="Contenu de la certification" value="<?= set_value('f_content') ?>">
+                            <input class="form-control mb-2" type="date" name="f_date" id="f_date" placeholder="Date de la certification (*)" value="<?= set_value('f_date') ?>">
+                            <input class="form-control mb-2" type="text" name="f_organism" id="f_organism" placeholder="Nom de l'organisme (*)" value="<?= set_value('f_organism') ?>">
+                            <input class="form-control mb-2" type="textarea" name="f_address" id="f_address" placeholder="Adresse de l'organisme (*)" value="<?= set_value('f_address') ?>">
+                            <input class="form-control mb-2" type="text" name="f_city" id="f_city" placeholder="Ville de l'organisme (*)" value="<?= set_value('f_city') ?>">
+                            <input class="form-control mb-2" type="text" name="f_cp" id="f_cp" placeholder="Code postal de l'organisme (*)" value="<?= set_value('f_cp') ?>">
+                            <input class="form-control mb-2" type="text" name="f_country" id="f_country" placeholder="Pays de l'organisme " value="<?= set_value('f_country') ?>">
+                        </div>
+                        <div id="scompany" style="display:none;">
+                            <input class="form-control mb-2" type="text" name="c_name" id="c_name" placeholder="Nom de l'entreprise (*)" value="<?= set_value('c_name') ?>">
+                            <input class="form-control mb-2" type="textarea" name="c_address" id="c_address" placeholder="Adresse de l'entreprise (*)" value="<?= set_value('c_address') ?>">
+                            <input class="form-control mb-2" type="text" name="c_city" id="c_city" placeholder="Ville de l'entreprise (*)" value="<?= set_value('c_city') ?>">
+                            <input class="form-control mb-2" type="text" name="c_cp" id="c_cp" placeholder="Code postal de l'entreprise (*)" value="<?= set_value('c_cp') ?>">
+                            <input class="form-control mb-2" type="text" name="c_siret" id="c_siret" placeholder="Numéro de Siret (**)" value="<?= set_value('c_siret') ?>">
+                            <input class="form-control mb-2" type="text" name="c_kbis" id="c_kbis" placeholder="Kbis (**)" value="<?= set_value('c_kbis') ?>">
+                        </div>
                     </div>
-                </div>
-                <div id="scompany" style="display: none;">
-                    <div>
-                        <label for="c_name">Nom de l'entreprise</label>
-                        <input type="text" name="c_name" id="c_name" value="<?= set_value('c_name') ?>">
+                    <div class="form-group">
+                        <input type="checkbox" name="newsletters" checked <?= set_checkbox('newsletters', '1'); ?>>
+                        <label for="newsletters">S'inscrire à la newsletters</label>
+                        <p>(*)  Obligatoire<br>(**) Entreprise non inscrite</p>                        
                     </div>
-                    <div>
-                        <label for="c_address">Adresse de l'entreprise</label>
-                        <input type="textarea" name="c_address" id="c_address" value="<?= set_value('c_address') ?>">
-                    </div>
-                    <div>
-                        <label for="c_city">Ville de l'entreprise</label>
-                        <input type="text" name="c_city" id="c_city" value="<?= set_value('c_city') ?>">
-                    </div>
-                    <div>
-                        <label for="c_cp">Code postal de l'entreprise</label>
-                        <input type="text" name="c_cp" id="c_cp" value="<?= set_value('c_cp') ?>">
-                    </div>
-                    <div>
-                        <label for="c_siret">Siret de l'entreprise</label>
-                        <input type="text" name="c_siret" id="c_siret" value="<?= set_value('c_siret') ?>">
-                    </div>
-                    <div>
-                        <label for="c_kbis">Kbis de l'entreprise</label>
-                        <input type="text" name="c_kbis" id="c_kbis" value="<?= set_value('c_kbis') ?>">
-                    </div>
-                </div>
-                <div id="smember" style="display: none;">
-                </div>
-            </div>
-            <?php if (isset($validation)) : ?>
+                    <?php if (isset($validation)) : ?>
                         <div class="col-12">
                             <div class="alert alert-danger" role="alert">
                                 <?= $validation->listErrors() ?>
                             </div>
                         </div>
                     <?php endif; ?>
-            <div>
-                <button type="submit">S'inscrire</button>
-            </div>
-            <div>
-                <a href="login">Se connecter</a>
+                    <div class="row mb-3">
+                        <div class="col-12 col-sm-4">
+                            <button class="btn btn-primary" type="submit">S'inscrire</button>
+                        </div>
+                        <div class="align-self-center col-12 col-sm-8 text-right">
+                            <a href="login">Se connecter</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
 </div>
-
 <?= $this->endSection() ?>
 
 
@@ -126,22 +95,22 @@
             document.getElementById("snone").style.display = 'block'
             document.getElementById("sformer").style.display = 'none'
             document.getElementById("scompany").style.display = 'none'
-            document.getElementById("smember").style.display = 'none'
+            //document.getElementById("smember").style.display = 'none'
         } else if (index == 1) {
             document.getElementById("snone").style.display = 'none'
             document.getElementById("sformer").style.display = 'block'
             document.getElementById("scompany").style.display = 'none'
-            document.getElementById("smember").style.display = 'none'
+            //document.getElementById("smember").style.display = 'none'
         } else if (index == 2) {
             document.getElementById("snone").style.display = 'none'
             document.getElementById("sformer").style.display = 'none'
             document.getElementById("scompany").style.display = 'block'
-            document.getElementById("smember").style.display = 'none'
+            //document.getElementById("smember").style.display = 'none'
         } else if (index == 3) {
             document.getElementById("snone").style.display = 'none'
             document.getElementById("sformer").style.display = 'none'
             document.getElementById("scompany").style.display = 'none'
-            document.getElementById("smember").style.display = 'block'
+            //document.getElementById("smember").style.display = 'block'
         }
     }
 </script>

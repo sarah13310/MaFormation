@@ -1,7 +1,6 @@
 <?php
 
 namespace Config;
-
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -21,11 +20,6 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
-// where controller filters or CSRF protection are bypassed.
-// If you don't want to define all routes, please use the Auto Routing (Improved).
-// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -42,10 +36,17 @@ $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/profil', 'Admin::profile');
 $routes->get('/contact', 'Contact::index');
 
+// former
+$routes->get('/former/view', 'Former::former_view');
+$routes->get('/former/list', 'Former::former_list');
+$routes->get('/former/profil/view', 'Former::profile_view');
+$routes->get('/former/profil/edit', 'Former::profile_edit');
+
 // user
 $routes->match(['get','post'],'login', 'User::login');//login user
 $routes->match(['get','post'],'/forgetpassword', 'User::forgetpassword');//login user
-$routes->match(['get','post'],'signin', 'User::signin');//signin user
+$routes->match(['get','post'],'/signin', 'User::signin');//signin user
+$routes->match(['get','post'],'/company', 'User::confirmation');//signin user
 
 // menu a propos
 $routes->get('/formateurs', 'Former::index');
@@ -58,7 +59,6 @@ $routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
 $routes->get('/videos', 'Media::videos');
 $routes->get('/livres', 'Media::books');
-
 
 /*
 * --------------------------------------------------------------------

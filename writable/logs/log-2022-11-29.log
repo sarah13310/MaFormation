@@ -1,0 +1,26 @@
+CRITICAL - 2022-11-29 14:50:11 --> Undefined array key "id_user"
+in APPPATH\Controllers\User.php on line 288.
+ 1 APPPATH\Controllers\User.php(288): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_user"', 'APPPATH\\Controllers\\User.php', 288)
+ 2 APPPATH\Controllers\User.php(274): App\Controllers\User->setCompanySession([...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->signin()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-11-29 15:01:58 --> count(): Argument #1 ($value) must be of type Countable|array, string given
+in APPPATH\Controllers\User.php on line 272.
+ 1 APPPATH\Controllers\User.php(272): count('ROOTPATH\\public')
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->signin()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-11-29 15:03:00 --> Undefined array key "firstname"
+in APPPATH\Controllers\User.php on line 289.
+ 1 APPPATH\Controllers\User.php(289): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "firstname"', 'APPPATH\\Controllers\\User.php', 289)
+ 2 APPPATH\Controllers\User.php(274): App\Controllers\User->setCompanySession([...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->signin()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

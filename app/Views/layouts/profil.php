@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="<?= base_url() . '/css/style.css' ?>" rel="stylesheet">
@@ -109,9 +109,8 @@
                                     <span class="d-none d-sm-inline mx-3">Admin</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                    <li><a class="dropdown-item" href="#">Nouvel administrateur...</a></li>
                                     <li><a class="dropdown-item" href="#">Paramètres</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -126,33 +125,44 @@
                                 </li>
                                 <li>
                                     <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Tableau de bord</span> </a>
-                                    <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Profil</span></a>
+                                    <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                                            <a href="#" class="nav-link px-0">Modifier Nom - Mdp</a>
                                         </li>
-                                        <li>
-                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-0">Informations contact</a>
+                                        </li>
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-0">Travail</a>
+                                        </li>
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-0">Compétences</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-stoplights"></i> <span class="ms-1 d-none d-sm-inline">Privilèges</span></a>
+                                    <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-stoplights"></i> <span class="ms-1 d-none d-sm-inline">Tabeau de bord</span></a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> + Administrateur</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Permissions</span></a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-currency-euro"></i> <span class="ms-1 d-none d-sm-inline">Factures</span></a>
-                                </li>
+
                                 <li>
                                     <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                         <i class="fs-4 bi-mortarboard"></i> <span class="ms-1 d-none d-sm-inline">Formateurs</span></a>
                                     <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-table'></span><span class="d-none d-sm-inline"> Listes</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Listes</span></a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-filter'></span><span class="d-none d-sm-inline"> Filtrer</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Filtrer</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -161,10 +171,10 @@
                                         <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Formations</span></a>
                                     <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"><span class='bi bi-table'></span> <span class="d-none d-sm-inline"> Listes</span></a>
+                                            <a href="#" class="nav-link px-0"><span class="d-none d-sm-inline"> Listes</span></a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"><span class='bi bi-filter'></span> <span class="d-none d-sm-inline"> Filtrer</span></a>
+                                            <a href="#" class="nav-link px-0"><span class="d-none d-sm-inline"> Filtrer</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -173,13 +183,13 @@
                                         <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Média</span> </a>
                                     <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-film'></span><span class="d-none d-sm-inline"> Vidéos</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Vidéos</span></a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-book'></span><span class="d-none d-sm-inline"> Livres</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Livres</span></a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-puzzle'><span class="d-none d-sm-inline"> Produits</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Produits</span></a>
                                         </li>
 
                                     </ul>
@@ -189,20 +199,23 @@
                                         <i class="fs-4 fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Clients</span> </a>
                                     <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-person'></span><span class="d-none d-sm-inline"> Particuliers</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Particuliers</span></a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span class='bi bi-bank'></span><span class="d-none d-sm-inline"> Entreprises</span></a>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"> Entreprises</span></a>
                                         </li>
                                     </ul>
                                 </li>
-
+                                <li>
+                                    <a href="#" class="nav-link px-0 align-middle">
+                                        <i class="fs-4 bi-currency-euro"></i> <span class="ms-1 d-none d-sm-inline">Factures</span></a>
+                                </li>
                             </ul>
                             <hr>
 
                         </div>
                     </div>
-                    <div class="col py-2">                        
+                    <div class="col py-2">
                         <?= $this->renderSection("content") ?>
                     </div>
                 </div>
