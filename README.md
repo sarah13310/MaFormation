@@ -1,11 +1,11 @@
-# CodeIgniter 4 Framework
+# Ma formation
 
-## What is CodeIgniter?
+## Qu'est-ce que MaFormation?
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+C'est un site basique pour gérer les formations écrit en PHP full-stack web dans un framework clair, rapide, flexible et sécurisé.
+Plus plus d'informations sur le framework utilisé, vous pouvre trouver des informations à [site officiel](http://codeigniter.com).
 
-This repository holds the distributable version of the framework,
+Ce répositoire maintient une version distributabledu site de formation,
 including the user guide. It has been built from the
 [development repository](https://github.com/codeigniter4/CodeIgniter4).
 
