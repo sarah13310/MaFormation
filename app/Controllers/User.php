@@ -92,7 +92,6 @@ class User extends BaseController
         return true;
     }
 
-
     private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
         $modelu = new UserModel();
@@ -115,6 +114,34 @@ class User extends BaseController
             "id_company" => $id_company,
         ];
         $modelucf->save($data_jointure);
+    }
+
+    private function associateCompany($data_user, $id_company, $kbis, $siret)
+    {
+        $modelu = new UserModel();
+        $modelcp = new CompanyModel();
+        $modelucf = new UserHasCompanyModel();
+
+        //table utilisateur
+        $modelu->save($data_user);      
+
+        // table jointure
+        $id_user = $modelu->getInsertID();
+       
+        $data_jointure = [
+            "id_user" => $id_user,
+            "id_company" => $id_company,
+        ];
+        $modelucf->save($data_jointure);
+    }
+    private function ifNotExistCompany($data_company)
+    {
+        $modelcp = new CompanyModel();
+        $company = $modelcp->where("name", $data_company['name'])
+            ->where("cp", $data_company['cp'])
+            ->where("city", $data_company['city'])
+            ->first();
+        return $company;
     }
 
     public function confirmation()
@@ -141,7 +168,7 @@ class User extends BaseController
             'cp' => session()->get('company_cp'),
         ];
 
-        
+
         if ($this->request->getMethod() == 'post') {
 
             $rulesconf = [
@@ -159,10 +186,16 @@ class User extends BaseController
 
             if (!$this->validate($rulesconf, $errorconf)) {
                 $data['validation'] = $this->validator;
-                $data['title'] = "Informations";
+                $data['title'] = "Inscrire société";
                 return view('Login/confirmation', $data);
             } else {
-                $this->saveCompany($data_user, $data_company, $kbis, $siret);
+                $company=$this->ifNotExistCompany($data_company);
+                if ($company==null){//la société n'existe pas on la rajoute
+                    $this->saveCompany($data_user, $data_company, $kbis, $siret);                   
+                }
+                else{// la société existe donc on associe juste avec la table de jointure
+                    $this->associateCompany($data_user, $company['id_company'], $kbis, $siret);   
+                }
                 $data["title"] = "Login";
                 return view('Login/login', $data);
             }
