@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\CertificateModel;
 use App\Models\UserHasCertificateModel;
+use App\Models\UserHasCompanyModel;
 use App\Models\CompanyModel;
 
 class User extends BaseController
@@ -92,17 +93,59 @@ class User extends BaseController
     }
 
 
-    public function confirmation()
+    private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
         $modelu = new UserModel();
-        $modelcf = new CertificateModel();
-        $modelucf = new UserHasCertificateModel();
+        $modelcp = new CompanyModel();
+        $modelucf = new UserHasCompanyModel();
+
+        //table utilisateur
+        $modelu->save($data_user);
+
+        // table entreprise    
+        $data_company['siret'] = $siret;
+        $data_company['kbis'] = $kbis;
+        $modelcp->save($data_company);
+
+        // table jointure
+        $id_user = $modelu->getInsertID();
+        $id_company = $modelcp->getInsertID();
+        $data_jointure = [
+            "id_user" => $id_user,
+            "id_company" => $id_company,
+        ];
+        $modelucf->save($data_jointure);
+    }
+
+    public function confirmation()
+    {
+        helper(['form']);
 
         $data['title'] = "Inscrire entreprise";
+
+        $data_user = [
+            "name" => session()->get("user_name"),
+            "firstname" => session()->get("user_firstname"),
+            "address" => session()->get("user_address"),
+            "cp" => session()->get("user_cp"),
+            "city" => session()->get("user_city"),
+            'phone' =>  session()->get('user_phone'),
+            'password' =>  session()->get('user_password'),
+            'mail' => session()->get('user_mail'),
+        ];
+
+        $data_company = [
+            'name' => session()->get('company_name'),
+            'address' => session()->get('company_address'),
+            'city' => session()->get('company_city'),
+            'cp' => session()->get('company_cp'),
+        ];
+
+        
         if ($this->request->getMethod() == 'post') {
 
             $rulesconf = [
-                'c_siret' => 'required|min_length[14]|max_length[14]',
+                'c_siret' => 'required|min_length[12]|max_length[14]',
                 'c_kbis' => 'required|min_length[3]|max_length[64]',
             ];
 
@@ -113,44 +156,17 @@ class User extends BaseController
 
             $kbis = $this->request->getVar('c_kbis');
             $siret = $this->request->getVar('c_siret');
+
             if (!$this->validate($rulesconf, $errorconf)) {
                 $data['validation'] = $this->validator;
                 $data['title'] = "Informations";
                 return view('Login/confirmation', $data);
             } else {
-                //table utilisateur
-                $data_user = [
-                    "name" => session()->get("user_name"),
-                    "firstname" => session()->get("user_firstname"),
-                    "address" => session()->get("user_address"),
-                    "cp" => session()->get("user_cp"),
-                    "city" => session()->get("user_city"),
-                    'phone' =>  session()->get('usr_phone'),
-                    'password' =>  session()->get('usr_password'),
-                    'mail' => session()->get('usr_mail'),
-                ];
-                $modelu->save($data_user);
-                // table entreprise    
-                $data_company = [
-                    'name' => session()->get('company_name'),
-                    'address' => session()->get('company_address'),
-                    'city' => session()->get('company_city'),
-                    'cp' => session()->get('company_cp'),
-                    'siret' => $siret,
-                    'kbis' => $kbis,
-                ];
-                $modelcf->save($data_company);
-                // table jointure
-                $id_user = $modelu->getInsertID();
-                $id_company = $modelcf->getInsertID();
-                $data_jointure = [
-                    "id_user" => $id_user,
-                    "id_company" => $id_company,
-                ];
-                $modelucf->save($data_jointure);
+                $this->saveCompany($data_user, $data_company, $kbis, $siret);
+                $data["title"] = "Login";
+                return view('Login/login', $data);
             }
         }
-        return view('Login/login', $data);
     }
 
 
@@ -159,16 +175,16 @@ class User extends BaseController
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
         $id = 3;
-        
+
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
-        $user=$user[0]; // juste le premier 
-        
+        $user = $user[0]; // juste le premier 
+
         $data = [
             "title" => "Membre",
             "user" => $user,
-         ];
+        ];
 
         return view('User/profile_user.php', $data);
     }
@@ -178,11 +194,11 @@ class User extends BaseController
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
         $id = 3;
-        
+
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
-        $user=$user[0]; // juste le premier 
+        $user = $user[0]; // juste le premier 
 
 
         $builder->select('company.name, company.address,company.city ,company.cp');
@@ -190,11 +206,13 @@ class User extends BaseController
         $builder->join('company', 'user_has_company.id_company=company.id_company');
         $query = $builder->get();
         $infos = $query->getResultArray();
-        
+
         $company = [];
-        foreach ($infos as $info){
-            $company[]=["name"=> $info['name'],
-            "address"=> $info['address']."<br>".$info['city'].", ".$info['cp']];  
+        foreach ($infos as $info) {
+            $company[] = [
+                "name" => $info['name'],
+                "address" => $info['address'] . "<br>" . $info['city'] . ", " . $info['cp']
+            ];
         }
 
         $data = [
@@ -224,7 +242,6 @@ class User extends BaseController
     public function signin()
     {
         $data = ["title" => "Inscription"];
-
         helper(['form']);
 
         if ($this->request->getMethod() == 'post') {
@@ -284,39 +301,27 @@ class User extends BaseController
                 'c_address' => 'required|min_length[3]|max_length[128]',
                 'c_city' => 'required|min_length[3]|max_length[64]',
                 'c_cp' => 'required|min_length[3]|max_length[16]',
-                'c_siret' => 'required|min_length[3]|max_length[64]',
-                'c_kbis' => 'required|min_length[3]|max_length[64]',
+                //'c_siret' => 'required|min_length[3]|max_length[64]',
+                //'c_kbis' => 'required|min_length[3]|max_length[64]',
             ];
             $errorc = [
                 'c_name' => ['required' => "Nom de la compagnie vide!"],
                 'c_address' => ['required' => "Adresse de la compagnie vide!"],
                 'c_city' => ['required' => "Ville de la compagnie vide!"],
                 'c_cp' => ['required' => "Code postal de la compagnie vide!"],
-                'c_siret' => ['required' => "Siret de la compagnie vide!"],
-                'c_kbis' => ['required' => "Kbis de la compagnie vide!"],
+                //'c_siret' => ['required' => "Siret de la compagnie vide!"],
+                //'c_kbis' => ['required' => "Kbis de la compagnie vide!"],
             ];
-
 
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
                 $main = false;
             }
 
-
-            $rulesconf = [
-                'c_siret' => 'required|min_length[3]|max_length[64]',
-                'c_kbis' => 'required|min_length[3]|max_length[64]',
-            ];
-            $errorconf = [
-                'c_siret' => ['required' => "Siret de la compagnie vide!"],
-                'c_kbis' => ['required' => "Kbis de la compagnie vide!"],
-            ];
-
             if (!$this->validate($rules, $error)) {
                 $data['confirmation'] = $this->validator;
                 $main = false;
             }
-
 
             switch ($index) {
                 case "1":
@@ -327,34 +332,30 @@ class User extends BaseController
                     if (!$this->validate($rulesf, $errorf)) {
                         $data['validation'] = $this->validator;
                         $sub = false;
-                    }
-                    else{
-                        $status ='7';
+                    } else {
+                        $status = '7';
                     }
                     break;
                 case "3":
                     if (!$this->validate($rulesc, $errorc)) {
                         $data['validation'] = $this->validator;
                         $sub = false;
-                    }
-                    else{
+                    } else {
                         $status = '8';
                     }
                     break;
                 case "4":
-                        $status = '4';
-                    break;    
-            }           
-
-            $ischecked=($check==NULL)?0:1;
-
+                    $status = '4';
+                    break;
+            }
+            $ischecked = ($check == NULL) ? 0 : 1;
 
             if ($main && $sub) {
 
                 $model = new UserModel();
-               $newData = [
+                $newData = [
                     'name' => $this->request->getVar('name'),
-                    'lastname' => $this->request->getVar('lastname'),
+                    'firstname' => $this->request->getVar('firstname'),
                     'address' => $this->request->getVar('address'),
                     'city' => $this->request->getVar('city'),
                     'cp' => $this->request->getVar('cp'),
@@ -363,56 +364,66 @@ class User extends BaseController
                     'phone' => $this->request->getVar('phone'),
                     'mail' => $this->request->getVar('mail'),
                     'password' => $this->request->getVar('password'),
-                    'newsletters' =>$ischecked,
-                ]; 
-                $model->save($newData);
+                    'newsletters' => $ischecked,
+                ];
 
-                if ($index==2){
+                if ($index == 4) {
+                    $model->save($newData);
+                }
 
+                if ($index == 2) {
+                    $model->save($newData);
                     $id_user = $model->getInsertID();
 
                     $modelf = new CertificateModel();
 
                     $newDataf = [
-                         'name' => $this->request->getVar('f_name'),
-                         'content' => $this->request->getVar('f_content'),
-                         'date' => $this->request->getVar('f_date'),
-                         'organism' => $this->request->getVar('f_organism'),
-                         'address' => $this->request->getVar('f_address'),
-                         'city' => $this->request->getVar('f_city'),
-                         'cp' => $this->request->getVar('f_cp'),
-                         'country' => $this->request->getVar('f_country'),
-                     ]; 
-                     $modelf->save($newDataf);
+                        'name' => $this->request->getVar('f_name'),
+                        'content' => $this->request->getVar('f_content'),
+                        'date' => $this->request->getVar('f_date'),
+                        'organism' => $this->request->getVar('f_organism'),
+                        'address' => $this->request->getVar('f_address'),
+                        'city' => $this->request->getVar('f_city'),
+                        'cp' => $this->request->getVar('f_cp'),
+                        'country' => $this->request->getVar('f_country'),
+                    ];
+                    $modelf->save($newDataf);
 
-                     $modelce = new UserHasCertificateModel();
+                    $modelce = new UserHasCertificateModel();
 
-                     $id_certificate = $modelf->getInsertID();
+                    $id_certificate = $modelf->getInsertID();
 
-                     $newDatace = [
+                    $newDatace = [
                         'id_user' => $id_user,
                         'id_certificate' => $id_certificate,
-                     ];
+                    ];
 
-                     $modelce->save($newDatace);
+                    $modelce->save($newDatace);
                 }
-                elseif ($index==3){
-
-                    $id_user = $model->getInsertID();
+                if ($index == 3) {
+                    $kbis = $this->request->getVar('c_kbis');
+                    $siret = $this->request->getVar('c_siret');
 
                     $newDatac = [
-                         'name' => $this->request->getVar('c_name'),
-                         'address' => $this->request->getVar('c_address'),
-                         'city' => $this->request->getVar('c_city'),
-                         'cp' => $this->request->getVar('c_cp'),
-                     ]; 
-                     
-                     
+                        'name' => $this->request->getVar('c_name'),
+                        'address' => $this->request->getVar('c_address'),
+                        'city' => $this->request->getVar('c_city'),
+                        'cp' => $this->request->getVar('c_cp'),
+                        'kbis' => $kbis,
+                        'siret' => $siret,
+                    ];
 
-                     return redirect()->to("Login/corfirmation");
+                    if (empty($kbis) || empty($siret)) {
+                        $data['title'] = "Inscrire entreprise";
+                        $this->setCompanySession($newData, $newDatac);
+                        return view("Login/confirmation", $data);
+                    } else {
+
+                        $this->saveCompany($newData, $newDatac, $kbis, $siret);
+                    }
                 }
                 session()->setFlashdata('success', 'Inscription réussi');
-                return redirect()->to("/");
+                return view("Login/login");
             }
         }
         return view('Login/signin', $data);

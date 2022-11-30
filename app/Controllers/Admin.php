@@ -21,7 +21,7 @@ class Admin extends BaseController
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-        $id = 3;
+        $id = 2;
         
         $builder->where('id_user', $id);
         $query   = $builder->get();
