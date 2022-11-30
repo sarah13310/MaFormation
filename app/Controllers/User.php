@@ -123,19 +123,22 @@ class User extends BaseController
         $modelucf = new UserHasCompanyModel();
 
         //table utilisateur
-        $modelu->save($data_user);      
+        $modelu->save($data_user);
 
         // table jointure
         $id_user = $modelu->getInsertID();
-       
+
         $data_jointure = [
             "id_user" => $id_user,
             "id_company" => $id_company,
         ];
         $modelucf->save($data_jointure);
     }
+
     private function ifNotExistCompany($data_company)
     {
+        // on part du principe une seule société par ville
+        // une évolution future: vérifier l'adresse
         $modelcp = new CompanyModel();
         $company = $modelcp->where("name", $data_company['name'])
             ->where("cp", $data_company['cp'])
@@ -189,12 +192,11 @@ class User extends BaseController
                 $data['title'] = "Inscrire société";
                 return view('Login/confirmation', $data);
             } else {
-                $company=$this->ifNotExistCompany($data_company);
-                if ($company==null){//la société n'existe pas on la rajoute
-                    $this->saveCompany($data_user, $data_company, $kbis, $siret);                   
-                }
-                else{// la société existe donc on associe juste avec la table de jointure
-                    $this->associateCompany($data_user, $company['id_company'], $kbis, $siret);   
+                $company = $this->ifNotExistCompany($data_company);
+                if ($company == null) { //la société n'existe pas on la rajoute
+                    $this->saveCompany($data_user, $data_company, $kbis, $siret);
+                } else { // la société existe donc on associe juste avec la table de jointure
+                    $this->associateCompany($data_user, $company['id_company'], $kbis, $siret);
                 }
                 $data["title"] = "Login";
                 return view('Login/login', $data);
@@ -434,6 +436,7 @@ class User extends BaseController
                     $modelce->save($newDatace);
                 }
                 if ($index == 3) {
+
                     $kbis = $this->request->getVar('c_kbis');
                     $siret = $this->request->getVar('c_siret');
 
@@ -451,12 +454,18 @@ class User extends BaseController
                         $this->setCompanySession($newData, $newDatac);
                         return view("Login/confirmation", $data);
                     } else {
-
-                        $this->saveCompany($newData, $newDatac, $kbis, $siret);
+                        $company = $this->ifNotExistCompany($newDatac);
+                        if ($company == null) {
+                            $this->saveCompany($newData, $newDatac, $kbis, $siret);
+                        } else {
+                            $this->associateCompany($newData, $company['id_company'], $kbis, $siret);
+                        }
                     }
                 }
-                session()->setFlashdata('success', 'Inscription réussi');
-                return view("Login/login");
+                session()->setFlashdata('success', 'Inscription réussie');
+                $data["title"] = "Login";
+                return view("Login/login", $data);
+                die();
             }
         }
         return view('Login/signin', $data);
