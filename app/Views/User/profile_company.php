@@ -1,10 +1,11 @@
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php/functions/util.php') ?>
 <?= $this->extend('layouts/profil_company') ?>
 <?= $this->section('content') ?>
 <!-- boite modal snapshot -->
 <div class="modal" tabindex="-1" id="myCamera">
     <div class="modal-dialog">
         <div class="modal-content" style="align-items:center">
-            <div class="modal-header">s
+            <div class="modal-header">
                 <h5 class="modal-title">Caméra - prendre une photo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -52,20 +53,21 @@
             <div><a href="" class="btn btn-outline-primary me-2" data-bs-target="#myCamera" data-bs-toggle="modal">Caméra</a>
                 <a href="" class="btn btn-outline-primary" data-bs-target="#myPicture" data-bs-toggle="modal">Importer</a>
             </div>
+        </div>
         <div class="col-12 col-md-6">
             <div class="row">
                 <div class="title1">
                     <div class="flex-between">
                         <span><?= $user['firstname'] . " " . $user['name'] ?> </span>
                         <span class="title2"><i class="bi bi-geo-alt" style="width:14px"></i><?= "  " . $user['city'] . ", " . $user['country'] ?></span>
-                        <div><button class="btn-title0 mt-1">Modifier</button></div>
+                        <div><button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier le nom" class="btn-title0 mt-1">Modifier</button></div>
                     </div>
                 </div>
                 <div class="mb-4 title0"><span><i class="bi bi-chat-left-fill "></i> Envoyer un message</span></div>
                 <div class="mb-1 title0">
                     <div class="title0 flex">
                         <div class="start"><i class="bi bi-person-fill"></i>&nbsp;Informations de contact</div>
-                        <div><button class="btn-title0 mt-1">Modifier</button></div>
+                        <div><button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier contact" class="btn-title0 mt-1">Modifier</button></div>
                     </div>
                     <hr class="fade-1">
                 </div>
@@ -85,17 +87,18 @@
                 <div class="mb-1 title0">
                     <div class="title0 flex">
                         <div class="start"><i class="bi bi-person-fill"></i>&nbsp;Informations de l'entreprise</div>
-                        <div><button class="btn-title0 mt-1">Modifier</button></div>
+                        <div><button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier entreprise" class="btn-title0 mt-1">Modifier</button></div>
                     </div>
                     <hr class="fade-1">
                 </div>
-                <div>
-                    <span class="title2 mt-1">Nom : <span class="ton-blue-5"><?= $company['name'] ?></span></span>
-                </div>
-                <div>
-                    <span class="title2 mt-1">Adresse : <span><?= $company['address'] . "<br>" . $company['cp'] . " " .
-                                                                    $company['city'] ?></span></span>
-                </div>
+                <?php foreach($companies as  $company): ?>
+                    <div>
+                        <span class="title2 mt-1">Nom : <span class="ton-blue-5"><?= $company['name'] ?></span></span>
+                    </div>
+                    <div>
+                        <span class="title2 mt-1">Adresse : <span><?= $company['address'] ?></span></span>
+                    </div>
+                <?php endforeach;?>
                 <div class="mt-4 mb-1 title0">
                     <div class="title0 flex">
                         <div class="start"><i class="bi bi-person-fill"></i>&nbsp;Informations personnelles</div>
@@ -160,6 +163,11 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 
-<?= $this->endSection() ?>
+    <?= $this->endSection() ?>

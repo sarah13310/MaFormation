@@ -4,6 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+define("TYPE_SUPER_ADMIN", "3");
+define("TYPE_ADMIN", "5");
+define("TYPE_FORMER", "7");
+define("TYPE_USER",     "9");
+define("TYPE_COMPANY",   "11");
+
 class UserModel extends Model
 {
     protected $table = 'user';
@@ -12,7 +18,24 @@ class UserModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['name', 'firstname', 'address', 'city', 'cp', 'country', 'type', 'mail', 'password', 'phone', "image_url", "newsletters", "gender", "birthday"];
+    protected $allowedFields = [
+        'name',
+        'firstname',
+        'address',
+        'city',
+        'cp',
+        'country',
+        'rights',
+        'mail',
+        'password',
+        'phone',
+        "image_url",
+        "newsletters",
+        "gender",
+        "birthday",
+        "type",
+        "status"
+    ];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
 
@@ -26,13 +49,13 @@ class UserModel extends Model
     // mise à jour horodatage
     protected function beforeUpdate(array $data)
     {
-        $data = $this->passwordHash($data);
+        //$data = $this->passwordHash($data);
         return $data;
     }
 
     protected function passwordHash(array $data)
     {
-        if (isset($data['data']['password'])) {            
+        if (isset($data['data']['password'])) {
             $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
         }
         return $data;

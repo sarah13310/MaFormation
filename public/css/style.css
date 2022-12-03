@@ -375,3 +375,7 @@ hr {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.custom-tooltip{
+	background: #185c9c;
+}

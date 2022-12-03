@@ -21,7 +21,7 @@
                 <form action="login" method="post">
                     <div class="form-group">
                         <label class="mt-2 mb-1" for="email">Adresse Mail</label>
-                        <input type="text" class="form-control" name="email" id="email" value="<?= session()->set('email') ?>">
+                        <input type="text" class="form-control" name="mail" id="mail" value="<?= session()->set('mail') ?>">
                     </div>
                     <div class="form-group">
                         <label class="mt-2 mb-1" for="password">Mot de passe</label>

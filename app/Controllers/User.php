@@ -20,6 +20,7 @@ class User extends BaseController
 
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
+
             $rules = [
                 'mail' => 'required|min_length[6]|max_length[50]|valid_email',
                 'password' => 'required|min_length[8]|max_length[255]',
@@ -39,22 +40,139 @@ class User extends BaseController
                 $model = new UserModel();
 
                 $user = $model->where('mail', $this->request->getVar('mail'))->first();
-
                 if (!$user) {
                     session()->setFlashdata('infos', 'Cet utilisateur n\'existe pas');
                 } else {
                     $pw = $this->request->getVar('password');
                     $pwh = $user['password'];
 
-                    if (password_verify($pw, $pwh)) {
+                    if (password_verify($pw, $pwh)) { // vérifie si password ok et dispatche
                         $this->setUserSession($user);
-                        return redirect()->to("dashboard");
+                        $data = $this->dispatch($user);
+                        $route = $data['route'];
+                        return view($route, $data);
                     }
                 }
             }
         }
         return view('Login/login', $data);
     }
+
+    private function dispatch($user)
+    {
+        $type = $user['type'];
+
+        switch ($type) {
+            case TYPE_SUPER_ADMIN: // super administrateur
+                $jobs = $this->getInfosCompany($user['id_user']);
+                $skills = $this->getInfosCertificates($user['id_user']);
+
+                $data = [
+                    "title" => "Mode super Administrateur",
+                    "user" => $user,
+                    "jobs" => $jobs,
+                    "skills" => $skills,
+                    "route" => "Admin/super_profile",
+                ];
+                break;
+
+            case TYPE_ADMIN: // administrateur
+                $jobs = $this->getInfosCompany($user['id_user']);
+                $skills = $this->getInfosCertificates($user['id_user']);
+                $data = [
+                    "title" => "Mode Administrateur",
+                    "user" => $user,
+                    "jobs" => $jobs,
+                    "skills" => $skills,
+                    "route" => "Admin/profile_admin",
+                ];
+                break;
+
+            case TYPE_FORMER: // formateur
+                $jobs = $this->getInfosCompany($user['id_user']);
+                $skills = $this->getInfosCertificates($user['id_user']);
+                $data = [
+                    "title" => "Mode Formateur",
+                    "user" => $user,
+                    "jobs" => $jobs,
+                    "skills" => $skills,
+                    "route" => "Former/profile_former",
+                ];
+                break;
+
+            case TYPE_USER: // particulier
+                $data = [
+                    "title" => "Mode Utilisateur Particulier",
+                    "user" => $user,
+                    "route" => "User/profile_user",
+                ];
+                break;
+
+            case TYPE_COMPANY: // entreprise
+                $jobs = $this->getInfosCompany($user['id_user']);
+                $data = [
+                    "title" => "Mode Utilisateur Entreprise",
+                    "user" => $user,
+                    "companies" => $jobs,
+                    "route" => "User/profile_company",
+                ];
+                break;
+        }
+        return $data;
+    }
+
+    private function getInfosCertificates($id)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+      
+        $builder->select('certificate.name');
+        $builder->where('user.id_user', $id);
+        $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
+        $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
+
+        $query = $builder->get();
+        $certificates = $query->getResultArray();
+        $skills = [];
+        foreach ($certificates as $certificate) {
+            $skills[] = $certificate['name'];
+        }
+        return $skills;
+    }
+
+    private function getInfosCompany($id, $single = true)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+        $builder->select('company.name, company.address,company.city ,company.cp');
+        $builder->where('user.id_user', $id);
+        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
+        $builder->join('company', 'user_has_company.id_company=company.id_company');
+        $query = $builder->get();
+        $companies = $query->getResultArray();
+
+        $jobs = [];
+
+        if ($companies == null)
+            return $jobs;
+
+        if ($single) {
+            $jobs[] = [
+                "name" => $companies[0]['name'],
+                "address" => $companies[0]['address'] . "<br>" . $companies[0]['city'] . ", " . $companies[0]['cp']
+            ];
+            return $jobs;
+        }
+
+        foreach ($companies as $company) {
+            $jobs[] = [
+                "name" => $company['name'],
+                "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
+            ];
+        }
+        return $jobs;
+    }
+
 
     private function setUserSession($user)
     {
@@ -63,12 +181,12 @@ class User extends BaseController
             'name' => $user['name'],
             'firstname' => $user['firstname'],
             'mail' => $user['mail'],
+            'password' => $user['password'],
             'isLoggedIn' => true,
         ];
         session()->set($data);
         return true;
     }
-
 
     private function setCompanySession($user, $company)
     {
@@ -119,7 +237,7 @@ class User extends BaseController
     private function associateCompany($data_user, $id_company, $kbis, $siret)
     {
         $modelu = new UserModel();
-        $modelcp = new CompanyModel();
+        //$modelcp = new CompanyModel();
         $modelucf = new UserHasCompanyModel();
 
         //table utilisateur
@@ -204,12 +322,12 @@ class User extends BaseController
         }
     }
 
-
     public function profileuser()
     {
+
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-        $id = 3;
+        $id =  session()->get('id_user');
 
         $builder->where('id_user', $id);
         $query   = $builder->get();
@@ -224,17 +342,17 @@ class User extends BaseController
         return view('User/profile_user.php', $data);
     }
 
+
     public function profilecompany()
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-        $id = 3;
+        $id =  session()->get('id_user');
 
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
         $user = $user[0]; // juste le premier 
-
 
         $builder->select('company.name, company.address,company.city ,company.cp');
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
@@ -242,20 +360,14 @@ class User extends BaseController
         $query = $builder->get();
         $infos = $query->getResultArray();
 
-        $company = [];
-        foreach ($infos as $info) {
-            $company[] = [
-                "name" => $info['name'],
-                "address" => $info['address'] . "<br>" . $info['city'] . ", " . $info['cp']
-            ];
-        }
+        $infos = $infos[0];
 
-        $data = [
-            "title" => "Membre",
-            "user" => $user,
-            "company" => $company,
+        $company = [
+            "name" => $infos['name'],
+            "address" => $infos['address'] . " " . $infos['city'] . ", " . $infos['cp']
         ];
-        return view('User/profile_company.php', $data);
+
+        return $company;
     }
 
     public function forgetpassword()
@@ -272,7 +384,6 @@ class User extends BaseController
         return redirect()->to('/');
         //return view('Home/index.php');
     }
-
 
     public function signin()
     {
@@ -336,16 +447,14 @@ class User extends BaseController
                 'c_address' => 'required|min_length[3]|max_length[128]',
                 'c_city' => 'required|min_length[3]|max_length[64]',
                 'c_cp' => 'required|min_length[3]|max_length[16]',
-                //'c_siret' => 'required|min_length[3]|max_length[64]',
-                //'c_kbis' => 'required|min_length[3]|max_length[64]',
+
             ];
             $errorc = [
                 'c_name' => ['required' => "Nom de la compagnie vide!"],
                 'c_address' => ['required' => "Adresse de la compagnie vide!"],
                 'c_city' => ['required' => "Ville de la compagnie vide!"],
                 'c_cp' => ['required' => "Code postal de la compagnie vide!"],
-                //'c_siret' => ['required' => "Siret de la compagnie vide!"],
-                //'c_kbis' => ['required' => "Kbis de la compagnie vide!"],
+
             ];
 
             if (!$this->validate($rules, $error)) {
@@ -363,24 +472,24 @@ class User extends BaseController
                     echo "<p>Veuillez sélectionner votre catégorie</p>";
                     $sub = false;
                     break;
-                case "2":
+                case "2": // Formateurs
                     if (!$this->validate($rulesf, $errorf)) {
                         $data['validation'] = $this->validator;
                         $sub = false;
                     } else {
-                        $status = '7';
+                        $rights = '001605051D1D050100';
                     }
                     break;
-                case "3":
+                case "3": // Entreprises
                     if (!$this->validate($rulesc, $errorc)) {
                         $data['validation'] = $this->validator;
                         $sub = false;
                     } else {
-                        $status = '8';
+                        $rights = '001605051D1D050300';
                     }
                     break;
-                case "4":
-                    $status = '4';
+                case "4": // Particuliers
+                    $rights = '00001C0505050200';
                     break;
             }
             $ischecked = ($check == NULL) ? 0 : 1;
@@ -395,21 +504,24 @@ class User extends BaseController
                     'city' => $this->request->getVar('city'),
                     'cp' => $this->request->getVar('cp'),
                     'country' => $this->request->getVar('country'),
-                    'type' => $status,
+                    'rights' => $rights,
                     'phone' => $this->request->getVar('phone'),
                     'mail' => $this->request->getVar('mail'),
                     'password' => $this->request->getVar('password'),
                     'newsletters' => $ischecked,
                 ];
 
-                if ($index == 4) {
+                if ($index == 4) { //Particulier
+                    $newData['type'] = TYPE_USER;
+                    $newData['status'] = 1;
                     $model->save($newData);
                 }
 
-                if ($index == 2) {
+                if ($index == 2) { // Formateur
+                    $newData['type'] = TYPE_FORMER;
+                    $newData['status'] = 1;
                     $model->save($newData);
                     $id_user = $model->getInsertID();
-
                     $modelf = new CertificateModel();
 
                     $newDataf = [
@@ -435,7 +547,9 @@ class User extends BaseController
 
                     $modelce->save($newDatace);
                 }
-                if ($index == 3) {
+                if ($index == 3) { //Entreprise
+                    $newData['type'] = TYPE_COMPANY;
+                    $newData['status'] = 1;
 
                     $kbis = $this->request->getVar('c_kbis');
                     $siret = $this->request->getVar('c_siret');

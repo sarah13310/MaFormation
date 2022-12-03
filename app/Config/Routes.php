@@ -32,21 +32,26 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 // admin
+$routes->get('/superadmin/profil', 'Admin::superprofile');
+$routes->get('/admin/profil', 'Admin::profileadmin');
+$routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard des formateurs
+
 $routes->get('/admin', 'Admin::index');
-$routes->get('/admin/profil', 'Admin::profile');
 $routes->get('/contact', 'Contact::index');
 
 // former
 $routes->get('/former/view', 'Former::former_view');
 $routes->get('/former/list', 'Former::former_list');
-$routes->get('/former/profil/view', 'Former::profile_view');
-$routes->get('/former/profil/edit', 'Former::profile_edit');
+$routes->get('/former/profil', 'Former::profile_view');
 
 // user
-$routes->match(['get','post'],'login', 'User::login');//login user
-$routes->match(['get','post'],'/forgetpassword', 'User::forgetpassword');//login user
-$routes->match(['get','post'],'/signin', 'User::signin');//signin user
-$routes->match(['get','post'],'/company', 'User::confirmation');//signin user
+$routes->match(['get', 'post'], 'login', 'User::login'); //login user
+$routes->get('logout', 'User::logout'); //logout user
+$routes->match(['get', 'post'], '/forgetpassword', 'User::forgetpassword'); //login user
+$routes->match(['get', 'post'], '/signin', 'User::signin'); //signin user
+$routes->match(['get', 'post'], '/company', 'User::confirmation'); //signin user
+$routes->get('/user/profile', 'User::profileuser'); //profil user
+$routes->get('/company/profile', 'User::profilecompany'); //profil company
 
 // menu a propos
 $routes->get('/formateurs', 'Former::index');
@@ -57,8 +62,12 @@ $routes->get('/financement', 'Funding::index');
 // menu actualités
 $routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
+$routes->match(['get', 'post'], '/articlesedit', 'News::articlesedit');
+$routes->match(['get', 'post'], '/publishesedit', 'News::publishesedit');
 $routes->get('/videos', 'Media::videos');
 $routes->get('/livres', 'Media::books');
+
+$routes->get('/paymentcb', 'Payment::paymentcb');
 
 /*
 * --------------------------------------------------------------------

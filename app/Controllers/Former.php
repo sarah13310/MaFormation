@@ -14,6 +14,25 @@ function profil_basic($title)
     $user = $query->getResultArray();
     $user = $user[0]; // juste le premier 
 
+    $type=7;
+        $builder->where('rights',$type);
+        $query   = $builder->get();
+        $formers = $query->getResultArray();
+    
+        $listformers = [];
+    
+        foreach ($formers as $former) {
+            $listformers[] = ["name" => $former['name'],
+                        "firstname" => $former['firstname'],
+                        "address" => $former['address'],
+                        "city" => $former['city'],
+                        "cp" => $former['cp'],
+                        "country" => $former['country'],
+                        "mail" => $former['mail'],
+                        "phone" => $former['country'],
+                        ];
+        }
+
     /* compétences certificats*/
     $builder->select('certificate.name');
     $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
@@ -23,7 +42,15 @@ function profil_basic($title)
     $certificates = $query->getResultArray();
     $skills = [];
     foreach ($certificates as $certificate) {
-        $skills[] = $certificate['name'];
+        $skills[] = ["name" => $certificate['name'],
+                    "content" => $certificate['content'],
+                    "date" => $certificate['date'],
+                    "organism" => $certificate['organism'],
+                    "address" => $certificate['address'],
+                    "city" => $certificate['city'],
+                    "cp" => $certificate['cp'],
+                    "country" => $certificate['country'],
+                    ];
     }
 
     $builder->select('company.name, company.address,company.city ,company.cp');
@@ -36,12 +63,16 @@ function profil_basic($title)
     foreach ($companies as $company) {
         $jobs[] = [
             "name" => $company['name'],
-            "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
+            "address" => $company['address'] ,
+            "city" => $company['city'], 
+            "cp" => $company['cp'],
+            "country" => $company['country'],
         ];
     }
 
     $data = [
         "title" => $title,
+        "listformers" => $listformers,
         "user" => $user,
         "jobs" => $jobs,
         "skills" => $skills,
@@ -68,12 +99,7 @@ class Former extends BaseController
     public function profile_view()
     {
         $data = profil_basic("Votre profil");
-        return view('Former/profile_view.php', $data);
+        return view('Former/profile_former.php', $data);
     }
 
-    public function profile_edit()
-    {
-        $data = profil_basic("Modification profil");
-        return view('Former/profile_edit.php', $data);
-    }
 }
