@@ -1,4 +1,10 @@
 <?php
+define("THEME_SUPER_ADMIN", "3");
+define("THEME_ADMIN", "5");
+define("THEME_FORMER", "7");
+define("THEME_USER",     "9");
+define("THEME_COMPANY",   "11");
+
 function powers($number, $max = 100, $show = 5)
 {
     if ($number > $max) {
@@ -88,6 +94,57 @@ function getMonth($month)
     return $strMonth;
 }
 
+function getGender($gender)
+{
+    if ($gender == null) {
+        return "Non renseigné";
+    }
+    return ($gender == 1) ? "Masculin" : "Féminin";
+}
+
+
+function fillMenuDashBoard($type)
+{
+    $menu="";
+    switch ($type) {
+        case THEME_USER:
+            break;
+        case THEME_COMPANY:
+            break;
+        case THEME_FORMER:
+            break;
+        case THEME_ADMIN:
+            break;
+        case THEME_SUPER_ADMIN:
+            break;
+    }
+    return $menu;
+}
+
+function getIcon($category){
+    switch ($category) {
+        case "Profil":
+            $icon = "bi-speedometer2";
+            break;
+        case "Formations":
+            $icon = "bi-book";
+            break;
+        case "Media":
+            $icon = "bi-grid";
+            break;
+        case "Clients":
+            $icon = "bi-people";
+            break;
+        case "Formateurs":
+            $icon = "bi-mortarboard";
+            break;
+        case "Privileges":
+            $icon = "bi-stoplights";
+            break;
+    }
+    return $icon;
+}
+
 
 /* remplit les categories du menu latéral gauche */
 function fillMenuRight($category = "Profil")
@@ -131,13 +188,107 @@ function fillMenuRight($category = "Profil")
                 ["ref" => "", "name" => "Filtre"],
             ];
             break;
+
+        case "Privileges":
+            $items = [
+                ["ref" => "", "name" => "Permissions"],
+            ];
+            break;
     }
     $str = "";
     foreach ($items as $item) {
         $str .= "<li class='w-100'>\n";
-        $str .= "<a href='" . $item['ref']."' class='nav-link px-0'>" . $item['name'] . "</a>\n";
+        $str .= "<a href='" . $item['ref'] . "' class='nav-link px-0'>" . $item['name'] . "</a>\n";
         $str .= "</li>\n";
     }
 
     return $str;
+}
+
+
+function fillMenu($menu, $title, $id, $category)
+{    
+    $str = "<li>";
+    $str .= "<a href='" . $id . "' data-bs-toggle='collapse' class='nav-link px-0 align-middle'>";
+    $str .=  "<i class='fs-4 " . getIcon($category) . " '></i> <span class='ms-1 d-none d-sm-inline'>" . $title . "</span></a>";
+    $str .= "<ul class='collapse  nav flex-column ms-1' id='" . $id . "' data-bs-parent='#menu'>";
+    $str .= fillMenuRight($category);
+    $str .= "     </ul>
+    </li>";
+    return $str;
+}
+
+
+function fillMenuNav($category = "News")
+{
+    switch ($category) {
+
+        case "News":
+            $items = [
+                ["ref" => "", "name" => "Articles"],
+                ["ref" => "", "name" => "Publications"],
+                ["ref" => "", "name" => "-"],
+                ["ref" => "", "name" => "Vidéos"],
+                ["ref" => "", "name" => "Livres"],
+            ];
+            break;
+
+        case "About":
+            $items = [
+                ["ref" => "", "name" => "Nos formateurs"],
+                ["ref" => "", "name" => "Nos formations"],
+                ["ref" => "", "name" => "Mon financement"],
+            ];
+            break;
+    }
+
+    $str = "<ul class='dropdown-menu' aria-labelledby='navbarDropdown'>\n";
+    foreach ($items as $item) {
+        $str .= "<li class='w-100'>\n";
+        if ($item['name'] == "-") {
+            $str .= "<hr class='dropdown-divider'>";
+        } else {
+            $str .= "<a href='" . $item['ref'] . "' class='dropdown-item'>" . $item['name'] . "</a>\n";
+        }
+        $str .= "</li>\n";
+    }
+    $str .= "</ul>";
+    return $str;
+}
+
+
+// On change le theme pour le menu et le footer
+function changeMainTheme($type, $navbar = true, $dark = true)
+{
+    $theme = ($navbar == true) ? "navbar" : "";
+    if (!empty($theme)) {
+        $theme .= ($dark == true) ? "-dark" : "-light";
+    }
+
+    switch ($type) {
+        case TYPE_USER: // Particulier
+            $theme .= " bg-blue";
+            break;
+
+        case TYPE_COMPANY: // Entreprise
+            $theme .= " bg-blue2";
+            break;
+
+        case TYPE_ADMIN: //Administrateur
+            $theme = " bg-yellow";
+            break;
+
+        case TYPE_SUPER_ADMIN: // Super Administrateur
+            $theme .= " bg-velvet";
+            break;
+
+        case TYPE_FORMER: // Formateur
+            $theme .= " bg-green";
+            break;
+
+        default: // par défaut
+            $theme .= " bg-dark";
+            break;
+    }
+    return $theme;
 }

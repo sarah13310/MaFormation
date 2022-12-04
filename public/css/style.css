@@ -54,6 +54,26 @@
 	background: linear-gradient(rgb(81, 6, 125), rgb(71, 20, 225));
 }
 
+.bg-blue {
+	
+	background: linear-gradient(#0661c2, #2578ec,#0661c2);
+}
+.bg-blue2 {
+	
+	background: linear-gradient(#0a3eb0, #1474e1,#0a3eb0);
+}
+.bg-yellow {
+	
+	background: linear-gradient(#7d2c06, #ac6104,#7d2c06);
+}
+.bg-velvet {
+	
+	background: linear-gradient(rgb(81, 6, 125), rgb(71, 20, 225));
+}
+.bg-green {
+	
+	background: linear-gradient(#B3DEC1, #80b49ce8,#B3DEC1 ) ;
+}
 a.text-white {
 	text-decoration: none;
 	color: white !important;
@@ -378,4 +398,9 @@ hr {
 
 .custom-tooltip{
 	background: #185c9c;
+}
+
+.rounded-circle-frame{
+	border-radius: 50%;
+	border: 2px solid #185c9c;
 }

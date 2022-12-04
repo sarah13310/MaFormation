@@ -1,0 +1,33 @@
+CRITICAL - 2022-12-03 20:22:54 --> Constant TYPE_SUPER_ADMIN already defined
+in FCPATH\php\functions\util.php on line 2.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Constant TYPE_SUPER_ADMIN already defined', 'FCPATH\\php\\functions\\util.php', 2)
+ 2 FCPATH\php\functions\util.php(2): define('TYPE_SUPER_ADMIN', '3')
+ 3 APPPATH\Views\Former\profile_former.php(1): require_once('FCPATH\\php\\functions\\util.php')
+ 4 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Former\\profile_former.php')
+ 5 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Former/profile_former', [], true)
+ 7 APPPATH\Controllers\User.php(53): view('Former/profile_former', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->login()
+ 9 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+10 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-03 20:24:23 --> Undefined constant "App\Controllers\TYPE_SUPER_ADMIN"
+in APPPATH\Controllers\User.php on line 66.
+ 1 APPPATH\Controllers\User.php(51): App\Controllers\User->dispatch([...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-03 20:39:44 --> Call to undefined function getGender()
+in APPPATH\Views\Admin\super_profile.php on line 138.
+ 1 SYSTEMPATH\View\View.php(213): include()
+ 2 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/super_profile', [], true)
+ 4 APPPATH\Controllers\User.php(53): view('Admin/super_profile', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->login()
+ 6 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 7 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
