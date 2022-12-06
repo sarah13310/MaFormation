@@ -35,17 +35,19 @@
                     <td>Ville</td>
                     <td>Code postal</td>
                     <td>Pays</td>
-                </tr>
-                <tr>
-                    <td><?= $skills['name'] ?></td>
-                    <td><?= $skills['content'] ?></td>
-                    <td><?= $skills['date'] ?></td>
-                    <td><?= $skills['organism'] ?></td>
-                    <td><?= $skills['address'] ?></td>
-                    <td><?= $skills['city'] ?></td>
-                    <td><?= $skills['cp'] ?></td>
-                    <td><?= $skills['country'] ?></td>                 
-                </tr>
+                    </tr>
+                    <?php $j = 0; foreach ($former['skills'] as $skill) : ?>
+                    <tr>
+                        <td><?= $skill['name'] ?></td>
+                        <td><?= $skill['content'] ?></td>
+                        <td><?= $skill['date'] ?></td>
+                        <td><?= $skill['organism'] ?></td>
+                        <td><?= $skill['address'] ?></td>
+                        <td><?= $skill['city'] ?></td>
+                        <td><?= $skill['cp'] ?></td>
+                        <td><?= $skill['country'] ?></td>                 
+                    </tr>
+                    <?php $j++; endforeach ?>
             </td>
         </tr>
      <?php $i++;
