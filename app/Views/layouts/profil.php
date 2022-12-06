@@ -16,15 +16,15 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg <?=changeMainTheme($user['type']) ?>">
+        <nav class="navbar   navbar-expand-lg <?=changeMainTheme($user['type']) ?>">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img class="logo" src="/assets/logo.png">Ma Formation</a>
+                <a class="navbar-brand" href="/"><img class="logo" src="/assets/<?= getLogoColor($user['type'])?>"> Ma Formation</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <form class="d-flex search">
+                <form action="#" class="d-flex search me-4">
                     <input class="form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Chercher</button>
+                    <button class="btn <?= getButtonColor($user['type'])?>" type="submit">Chercher</button>
                 </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,7 +44,6 @@
                             </a>
                             <?=fillMenuNav("News") ?>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="contact">Contact</a>
                         </li>
@@ -62,10 +61,10 @@
                     <?php else : ?>
                         <div class="dropdown ">
                                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="hugenerd" width="50" height="50" class="rounded-circle-frame">
+                                    <img src="<?= $user['image_url'] ?>" alt="MF" width="50" height="50" class="rounded-circle-frame">
                                     <span class="d-none d-sm-inline mx-3"><?=session()->name  ?></span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                                <ul class="dropdown-menu dropdown-menu text-small shadow">
                                     <li><a class="dropdown-item" href="#">Paramètres</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -83,65 +82,22 @@
         <section>
             <div class="container-fluid">
                 <div class="row flex-nowrap">
-                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?=changeMenuTheme(session()->get('type')) ?>">
                         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                            <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                                <span class="fs-5 d-none d-sm-inline">Bienvenue</span>
-                            </a>
-                            <div class="dropdown pb-4">
-                                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="hugenerd" width="50" height="50" class="rounded-circle">
-                                    <span class="d-none d-sm-inline mx-3"><?=session()->name  ?></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                    <li><a class="dropdown-item" href="#">Paramètres</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Se déconnecter</a></li>
-                                </ul>
+                            <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
+                                <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
+                            <!-- </a> -->
+                            <div class=" pb-4">
+                                <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none" > -->
+                                    <span class="d-none d-sm-inline "><?=session()->name ?></span>
+                                    <span class="d-none d-sm-inline "><?=session()->firstname  ?></span>
+                                <!-- </a>                                 -->
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link align-middle px-0">
-                                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Accueil</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Profil</span></a>
-                                    <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                        <?= fillMenuRight() ?>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                        <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Formations</span></a>
-                                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                        <?= fillMenuRight("Formations") ?>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Média</span> </a>
-                                    <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
-                                        <?= fillMenuRight("Media") ?>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Clients</span> </a>
-                                    <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
-                                        <?= fillMenuRight("Clients")?>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-currency-euro"></i> <span class="ms-1 d-none d-sm-inline">Factures</span></a>
-                                </li>
+                                                             
+                                <?= fillMenuDashBoard(session()->get('type')) ?>
                             </ul>
                             <hr>
-
                         </div>
                     </div>
                     <div class="col py-2">
@@ -153,7 +109,7 @@
 
     </section>
     <!-- Footer -->
-    <footer class="bg-dark text-center text-white">
+    <footer class="<?=changeFooterTheme($user['type']) ?> text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->

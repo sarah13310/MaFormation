@@ -1,12 +1,12 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php/functions/util.php') ?>
-<?= $this->extend('layouts/profil_former') ?>
+<?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <span class="title3"><?= $title ?></span>
 <div class="container">
     <div class="row ">
         <div class="col-12  col-md-4 mb-4">
             <div class="row">
-                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" style="width: 200px;" alt="Avatar" />
+                <img src="<?= $user['image_url']?>" style="width: 200px;" alt="Avatar" />
             </div>
             <div class="mb-1 title0">
                 <div class="title0 flex">

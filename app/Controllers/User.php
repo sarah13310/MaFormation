@@ -61,6 +61,8 @@ class User extends BaseController
     private function dispatch($user)
     {
         $type = $user['type'];
+        if ($user['image_url'] == null)
+            $user['image_url'] = base_url() . "/assets/blank.png";
 
         switch ($type) {
             case TYPE_SUPER_ADMIN: // super administrateur
@@ -125,7 +127,7 @@ class User extends BaseController
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-      
+
         $builder->select('certificate.name');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
@@ -182,6 +184,7 @@ class User extends BaseController
             'firstname' => $user['firstname'],
             'mail' => $user['mail'],
             'password' => $user['password'],
+            'type' => $user['type'],
             'isLoggedIn' => true,
         ];
         session()->set($data);

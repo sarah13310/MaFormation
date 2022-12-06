@@ -1,5 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php/functions/util.php') ?>
-<?= $this->extend('layouts/profil_user') ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
+<?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <!-- boite modal snapshot -->
 <div class="modal" tabindex="-1" id="myCamera">
