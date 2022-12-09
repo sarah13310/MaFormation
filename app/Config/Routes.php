@@ -36,6 +36,7 @@ $routes->get('/superadmin/profil', 'Admin::superprofile');//Page profil super ad
 $routes->get('/admin/profil', 'Admin::profileadmin');// Page profil administrateur
 $routes->match(['get', 'post'],'/superadmin/add/admin', 'Admin::add_admin');// Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges');//dashboard des privileges
+
 //Former
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard des formateurs
 $routes->get('/former/list', 'Former::listformershome');// liste des formateurs page home
@@ -69,10 +70,13 @@ $routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
 $routes->match(['get', 'post'], '/articlesedit', 'News::articlesedit');
 $routes->match(['get', 'post'], '/publishesedit', 'News::publishesedit');
-$routes->get('/videos', 'Media::videos');
-$routes->get('/livres', 'Media::books');
 
 $routes->get('/paymentcb', 'Payment::paymentcb');
+
+//Medias
+$routes->get('/medias/slides', 'Media::slides');
+$routes->get('/medias/videos', 'Media::videos');
+$routes->get('/medias/livres', 'Media::books');
 
 /*
 * --------------------------------------------------------------------
