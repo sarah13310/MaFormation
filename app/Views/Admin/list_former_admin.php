@@ -1,19 +1,19 @@
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
 <h1><?= $title ?></h1>
-<table>
+<table class="table">
+<thead class="t_former">    
 <tr>
-    <td>Nom</td>
-    <td>Prénom</td>
-    <td>Adresse</td>
-    <td>Ville</td>
-    <td>Code postal</td>
-    <td>Pays</td>
-    <td>Mail</td>
-    <td>Téléphone</td>
-    <td>Certificat</td>
+    <th scope="col">Nom</th>
+    <th scope="col">Prénom</th>
+    <th scope="col">Adresse</th>
+    <th scope="col">Ville</th>
+    <th scope="col">Code postal</th>
+    <th scope="col">Pays</th>
+    <th scope="col">Mail</th>
+    <th scope="col">Téléphone</th>
 </tr>
-
+</thead>
 <?php $i = 0;
     foreach ($listformers as $former) : ?>
         <tr>
@@ -26,16 +26,18 @@
             <td><?= $former['mail'] ?></td>
             <td><?= $former['phone'] ?></td>
             <td>
+            <thead class="t_skill">  
                 <tr>
-                    <td>Nom</td>
-                    <td>Contenu</td>
-                    <td>Date</td>
-                    <td>Organisme</td>
-                    <td>Adresse</td>
-                    <td>Ville</td>
-                    <td>Code postal</td>
-                    <td>Pays</td>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Contenu</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Organisme</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Code postal</th>
+                    <th scope="col">Pays</th>
                     </tr>
+            </thead>       
                     <?php $j = 0; foreach ($former['skills'] as $skill) : ?>
                     <tr>
                         <td><?= $skill['name'] ?></td>

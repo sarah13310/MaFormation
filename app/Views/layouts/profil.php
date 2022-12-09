@@ -24,7 +24,7 @@
                 </button>
                 <form action="#" class="d-flex search me-4">
                     <input class="form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
-                    <button class="btn <?= getButtonColor($user['type'])?>" type="submit">Chercher</button>
+                    <button class="btn <?= getMenuButtonColor($user['type'])?>" type="submit">Chercher</button>
                 </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -61,8 +61,8 @@
                     <?php else : ?>
                         <div class="dropdown ">
                                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= $user['image_url'] ?>" alt="MF" width="50" height="50" class="rounded-circle-frame">
-                                    <span class="d-none d-sm-inline mx-3"><?=session()->name  ?></span>
+                                    <img src="<?= $user['image_url'] ?>" alt="MF" width="50px" height="50px" class="rounded-circle-frame">
+                                    <span class="d-none d-sm-inline mx-3"><?=$user['name']  ?></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu text-small shadow">
                                     <li><a class="dropdown-item" href="#">Paramètres</a></li>
@@ -82,20 +82,20 @@
         <section>
             <div class="container-fluid">
                 <div class="row flex-nowrap">
-                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?=changeMenuTheme(session()->get('type')) ?>">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?=changeMenuTheme($user['type']) ?>">
                         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                             <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
                                 <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
                             <!-- </a> -->
                             <div class=" pb-4">
                                 <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none" > -->
-                                    <span class="d-none d-sm-inline "><?=session()->name ?></span>
-                                    <span class="d-none d-sm-inline "><?=session()->firstname  ?></span>
+                                    <span class="d-none d-sm-inline "><?=$user['name'] ?></span>
+                                    <span class="d-none d-sm-inline "><?=$user['firstname']  ?></span>
                                 <!-- </a>                                 -->
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                                              
-                                <?= fillMenuDashBoard(session()->get('type')) ?>
+                                <?= fillMenuDashBoard($user['type']) ?>
                             </ul>
                             <hr>
                         </div>

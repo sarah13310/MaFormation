@@ -2,47 +2,59 @@
 
 namespace App\Controllers;
 
-function profil_basic($title)
+
+class Former extends BaseController
 {
 
-    $db      = \Config\Database::connect();
-    $builder = $db->table('user');
-    $id = 2;
+    public function listformershome()
+    {
 
-    $builder->where('id_user', $id);
-    $query   = $builder->get();
-    $user = $query->getResultArray();
-    $user = $user[0]; // juste le premier 
+        $title = "Liste des formateurs";
 
-    $type=7;
-        $builder->where('rights',$type);
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+
+        $type = 7;
+        $builder->where('type', $type);
         $query   = $builder->get();
         $formers = $query->getResultArray();
-    
+
         $listformers = [];
-    
+
         foreach ($formers as $former) {
-            $listformers[] = ["name" => $former['name'],
-                        "firstname" => $former['firstname'],
-                        "address" => $former['address'],
-                        "city" => $former['city'],
-                        "cp" => $former['cp'],
-                        "country" => $former['country'],
-                        "mail" => $former['mail'],
-                        "phone" => $former['country'],
-                        ];
+            $listformers[] = [
+                "id_user" => $former['id_user'],
+                "name" => $former['name'],
+                "firstname" => $former['firstname'],
+                "address" => $former['address'],
+                "city" => $former['city'],
+                "cp" => $former['cp'],
+                "country" => $former['country'],
+                "mail" => $former['mail'],
+                "phone" => $former['phone'],
+            ];
         }
 
-    /* compétences certificats*/
-    $builder->select('certificate.name');
-    $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-    $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
 
-    $query = $builder->get();
-    $certificates = $query->getResultArray();
-    $skills = [];
-    foreach ($certificates as $certificate) {
-        $skills[] = ["name" => $certificate['name'],
+        /* compétences certificats*/
+
+        $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
+
+
+        $skills = [];
+
+        for ($i = 0; $i < count($listformers); $i++) {
+            $builder->where('user.id_user', $listformers[$i]['id_user']);
+            $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
+            $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
+
+            $query = $builder->get();
+            $certificates = $query->getResultArray();
+
+            $certi = [];
+            foreach ($certificates as $certificate) {
+                $certi[] = [
+                    "name" => $certificate['name'],
                     "content" => $certificate['content'],
                     "date" => $certificate['date'],
                     "organism" => $certificate['organism'],
@@ -50,56 +62,109 @@ function profil_basic($title)
                     "city" => $certificate['city'],
                     "cp" => $certificate['cp'],
                     "country" => $certificate['country'],
-                    ];
-    }
+                ];
+            }
 
-    $builder->select('company.name, company.address,company.city ,company.cp');
-    $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
-    $builder->join('company', 'user_has_company.id_company=company.id_company');
-    $query = $builder->get();
-    $companies = $query->getResultArray();
+            $listformers[$i]["skills"] = $certi;
+        }
 
-    $jobs = [];
-    foreach ($companies as $company) {
-        $jobs[] = [
-            "name" => $company['name'],
-            "address" => $company['address'] ,
-            "city" => $company['city'], 
-            "cp" => $company['cp'],
-            "country" => $company['country'],
+
+        $builder->select('company.name, company.address,company.city ,company.cp,company.country');
+        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
+        $builder->join('company', 'user_has_company.id_company=company.id_company');
+        $query = $builder->get();
+        $companies = $query->getResultArray();
+
+        $jobs = [];
+        foreach ($companies as $company) {
+            $jobs[] = [
+                "name" => $company['name'],
+                "address" => $company['address'],
+                "city" => $company['city'],
+                "cp" => $company['cp'],
+                "country" => $company['country'],
+            ];
+        }
+
+        $data = [
+            "title" => $title,
+            "listformers" => $listformers,
+            "jobs" => $jobs,
         ];
+
+        return view('Former/list_former.php', $data);
     }
 
-    $data = [
-        "title" => $title,
-        "listformers" => $listformers,
-        "user" => $user,
-        "jobs" => $jobs,
-        "skills" => $skills,
-    ];
-
-    return $data;
-}
-
-
-class Former extends BaseController
-{
-    public function former_list()
+    public function listformerhome()
     {
-        $data = profil_basic("Liste des formateurs");
-        return view('Former/list.php', $data);
-    }
-    
-    public function former_view()
-    {
-        $data = profil_basic("Votre formateur");
-        return view('Former/index.php', $data);
-    }
 
-    public function profile_view()
-    {
-        $data = profil_basic("Votre profil");
-        return view('Former/profile_former.php', $data);
+        $title = "Liste d'un formateur";
+
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+
+        $id = 2;
+
+        $builder->where('id_user', $id);
+        $query   = $builder->get();
+        $former = $query->getResultArray();        
+
+        /* compétences certificats*/
+
+        $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
+
+
+        $skills = [];
+
+            $builder->where('user.id_user', $id);
+            $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
+            $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
+
+            $query = $builder->get();
+            $certificates = $query->getResultArray();
+
+            $certi = [];
+            foreach ($certificates as $certificate) {
+                $certi[] = [
+                    "name" => $certificate['name'],
+                    "content" => $certificate['content'],
+                    "date" => $certificate['date'],
+                    "organism" => $certificate['organism'],
+                    "address" => $certificate['address'],
+                    "city" => $certificate['city'],
+                    "cp" => $certificate['cp'],
+                    "country" => $certificate['country'],
+                ];
+            }
+
+            //$former["skills"] = $certi;
+
+            
+
+        $builder->select('company.name, company.address,company.city ,company.cp,company.country');
+        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
+        $builder->join('company', 'user_has_company.id_company=company.id_company');
+        $query = $builder->get();
+        $companies = $query->getResultArray();
+
+        $jobs = [];
+        foreach ($companies as $company) {
+            $jobs[] = [
+                "name" => $company['name'],
+                "address" => $company['address'],
+                "city" => $company['city'],
+                "cp" => $company['cp'],
+                "country" => $company['country'],
+            ];
+        }
+
+        $data = [
+            "title" => $title,
+            "former" => $former[0],
+            "jobs" => $jobs,
+        ];
+
+        return view('Former/list_former_cv.php', $data);
     }
 
 }

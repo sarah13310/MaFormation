@@ -1,48 +1,89 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 define("THEME_SUPER_ADMIN", "3");
 define("THEME_ADMIN", "5");
 define("THEME_FORMER", "7");
 define("THEME_USER",     "9");
 define("THEME_COMPANY",   "11");
 
-/*********************ACCUEIL**************** */
+/*********************ACCUEIL*****************/
 
+// indicateur carousel
+function indicatorCarousel($index, $count)
+{
+    $str = "<div class='carousel-indicators'>";
+
+    for ($i = 0; $i < $count; $i++) {
+        $active = ($i == $index) ? "class='active' aria-current='true'" : "";
+        $str .= " <button type='button' data-bs-target='#carouselCaptions' data-bs-slide-to='$i' $active aria-label='Slide" . ($i + 1) . "'></button>";
+    }
+    $str .= "</div>";
+    return $str;
+}
+
+// éléments du carousel
 function listCarousel($index = 0)
 {
+    $base = base_url();
     $list = [
         [
-            "url_image" => base_url() . "assets/img/img1.jpg",
+            "url_image" => $base . "/assets/img/img1.jpg",
             "title" => "Débutant",
             "description" => "Vous débutez...",
         ],
         [
-            "url_image" => base_url() . "assets/img/img2.jpg",
+            "url_image" => $base . "/assets/img/img2.jpg",
             "title" => "Avancé",
             "description" => "Vous avancez...",
         ],
         [
-            "url_image" => base_url() . "assets/img/img3.jpg",
+            "url_image" => $base . "/assets/img/img3.jpg",
             "title" => "Entreprise",
             "description" => "Vous êtes un entreprise...",
         ],
     ];
     $i = 0;
-    $str = "";
+
+    $str = indicatorCarousel($index, count($list));
+
+    $str .= "<div class='carousel-inner'>";
     foreach ($list as $item) {
         $active = ($i == $index) ? "active" : "";
-        $str .= "<div class='carousel-item'" . $active . " >";
+        $str .= "<div class='carousel-item " . $active . " '' >";
         $str .= "<img src='" . $item['url_image'] . "' class='d-block w-100' alt='...'>";
         $str .= "<div class='carousel-caption d-none d-md-block'>";
         $str .= "<h5>" . $item['title'] . "</h5>";
         $str .= "<p>" . $item['description'] . "</p>";
+        $str .= "</div>";
+        $str .= "</div>";
         $i++;
     }
+    $str .= "</div>";
     return $str;
 }
-/******************************************** */
+
+/*********************************************/
+// Les profils utilisateur
+function createOptionType($select=0)
+{
+    $types = ["Vous êtes", "Formateur", "Entreprise","Particulier" ];
+    $selected_index=array_search($select,$types);
+    $options = "";
+    $index = 1;
+    foreach ($types as $type) {
+        $selected=($index == $selected_index)?"selected":"";
+        $options .= "<option value='$index' $selected >$type</option>";
+        $index++;
+    }
+    return $options;
+}
 
 
-/*********************PROFILS**************** */
+/*********************PROFILS*****************/
+
+// Privilèges
 function powers($number, $max = 100, $show = 5)
 {
     if ($number > $max) {
@@ -59,7 +100,7 @@ function powers($number, $max = 100, $show = 5)
     }
     return $str;
 }
-
+// Popularité
 function ratings($number, $max = 10)
 {
     if ($number > $max) {
@@ -76,7 +117,7 @@ function ratings($number, $max = 10)
     }
     return $str;
 }
-
+// Formatage des dates
 function dateFormat($date)
 {
     $strDate = "Aucune date renseignée";
@@ -87,7 +128,7 @@ function dateFormat($date)
     }
     return $strDate;
 }
-
+// Le mois en format texte
 function getMonth($month)
 {
     $strMonth = "";
@@ -131,7 +172,7 @@ function getMonth($month)
     }
     return $strMonth;
 }
-
+// Le genre de l'utilisateur
 function getGender($gender)
 {
     if ($gender == null) {
@@ -140,7 +181,7 @@ function getGender($gender)
     return ($gender == 1) ? "Masculin" : "Féminin";
 }
 
-
+// Menu 
 function fillMenuDashBoard($type)
 {
     $menu = "";
@@ -168,7 +209,7 @@ function fillMenuDashBoard($type)
             break;
 
         case THEME_ADMIN:
-            $menu .= fillMenu2("Accueil", "#", "Accueil", $type);
+            $menu .= fillMenu2("Accueil", "/login", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
             $menu .= fillMenu("Formations", "menu3", "Formations", $type);
@@ -179,7 +220,7 @@ function fillMenuDashBoard($type)
             break;
 
         case THEME_SUPER_ADMIN:
-            $menu .= fillMenu2("Accueil", "#", "Accueil", $type);
+            $menu .= fillMenu2("Accueil", "/superadmin/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
             $menu .= fillMenu("Formations", "menu3", "Formations", $type);
@@ -191,7 +232,7 @@ function fillMenuDashBoard($type)
     }
     return $menu;
 }
-
+// Icones en fonction des catégories
 function getIcon($category)
 {
     switch ($category) {
@@ -286,10 +327,19 @@ function fillMenuRight($category, $type)
             break;
 
         case "Privileges":
-            $items = [
-                ["ref" => "", "name" => "+ Administrateur"],
-                ["ref" => "", "name" => "Permissions"],
-            ];
+            switch ($type) {
+                case THEME_ADMIN:
+                    $items = [
+                        ["ref" => "", "name" => "Permissions"],
+                    ];
+                    break;
+                case THEME_SUPER_ADMIN:
+                    $items = [
+                        ["ref" => "/superadmin/add/admin", "name" => "+ Administrateur"],
+                        ["ref" => "/superadmin/privileges", "name" => "Permissions"],
+                    ];
+                    break;
+            }
             break;
     }
     $str = "";
@@ -300,7 +350,6 @@ function fillMenuRight($category, $type)
     }
     return $str;
 }
-
 
 function fillMenu($title, $id, $category, $type)
 {
@@ -319,11 +368,11 @@ function fillMenu2($title, $action, $category, $type)
     $str = "<li>
     <a href='" . $action . "' class='nav-link px-0 align-middle " . getTextColor($type) . "'>
         <i class='fs-4 " . getIcon($category) . "'></i> <span class='ms-1 d-none d-sm-inline'>" . $title . "</span></a>
-</li>";
+    </li>";
     return $str;
 }
 
-
+// Menu de navigation du haut
 function fillMenuNav($category = "News")
 {
     switch ($category) {
@@ -361,8 +410,7 @@ function fillMenuNav($category = "News")
     return $str;
 }
 
-
-// On change le theme pour le menu et le footer
+// On change le footer
 function changeFooterTheme($type, $navbar = true, $dark = true)
 {
     $theme = ($navbar == true) ? "navbar" : "";
@@ -371,23 +419,23 @@ function changeFooterTheme($type, $navbar = true, $dark = true)
     }
 
     switch ($type) {
-        case TYPE_USER: // Particulier
+        case THEME_USER: // Particulier
             $theme .= " f-blue";
             break;
 
-        case TYPE_COMPANY: // Entreprise
+        case THEME_COMPANY: // Entreprise
             $theme .= " f-blue2";
             break;
 
-        case TYPE_ADMIN: //Administrateur
+        case THEME_ADMIN: //Administrateur
             $theme = " f-yellow";
             break;
 
-        case TYPE_SUPER_ADMIN: // Super Administrateur
+        case THEME_SUPER_ADMIN: // Super Administrateur
             $theme .= " f-velvet";
             break;
 
-        case TYPE_FORMER: // Formateur
+        case THEME_FORMER: // Formateur
             $theme .= " f-green";
             break;
 
@@ -407,23 +455,23 @@ function changeMenuTheme($type, $navbar = true, $dark = true)
     $theme .= " menu-";
 
     switch ($type) {
-        case TYPE_USER: // Particulier
+        case THEME_USER: // Particulier
             $theme .= "bg-blue";
             break;
 
-        case TYPE_COMPANY: // Entreprise
+        case THEME_COMPANY: // Entreprise
             $theme .= "bg-blue2";
             break;
 
-        case TYPE_ADMIN: //Administrateur
+        case THEME_ADMIN: //Administrateur
             $theme = "bg-yellow";
             break;
 
-        case TYPE_SUPER_ADMIN: // Super Administrateur
+        case THEME_SUPER_ADMIN: // Super Administrateur
             $theme .= "bg-velvet";
             break;
 
-        case TYPE_FORMER: // Formateur
+        case THEME_FORMER: // Formateur
             $theme .= "bg-green";
             break;
 
@@ -435,30 +483,30 @@ function changeMenuTheme($type, $navbar = true, $dark = true)
 }
 // On change le theme pour le menu et le footer
 function changeMainTheme($type, $navbar = true, $dark = true)
-{
+{;
     $theme = ($navbar == true) ? "navbar" : "";
     if (!empty($theme)) {
         $theme .= ($dark == true) ? "-dark" : "-light";
     }
 
     switch ($type) {
-        case TYPE_USER: // Particulier
+        case THEME_USER: // Particulier
             $theme .= " bg-blue";
             break;
 
-        case TYPE_COMPANY: // Entreprise
+        case THEME_COMPANY: // Entreprise
             $theme .= " bg-blue2";
             break;
 
-        case TYPE_ADMIN: //Administrateur
+        case THEME_ADMIN: //Administrateur
             $theme = " bg-yellow";
             break;
 
-        case TYPE_SUPER_ADMIN: // Super Administrateur
+        case THEME_SUPER_ADMIN: // Super Administrateur
             $theme .= " bg-velvet";
             break;
 
-        case TYPE_FORMER: // Formateur
+        case THEME_FORMER: // Formateur
             $theme .= " bg-green";
             break;
 
@@ -475,23 +523,23 @@ function getTextColor($type)
     $theme = "";
 
     switch ($type) {
-        case TYPE_USER: // Particulier
+        case THEME_USER: // Particulier
             $theme = "text-white";
             break;
 
-        case TYPE_COMPANY: // Entreprise
+        case THEME_COMPANY: // Entreprise
             $theme = "text-white";
             break;
 
-        case TYPE_ADMIN: //Administrateur
+        case THEME_ADMIN: //Administrateur
             $theme = "text-white";
             break;
 
-        case TYPE_SUPER_ADMIN: // Super Administrateur
+        case THEME_SUPER_ADMIN: // Super Administrateur
             $theme = "text-white";
             break;
 
-        case TYPE_FORMER: // Formateur
+        case THEME_FORMER: // Formateur
             $theme = "text-white";
             break;
 
@@ -502,28 +550,59 @@ function getTextColor($type)
     return $theme;
 }
 
+function getMenuButtonColor($type)
+{
+    $theme = "";
+
+    switch ($type) {
+        case THEME_USER: // Particulier
+            $theme = "btn-menu-outline-1";
+            break;
+
+        case THEME_COMPANY: // Entreprise
+            $theme = "btn-menu-outline-1";
+            break;
+
+        case THEME_ADMIN: //Administrateur
+            $theme = "btn-menu-outline-1";
+            break;
+
+        case THEME_SUPER_ADMIN: // Super Administrateur
+            $theme = "btn-menu-outline-3";
+            break;
+
+        case THEME_FORMER: // Formateur
+            $theme = "btn-menu-outline-2";
+            break;
+
+        default: // par défaut
+            $theme = "btn-outline-primary";
+            break;
+    }
+    return $theme;
+}
 function getButtonColor($type)
 {
     $theme = "";
 
     switch ($type) {
-        case TYPE_USER: // Particulier
+        case THEME_USER: // Particulier
             $theme = "btn-outline-primary-1";
             break;
 
-        case TYPE_COMPANY: // Entreprise
+        case THEME_COMPANY: // Entreprise
             $theme = "btn-outline-primary-1";
             break;
 
-        case TYPE_ADMIN: //Administrateur
+        case THEME_ADMIN: //Administrateur
             $theme = "btn-outline-primary-1";
             break;
 
-        case TYPE_SUPER_ADMIN: // Super Administrateur
+        case THEME_SUPER_ADMIN: // Super Administrateur
             $theme = "btn-outline-primary-3";
             break;
 
-        case TYPE_FORMER: // Formateur
+        case THEME_FORMER: // Formateur
             $theme = "btn-outline-primary-2";
             break;
 
@@ -539,23 +618,23 @@ function getLogoColor($type)
     $theme = "";
 
     switch ($type) {
-        case TYPE_USER: // Particulier
+        case THEME_USER: // Particulier
             $theme .= "logo3.png";
             break;
 
-        case TYPE_COMPANY: // Entreprise
+        case THEME_COMPANY: // Entreprise
             $theme .= "logo3.png";
             break;
 
-        case TYPE_ADMIN: //Administrateur
+        case THEME_ADMIN: //Administrateur
             $theme .= "logo2.png";
             break;
 
-        case TYPE_SUPER_ADMIN: // Super Administrateur
+        case THEME_SUPER_ADMIN: // Super Administrateur
             $theme .= "logo2.png";
             break;
 
-        case TYPE_FORMER: // Formateur
+        case THEME_FORMER: // Formateur
             $theme = "logo1.png";
             break;
 
@@ -564,4 +643,56 @@ function getLogoColor($type)
             break;
     }
     return $theme;
+}
+
+// extractions des droits pour un utilisateur
+function getRights($right)
+{
+    return explode(' ', $right);
+}
+
+define("FLAG_READ", 0x8);
+define("FLAG_UPDATE", 0x4);
+define("FLAG_DELETE", 0x2);
+define("FLAG_EXPORT", 0x1);
+
+// réprésentation des droits sous forme graphique
+function translateRights($right)
+{
+    $first = $right[0];
+    $second = $right[1];
+    $icons = "<div style='display:flex;'>";
+
+    if ($first & 1) {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Ajout'><i class='bi bi-plus-circle-fill'></i></div>";
+    } else {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Ajout'><i class='bi bi-plus-circle'></i></div>";
+    }
+    $mask = base_convert($second, 16, 10);
+    $icons .= "&nbsp";
+    if ($mask & FLAG_READ) {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Lecture'><i class='bi bi-info-circle-fill'></i></div>";
+    } else {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Lecture'><i class='bi bi-info-circle'></i></div>";
+    }
+    $icons .= "&nbsp";
+    if ($mask & FLAG_UPDATE) {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Mise à jour'><i class='bi bi-check-circle-fill'></i></div>";
+    } else {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Mise à jour'><i class='bi bi-check-circle'></i></div>";
+    }
+    $icons .= "&nbsp";
+    if ($mask & FLAG_DELETE) {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Suppression'><i class='bi bi-dash-circle-fill'></i></div>";
+    } else {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Suppression'><i class='bi bi-dash-circle'></i></div>";
+    }
+    $icons .= "&nbsp";
+    if ($mask & FLAG_EXPORT) {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Exportation'><i class='bi bi-arrow-up-circle-fill'></i></div>";
+    } else {
+        $icons .= "<div data-bs-toggle='tooltip' data-bs-placement='bottom' title='Exportation'><i class='bi bi-arrow-up-circle'></i></div>";
+    }
+    $icons .= "</div>";
+    return $icons;
 }

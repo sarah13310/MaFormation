@@ -42,7 +42,99 @@
     </div>
 </div>
 
-<div class="title3 ms-4 mb-3"><?= $title ?></div>
+<div class="modal " tabindex="-1" id="myModalName">
+    <div class="modal-dialog">
+        <form action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification du nom</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id_user" id="id_user" value="<?= set_value('id_user') ?>">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" class="form-control mb-2" name="name" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Prénom</label>
+                        <input type="text" class="form-control mb-2" name="firstname" id="firstname">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                    <button type="submit" class="btn <?= getButtonColor($user['type'])?>">Modifier</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal " tabindex="-1" id="myModalContact">
+    <div class="modal-dialog">
+        <form action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informations de contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row">
+                    <input type="hidden" name="id_user" id="id_user" value="<?= set_value('id_user') ?>">
+                    <div class="col-md-6">
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="address" id="address" placeholder='Adresse'>
+                            <label for="name">Adresse</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="cp" id="cp" placeholder='Code postal'>
+                            <label for="cp">CP</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="city" id="city" placeholder='Ville'>
+                            <label for="city">Ville</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="country" id="country" placeholder='Pays'>
+                            <label for="country">Pays</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="mail" id="mail" placeholder='Mail'>
+                            <label for="mail">Mail</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="site" id="site" placeholder='Site'>
+                            <label for="site">Site</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder='Téléphone'>
+                            <label for="phone">Téléphone</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="date" class="form-control" name="birthday" id="birthday" placeholder='Anniversaire'>
+                            <label for="birthday">Anniversaire</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class='form-select' id='gender' name="gender" aria-label='Genre'>
+                                <option value='0'>Madame</option>
+                                <option value='1'>Monsieur</option>
+                                <option value='Null' selected>Non renseigné</option>
+                            </select>
+                            <label for="gender">Genre</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                    <button type="submit" class="btn <?= getButtonColor($user['type'])?>">Modifier</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="ms-2 mb-3"><h1><?= $title ?></h1></div>
 <div class="container">
     <div class="row ">
         <div class="col-12  col-md-4 mb-4">
@@ -91,7 +183,7 @@
                     <div class="flex-between">
                         <span><?= $user['firstname'] . " " . $user['name'] ?> </span>
                         <span class="title2"><i class="bi bi-geo-alt" style="width:14px"></i><?= "  " . $user['city'] . ", " . $user['country'] ?></span>
-                        <div><button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier le nom" class="btn-title0 mt-1">Modifier</button></div>
+                        <div data-bs-toggle="tooltip" title="Modifier le nom"><button data-bs-toggle="modal" data-bs-placement="bottom" data-bs-target="#myModalName" class="btn-title0 mt-1">Modifier</button></div>
                     </div>
                 </div>
                 <div class="row">
@@ -108,7 +200,7 @@
                 <div class="mb-1 title0">
                     <div class="title0 flex">
                         <div class="start"><i class="bi bi-person-fill"></i>&nbsp;Informations de contact</div>
-                        <div><button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier contact" class="btn-title0 mt-1">Modifier</button></div>
+                        <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier contact"><button data-bs-toggle="modal" data-bs-target="#myModalContact" class="btn-title0 mt-1">Modifier</button></div>
                     </div>
                     <hr class="fade-1">
                 </div>
@@ -128,7 +220,6 @@
                 <div class="mt-4 mb-1 title0">
                     <div class="title0 flex">
                         <div class="start"><i class="bi bi-person-fill"></i>&nbsp;Informations personnelles</div>
-
                     </div>
                     <hr class="fade-2">
                 </div>
@@ -189,9 +280,48 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
+        
+        function setupToolTip(){
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        }
+
+        var myModal = document.getElementById('myModalName')
+        var myModalContact = document.getElementById('myModalContact')
+
+        var myInputName = document.getElementById('name')
+        var myInputFirstname = document.getElementById('firstname')
+
+        var myInputAddress = document.getElementById('address')
+        var myInputCp = document.getElementById('cp')
+        var myInputCity = document.getElementById('city')
+        var myInputCountry = document.getElementById('country')
+        var myInputPhone = document.getElementById('phone')
+        var myInputMail = document.getElementById('mail')
+        var myInputBirthday = document.getElementById('birthday')
+        var myInputSite = document.getElementById('site')
+        //var myInputNewsLetters = document.getElementById('newsletters')
+
+        myModal.addEventListener('shown.bs.modal', function() {
+            myInputName.value = "<?= $user['name'] ?>";
+            myInputFirstname.value = "<?= $user['firstname'] ?>";           
         })
+
+        
+        myModalContact.addEventListener('shown.bs.modal', function() {
+            myInputAddress.value = "<?= $user['address'] ?>";
+            myInputCp.value = "<?= $user['cp'] ?>";
+            myInputCity.value = "<?= $user['city'] ?>";
+            myInputCountry.value = "<?= $user['country'] ?>";
+            myInputPhone.value = "<?= $user['phone'] ?>";
+            myInputMail.value = "<?= $user['mail'] ?>";
+            myInputBirthday.value = "<?= $user['birthday'] ?>";
+            myInputSite.value = "www.maformation.com";            
+        })
+
+        setupToolTip()
+
     </script>
     <?= $this->endSection() ?>

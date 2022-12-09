@@ -32,12 +32,17 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 // admin
-$routes->get('/superadmin/profil', 'Admin::superprofile');
-$routes->get('/admin/profil', 'Admin::profileadmin');
+$routes->get('/superadmin/profil', 'Admin::superprofile');//Page profil super administrateur
+$routes->get('/admin/profil', 'Admin::profileadmin');// Page profil administrateur
+$routes->match(['get', 'post'],'/superadmin/add/admin', 'Admin::add_admin');// Ajout administrateur
+$routes->get('/superadmin/privileges', 'Dashboard::privileges');//dashboard des privileges
+//Former
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard des formateurs
+$routes->get('/former/list', 'Former::listformershome');// liste des formateurs page home
+$routes->get('/former/list/cv', 'Former::listformerhome');// détails du formateur page home
 
 $routes->get('/admin', 'Admin::index');
-$routes->get('/contact', 'Contact::index');
+$routes->get('/contact', 'Contact::index');// page contact
 
 // former
 $routes->get('/former/view', 'Former::former_view');

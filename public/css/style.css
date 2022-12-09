@@ -41,8 +41,8 @@
 	--mf-dark-4: #212529;
 }
 
-body{
-	overflow-x:hidden;
+body {
+	overflow-x: hidden;
 }
 
 .logo {
@@ -175,7 +175,7 @@ body{
 
 .menu-bg-green {
 	background: linear-gradient(#394d40, #2d5442e8, #b1dcbf);
-	
+
 }
 
 /**/
@@ -391,9 +391,29 @@ hr {
 .fade-2 {
 	height: 1px;
 	margin: 0;
-	background: linear-gradient(#33333318, #2673de, #33333318);
+	background:  #2673de;
 	border: 0;
 	margin-bottom: 4px;
+}
+
+.fade-2::before {
+	display: block;
+	margin-left: -10%;
+	margin-top: -1px;
+	content: "";
+	background: linear-gradient(to left, #33333318, #2673de);
+	width: 10%;
+	height: 1px;
+}
+
+.fade-2::after {
+	display: block;
+	margin-left: 100%;
+	margin-top: -1px;
+	content: "";
+	background: linear-gradient(to right, #2673de, #33333318);
+	width: 10%;
+	height: 1px;
 }
 
 .ton-blue-6 {
@@ -406,27 +426,15 @@ hr {
 
 .fade-1 {
 	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#badcff+0,60abf8+50,60abf8+50,badcff+100 */
-	background: #badcff28;
+	background: #badcff;
 	/* Old browsers */
-	background: -moz-linear-gradient(left,
-			#badcff28 0%,
-			#60abf8 50%,
-			#60abf8 50%,
-			#badcff28 100%);
+	background: -moz-linear-gradient(left, #badcff 0%, #60abf8 50%, #60abf8 50%, #badcff 100%);
 	/* FF3.6-15 */
-	background: -webkit-linear-gradient(left,
-			#badcff28 0%,
-			#60abf8 50%,
-			#60abf8 50%,
-			#badcff28 100%);
+	background: -webkit-linear-gradient(left, #badcff 0%, #60abf8 50%, #60abf8 50%, #badcff 100%);
 	/* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to right,
-			#badcff28 0%,
-			#60abf8 50%,
-			#60abf8 50%,
-			#badcff28 100%);
+	background: linear-gradient(to right, #badcff 0%, #60abf8 50%, #60abf8 50%, #badcff 100%);
 	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#badcff28', endColorstr='#badcff', GradientType=1);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#badcff', endColorstr='#badcff', GradientType=1);
 	/* IE6-9 */
 }
 
@@ -519,49 +527,98 @@ hr {
 	border: 2px solid #185c9c;
 }
 
-
 .relief {
 	text-shadow: 1px 1px 4px black;
 }
 
+/* boutons en fonction des thèmes  */
 .btn-outline-primary-1 {
-	background: transparent;
-	color: var(--mf-blue-5) !important;
-	border-color: var(--mf-blue-5) !important;
+	background: var(--mf-blue-5);
+	color: whitesmoke;
+	border-color: black;
 	border-radius: .25rem;
 }
 
-.btn-outline-primary-1:hover {
-	color: #fff!important;
+.btn-outline-primary-2 {
+	background: var(--mf-green-1);
+	color: whitesmoke;
+	border-color: black;
+	border-radius: .25rem;
+}
+
+.btn-outline-primary-3 {
+	background: var(--mf-velvet-1);
+	color: whitesmoke;
+	border-color: black;
+	border-radius: .25rem;
+}
+
+.btn-outline-primary-1:hover,
+.btn-outline-primary-2:hover,
+.btn-outline-primary-3:hover {
+	filter: brightness(2);
+	color: whitesmoke;
+	border-color: black;
+
+}
+
+.btn-menu-outline-1 {
+	color: #fff;
 	background-color: var(--mf-blue-1);
 	border-color: white;
 	border-radius: .25rem;
 }
 
-.btn-outline-primary-2 {
-	background: transparent;
-	color: whitesmoke !important;
-	border-color: whitesmoke !important;
-	border-radius: .25rem;
-}
-
-.btn-outline-primary-2:hover {
-	color: #fff!important;
+.btn-menu-outline-2 {
+	color: #fff !important;
 	background-color: var(--mf-green-1);
 	border-color: white;
 	border-radius: .25rem;
 }
 
-.btn-outline-primary-3 {
-	background: transparent;
-	color: whitesmoke !important;
-	border-color: whitesmoke !important;
-	border-radius: .25rem;
+.btn-menu-outline-1:hover,
+.btn-menu-outline-2:hover,
+.btn-menu-outline-3:hover {
+	color: white;
+	filter: brightness(1.8);
 }
 
-.btn-outline-primary-3:hover {
-	color: #fff!important;
+
+.btn-menu-outline-3 {
+	color: #fff;
 	background-color: var(--mf-velvet-1);
 	border-color: white;
 	border-radius: .25rem;
+}
+
+
+/* tableau entete */
+.t_former {
+	color: #fff !important;
+	background: #4c0cab !important;
+}
+
+.t_skill {
+	color: #fff !important;
+	background: rgb(166, 227, 185) !important;
+}
+
+table#table_admin tr:hover {
+	color: white;
+	background-color: var(--mf-velvet-1);
+	cursor: pointer;
+}
+
+table#table_rights td:hover {
+	color: white;
+	background-color: var(--mf-velvet-1);
+	cursor: pointer;
+}
+
+.hidden {
+	display: none;
+}
+
+.disabled {
+	color: var(--mf-b-gray-2);
 }

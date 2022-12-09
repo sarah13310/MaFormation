@@ -47,7 +47,7 @@ class User extends BaseController
                     $pwh = $user['password'];
 
                     if (password_verify($pw, $pwh)) { // vérifie si password ok et dispatche
-                        $this->setUserSession($user);
+                       
                         $data = $this->dispatch($user);
                         $route = $data['route'];
                         return view($route, $data);
@@ -60,7 +60,12 @@ class User extends BaseController
 
     private function dispatch($user)
     {
+        helper(['form']);
+
+        $this->setUserSession($user);
+
         $type = $user['type'];
+
         if ($user['image_url'] == null)
             $user['image_url'] = base_url() . "/assets/blank.png";
 
@@ -70,7 +75,7 @@ class User extends BaseController
                 $skills = $this->getInfosCertificates($user['id_user']);
 
                 $data = [
-                    "title" => "Mode super Administrateur",
+                    "title" => "Profil",
                     "user" => $user,
                     "jobs" => $jobs,
                     "skills" => $skills,
@@ -174,17 +179,24 @@ class User extends BaseController
         }
         return $jobs;
     }
-
+    
 
     private function setUserSession($user)
     {
         $data = [
-            'id' => $user['id_user'],
+            'id_user' => $user['id_user'],
             'name' => $user['name'],
             'firstname' => $user['firstname'],
             'mail' => $user['mail'],
             'password' => $user['password'],
-            'type' => $user['type'],
+            'address' => $user['address'],
+            'cp' => $user['cp'],
+            'city' => $user['city'],           
+            'country' => $user['country'],
+            'gender' => $user['gender'],
+            'phone' => $user['phone'],
+            'image_url' => $user['image_url'],
+            'type'=>$user['type'],
             'isLoggedIn' => true,
         ];
         session()->set($data);
@@ -328,6 +340,8 @@ class User extends BaseController
     public function profileuser()
     {
 
+        helper(['form']);  
+
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
         $id =  session()->get('id_user');
@@ -450,14 +464,12 @@ class User extends BaseController
                 'c_address' => 'required|min_length[3]|max_length[128]',
                 'c_city' => 'required|min_length[3]|max_length[64]',
                 'c_cp' => 'required|min_length[3]|max_length[16]',
-
             ];
             $errorc = [
                 'c_name' => ['required' => "Nom de la compagnie vide!"],
                 'c_address' => ['required' => "Adresse de la compagnie vide!"],
                 'c_city' => ['required' => "Ville de la compagnie vide!"],
                 'c_cp' => ['required' => "Code postal de la compagnie vide!"],
-
             ];
 
             if (!$this->validate($rules, $error)) {
@@ -480,7 +492,7 @@ class User extends BaseController
                         $data['validation'] = $this->validator;
                         $sub = false;
                     } else {
-                        $rights = '001605051D1D050100';
+                        $rights = '00 16 05 05 1D 1D 05';
                     }
                     break;
                 case "3": // Entreprises
@@ -488,11 +500,11 @@ class User extends BaseController
                         $data['validation'] = $this->validator;
                         $sub = false;
                     } else {
-                        $rights = '001605051D1D050300';
+                        $rights = '00 16 05 05 1D 1D 05';
                     }
                     break;
                 case "4": // Particuliers
-                    $rights = '00001C0505050200';
+                    $rights = '00 00 1C 05 05 05';
                     break;
             }
             $ischecked = ($check == NULL) ? 0 : 1;
@@ -511,6 +523,7 @@ class User extends BaseController
                     'phone' => $this->request->getVar('phone'),
                     'mail' => $this->request->getVar('mail'),
                     'password' => $this->request->getVar('password'),
+                    'type' => $this->request->getVar('type'),
                     'newsletters' => $ischecked,
                 ];
 
