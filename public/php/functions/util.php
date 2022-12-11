@@ -66,14 +66,14 @@ function listCarousel($index = 0)
 
 /*********************************************/
 // Les profils utilisateur
-function createOptionType($select=0)
+function createOptionType($select = 0)
 {
-    $types = ["Vous êtes", "Formateur", "Entreprise","Particulier" ];
-    $selected_index=array_search($select,$types);
+    $types = ["Vous êtes", "Formateur", "Entreprise", "Particulier"];
+    $selected_index = array_search($select, $types);
     $options = "";
     $index = 1;
     foreach ($types as $type) {
-        $selected=($index == $selected_index)?"selected":"";
+        $selected = ($index == $selected_index) ? "selected" : "";
         $options .= "<option value='$index' $selected >$type</option>";
         $index++;
     }
@@ -294,7 +294,8 @@ function fillMenuRight($category, $type)
                         ["ref" => "", "name" => "Travail"],
                     ];
                     break;
-                default:
+                case THEME_ADMIN:
+                case THEME_SUPER_ADMIN:
                     $items = [
                         ["ref" => "", "name" => "Nom - Mot de passe"],
                         ["ref" => "", "name" => "Informations contact"],
@@ -313,10 +314,25 @@ function fillMenuRight($category, $type)
             break;
 
         case "Formations":
-            $items = [
-                ["ref" => "", "name" => "Liste"],
-                ["ref" => "", "name" => "Filtre"],
-            ];
+            switch ($type) {
+                case THEME_ADMIN:
+                case THEME_FORMER:
+                case THEME_SUPER_ADMIN:
+                    $items = [
+                        ["ref" => "", "name" => "Liste"],
+                        ["ref" => "/admin/articles/edit", "name" => "Création Article"],
+                        ["ref" => "/admin/publishes/edit", "name" => "Création Publication"],
+                    ];
+                    break;
+                case THEME_USER:
+                case THEME_COMPANY:
+                    $items = [
+                        ["ref" => "", "name" => "Liste"],
+                        ["ref" => "", "name" => "Filtre"],
+                    ];
+                    break;
+            }
+
             break;
 
         case "Formateurs":

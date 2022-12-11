@@ -40,7 +40,6 @@ class Former extends BaseController
 
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
 
-
         $skills = [];
 
         for ($i = 0; $i < count($listformers); $i++) {

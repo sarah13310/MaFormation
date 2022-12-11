@@ -92,3 +92,12 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+
+define ('VALIDE', 1);
+define ('EN_COURS', 2);
+define ('REFUSE', 3);
+define ('EDITE', 10);
+define ('REEDITE', 11);
+define ('EXPORTE', 12);
+define('BROUILLON',13);

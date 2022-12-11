@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/profil_former') ?>
+<?= $this->extend('layouts/profil') ?>
 <?= $this->section('header') ?>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="<?= base_url() ?>/css/stylemain.css">
@@ -8,7 +8,7 @@
 <?= $this->section('content') ?>
 <h1><?= $title ?></h1>
 <section class="Content">
-    <link rel="stylesheet" href="css/default.min.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>/css/default.min.css" />
     <script src="<?= base_url() ?>/js/sceditor.min.js"></script>
     <script src="<?= base_url() ?>/js/languages/fr.js"></script>
     <script src="<?= base_url() ?>/js/bbcode.min.js"></script>
@@ -16,12 +16,10 @@
     <div class="fullwidth Intro">
         <p><?= $subtitle ?></p>
         <textarea id="example" style="width: 80%; height: 400px">
-
         </textarea>
     </div>
 </section>
 <?= $this->endSection() ?>
-
 
 <?= $this->section('js') ?>
 <script>

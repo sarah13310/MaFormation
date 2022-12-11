@@ -36,6 +36,9 @@ $routes->get('/superadmin/profil', 'Admin::superprofile');//Page profil super ad
 $routes->get('/admin/profil', 'Admin::profileadmin');// Page profil administrateur
 $routes->match(['get', 'post'],'/superadmin/add/admin', 'Admin::add_admin');// Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges');//dashboard des privileges
+$routes->match(['get', 'post'], '/admin/articles/edit', 'News::articles_edit');
+$routes->match(['get', 'post'], '/admin/publishes/edit', 'News::publishes_edit');
+
 
 //Former
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard des formateurs
@@ -68,9 +71,6 @@ $routes->get('/financement', 'Funding::index');
 // menu actualités
 $routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
-$routes->match(['get', 'post'], '/articlesedit', 'News::articlesedit');
-$routes->match(['get', 'post'], '/publishesedit', 'News::publishesedit');
-
 $routes->get('/paymentcb', 'Payment::paymentcb');
 
 //Medias
