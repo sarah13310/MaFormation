@@ -40,18 +40,19 @@ $routes->match(['get', 'post'], '/admin/articles/edit', 'News::articles_edit');
 $routes->match(['get', 'post'], '/admin/publishes/edit', 'News::publishes_edit');
 
 
+
 //Former
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard des formateurs
-$routes->get('/former/list', 'Former::listformershome');// liste des formateurs page home
-$routes->get('/former/list/cv', 'Former::listformerhome');// détails du formateur page home
-
+$routes->match(['get', 'post'],'/former/list', 'Former::list_formers_home');// liste des formateurs page home
+$routes->add('/former/list/cv', 'Former::details_former_home');// détails du formateur page home
 $routes->get('/admin', 'Admin::index');
-$routes->get('/contact', 'Contact::index');// page contact
+$routes->match(['get', 'post'],'/contact', 'Contact::index');// page contact
 
 // former
 $routes->get('/former/view', 'Former::former_view');
 $routes->get('/former/list', 'Former::former_list');
 $routes->get('/former/profil', 'Former::profile_view');
+$routes->add('/former/rdv', 'Former::rdv');
 
 // user
 $routes->match(['get', 'post'], 'login', 'User::login'); //login user
@@ -65,8 +66,9 @@ $routes->get('/company/profile', 'User::profilecompany'); //profil company
 // menu a propos
 $routes->get('/formateurs', 'Former::index');
 $routes->get('/faq', 'FAQ::index');
+$routes->get('/funding', 'Home::funding');
 $routes->get('/formations', 'Training::index');
-$routes->get('/financement', 'Funding::index');
+
 
 // menu actualités
 $routes->get('/articles', 'News::index');
@@ -77,6 +79,9 @@ $routes->get('/paymentcb', 'Payment::paymentcb');
 $routes->get('/medias/slides', 'Media::slides');
 $routes->get('/medias/videos', 'Media::videos');
 $routes->get('/medias/livres', 'Media::books');
+
+
+
 
 /*
 * --------------------------------------------------------------------

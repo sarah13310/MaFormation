@@ -53,7 +53,7 @@ h5, h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #4a4a4a;
+    color: #777777;
     line-height: 1.1;
     margin: 2rem 0 .5rem;
     letter-spacing: .5px
@@ -105,7 +105,7 @@ html code {
 
 .Content > :not(.fullwidth):not(.Post), .Footer__container, .Header__container {
     width: 100%;
-    max-width: 58rem;
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto
 }

@@ -7,6 +7,7 @@ use App\Models\CertificateModel;
 use App\Models\UserHasCertificateModel;
 use App\Models\UserHasCompanyModel;
 use App\Models\CompanyModel;
+use App\Libraries\UserHelper;
 
 class User extends BaseController
 {
@@ -17,6 +18,7 @@ class User extends BaseController
             'isLoggedIn' => false,
         ];
         helper(['form']);
+        
 
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
@@ -62,7 +64,9 @@ class User extends BaseController
     {
         helper(['form']);
 
-        $this->setUserSession($user);
+        $user_info= new UserHelper();
+        $user_info->setUserSession($user);
+        // $this->setUserSession($user);
 
         $type = $user['type'];
 
@@ -71,8 +75,8 @@ class User extends BaseController
 
         switch ($type) {
             case TYPE_SUPER_ADMIN: // super administrateur
-                $jobs = $this->getInfosCompany($user['id_user']);
-                $skills = $this->getInfosCertificates($user['id_user']);
+                $jobs = $user_info->getInfosCompany($user['id_user']);
+                $skills = $user_info->getInfosCertificates($user['id_user']);
 
                 $data = [
                     "title" => "Profil",
@@ -84,8 +88,8 @@ class User extends BaseController
                 break;
 
             case TYPE_ADMIN: // administrateur
-                $jobs = $this->getInfosCompany($user['id_user']);
-                $skills = $this->getInfosCertificates($user['id_user']);
+                $jobs = $user_info->getInfosCompany($user['id_user']);
+                $skills = $user_info->getInfosCertificates($user['id_user']);
                 $data = [
                     "title" => "Mode Administrateur",
                     "user" => $user,
@@ -96,8 +100,8 @@ class User extends BaseController
                 break;
 
             case TYPE_FORMER: // formateur
-                $jobs = $this->getInfosCompany($user['id_user']);
-                $skills = $this->getInfosCertificates($user['id_user']);
+                $jobs = $user_info->getInfosCompany($user['id_user']);
+                $skills = $user_info->getInfosCertificates($user['id_user']);
                 $data = [
                     "title" => "Mode Formateur",
                     "user" => $user,
@@ -116,7 +120,7 @@ class User extends BaseController
                 break;
 
             case TYPE_COMPANY: // entreprise
-                $jobs = $this->getInfosCompany($user['id_user']);
+                $jobs = $user_info->getInfosCompany($user['id_user']);
                 $data = [
                     "title" => "Mode Utilisateur Entreprise",
                     "user" => $user,
@@ -128,103 +132,11 @@ class User extends BaseController
         return $data;
     }
 
-    private function getInfosCertificates($id)
-    {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+   
 
-        $builder->select('certificate.name');
-        $builder->where('user.id_user', $id);
-        $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-        $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
-        $query = $builder->get();
-        $certificates = $query->getResultArray();
-        $skills = [];
-        foreach ($certificates as $certificate) {
-            $skills[] = $certificate['name'];
-        }
-        return $skills;
-    }
-
-    private function getInfosCompany($id, $single = true)
-    {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $builder->select('company.name, company.address,company.city ,company.cp');
-        $builder->where('user.id_user', $id);
-        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
-        $builder->join('company', 'user_has_company.id_company=company.id_company');
-        $query = $builder->get();
-        $companies = $query->getResultArray();
-
-        $jobs = [];
-
-        if ($companies == null)
-            return $jobs;
-
-        if ($single) {
-            $jobs[] = [
-                "name" => $companies[0]['name'],
-                "address" => $companies[0]['address'] . "<br>" . $companies[0]['city'] . ", " . $companies[0]['cp']
-            ];
-            return $jobs;
-        }
-
-        foreach ($companies as $company) {
-            $jobs[] = [
-                "name" => $company['name'],
-                "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
-            ];
-        }
-        return $jobs;
-    }
     
 
-    private function setUserSession($user)
-    {
-        $data = [
-            'id_user' => $user['id_user'],
-            'name' => $user['name'],
-            'firstname' => $user['firstname'],
-            'mail' => $user['mail'],
-            'password' => $user['password'],
-            'address' => $user['address'],
-            'cp' => $user['cp'],
-            'city' => $user['city'],           
-            'country' => $user['country'],
-            'gender' => $user['gender'],
-            'phone' => $user['phone'],
-            'image_url' => $user['image_url'],
-            'type'=>$user['type'],
-            'isLoggedIn' => true,
-        ];
-        session()->set($data);
-        return true;
-    }
-
-    private function setCompanySession($user, $company)
-    {
-        $data = [
-            'user_name' => $user['name'],
-            'user_firstname' => $user['firstname'],
-            'user_mail' => $user['mail'],
-            'user_address' => $user['address'],
-            'user_cp' => $user['cp'],
-            'user_city' => $user['city'],
-            'user_phone' => $user['phone'],
-            'user_password' => $user['password'],
-            'company_name' => $company['name'],
-            'company_address' => $company['address'],
-            'company_cp' => $company['cp'],
-            'company_city' => $company['city'],
-            'company_kbis' => $company['kbis'],
-            'company_siret' => $company['siret'],
-        ];
-        session()->set($data);
-        return true;
-    }
-
+    
     private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
         $modelu = new UserModel();
@@ -394,6 +306,7 @@ class User extends BaseController
         ];
         return view('Login/forgetpassword.php', $data);
     }
+    
 
     public function logout()
     {
@@ -402,11 +315,12 @@ class User extends BaseController
         //return view('Home/index.php');
     }
 
+
     public function signin()
     {
         $data = ["title" => "Inscription"];
         helper(['form']);
-
+        $user_info= new UserHelper();
         if ($this->request->getMethod() == 'post') {
 
             $index = $this->request->getVar('index');
@@ -581,7 +495,7 @@ class User extends BaseController
 
                     if (empty($kbis) || empty($siret)) {
                         $data['title'] = "Inscrire entreprise";
-                        $this->setCompanySession($newData, $newDatac);
+                        $user_info->setCompanySession($newData, $newDatac);
                         return view("Login/confirmation", $data);
                     } else {
                         $company = $this->ifNotExistCompany($newDatac);

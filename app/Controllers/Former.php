@@ -2,11 +2,36 @@
 
 namespace App\Controllers;
 
+use App\Models\RdvModel;
 
+// Date 14-12-2022
 class Former extends BaseController
 {
 
-    public function listformershome()
+    private function setFormerSession($former)
+    {
+        $data = [
+            'id_user' => $former['id_user'],
+            'name' => $former['name'],
+            'firstname' => $former['firstname'],
+            'mail' => $former['mail'],
+            'password' => $former['password'],
+            'address' => $former['address'],
+            'cp' => $former['cp'],
+            'city' => $former['city'],
+            'country' => $former['country'],
+            'gender' => $former['gender'],
+            'phone' => $former['phone'],
+            'image_url' => $former['image_url'],
+            'type' => $former['type'],
+            'isLoggedIn' => true,
+        ];
+        session()->set($data);
+        return true;
+    }
+
+
+    public function list_formers_home()
     {
 
         $title = "Liste des formateurs";
@@ -34,7 +59,6 @@ class Former extends BaseController
                 "phone" => $former['phone'],
             ];
         }
-
 
         /* compétences certificats*/
 
@@ -94,26 +118,24 @@ class Former extends BaseController
         return view('Former/list_former.php', $data);
     }
 
-    public function listformerhome()
+
+    public function details_former_home()
     {
+        $title = "Cv du formateur";
 
-        $title = "Liste d'un formateur";
+        if ($this->request->getMethod() == 'post') {
 
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+            $mail = $this->request->getVar('mail');
 
-        $id = 2;
-
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $former = $query->getResultArray();        
-
-        /* compétences certificats*/
-
-        $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
+            $db      = \Config\Database::connect();
+            $builder = $db->table('user');
+            $builder->where('mail', $mail);
+            $query   = $builder->get();
+            $former = $query->getResultArray();
 
 
-        $skills = [];
+            $id = $former[0]['id_user'];
+
 
             $builder->where('user.id_user', $id);
             $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
@@ -122,9 +144,9 @@ class Former extends BaseController
             $query = $builder->get();
             $certificates = $query->getResultArray();
 
-            $certi = [];
+            $skills = [];
             foreach ($certificates as $certificate) {
-                $certi[] = [
+                $skills[] = [
                     "name" => $certificate['name'],
                     "content" => $certificate['content'],
                     "date" => $certificate['date'],
@@ -136,34 +158,35 @@ class Former extends BaseController
                 ];
             }
 
-            //$former["skills"] = $certi;
+            $data = [
+                "title" => $title,
+                "former" => $former,
+                "skills" => $skills,
+            ];
 
-            
+            return view('Former/list_former_cv.php', $data);
+        }
+    }
 
-        $builder->select('company.name, company.address,company.city ,company.cp,company.country');
-        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
-        $builder->join('company', 'user_has_company.id_company=company.id_company');
-        $query = $builder->get();
-        $companies = $query->getResultArray();
-
-        $jobs = [];
-        foreach ($companies as $company) {
-            $jobs[] = [
-                "name" => $company['name'],
-                "address" => $company['address'],
-                "city" => $company['city'],
-                "cp" => $company['cp'],
-                "country" => $company['country'],
+    public function rdv()
+    {
+        $id_user = 3;
+        $rdv = new RdvModel();
+        $query = $rdv->where("id_user", $id_user)->findAll();
+        $events=[];
+        foreach ($query as $event) {
+            $events[] = [
+                "title" => "Infos",
+                "dateStart" => $event['dateStart'],
+                "dateEnd" =>  $event['dateEnd'],
             ];
         }
 
         $data = [
-            "title" => $title,
-            "former" => $former[0],
-            "jobs" => $jobs,
+            "title"=>"Planning des Rendez-vous",
+            "id_user" => $id_user,
+            "events" => $events,
         ];
-
-        return view('Former/list_former_cv.php', $data);
+        return view('Former/rdv.php', $data);
     }
-
 }

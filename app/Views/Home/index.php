@@ -45,8 +45,49 @@
     Odio aenean sed adipiscing diam donec. Lorem mollis aliquam ut porttitor leo a diam.
     Ultrices eros in cursus turpis massa tincidunt.
     Porttitor massa id neque aliquam. Morbi non arcu risus quis varius quam.</p>
-  <button onclick="location = '/financement'">Me financer</button>
+  <button class="btn btn-outline-primary" onclick="location = '/funding'">Me financer</button>
 </div>
+<section class="">
+                <form action="/" method="post">
+                    <!--Grid row-->
+                    <div class="row d-flex justify-content-center">
+                        <!--Grid column-->
+                        <div class="col-auto">
+                            <p class="pt-2">
+                                <strong>S'abonner à la lettre d'informations</strong>
+                            </p>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-md-5 col-12">
+                            <!-- Email input -->
+                            <div class="form-outline form-white mb-4">
+                              <input class="form-control mb-2" type="text" name="mail" id="mail" placeholder="Adresse mail" value="">
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                        <?php if (isset($validation)) : ?>
+                        <div class="col-12">
+                            <div class="alert alert-danger" role="alert">
+                                <?= $validation->listErrors() ?>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                        <!--Grid column-->
+                        <div class="col-auto">
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-outline-dark mb-4">
+                                Souscrire
+                            </button>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </form>
+            </section>
+            <!-- Section: Form -->
 
 
 <?= $this->endSection() ?>

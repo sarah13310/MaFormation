@@ -2,7 +2,8 @@
 <?= $this->section('content') ?>
 <h1><?= $title ?></h1>
 
-<?= $former['name'] ?>  
+<?= $name ?> 
+<?= $firstname ?>  
 
 <?= $this->endSection() ?>
 

@@ -622,3 +622,47 @@ table#table_rights td:hover {
 .disabled {
 	color: var(--mf-b-gray-2);
 }
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #777777;
+    line-height: 1.1;
+    margin: 2rem 0 0.5rem;
+    letter-spacing: .5px;
+}
+
+.f_contact{
+    background-color: #dadfe7;
+}
+
+.l_contact{
+    background-color: #9bb5df;
+}
+
+
+.myfunding1{
+    background-color: #87b1ff;
+    width: 1000px;
+}
+
+.myfunding2{
+    background-color: #9fc1ff;
+    width: 1000px;
+}
+
+.myfunding3{
+    width: 1000px;
+}
+
+.accordion{
+    width:90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.infofund, .infohome{
+	width:95%;
+	margin-left:auto;
+	margin-right:auto;
+}

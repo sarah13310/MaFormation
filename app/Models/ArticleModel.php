@@ -10,8 +10,7 @@ class ArticleModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id_article', 'subject', 'description', 'datetime', 'media_id_media','status'];
-    
+    protected $allowedFields = ['id_article', 'subject', 'description', 'datetime', 'media_id_media','status'];   
    
     
 }

@@ -101,3 +101,8 @@ define ('EDITE', 10);
 define ('REEDITE', 11);
 define ('EXPORTE', 12);
 define('BROUILLON',13);
+
+define("FLAG_READ", 0x8);
+define("FLAG_UPDATE", 0x4);
+define("FLAG_DELETE", 0x2);
+define("FLAG_EXPORT", 0x1);

@@ -1,3 +1,4 @@
+<?php $base = base_url(); ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('header') ?>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -6,27 +7,36 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<h1><?= $title ?></h1>
+<h1 class="ms-3"><?= $title ?></h1>
 <section class="Content">
-    <link rel="stylesheet" href="<?= base_url() ?>/css/default.min.css" />
-    <script src="<?= base_url() ?>/js/sceditor.min.js"></script>
-    <script src="<?= base_url() ?>/js/languages/fr.js"></script>
-    <script src="<?= base_url() ?>/js/bbcode.min.js"></script>
-    <script src="<?= base_url() ?>/js/monocons.min.js"></script>
+    <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
+    <script src="<?= $base ?>/js/sceditor.min.js"></script>
+    <script src="<?= $base ?>/js/languages/fr.js"></script>
+    <script src="<?= $base ?>/js/bbcode.min.js"></script>
+    <script src="<?= $base ?>/js/monocons.min.js"></script>
 
     <form action="/admin/articles/edit" method="post">
         <div class='form-floating mb-3'>
             <input class='form-control' id='title_example' type='text' name='subject' placeholder="Nom de l'article" />
             <label for='title_example'>Nom de l'article (*)</label>
         </div>
-        <div class="fullwidth editor">
-            <p><?= $subtitle ?></p>
-            <textarea id="example" name="description" style="width: 90%; height: 400px">
+        <div class="form-group row">
+            <label for="select" class="col-sm-4 col-12 col-md-6 col-xl-6 ">Catégorie</label>
+            <div class="col-sm-8 col-12 col-md-6 col-xl-6" >
+                <select id="select" name="select" class="form-select">
+                    <option value="0">Informatique</option>
+                    <option value="1">Programmation processeur</option>
+                    <option value="2">Méthodologie</option>
+                </select>
+            </div>
+        </div>
+        <div class="fullwidth editor mt-2">            
+            <textarea id="example" name="description" style="width:95%; height:400px">
         </textarea>
         </div>
         <div class="row fullwidth align-items-center mt-2">
-            <div class="col-sm-12 col-md-3  col-xl-1"><button type="submit" class="btn btn-primary">Sauver</button></div>
-            <div class="col-sm-12 col-md-3  col-xl-2">
+            <div class="col-sm-12 col-md-3 col-xl-1"><button type="submit" class="btn btn-primary">Sauver</button></div>
+            <div class="col-sm-12 col-md-3 col-xl-2">
                 <input type="checkbox" id="publish" name="publish" checked>
                 <label for="publish">Publier</label>
             </div>
@@ -39,9 +49,9 @@
 <script>
     sceditor.create(document.getElementById('example'), {
         format: 'bbcode',
-        width: '95%',
+        width: '100%',
         icons: 'monocons',
-        style: 'css/default.min.css',
+        style: '<?= $base ?>/css/default.min.css',
         locale: 'fr-FR'
     });
 </script>
