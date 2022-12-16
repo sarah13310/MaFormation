@@ -40,22 +40,21 @@ $routes->match(['get', 'post'], '/admin/articles/edit', 'News::articles_edit');
 $routes->match(['get', 'post'], '/admin/publishes/edit', 'News::publishes_edit');
 
 
+$routes->get('/admin', 'Admin::index');
 
 //Former
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard des formateurs
 $routes->match(['get', 'post'],'/former/list', 'Former::list_formers_home');// liste des formateurs page home
 $routes->add('/former/list/cv', 'Former::details_former_home');// détails du formateur page home
-$routes->get('/admin', 'Admin::index');
 $routes->match(['get', 'post'],'/contact', 'Contact::index');// page contact
 
-// former
 $routes->get('/former/view', 'Former::former_view');
-$routes->get('/former/list', 'Former::former_list');
 $routes->get('/former/profil', 'Former::profile_view');
 $routes->add('/former/rdv', 'Former::rdv');
+$routes->add('/former/profil/edit', 'Former::profile_view');
 
 // user
-$routes->match(['get', 'post'], 'login', 'User::login'); //login user
+$routes->match(['get', 'post'], '/login', 'User::login'); //login user
 $routes->get('logout', 'User::logout'); //logout user
 $routes->match(['get', 'post'], '/forgetpassword', 'User::forgetpassword'); //login user
 $routes->match(['get', 'post'], '/signin', 'User::signin'); //signin user

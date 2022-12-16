@@ -204,8 +204,9 @@ function fillMenuDashBoard($type)
             $menu .= fillMenu2("Accueil", "#", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Edition", "menu2", "Edition", $type);
-            $menu .= fillMenu("Formations", "menu3", "Formations", $type);
-            $menu .= fillMenu("Clients", "menu4", "Clients", $type);
+            $menu .= fillMenu("Rendez-vous", "menu3", "Agenda", $type);
+            $menu .= fillMenu("Formations", "menu4", "Formations", $type);
+            $menu .= fillMenu("Clients", "menu5", "Clients", $type);
             $menu .= fillMenu2("Factures", "#", "Factures", $type);
             break;
 
@@ -238,6 +239,7 @@ function fillMenuDashBoard($type)
 // Icones en fonction des catégories
 function getIcon($category)
 {
+    $icon="";
     switch ($category) {
 
         case "Accueil":
@@ -267,6 +269,9 @@ function getIcon($category)
         case "Edition":
             $icon = "bi-magic";
             break;
+        case "Agenda":
+            $icon = "bi-calendar-date";
+            break;
     }
     return $icon;
 }
@@ -275,13 +280,13 @@ function getIcon($category)
 /* remplit les categories du menu latéral gauche */
 function fillMenuRight($category, $type)
 {
+    $items = [];
     switch ($category) {
         case "Edition":
             switch ($type) {
-                case THEME_FORMER:
+                case THEME_FORMER: // Edition Articles , Publications ..
                     $items = [
-                        ["ref" => "/user/articles/edit", "name" => "Création Article"],
-                        ["ref" => "/user/publishes/edit", "name" => "Création Publication"],
+                        ["ref" => "/user/former/edit", "name" => "Création Formation"],
                         ["ref" => "/user/videos/edit", "name" => "Création Vidéo"],
                         ["ref" => "/user/books/edit", "name" => "Association Livre"],
                         ["ref" => "/user/products/edit", "name" => "Association Produit"],
@@ -300,7 +305,7 @@ function fillMenuRight($category, $type)
             }
             break;
 
-        case "Media":
+        case "Media": // Type de médias
             $items = [
                 ["ref" => "", "name" => "Vidéos"],
                 ["ref" => "", "name" => "Livres"],
@@ -308,7 +313,7 @@ function fillMenuRight($category, $type)
             ];
             break;
 
-        case "Profil":
+        case "Profil": // Profil des adhérents, administrateurs et formateurs
             switch ($type) {
                 case THEME_USER:
                     $items = [
@@ -335,7 +340,7 @@ function fillMenuRight($category, $type)
             }
             break;
 
-        case "Clients":
+        case "Clients": // Liste Type d'ahérents
             $items = [
                 ["ref" => "", "name" => "Particulier"],
                 ["ref" => "", "name" => "Entreprise"],
@@ -348,7 +353,7 @@ function fillMenuRight($category, $type)
                 case THEME_FORMER:
                 case THEME_SUPER_ADMIN:
                     $items = [
-                        ["ref" => "", "name" => "Liste"],                       
+                        ["ref" => "", "name" => "Liste"],
                     ];
                     break;
                 case THEME_USER:
@@ -361,14 +366,32 @@ function fillMenuRight($category, $type)
             }
             break;
 
-        case "Formateurs":
+        case "Formateurs": // Liste des formateurs
             $items = [
                 ["ref" => "", "name" => "Liste"],
                 ["ref" => "", "name" => "Filtre"],
             ];
             break;
 
-        case "Privileges":
+        case "Agenda": // Gestion des rendez-vous
+            switch ($type) {
+                case THEME_ADMIN:
+                case THEME_SUPER_ADMIN:
+                    $items = [
+                        ["ref" => "/admin/rdv/list", "name" => "Liste"],
+                        ["ref" => "/admin/rdv", "name" => "Modification"],
+                    ];
+                    break;
+                case THEME_FORMER:
+                    $items = [
+                        ["ref" => "/former/rdv/list", "name" => "Liste"],
+                        ["ref" => "/former/rdv", "name" => "Modification"],
+                    ];
+                    break;
+            }
+            break;            
+
+        case "Privileges": // Droits
             switch ($type) {
                 case THEME_ADMIN:
                     $items = [

@@ -3,44 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\RdvModel;
+use App\Libraries\UserHelper;
 
-// Date 14-12-2022
+// Date 16-12-2022
 class Former extends BaseController
-{
-
-    private function setFormerSession($former)
-    {
-        $data = [
-            'id_user' => $former['id_user'],
-            'name' => $former['name'],
-            'firstname' => $former['firstname'],
-            'mail' => $former['mail'],
-            'password' => $former['password'],
-            'address' => $former['address'],
-            'cp' => $former['cp'],
-            'city' => $former['city'],
-            'country' => $former['country'],
-            'gender' => $former['gender'],
-            'phone' => $former['phone'],
-            'image_url' => $former['image_url'],
-            'type' => $former['type'],
-            'isLoggedIn' => true,
-        ];
-        session()->set($data);
-        return true;
-    }
-
-
+{  
     public function list_formers_home()
     {
-
         $title = "Liste des formateurs";
-
         $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-
-        $type = 7;
-        $builder->where('type', $type);
+        $builder = $db->table('user');        
+        $builder->where('type', FORMER);
         $query   = $builder->get();
         $formers = $query->getResultArray();
 
@@ -61,7 +34,6 @@ class Former extends BaseController
         }
 
         /* compétences certificats*/
-
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
 
         $skills = [];
@@ -170,9 +142,11 @@ class Former extends BaseController
 
     public function rdv()
     {
-        $id_user = 3;
+        $user_info=new UserHelper();
+        $user=$user_info->getUserSession();
+        
         $rdv = new RdvModel();
-        $query = $rdv->where("id_user", $id_user)->findAll();
+        $query = $rdv->where("id_user", $user['id_user'])->findAll();
         $events=[];
         foreach ($query as $event) {
             $events[] = [
@@ -184,8 +158,9 @@ class Former extends BaseController
 
         $data = [
             "title"=>"Planning des Rendez-vous",
-            "id_user" => $id_user,
+            "id_user" => $user['id_user'],
             "events" => $events,
+            "user"=>$user,
         ];
         return view('Former/rdv.php', $data);
     }

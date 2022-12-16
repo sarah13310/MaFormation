@@ -23,7 +23,6 @@
 }
 
 
-
 @media screen and (max-width: 576px) {
 
     .fc-today-button {
@@ -53,6 +52,11 @@
         margin-top: 0.5em;
         margin-bottom: 1em;
     }
+}
+
+#column_calendar {
+    margin-left: 24px;
+    margin-top: 8px !important;
 }
 
 .form-control {
@@ -85,6 +89,11 @@ a {
 
 /* Breakpoints */
 @media screen and (min-width: 577px) {
+    #column_calendar {
+        margin-left: 24px;
+        margin-top: 8px !important;
+    }
+
     .form-control {
         font-size: 2.5vw;
     }
@@ -124,15 +133,25 @@ a {
 }
 
 @media screen and (min-width: 768px) {
+    #column_calendar {
+        margin-left: 0px;
+        margin-top: -7px !important;
+    }
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 45%;
+    }
+
     .form-control {
-        font-size: 1.75vw;
+        font-size: 0.9vw;
     }
 
     .form-control::placeholder {
-        font-size: 1.25vw;
+        font-size: 0.9vw;
     }
+
     label {
-        font-size: 1.25vw;
+        font-size: 0.9vw;
     }
 
     .my-0 {
@@ -178,17 +197,16 @@ a {
 }
 
 
-
 @media screen and (min-width: 998px) {
+    #column_calendar {
+        margin-left: 0px;
+        margin-top: -20px !important;
+    }
+
     .form-control {
-        font-size: 1.5vw;
+        font-size: 1.1vw;
     }
-
-    .my-0 {
-        margin-top: -7px !important;
-        margin-bottom: 0 !important;
-    }
-
+  
     .fc .fc-toolbar-title {
         width: 70%;
         font-size: 1.25em;
@@ -214,11 +232,23 @@ a {
 
     .fc-toolbar-chunk {
         width: 90%;
-
     }
 }
-
+@media screen and (min-width: 1076px) {
+    #column_calendar {
+        margin-left: 0px;
+        margin-top: -7px !important;
+    }
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 42%;
+    }
+}
 @media screen and (min-width: 1200px) {
+    #column_calendar {
+        margin-left: 0px;
+        margin-top: -7px !important;
+    }
     .fc .fc-toolbar-title {
         width: 100%;
         font-size: 1.15em;
@@ -282,4 +312,14 @@ a {
         width: 100%;
         display: flex;
     }
+}
+
+#calendar {
+    width: 120%;
+}
+
+.fc-daygrid-block-event .fc-event-time,
+.fc-daygrid-block-event .fc-event-title {
+    padding: 1px;
+    cursor: pointer;
 }

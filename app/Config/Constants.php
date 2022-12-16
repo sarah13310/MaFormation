@@ -106,3 +106,9 @@ define("FLAG_READ", 0x8);
 define("FLAG_UPDATE", 0x4);
 define("FLAG_DELETE", 0x2);
 define("FLAG_EXPORT", 0x1);
+
+define ("SUPER_ADMIN", 3);
+define ("ADMIN", 5);
+define ("FORMER", 7);
+define ("USER", 9);
+define ("COMPANY", 11);
