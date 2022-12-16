@@ -9,13 +9,9 @@
             <div class="col-md-4">
                 <form action="/former/list/cv" method="post">
                     <div class="card" style="width: 18rem;">
-                        <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">
+                        <img src="" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title"><?= $former['name'] . " " . $former['firstname'] ?></h5>
-                            <input type="hidden" name="id_former" value="<?=$former['id_user']?>" >
-                            <input type="hidden" name="name" value="<?=$former['name']?>" >
-                            <input type="hidden" name="firstname" value="<?=$former['firstname']?>" >
-                            <input type="hidden" name="phone" value="<?=$former['phone']?>" >
                             <input type="hidden" name="mail" value="<?=$former['mail']?>" >
                             <h6 class="card-subtitle mb-2 text-muted">
                                 Formateur en <?php $j = 0;

@@ -62,8 +62,11 @@ $routes->match(['get', 'post'], '/company', 'User::confirmation'); //signin user
 $routes->get('/user/profile', 'User::profileuser'); //profil user
 $routes->get('/company/profile', 'User::profilecompany'); //profil company
 
+
+//article et publication
+$routes->add('/admin/dashboard/article', 'Dashboard::listarticles');
+
 // menu a propos
-$routes->get('/formateurs', 'Former::index');
 $routes->get('/faq', 'FAQ::index');
 $routes->get('/funding', 'Home::funding');
 $routes->get('/formations', 'Training::index');

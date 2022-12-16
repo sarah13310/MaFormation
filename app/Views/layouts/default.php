@@ -37,9 +37,9 @@
                                 A propos
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="formateurs">Nos formateurs</a></li>
+                                <li><a class="dropdown-item" href="former/list">Nos formateurs</a></li>
                                 <li><a class="dropdown-item" href="formations">Page formation</a></li>
-                                <li><a class="dropdown-item" href="financement">Mon financement</a></li>
+                                <li><a class="dropdown-item" href="funding">Mon financement</a></li>
                                 <li><a class="dropdown-item" href="faq">F.A.Q.</a></li>
                                 <li>
                             </ul>

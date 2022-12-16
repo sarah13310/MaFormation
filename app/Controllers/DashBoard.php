@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Libraries\ArticleHelper;
+
 class DashBoard extends BaseController
 {
 
@@ -38,9 +40,6 @@ class DashBoard extends BaseController
         /* compétences certificats*/
 
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
-
-
-        $skills = [];
 
         for ($i = 0; $i < count($listformers); $i++) {
             $builder->where('user.id_user', $listformers[$i]['id_user']);
@@ -93,6 +92,63 @@ class DashBoard extends BaseController
 
         return view('Admin/list_former_admin.php', $data);
     }
+
+    public function listarticles()
+    {
+
+        $title = "Liste des articles";
+
+        $article_helper= new ArticleHelper();
+
+        $public=$article_helper->getArticles();
+
+        $builder=$public['builder'];
+
+        $articles=$public['articles'];
+
+        $listarticles = [];
+
+        foreach ($articles as $article) {
+            $listarticles[] = [
+                "id_article" => $article['id_article'],
+                "subject" => $article['subject'],
+                "description" => $article['description'],
+                "datetime" => $article['datetime'],
+            ];
+        }
+
+
+        /* auteur de l'article*/
+
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listarticles); $i++) {
+            $builder->where('article.id_article', $listarticles[$i]['id_article']);
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+
+            $listarticles[$i]["user"] = $authors;
+        }
+
+        $data = [
+            "title" => $title,
+            "listarticles" => $listarticles,
+        ];
+
+        return view('Admin/list_article_admin.php', $data);
+    }
+
 
     private function getUserSession()
     {
