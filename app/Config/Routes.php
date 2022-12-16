@@ -65,6 +65,8 @@ $routes->get('/company/profile', 'User::profilecompany'); //profil company
 
 //article et publication
 $routes->add('/admin/dashboard/article', 'Dashboard::listarticles');
+$routes->match(['get', 'post'],'/article/list', 'News::list_articles_home');
+
 
 // menu a propos
 $routes->get('/faq', 'FAQ::index');
@@ -73,7 +75,6 @@ $routes->get('/formations', 'Training::index');
 
 
 // menu actualités
-$routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
 $routes->get('/paymentcb', 'Payment::paymentcb');
 

@@ -82,4 +82,108 @@ class News extends BaseController
         }
         return view('Publishes/publishes_edit.php', $data);
     }
+
+    public function list_articles_home()
+    {
+        $title = "Liste des articles";
+        $db      = \Config\Database::connect();
+        $builder = $db->table('article');   
+        
+        $status=1;
+        
+        $builder->where('status', $status);
+        $query   = $builder->get();
+        $articles = $query->getResultArray();
+
+        $listarticles = [];
+
+        foreach ($articles as $article) {
+            $listarticles[] = [
+                "id_article" => $article['id_article'],
+                "subject" => $article['subject'],
+                "description" => $article['description'],
+                "datetime" => $article['datetime'],
+            ];
+        }
+
+        /* auteur de l'article*/
+
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listarticles); $i++) {
+            $builder->where('article.id_article', $listarticles[$i]['id_article']);
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+
+            $listarticles[$i]["user"] = $authors;
+        }
+
+        $data = [
+            "title" => $title,
+            "listarticles" => $listarticles,
+        ];
+
+        return view('Articles/list_article.php', $data);
+    }
+
+
+    public function details_former_home()
+    {
+        $title = "Cv du formateur";
+
+        if ($this->request->getMethod() == 'post') {
+
+            $mail = $this->request->getVar('mail');
+
+            $db      = \Config\Database::connect();
+            $builder = $db->table('user');
+            $builder->where('mail', $mail);
+            $query   = $builder->get();
+            $former = $query->getResultArray();
+
+
+            $id = $former[0]['id_user'];
+
+
+            $builder->where('user.id_user', $id);
+            $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
+            $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
+
+            $query = $builder->get();
+            $certificates = $query->getResultArray();
+
+            $skills = [];
+            foreach ($certificates as $certificate) {
+                $skills[] = [
+                    "name" => $certificate['name'],
+                    "content" => $certificate['content'],
+                    "date" => $certificate['date'],
+                    "organism" => $certificate['organism'],
+                    "address" => $certificate['address'],
+                    "city" => $certificate['city'],
+                    "cp" => $certificate['cp'],
+                    "country" => $certificate['country'],
+                ];
+            }
+
+            $data = [
+                "title" => $title,
+                "former" => $former,
+                "skills" => $skills,
+            ];
+
+            return view('Former/list_former_cv.php', $data);
+        }
+    }
 }
