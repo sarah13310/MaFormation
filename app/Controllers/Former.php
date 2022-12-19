@@ -10,6 +10,8 @@ use App\Models\PageModel;
 use App\Libraries\UserHelper;
 use App\Libraries\FormerHelper;
 use App\Libraries\CategoryHelper;
+use App\Libraries\TrainingHelper;
+
 // Date 19-12-2022
 class Former extends BaseController
 {
@@ -155,27 +157,83 @@ class Former extends BaseController
         ];
         return view('Former/rdv.php', $data);
     }
-
-    public function training_edit()
+   
+    public function training_add()
     {
         $user_info = new UserHelper();
         $user = $user_info->getUserSession();
-
         $category_infos = new CategoryHelper();
         $options = $category_infos->getCategories();
 
+        $data = [
+            "title" => "Création formation",
+            "id_user" => $user['id_user'],
+            "user" => $user,
+            "options" => $options,
+        ];
+
+        if ($this->request->getMethod() == 'post') {
+            $training=new TrainingHelper();
+            $dateStart = $this->request->getVar('dateStart');
+            $dateEnd = $this->request->getVar('dateEnd');
+            $timeStart = $this->request->getVar('timeStart');
+            $timeEnd = $this->request->getVar('timeEnd');
+            $dateTimeStart = date('Y-m-d H:i:s', strtotime($dateStart . ' ' . $timeStart));
+            $dateTimeEnd = date('Y-m-d H:i:s', strtotime($dateEnd . ' ' . $timeEnd));
+
+            $data_save = [
+                "title" => $this->request->getVar('title'),
+                "description" => $this->request->getVar('description'),
+                "date" => $dateTimeStart,
+                "duration" => $dateTimeEnd,
+                "rating" => 0,
+                "bill_id_bill" => 0,
+                "type_slide_id_type" => 0,
+                "status_id_status" => 0,
+                "id_tag" => 0,
+            ];
+            $types = [
+                ["id" => 1, "name" => "Introduction"],
+                ["id" => 2, "name" => "Chapitre"],
+                ["id" => 3, "name" => "Conclusion"],
+                ["id" => 4, "name" => "Annexe"],
+            ];
+            $data['types']=$types;
+
+            $last_id = $training->add($data_save);             
+            $training->setTrainingSession($data_save);
+            session()->set("id_training", $last_id);   
+
+            return view('Training/training_edit.php', $data);     
+        }
+
+        return view('Training/training_add.php', $data);
+    }
+
+    public function training_edit()
+    {
+        $id_training=session()->get("id_training");
+        //
+        $user_info = new UserHelper();
+        $user = $user_info->getUserSession();
+        //
+        $category_infos = new CategoryHelper();
+        $options = $category_infos->getCategories();
+        //
         $types = [
             ["id" => 1, "name" => "Introduction"],
             ["id" => 2, "name" => "Chapitre"],
             ["id" => 3, "name" => "Conclusion"],
             ["id" => 4, "name" => "Annexe"],
         ];
+        //
         $data = [
             "title" => "Création formation",
             "id_user" => $user['id_user'],
             "user" => $user,
             "options" => $options,
             "types" => $types,
+            "id_training"=>$id_training,
         ];
 
         if ($this->request->getMethod() == 'post') {
@@ -190,12 +248,14 @@ class Former extends BaseController
                         break;
                     case "modify":
                         break;
+                    case "delete":
+                        break;
                     default:
                         break;
                 }
             }
         }
-
+        
         return view('Training/training_edit.php', $data);
     }
 }

@@ -117,6 +117,7 @@ function ratings($number, $max = 10)
     }
     return $str;
 }
+
 // Formatage des dates
 function dateFormat($date)
 {
@@ -128,6 +129,7 @@ function dateFormat($date)
     }
     return $strDate;
 }
+
 // Le mois en format texte
 function getMonth($month)
 {
@@ -286,7 +288,8 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_FORMER: // Edition Articles , Publications ..
                     $items = [
-                        ["ref" => "/former/training/edit", "name" => "Création Formation"],
+                        ["ref" => "/former/training/add", "name" => "Création Formation"],
+                        ["ref" => "/former/training/edit", "name" => "Création Page"],
                         ["ref" => "/user/videos/edit", "name" => "Création Vidéo"],
                         ["ref" => "/user/books/edit", "name" => "Association Livre"],
                         ["ref" => "/user/products/edit", "name" => "Association Produit"],

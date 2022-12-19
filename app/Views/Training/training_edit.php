@@ -8,21 +8,25 @@
 
 <?= $this->section('content') ?>
 <div id="modalDelete" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Suppression</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="msg_delete">Voulez-vous supprimer cette page?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
-                <button type="button" class="btn btn-primary">Oui</button>
+    <form action="/former/training/edit" method="POST">
+        <input type="hidden" id="action" name="action" value="delete">
+        <input type="hidden" id="id_page" name="id_page">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="msg_delete">Voulez-vous supprimer cette page?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                    <button type="submit" class="btn btn-primary">Oui</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <h1 class="noselect ms-3"><?= $title ?></h1>
@@ -34,11 +38,12 @@
     <script src="<?= $base ?>/js/monocons.min.js"></script>
     <div class="row">
         <div class="col-12 col-md-6">
-            <form id="form_training">
+            <form id="form_training" action="" method="POST">
+                <input type="hidden" id="action" name="action" value="create">
                 <input type="hidden" id="data" name="data[]">
                 <div class="row justify-content-between ">
                     <div class='col-12 col-md-5 form-floating mb-3'>
-                        <input class='noselect form-control' id='title' type='text' name='title' placeholder="Nom de la formation" value="" />
+                        <input class='noselect form-control' id='title' type='text' name='title' placeholder="Nom de la formation" readonly value="<?= session()->title ?>" />
                         <label class="noselect" for='title'>&nbsp;Nom de la formation</label>
                     </div>
                     <div class="noselect col-12 col-md-5">
@@ -67,7 +72,7 @@
                 </div>
                 <div class="row fullwidth  mt-2">
                     <div class="row align-items-center">
-                        <div id="modify" class="noselect hidden col-sm-12 col-md-3"><a onclick="addTableau()" class="noselect btn btn-outline-primary">Modifier</a></div>
+                        <div id="modify" class="noselect hidden col-sm-12 col-md-3"><a onclick="modifyTableau()" class="noselect btn btn-outline-primary">Modifier</a></div>
                         <div id="add" class="noselect col-sm-12 col-md-3 "><a onclick="addTableau()" class="noselect btn btn-outline-primary">Ajouter</a></div>
                         <div class="col-sm-12 col-md-3 "><button type="submit" class="noselect btn btn-primary">Sauver</button></div>
                         <div class="col-sm-12 col-md-6 ">
@@ -85,7 +90,7 @@
                 </div>
             </div>
             <div class="row mb-1">
-                <div id="lblTitle" class="col-12 col-md-3">Nom...
+                <div id="lblTitle" class="col-12 col-md-5"><?= session()->title ?>
                 </div>
                 <div id="lblType" class="col-12 col-md-6">Chapitre...
                 </div>
@@ -94,7 +99,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Chapitre</th>
-                        <th scope="col">Nom</th>
+                        <th scope="col">Catégorie</th>
                         <th scope="col">Actions</th>
                         <th class="hidden">Code</th>
                     </tr>
@@ -108,6 +113,10 @@
 <?= $this->section('js') ?>
 <script>
     const modalDelete = new bootstrap.Modal('#modalDelete');
+    const formDelete = document.getElementById('modalDelete');
+    let action = document.getElementById('action');
+    let current_page = document.getElementById('id_page');
+    //
     let table = document.getElementById('table');
     let title = document.getElementById('title');
     let type = document.getElementById('type');
@@ -120,7 +129,6 @@
     let data = document.getElementById('data');
     let btnModify = document.getElementById("modify");
     let btnAdd = document.getElementById("add");
-
     let msg_delete = document.getElementById("msg_delete");
     //
     let str = "";
@@ -143,10 +151,10 @@
 
     function getStorage() {
         page_num = localStorage.page_num;
-        title.value = localStorage.title;
+        //title.value = localStorage.title;
         select.value = localStorage.select;
         type.value = localStorage.type;
-        lblTitle.innerHTML = localStorage.title;
+        //lblTitle.innerHTML = localStorage.title;
     }
 
     function initEditor() {
@@ -186,6 +194,17 @@
         lblTitle.innerHTML = title.value;
     }
 
+    function modifyTableau() {
+        area = sceditor.instance(content).val();
+
+        if (rowSelected != null) {
+            rowSelected.cells[3].innerHTML = area;
+        }
+        updateStorage();
+        onNew();
+        modified = false;
+        lblTitle.innerHTML = title.value;
+    }
     let tbody = document.createElement('tbody');
 
     function addRow(td_page, td_category, td_content) {
@@ -206,8 +225,7 @@
         //
         td1.appendChild(text1);
         td2.appendChild(text2);
-
-        //btn.addEventListener('click', showModalDelete(this));
+        //
         btn.innerHTML = "<i class='bi bi-trash3'>";
         td3.appendChild(btn);
         //td3.innerHTML = "<button data-bs-toggle='modal' data-bs-target='#modalDelete' ><i class='bi bi-trash3'></i></button>";
@@ -220,16 +238,13 @@
         //
         tbody.appendChild(tr);
         table.appendChild(tbody);
-
         modified = false;
     }
-
 
     /*function confirm(e) {
         let parent = e.target.parentElement.parentElement.parentElement;
         console.log(parent.children[0]);
     }*/
-
 
     function save() {
         let rows = table.rows;
@@ -246,6 +261,14 @@
         return false;
     }
 
+    formDelete.onsubmit = () => {
+        if (rowSelected != null) {
+            rowSelected.remove();
+        }
+        modalDelete.hide();
+        return false;
+    }
+
     function onResetPage() {
         type.value = 1;
         page_num = 0;
@@ -259,12 +282,6 @@
         modified = false;
     }
 
-    document.getElementById('modalDelete').addEventListener('show.bs.modal', event => {
-        //let parent = event.target;
-
-        msg_delete.innerHTML = "Voulez-vous supprimer " + lblType.innerHTML + "?";
-    });
-
     // gestion des ellipses en js
     String.prototype.trunc =
         function(n) {
@@ -276,13 +293,9 @@
         let rows = table.getElementsByTagName("tr");
         for (let i = 1; i < rows.length; i++) {
             let rowCurrent = rows[i];
-            for (let col = 0; col < 3; col++) {
-                if (col == 2) {
-                    rowCurrent.cells[2].onclick = () => {}
-                }
-            }
 
             rowCurrent.onclick = () => {
+                rowSelected = rowCurrent; // on récupère en global le row sélectionné
                 sceditor.instance(content).val(rowCurrent.cells[3].innerHTML);
                 btnAdd.classList.add("hidden");
                 btnModify.classList.remove("hidden");
@@ -301,7 +314,16 @@
             }
         }
     }
-    
+
+    let chapter;
+    let rowSelected;
+
+    function showModalDelete(row) {
+        rowSelected = row;
+        chapter = row.cells[0].innerHTML;
+        msg_delete.innerHTML = "Voulez-vous supprimer " + chapter + "?";
+        modalDelete.show();
+    }
 
     function onNew() {
         sceditor.instance(content).val("");
@@ -310,16 +332,10 @@
         btnModify.classList.add("hidden");
     }
 
-    function showModalDelete(e) {
-        //$parent=e.target;
-        //console.log($parent);
-        modalDelete.show();
-    }
-
     initEditor();
-
     sceditor.instance(content).bind('keypress', function(e) {
         modified = true;
+
     });
 </script>
 <?= $this->endSection() ?>

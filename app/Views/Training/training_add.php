@@ -1,0 +1,101 @@
+<?php $base = base_url(); ?>
+<?= $this->extend('layouts/profil') ?>
+<?= $this->section('header') ?>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="<?= $base ?>/css/stylemain.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700,700i|Source+Code+Pro:400,700&display=swap">
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+<section>
+    <h1 class="noselect ms-3"><?= $title ?></h1>
+    <div class="container py-3">
+        <form id="trainingForm" method="post" action="/former/training/add">
+            <div class="row">
+                <div class="col-12 col-md-6 ">
+                    <div class="col-12  form-floating mb-3">
+                        <input class="form-control" id="name" name="title" type="text" placeholder="Nom de la formation" data-sb-validations="required" />
+                        <label for="nomDeLaFormation">Nom de la formation</label>
+                    </div>
+                    <div class="col-12  form-floating mb-3">
+                        <select class="form-select" id="category" aria-label="Type de prestation">
+                            <?php foreach ($options as $option) : ?>
+                                <option value="<?= $option["id_category"] ?>"><?= $option["name"] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <label for="category">Catégorie</label>
+                    </div>
+                    <div class="col-12  form-floating mb-3">
+                        <textarea class="form-control" name="description" id="description" type="text" placeholder="Description " style="height: 8rem;"></textarea>
+                        <label for="description">Description </label>
+                    </div>                    
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-6 form-floating mb-3">
+                            <input class="form-control" name="dateStart" id="dateDeDebut" type="date" placeholder="Date de  début" />
+                            <label for="dateDeDebut">&nbsp;Date de début</label>
+                        </div>
+                        <div class="col-6 form-floating mb-3">
+                            <input class="form-control" name="timeStart" id="timeStart" type="time" placeholder="Date de  début" />
+                            <label for="timeStart">&nbsp;Heure de début</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-floating mb-3">
+                            <input class="form-control" name="dateEnd" id="dateEnd" type="date" placeholder="Date de fin" />
+                            <label for="dateEnd">&nbsp;Date de fin</label>
+                        </div>
+                        <div class="col-6 form-floating mb-3">
+                            <input class="form-control" name="timeEnd" id="timeEnd" type="time" placeholder="Date de fin" data-sb-validations="" />
+                            <label for="timeEnd">&nbsp;Heure de fin</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-8 form-floating mb-3">
+                        <input class="form-control" name="price" id="price" type="numeric" min="10" step="0.1" max="1000" placeholder="Montant de la prestation" />
+                        <label for="price">Montant de la prestation</label>
+                    </div>
+                    <div class="col-3 col-xl-2 d-grid">
+                        <button class="btn btn-primary btn-lg" id="btnCreate" type="submit">Créer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+<?= $this->endSection() ?>
+
+<?= $this->section('js') ?>
+<script>
+    let formAdd = document.getElementById('trainingForm');
+    let date = new Date();
+    formAdd['dateStart'].value = formatDate(date);
+    formAdd['dateEnd'].value = formatDate(date);
+    formAdd['timeStart'].value = "08:00";
+    formAdd['timeEnd'].value = "09:00";
+
+    price.value = "10";
+    name.value = "";
+    // gestion des dates en js
+    function padTo2Digits(num) {
+        return num.toString().padStart(2, '0');
+    }
+
+    function formatDate(date) {
+        return [
+            date.getFullYear(),
+            padTo2Digits(date.getMonth() + 1),
+            padTo2Digits(date.getDate()),
+        ].join('-');
+    }
+
+    function formatTime(date, offset = 1) {
+        return [
+            padTo2Digits(date.getHours() + offset),
+            padTo2Digits(date.getMinutes()),
+            //padTo2Digits(date.getSeconds()),
+        ].join(':');
+    }
+</script>
+<?= $this->endSection() ?>
