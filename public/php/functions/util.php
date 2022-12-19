@@ -286,7 +286,7 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_FORMER: // Edition Articles , Publications ..
                     $items = [
-                        ["ref" => "/user/former/edit", "name" => "Création Formation"],
+                        ["ref" => "/former/training/edit", "name" => "Création Formation"],
                         ["ref" => "/user/videos/edit", "name" => "Création Vidéo"],
                         ["ref" => "/user/books/edit", "name" => "Association Livre"],
                         ["ref" => "/user/products/edit", "name" => "Association Produit"],
@@ -409,7 +409,7 @@ function fillMenuRight($category, $type)
     }
     $str = "";
     foreach ($items as $item) {
-        $str .= "<li class='w-100 '>\n";
+        $str .= "<li class='noselect w-100 '>\n";
         $str .= "<a href='" . $item['ref'] . "' class='nav-link " . getTextColor($type) . " px-0'>" . $item['name'] . "</a>\n";
         $str .= "</li>\n";
     }
@@ -419,7 +419,7 @@ function fillMenuRight($category, $type)
 function fillMenu($title, $id, $category, $type)
 {
     $str = "<li>";
-    $str .= "<a href='#" . $id . "' data-bs-toggle='collapse' class='nav-link px-0 align-middle " . getTextColor($type) . " '>";
+    $str .= "<a href='#" . $id . "' data-bs-toggle='collapse' class='noselect nav-link px-0 align-middle " . getTextColor($type) . " '>";
     $str .=  "<i class='fs-4 " . getIcon($category) . " '></i> <span class='ms-1 d-none d-sm-inline'>" . $title . "</span></a>";
     $str .= "<ul class='collapse  nav flex-column ms-1' id='" . $id . "' data-bs-parent='#menu'>";
     $str .= fillMenuRight($category, $type);
@@ -431,7 +431,7 @@ function fillMenu($title, $id, $category, $type)
 function fillMenu2($title, $action, $category, $type)
 {
     $str = "<li>
-    <a href='" . $action . "' class='nav-link px-0 align-middle " . getTextColor($type) . "'>
+    <a href='" . $action . "' class='noselect nav-link px-0 align-middle " . getTextColor($type) . "'>
         <i class='fs-4 " . getIcon($category) . "'></i> <span class='ms-1 d-none d-sm-inline'>" . $title . "</span></a>
     </li>";
     return $str;

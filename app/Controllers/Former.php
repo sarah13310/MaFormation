@@ -3,20 +3,23 @@
 namespace App\Controllers;
 
 use App\Models\RdvModel;
-use App\Libraries\UserHelper;
+use App\Models\TrainingModel;
+use App\Models\TrainingHasPageModel;
+use App\Models\PageModel;
 
-// Date 16-12-2022
+use App\Libraries\UserHelper;
+use App\Libraries\FormerHelper;
+use App\Libraries\CategoryHelper;
+// Date 19-12-2022
 class Former extends BaseController
-{  
+{
     public function list_formers_home()
     {
         $title = "Liste des formateurs";
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');        
-        $builder->where('type', FORMER);
-        $query   = $builder->get();
-        $formers = $query->getResultArray();
-
+        $helper = new FormerHelper();
+        $public = $helper->getFormers();
+        $builder = $public["builder"];
+        $formers = $public["formers"];
         $listformers = [];
 
         foreach ($formers as $former) {
@@ -32,11 +35,8 @@ class Former extends BaseController
                 "phone" => $former['phone'],
             ];
         }
-
         /* compétences certificats*/
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
-
-        $skills = [];
 
         for ($i = 0; $i < count($listformers); $i++) {
             $builder->where('user.id_user', $listformers[$i]['id_user']);
@@ -59,11 +59,8 @@ class Former extends BaseController
                     "country" => $certificate['country'],
                 ];
             }
-
             $listformers[$i]["skills"] = $certi;
         }
-
-
         $builder->select('company.name, company.address,company.city ,company.cp,company.country');
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
         $builder->join('company', 'user_has_company.id_company=company.id_company');
@@ -98,24 +95,18 @@ class Former extends BaseController
         if ($this->request->getMethod() == 'post') {
 
             $mail = $this->request->getVar('mail');
-
             $db      = \Config\Database::connect();
             $builder = $db->table('user');
             $builder->where('mail', $mail);
             $query   = $builder->get();
             $former = $query->getResultArray();
-
-
             $id = $former[0]['id_user'];
-
 
             $builder->where('user.id_user', $id);
             $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
             $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
             $query = $builder->get();
             $certificates = $query->getResultArray();
-
             $skills = [];
             foreach ($certificates as $certificate) {
                 $skills[] = [
@@ -129,25 +120,25 @@ class Former extends BaseController
                     "country" => $certificate['country'],
                 ];
             }
-
             $data = [
                 "title" => $title,
                 "former" => $former,
                 "skills" => $skills,
             ];
-
             return view('Former/list_former_cv.php', $data);
         }
     }
 
     public function rdv()
     {
-        $user_info=new UserHelper();
-        $user=$user_info->getUserSession();
-        
+        $user_info = new UserHelper();
+        $user = $user_info->getUserSession();
         $rdv = new RdvModel();
         $query = $rdv->where("id_user", $user['id_user'])->findAll();
-        $events=[];
+        $events = [];
+
+        $category_infos = new CategoryHelper();
+        $options = $category_infos->getCategories();
         foreach ($query as $event) {
             $events[] = [
                 "title" => "Infos",
@@ -155,13 +146,56 @@ class Former extends BaseController
                 "dateEnd" =>  $event['dateEnd'],
             ];
         }
-
         $data = [
-            "title"=>"Planning des Rendez-vous",
+            "title" => "Planning des Rendez-vous",
             "id_user" => $user['id_user'],
             "events" => $events,
-            "user"=>$user,
+            "user" => $user,
+            "options" => $options,
         ];
         return view('Former/rdv.php', $data);
+    }
+
+    public function training_edit()
+    {
+        $user_info = new UserHelper();
+        $user = $user_info->getUserSession();
+
+        $category_infos = new CategoryHelper();
+        $options = $category_infos->getCategories();
+
+        $types = [
+            ["id" => 1, "name" => "Introduction"],
+            ["id" => 2, "name" => "Chapitre"],
+            ["id" => 3, "name" => "Conclusion"],
+            ["id" => 4, "name" => "Annexe"],
+        ];
+        $data = [
+            "title" => "Création formation",
+            "id_user" => $user['id_user'],
+            "user" => $user,
+            "options" => $options,
+            "types" => $types,
+        ];
+
+        if ($this->request->getMethod() == 'post') {
+            // on utilise les modèles pour renseigner nos tables de formation, pages ...
+            $training_model = new TrainingModel();
+            $page_model = new PageModel();
+            $training_has_model = new TrainingHasPageModel();
+            $action = $this->request->getVar('action');
+            if ($action != null) {
+                switch ($action) {
+                    case "create":
+                        break;
+                    case "modify":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        return view('Training/training_edit.php', $data);
     }
 }

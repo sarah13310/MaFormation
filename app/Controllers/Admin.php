@@ -60,38 +60,32 @@ class Admin extends BaseController
         $builder->join('company', 'user_has_company.id_company=company.id_company');
         $query = $builder->get();
         $companies = $query->getResultArray();
-
         $jobs = [];
         foreach ($companies as $company) {
             $jobs[] = [
                 "name" => $company['name'],
                 "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
             ];
-        }
-        
+        }        
         $data = [
             "title" => "Mode Administrateur",
             "user" => $user,
             "jobs" => $jobs,
             "skills" => $skills,
         ];
-
         return view('Admin/profile_admin.php', $data);
     }
 
     public function superprofile()
     {
-
         helper(['form']);
-
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
         $id = session()->get('id_user');
 
         $builder->where('id_user', $id);
         $query   = $builder->get();
-        $user = $query->getResultArray();
-        
+        $user = $query->getResultArray();        
         $user = $user[0]; // juste le premier 
 
         /* compétences certificats*/
@@ -139,7 +133,6 @@ class Admin extends BaseController
 
         if ($this->request->getMethod() == 'post') {
             //faisons la validation ici
-
             $rules = [
                 'mail' => 'required|min_length[6]|max_length[50]|valid_email',
                 'password' => 'required|min_length[8]|max_length[25]',

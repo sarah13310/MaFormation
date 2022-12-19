@@ -52,6 +52,7 @@ $routes->get('/former/view', 'Former::former_view');
 $routes->get('/former/profil', 'Former::profile_view');
 $routes->add('/former/rdv', 'Former::rdv');
 $routes->add('/former/profil/edit', 'Former::profile_view');
+$routes->add('/former/training/edit', 'Former::training_edit');
 
 // user
 $routes->match(['get', 'post'], '/login', 'User::login'); //login user

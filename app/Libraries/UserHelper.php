@@ -1,7 +1,6 @@
 <?php
 namespace App\Libraries;
 
-
 class UserHelper{
 
     function getUserSession()
@@ -41,7 +40,6 @@ class UserHelper{
         session()->set($data);
         return true;
     }
-
 
     function getInfosCertificates($id)
     {
@@ -116,8 +114,6 @@ class UserHelper{
         ];
         session()->set($data);
         return true;
-    }
-
-    
+    }   
    
 }

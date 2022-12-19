@@ -391,7 +391,7 @@ hr {
 .fade-2 {
 	height: 1px;
 	margin: 0;
-	background:  #2673de;
+	background: #2673de;
 	border: 0;
 	margin-bottom: 4px;
 }
@@ -624,45 +624,101 @@ table#table_rights td:hover {
 }
 
 
-h1, h2, h3, h4, h5, h6 {
-    color: #777777;
-    line-height: 1.1;
-    margin: 0 0.5rem;
-    letter-spacing: .5px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #777777;
+	line-height: 1.1;
+	margin: 0 0.5rem;
+	letter-spacing: .5px;
 }
 
-.f_contact{
-    background-color: #dadfe7;
+.f_contact {
+	background-color: #dadfe7;
 }
 
-.l_contact{
-    background-color: #9bb5df;
+.l_contact {
+	background-color: #9bb5df;
 }
 
 
-.myfunding1{
-    background-color: #87b1ff;
-    width: 1000px;
+.myfunding1 {
+	background-color: #87b1ff;
+	width: 1000px;
 }
 
-.myfunding2{
-    background-color: #9fc1ff;
-    width: 1000px;
+.myfunding2 {
+	background-color: #9fc1ff;
+	width: 1000px;
 }
 
-.myfunding3{
-    width: 1000px;
+.myfunding3 {
+	width: 1000px;
 }
 
-.accordion{
-    width:90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.accordion {
+	width: 90%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.infofund, .infohome{
-	width:95%;
-	margin-left:auto;
-	margin-right:auto;
+.infofund,
+.infohome {
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
 }
+
+tr {
+	cursor: pointer;
+}
+
+.overflow-clip {
+	text-overflow: clip;
+}
+
+.overflow-ellipsis {
+	text-overflow: ellipsis;
+}
+
+.overflow-string {
+	text-overflow: " [..]";
+}
+
+/* pour éviter les sélections intempestives */
+.noselect {
+	-webkit-touch-callout: none;
+	/* iOS Safari */
+	-webkit-user-select: none;
+	/* Safari */
+	-khtml-user-select: none;
+	/* Konqueror HTML */
+	-moz-user-select: none;
+	/* Firefox */
+	-ms-user-select: none;
+	/* Internet Explorer/Edge */
+	user-select: none;
+	/* Non-prefixed version, currently
+									supported by Chrome and Opera */
+}
+
+.yesselect {
+	-webkit-touch-callout: all;
+	/* iOS Safari */
+	-webkit-user-select: all;
+	/* Safari */
+	-khtml-user-select: all;
+	/* Konqueror HTML */
+	-moz-user-select: all;
+	/* Firefox */
+	-ms-user-select: all;
+	/* Internet Explorer/Edge */
+	user-select: all;
+	/* Non-prefixed version, currently
+									supported by Chrome and Opera */
+}
+

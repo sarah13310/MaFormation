@@ -18,19 +18,19 @@
     <header>
         <nav class="navbar   navbar-expand-lg <?=changeMainTheme($user['type']) ?>">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img class="logo" src="/assets/<?= getLogoColor($user['type'])?>"> Ma Formation</a>
+                <a class="noselect navbar-brand" href="/"><img class="noselect logo" src="<?=base_url() ?>/assets/<?= getLogoColor($user['type'])?>"> Ma Formation</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <form action="#" class="d-flex search me-4">
-                    <input class="form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
-                    <button class="btn <?= getMenuButtonColor($user['type'])?>" type="submit">Chercher</button>
+                    <input class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
+                    <button class="noselect btn <?= getMenuButtonColor($user['type'])?>" type="submit">Chercher</button>
                 </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="noselect navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+                            <a class="noselect nav-link active" aria-current="page" href="/">Accueil</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,18 +39,18 @@
                             <?=fillMenuNav("About") ?>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="noselect nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Actualités
                             </a>
                             <?=fillMenuNav("News") ?>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact">Contact</a>
+                            <a class="noselect nav-link" href="contact">Contact</a>
                         </li>
                     </ul>
                     <?php if (!session()->get('isLoggedIn')) : ?>
                         <!-- Bouton de connexion -->
-                        <a href='login' class="btn btn-primary btn-login">
+                        <a href='/login' class="noselect btn btn-primary btn-login">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z">
                                 </path>
@@ -60,13 +60,13 @@
                         </a>
                         <!-- Menu Drop de déconnexion -->
                     <?php else : ?>
-                        <div class="dropdown ">
+                        <div class="noselect dropdown ">
                                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="<?= $user['image_url'] ?>" alt="MF" width="50px" height="50px" class="rounded-circle-frame">
                                     <span class="d-none d-sm-inline mx-3"><?=$user['name']  ?></span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu text-small shadow">
-                                    <li><a class="dropdown-item" href="#">Paramètres</a></li>
+                                <ul class="noselect dropdown-menu dropdown-menu text-small shadow">
+                                    <li><a class="dropdown-item" href="/parameters">Paramètres</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -109,7 +109,7 @@
 
     </section>
     <!-- Footer -->
-    <footer class="<?=changeFooterTheme($user['type']) ?> text-center text-white">
+    <footer class="noselect <?=changeFooterTheme($user['type']) ?> text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->

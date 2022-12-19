@@ -5,7 +5,6 @@
     <div class="row">
         <?php $i = 0;
         foreach ($listformers as $former) : ?>
-
             <div class="col-md-4">
                 <form action="/former/list/cv" method="post">
                     <div class="card" style="width: 18rem;">
