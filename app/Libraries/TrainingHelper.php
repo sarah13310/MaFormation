@@ -1,6 +1,7 @@
 <?php
 namespace App\Libraries;
 
+use App\Controllers\Training;
 
 class TrainingHelper{
 
@@ -34,6 +35,33 @@ class TrainingHelper{
             'rating' => $training['rating'],          
         ];
         session()->set($data);
+    }
+
+    function getTrainingsTitle(){
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
+        $builder->select("id_training, title");
+        $query = $builder->get();
+        return $query->getResultArray();        
+    }
+
+    function isExist($title){
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
+        $builder->where("title", $title);
+        $query = $builder->get();
+        return ($query->getResultArray()==null)?false:true; 
+    }
+
+    function fillOptionsTraining($index){
+        $trainings=$this->getTrainingsTitle();
+        $str="";        
+        foreach ($trainings as $training){        
+            $id=$training['id_training'];
+            $selected=($id==$index)?"selected":"";
+            $str.="<option value='".$training['id_training']."' ".$selected.">".$training['title']."</option>";
+        }
+        return $str;
     }
    
 }

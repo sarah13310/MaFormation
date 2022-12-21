@@ -8,37 +8,75 @@
 
 <?= $this->section('content') ?>
 <h1 class="ms-3"><?= $title ?></h1>
+
 <section class="Content">
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
     <script src="<?= $base ?>/js/sceditor.min.js"></script>
     <script src="<?= $base ?>/js/languages/fr.js"></script>
     <script src="<?= $base ?>/js/bbcode.min.js"></script>
     <script src="<?= $base ?>/js/monocons.min.js"></script>
-
-    <form action="/admin/publishes/edit" method="post">
-        <div class='form-floating mb-3'>
-            <input class='form-control' id='title_example' type='text' name='subject' placeholder="Nom de la publication" />
-            <label for='title_example'>Nom de la publication (*)</label>
+    <?php if (isset(session()->success)) : ?>
+        <div id="success" class="alert alert-success" role="alert">
+            <?= session()->success ?>
         </div>
-        <div class="form-group row">
-            <label for="select" class="col-2 col-form-label">Catégorie</label>
-            <div class="col-10">
-                <select id="select" name="select" class="form-select">
-                    <option value="0">Informatique</option>
-                    <option value="1">Programmation processeur</option>
-                    <option value="2">Méthodologie</option>
-                </select>
+    <?php endif; ?>
+    <?php if (isset($validation)) : ?>
+        <div id="error" class="col-12 mt-2">
+            <div class="alert alert-danger" role="alert">
+                <?= $validation->listErrors() ?>
             </div>
         </div>
-        <div class="fullwidth editor mt-2">
-            <textarea id="example" name="description" style="width:100%; height:400px">
-        </textarea>
+    <?php endif ?>
+    <?php if (isset($warning)) : ?>
+        <div id="error" class="col-12 mt-2">
+            <div class="alert alert-warning" role="alert">
+                <?= $warning ?>
+            </div>
         </div>
-        <div class="row fullwidth align-items-center mt-2">
-            <div class="col-sm-12 col-md-3 col-xl-1"><button type="submit" class="btn btn-primary">Sauver</button></div>
-            <div class="col-sm-12 col-md-3 col-xl-2">
-                <input type="checkbox" id="publish" name="publish" checked>
-                <label for="publish">Publier</label>
+    <?php endif ?>
+    <form action="/admin/publishes/edit" method="post">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div class="row">
+                    <div class='form-floating mb-3 col-12 col-md-4'>
+                        <input class='form-control' id='subject' type='text' name='subject' placeholder="Nom de l'article" />
+                        <label for='subject'>&nbsp;Nom de la publication (*)</label>
+                    </div>
+                    <div class='form-floating mb-3 col-12 col-md-4'>
+                        <input class='form-control' id='name' type='text' name='name' placeholder="Nom de l'auteur" readonly value="<?= session()->name . " " . session()->firstname; ?> " />
+                        <label for='name'>&nbsp;Nom de l'auteur </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="category" class="col-2 col-form-label">Catégorie</label>
+                    <div class="col-10">
+                        <select id="category" name="category" class="form-select">
+                            <!-- remplit les catégories disponibles  -->
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= $category['id_category'] ?>"><?= $category['name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="fullwidth editor mt-2">
+                    <textarea id="editor" name="description"></textarea>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-4 ">
+                <div class="row mb-2">
+                    <div class="col-12 col-md-2"><a href="/admin/articles/edit" class="btn btn-primary"><i class="bi bi-plus-circle"></i></a></div>
+                    <div class="col-12 col-md-10">Sélectionner vos articles dans la liste :</div>
+                </div>
+                <select name='list_articles' id="list_articles" style="width:100%;VISIBILITY: visible;" size=17>
+                </select>
+                <div class="row align-items-center mt-2">
+                    <div class="col-12 col-md-3"><button type="submit" class="btn btn-primary">Sauver</button></div>
+                    <div class="col-12 col-md-3 ">
+                        <input type="checkbox" id="publish" name="publish" checked>
+                        <label for="publish">Publier</label>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -47,12 +85,28 @@
 
 <?= $this->section('js') ?>
 <script>
-    sceditor.create(document.getElementById('example'), {
+    let warning = document.getElementById("warning");
+    let error = document.getElementById("error");
+    let success = document.getElementById("success");
+    sceditor.create(document.getElementById('editor'), {
         format: 'bbcode',
         width: '100%',
+        height: '330px',
         icons: 'monocons',
         style: '<?= $base ?>/css/default.min.css',
         locale: 'fr-FR'
     });
+
+    setTimeout(() => {
+        if (warning) {
+            warning.remove();
+        }
+        if (error) {
+            error.remove();
+        }
+        if (success) {
+            success.remove();
+        }
+    }, 1500);
 </script>
 <?= $this->endSection() ?>

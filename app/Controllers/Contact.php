@@ -10,18 +10,19 @@ class Contact extends BaseController
 {
 
     private function createOptionobject($select=0)
-{
-    $types = ["Votre objet", "Objet 1", "Objet 2","Objet 3" ];
-    $selected_index=array_search($select,$types);
-    $options = "";
-    $index = 1;
-    foreach ($types as $type) {
-        $selected=($index == $selected_index)?"selected":"";
-        $options .= "<option value='$index' $selected >$type</option>";
-        $index++;
+    {
+        $types = ["Votre objet", "Objet 1", "Objet 2","Objet 3" ];
+        $selected_index=array_search($select,$types);
+        $options = "";
+        $index = 1;
+        foreach ($types as $type) {
+            $selected=($index == $selected_index)?"selected":"";
+            $options .= "<option value='$index' $selected >$type</option>";
+            $index++;
+        }
+        return $options;
     }
-    return $options;
-}
+    
     public function index()
     {
         $data = ["title" => "Contact"];
@@ -30,13 +31,11 @@ class Contact extends BaseController
         $data['options']=$options;
         if ($this->request->getMethod() == 'post') {
 
-
         $rules = [
             'name' => 'required|min_length[3]|max_length[20]',
             'content' => 'required|min_length[3]|max_length[128]',
             'mail' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[user.mail]',
         ];
-
         $error = [
             'name' => ['required' => "Nom vide!"],
             'content' => ['required' => "Message vide!"],
@@ -46,10 +45,8 @@ class Contact extends BaseController
        
         if (!$this->validate($rules, $error)) {
             $data['validation'] = $this->validator;
-
             $main = false;
         }
-
             
             $model = new ContactModel();
                 $newData = [
@@ -65,4 +62,3 @@ class Contact extends BaseController
         return view("Contact/index", $data);
     }
 }
-?>

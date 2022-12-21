@@ -722,3 +722,10 @@ tr {
 									supported by Chrome and Opera */
 }
 
+.card-description{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	overflow: hidden;
+	font-size:.76rem;
+	}

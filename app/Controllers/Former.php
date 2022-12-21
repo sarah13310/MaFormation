@@ -157,7 +157,7 @@ class Former extends BaseController
         ];
         return view('Former/rdv.php', $data);
     }
-   
+
     public function training_add()
     {
         $user_info = new UserHelper();
@@ -172,17 +172,28 @@ class Former extends BaseController
             "options" => $options,
         ];
 
+        $rules = [
+            'title' => 'required|min_length[3]|max_length[30]',
+        ];
+        $error = [
+            'title' => [
+                'required' => "Titre vide!",
+                'min_length' => "Titre trop court",
+                'max_length' => "Titre trop long",
+            ],
+        ];
+
         if ($this->request->getMethod() == 'post') {
-            $training=new TrainingHelper();
+            $training = new TrainingHelper();
             $dateStart = $this->request->getVar('dateStart');
             $dateEnd = $this->request->getVar('dateEnd');
             $timeStart = $this->request->getVar('timeStart');
             $timeEnd = $this->request->getVar('timeEnd');
             $dateTimeStart = date('Y-m-d H:i:s', strtotime($dateStart . ' ' . $timeStart));
             $dateTimeEnd = date('Y-m-d H:i:s', strtotime($dateEnd . ' ' . $timeEnd));
-
+            $title = $this->request->getVar('title');
             $data_save = [
-                "title" => $this->request->getVar('title'),
+                "title" => $title,
                 "description" => $this->request->getVar('description'),
                 "date" => $dateTimeStart,
                 "duration" => $dateTimeEnd,
@@ -198,21 +209,46 @@ class Former extends BaseController
                 ["id" => 3, "name" => "Conclusion"],
                 ["id" => 4, "name" => "Annexe"],
             ];
-            $data['types']=$types;
+            $data['types'] = $types;
 
-            $last_id = $training->add($data_save);             
-            $training->setTrainingSession($data_save);
-            session()->set("id_training", $last_id);   
-
-            return view('Training/training_edit.php', $data);     
+            if (!$this->validate($rules, $error)) {
+                $data['validation'] = $this->validator;
+            } else {
+                if ($training->isExist($title) === true) {
+                    // la formation existe déjà avec ce titre
+                    // on doit avertir le formateur
+                    $session_add = [
+                        "description" => $this->request->getVar('description'),
+                        "dateStart" => $dateStart,
+                        "dateEnd" => $dateEnd,
+                        "timeStart" => $timeStart,
+                        "timeEnd" => $timeEnd,
+                    ];
+                    $data["warning"] = "true";
+                    session()->set($session_add);
+                    return view('Training/training_add.php', $data);
+                } else {
+                    $training = new TrainingHelper();
+                    $last_id = $training->add($data_save);
+                    $training->setTrainingSession($data_save);
+                    
+                    $trainings = $training->fillOptionsTraining($last_id);
+                    session()->set("id_training", $last_id);              
+                    
+                    $data["trainings"] = $trainings;
+                    $data['title'] = "Création contenu";
+                    return view('Training/training_edit.php', $data);
+                }
+            }
         }
-
         return view('Training/training_add.php', $data);
     }
 
     public function training_edit()
     {
-        $id_training=session()->get("id_training");
+        $training = new TrainingHelper();
+        $id_training = session()->get("id_training");
+        $trainings = $training->fillOptionsTraining(session()->id_training);
         //
         $user_info = new UserHelper();
         $user = $user_info->getUserSession();
@@ -228,12 +264,13 @@ class Former extends BaseController
         ];
         //
         $data = [
-            "title" => "Création formation",
+            "title" => "Création contenu",
             "id_user" => $user['id_user'],
             "user" => $user,
             "options" => $options,
             "types" => $types,
-            "id_training"=>$id_training,
+            "id_training" => $id_training,
+            "trainings" => $trainings,
         ];
 
         if ($this->request->getMethod() == 'post') {
@@ -255,7 +292,6 @@ class Former extends BaseController
                 }
             }
         }
-        
         return view('Training/training_edit.php', $data);
     }
 }

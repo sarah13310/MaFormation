@@ -241,7 +241,7 @@ function fillMenuDashBoard($type)
 // Icones en fonction des catégories
 function getIcon($category)
 {
-    $icon="";
+    $icon = "";
     switch ($category) {
 
         case "Accueil":
@@ -293,6 +293,8 @@ function fillMenuRight($category, $type)
                         ["ref" => "/user/videos/edit", "name" => "Création Vidéo"],
                         ["ref" => "/user/books/edit", "name" => "Association Livre"],
                         ["ref" => "/user/products/edit", "name" => "Association Produit"],
+                        ["ref" => "/former/articles/edit", "name" => "Création Article"],
+                        ["ref" => "/former/publishes/edit", "name" => "Création Publication"],
                     ];
                     break;
                 case THEME_ADMIN:
@@ -309,11 +311,27 @@ function fillMenuRight($category, $type)
             break;
 
         case "Media": // Type de médias
-            $items = [
-                ["ref" => "", "name" => "Vidéos"],
-                ["ref" => "", "name" => "Livres"],
-                ["ref" => "", "name" => "Produits"],
-            ];
+            switch ($type) {
+                case ADMIN:
+                case SUPER_ADMIN:
+                    $items = [
+                        ["ref" => "/admin/articles/list", "name" => "Liste des Articles"],
+                        ["ref" => "/admin/publishes/list", "name" => "Liste des Publications"],
+                        ["ref" => "/admin/videos/list", "name" => "Liste des Vidéos"],
+                        ["ref" => "/admin/books/list", "name" => "Liste des Livres"],
+                        ["ref" => "/admin/products/list", "name" => "Liste des Produits"],
+                    ];
+                    break;
+                case FORMER:
+                    $items = [
+                        ["ref" => "/former/articles/list", "name" => "Liste des Articles"],
+                        ["ref" => "/former/publishes/list", "name" => "Liste des Publications"],
+                        ["ref" => "/former/videos/list", "name" => "Liste des Vidéos"],
+                        ["ref" => "/former/books/list", "name" => "Liste des Livres"],
+                        ["ref" => "/former/products/list", "name" => "Liste des Produits"],
+                    ];
+                    break;
+            }
             break;
 
         case "Profil": // Profil des adhérents, administrateurs et formateurs
@@ -392,7 +410,7 @@ function fillMenuRight($category, $type)
                     ];
                     break;
             }
-            break;            
+            break;
 
         case "Privileges": // Droits
             switch ($type) {

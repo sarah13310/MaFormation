@@ -38,8 +38,8 @@ $routes->match(['get', 'post'],'/superadmin/add/admin', 'Admin::add_admin');// A
 $routes->get('/superadmin/privileges', 'Dashboard::privileges');//dashboard des privileges
 $routes->match(['get', 'post'], '/admin/articles/edit', 'News::articles_edit');
 $routes->match(['get', 'post'], '/admin/publishes/edit', 'News::publishes_edit');
-
-
+$routes->add('/admin/articles/list', 'Dashboard::listarticles');
+$routes->add('/admin/publishes/list', 'Dashboard::listpublishes');
 $routes->get('/admin', 'Admin::index');
 
 //Former
@@ -47,13 +47,15 @@ $routes->get('/admin/dashboard/former', 'Dashboard::listformers');//dashboard de
 $routes->match(['get', 'post'],'/former/list', 'Former::list_formers_home');// liste des formateurs page home
 $routes->add('/former/list/cv', 'Former::details_former_home');// détails du formateur page home
 $routes->match(['get', 'post'],'/contact', 'Contact::index');// page contact
+$routes->match(['get', 'post'], '/former/articles/edit', 'News::articles_edit');
+$routes->match(['get', 'post'], '/former/publishes/edit', 'News::publishes_edit');
 
 $routes->get('/former/view', 'Former::former_view');
-$routes->get('/former/profil', 'Former::profile_view');
+$routes->get('/former/profil', 'Former::profile_view');// lecture du profil
 $routes->add('/former/rdv', 'Former::rdv');
-$routes->add('/former/profil/edit', 'Former::profile_view');
-$routes->add('/former/training/add', 'Former::training_add');
-$routes->add('/former/training/edit', 'Former::training_edit');
+$routes->add('/former/profil/edit', 'Former::profile_view');// modification du profil
+$routes->add('/former/training/add', 'Former::training_add');// création de la formation
+$routes->add('/former/training/edit', 'Former::training_edit');// création de la page
 
 // user
 $routes->match(['get', 'post'], '/login', 'User::login'); //login user
@@ -72,9 +74,12 @@ $routes->get('/formations', 'Training::index');
 
 
 // menu actualités
-$routes->get('/articles', 'News::index');
 $routes->get('/publications', 'News::publish');
 $routes->get('/paymentcb', 'Payment::paymentcb');
+
+// Articles et publication 
+$routes->match(['get', 'post'],'/article/list', 'News::list_articles_home');// liste des articles page home
+$routes->add('/article/list/details', 'News::details_article_home');// détails de l'article page home
 
 //Medias
 $routes->get('/medias/slides', 'Media::slides');

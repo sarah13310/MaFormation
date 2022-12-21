@@ -2,17 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Libraries\UserHelper;
+use App\Libraries\ArticleHelper;
+
+
 class DashBoard extends BaseController
 {
 
     public function listformers()
     {
-
         $title = "Liste des formateurs";
-
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-
         $type = 7;
         $builder->where('type', $type);
         $query   = $builder->get();
@@ -33,13 +34,8 @@ class DashBoard extends BaseController
                 "phone" => $former['phone'],
             ];
         }
-
-
         /* compétences certificats*/
-
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
-
-
         $skills = [];
 
         for ($i = 0; $i < count($listformers); $i++) {
@@ -63,11 +59,8 @@ class DashBoard extends BaseController
                     "country" => $certificate['country'],
                 ];
             }
-
             $listformers[$i]["skills"] = $certi;
         }
-
-
         $builder->select('company.name, company.address,company.city ,company.cp,company.country');
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
         $builder->join('company', 'user_has_company.id_company=company.id_company');
@@ -94,30 +87,12 @@ class DashBoard extends BaseController
         return view('Admin/list_former_admin.php', $data);
     }
 
-    private function getUserSession()
-    {
-        $user = [
-            'id_user' => session()->get('id_user'),
-            'name' => session()->get('name'),
-            'firstname' => session()->get('firstname'),
-            'mail' => session()->get('mail'),
-            'password' => session()->get('password'),
-            'type' => session()->get('type'),
-            'image_url' => session()->get('image_url'),
-            'gender' => session()->get('gender'),
-            'isLoggedIn' => true,
-        ];        
-        return $user;
-    }
-
     public function privileges()
     {
-
+        $user_helper=new UserHelper();
         $title = "Liste des privilèges";
-
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-
         $type = 3;
         $typed = 5;
         $builder->where('type', $type);
@@ -139,23 +114,18 @@ class DashBoard extends BaseController
                 "mail" => $former['mail'],
                 "phone" => $former['phone'],
                 "type" => $former['type'],
-                "rights"=>$former['rights'],
+                "rights" => $former['rights'],
             ];
         }
 
-
         /* compétences certificats*/
-
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
-
-
         $skills = [];
 
         for ($i = 0; $i < count($listformers); $i++) {
             $builder->where('user.id_user', $listformers[$i]['id_user']);
             $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
             $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
             $query = $builder->get();
             $certificates = $query->getResultArray();
 
@@ -172,11 +142,9 @@ class DashBoard extends BaseController
                     "country" => $certificate['country'],
                 ];
             }
-
             $listformers[$i]["skills"] = $certi;
         }
-
-
+        //
         $builder->select('company.name, company.address,company.city ,company.cp,company.country');
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
         $builder->join('company', 'user_has_company.id_company=company.id_company');
@@ -193,16 +161,65 @@ class DashBoard extends BaseController
                 "country" => $company['country'],
             ];
         }
-
-        $user=$this->getUserSession();
+        $user = $user_helper->getUserSession();
 
         $data = [
             "title" => $title,
             "listformers" => $listformers,
             "jobs" => $jobs,
-            "user"=>$user,
+            "user" => $user,
+            "type="=>$user['type'],
         ];
 
         return view('Admin/list_privileges.php', $data);
+    }
+
+
+    public function listarticles()
+    {
+        $title = "Liste des articles";
+        
+        $article_helper = new ArticleHelper();
+        $public = $article_helper->getArticles();
+        $builder = $public['builder'];
+        $articles = $public['articles'];
+        $listarticles = [];
+
+        foreach ($articles as $article) {
+            $listarticles[] = [
+                "id_article" => $article['id_article'],
+                "subject" => $article['subject'],
+                "description" => $article['description'],
+                "datetime" => $article['datetime'],
+            ];
+        }
+        /* auteur de l'article*/
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listarticles); $i++) {
+            $builder->where('article.id_article', $listarticles[$i]['id_article']);
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+            $listarticles[$i]["user"] = $authors;
+        }
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();        
+        $data = [
+            "title" => $title,
+            "listarticles" => $listarticles,
+            "user" => $user,
+            "type"=>session()->type,
+        ];
+        return view('Admin/list_article_admin.php', $data);
     }
 }

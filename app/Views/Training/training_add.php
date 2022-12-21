@@ -28,26 +28,36 @@
                     <div class="col-12  form-floating mb-3">
                         <textarea class="form-control" name="description" id="description" type="text" placeholder="Description " style="height: 8rem;"></textarea>
                         <label for="description">Description </label>
-                    </div>                    
+                    </div>
+                    <?php if (isset($warning)) : ?>
+                        <div id="warning" class="alert alert-warning" role="alert">Ce titre existe déjà !</div>
+                    <?php endif; ?>
+                    <?php if (isset($validation)) : ?>
+                        <div class="col-12 mt-2">
+                            <div class="alert alert-danger" role="alert">
+                                <?= $validation->listErrors() ?>
+                            </div>
+                        </div>
+                    <?php endif ?>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="row">
                         <div class="col-6 form-floating mb-3">
-                            <input class="form-control" name="dateStart" id="dateDeDebut" type="date" placeholder="Date de  début" />
+                            <input class="form-control" name="dateStart" id="dateDeDebut" type="date" placeholder="Date de  début" value="<?= session()->dateStart ?>" />
                             <label for="dateDeDebut">&nbsp;Date de début</label>
                         </div>
                         <div class="col-6 form-floating mb-3">
-                            <input class="form-control" name="timeStart" id="timeStart" type="time" placeholder="Date de  début" />
+                            <input class="form-control" name="timeStart" id="timeStart" type="time" placeholder="Heure de  début" value="<?= session()->timeStart ?>" />
                             <label for="timeStart">&nbsp;Heure de début</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6 form-floating mb-3">
-                            <input class="form-control" name="dateEnd" id="dateEnd" type="date" placeholder="Date de fin" />
+                            <input class="form-control" name="dateEnd" id="dateEnd" type="date" placeholder="Date de fin" value="<?= session()->dateEnd ?>" />
                             <label for="dateEnd">&nbsp;Date de fin</label>
                         </div>
                         <div class="col-6 form-floating mb-3">
-                            <input class="form-control" name="timeEnd" id="timeEnd" type="time" placeholder="Date de fin" data-sb-validations="" />
+                            <input class="form-control" name="timeEnd" id="timeEnd" type="time" placeholder="Date de fin" value="<?= session()->timeEnd ?>" />
                             <label for="timeEnd">&nbsp;Heure de fin</label>
                         </div>
                     </div>
@@ -69,6 +79,7 @@
 <?= $this->section('js') ?>
 <script>
     let formAdd = document.getElementById('trainingForm');
+    let warning = document.getElementById('warning');
     let date = new Date();
     formAdd['dateStart'].value = formatDate(date);
     formAdd['dateEnd'].value = formatDate(date);
@@ -97,5 +108,9 @@
             //padTo2Digits(date.getSeconds()),
         ].join(':');
     }
+
+    setTimeout(() => {
+        warning.remove();
+    }, 2000);
 </script>
 <?= $this->endSection() ?>

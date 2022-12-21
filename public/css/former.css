@@ -1,0 +1,235 @@
+.row>* {
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y*1.1);
+}
+
+.h5, h5 {
+    font-size: 2.5vw;
+}
+
+h6 {
+    font-size: 1vw;
+}
+
+.card{
+    max-width: 74%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.btn {
+    font-size: 2vw;
+}
+@media screen and (max-width: 768px) {
+    .card{
+        max-width: 82%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 3vw;
+    }
+    
+    h6 {
+        font-size: 2vw;
+    }
+    
+    
+    
+    .btn {
+        font-size: 2.5vw;
+    }
+    
+}
+@media screen and (min-width: 767px) {
+    .card{
+        max-width: 82%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 1.55vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+@media screen and (min-width: 998px) {
+    .card{
+        max-width: 72%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 2vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    .card{
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+@media screen and (min-width: 576px) {
+    .card{
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 1.8vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+@media screen and (min-width: 767px) {
+    .card{
+        max-width: 82%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 1.55vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+@media screen and (min-width: 998px) {
+    .card{
+        max-width: 72%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 2vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    .card{
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+@media screen and (min-width: 1200px) {
+    .card{
+        max-width: 72%;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .h5, h5 {
+        font-size: 2.15vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+@media screen and (min-width: 1450px) {
+   
+
+    .h5, h5 {
+        font-size: 2vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    .card{
+        max-width: 78%;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}
+
+@media screen and (min-width: 1920px) {
+   
+    .h5, h5 {
+        font-size: 1.8vw;
+    }
+    
+    h6 {
+        font-size: 1vw;
+    }
+    
+    .card{
+        max-width: 78%;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+    
+    .btn {
+        font-size: 1.5vw;
+    }
+    
+}

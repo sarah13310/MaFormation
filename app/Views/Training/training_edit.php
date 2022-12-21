@@ -41,17 +41,16 @@
             <form id="form_training" action="" method="POST">
                 <input type="hidden" id="action" name="action" value="create">
                 <input type="hidden" id="data" name="data[]">
-                <div class="row justify-content-between ">
-                    <div class='col-12 col-md-5 form-floating mb-3'>
-                        <input class='noselect form-control' id='title' type='text' name='title' placeholder="Nom de la formation" readonly value="<?= session()->title ?>" />
-                        <label class="noselect" for='title'>&nbsp;Nom de la formation</label>
-                    </div>
+                <div class="row justify-content-between">
                     <div class="noselect col-12 col-md-5">
-                        <select id="type" name="type" class="form-select">
+                        <select id="type" name="type" class="form-select mb-3">
                             <?php foreach ($types as $type) : ?>
                                 <option value="<?= $type["id"] ?>"><?= $type["name"] ?></option>
                             <?php endforeach ?>
                         </select>
+                    </div>
+                    <div class=" noselect col-12 col-md-5">
+                        <input id="number" type="number" max="12" min="1">
                     </div>
                     <div class="col-12 col-md-2">
                         <a onclick="onResetPage()" class="btn btn-primary"><i class="bi bi-trash"></i></a>
@@ -131,6 +130,8 @@
     let btnAdd = document.getElementById("add");
     let msg_delete = document.getElementById("msg_delete");
     //
+    let number = document.getElementById("number");
+    //
     let str = "";
     let page_num = 0,
         annexe_num = 0;
@@ -138,24 +139,6 @@
     let mode = "new",
         modified = false;
 
-    if (localStorage.title != "") {
-        getStorage();
-    }
-
-    function updateStorage() {
-        localStorage.page_num = page_num;
-        localStorage.title = title.value;
-        localStorage.setItem('select', select.value);
-        localStorage.type = type.value;
-    }
-
-    function getStorage() {
-        page_num = localStorage.page_num;
-        //title.value = localStorage.title;
-        select.value = localStorage.select;
-        type.value = localStorage.type;
-        //lblTitle.innerHTML = localStorage.title;
-    }
 
     function initEditor() {
         sceditor.create(content, {
@@ -172,26 +155,38 @@
 
         area = sceditor.instance(content).val();
         let libelle = type[type.selectedIndex].text;
+        let index = type[type.selectedIndex].value;
+        let max_page = parseInt(localStorage.page_num);
+        let max_annexe = parseInt(localStorage.annexe_num);
 
-        if (libelle == "Introduction") {
+        if (index == 1) {
             type.value = 2;
-        }
-        if (libelle == "Chapitre") {
+        } else if (index == 2) {
             page_num++;
-            libelle = libelle + " " + page_num.toString();
-        }
-        if (libelle == "Annexe") {
+            if (page_num <= max_page) {
+                libelle = libelle + " " + page_num.toString();
+            } else {
+                type.value = 3;
+            }
+        } else if (index == 3) {
+            type.value = 4;
+            
+        } else if (index == 4) {
             annexe_num++;
-            libelle = libelle + " " + annexe_num.toString();
+            if (annexe_num < max_annexe) {
+                libelle = libelle + " " + annexe_num.toString();
+            } else {
+                //on verra plus tard :)
+            }
         }
+
         addRow(libelle, select[select.selectedIndex].text, area);
         select.value = 1;
-        updateStorage();
+
         AddRowSelect();
         AddBtnDelete();
         modified = false;
         sceditor.instance(content).val("");
-        lblTitle.innerHTML = title.value;
     }
 
     function modifyTableau() {
@@ -200,10 +195,8 @@
         if (rowSelected != null) {
             rowSelected.cells[3].innerHTML = area;
         }
-        updateStorage();
         onNew();
         modified = false;
-        lblTitle.innerHTML = title.value;
     }
     let tbody = document.createElement('tbody');
 
@@ -241,11 +234,6 @@
         modified = false;
     }
 
-    /*function confirm(e) {
-        let parent = e.target.parentElement.parentElement.parentElement;
-        console.log(parent.children[0]);
-    }*/
-
     function save() {
         let rows = table.rows;
         for (let i = 1; i < rows.length; i++) {
@@ -269,12 +257,13 @@
         return false;
     }
 
+
+
+
+
     function onResetPage() {
         type.value = 1;
-        page_num = 0;
-        localStorage.type = type.value;
-        localStorage.page_num = page_num;
-
+        number.value = "";
         var rowCount = table.rows.length;
         for (var i = 1; i < rowCount; i++) {
             table.deleteRow(rowCount - i);
@@ -282,24 +271,46 @@
         modified = false;
     }
 
+    type.addEventListener('click', () => {
+        let value = event.target.value;
+        switch (value) {
+            case "1": // Introduction
+            case "3": // Introduction
+                number.value = "";
+                break;
+            case "2": // Chapitre
+                number.value = localStorage.page_num;
+                break;
+            case "4": // Annexe
+                number.value = localStorage.annexe_num;
+                break;
+        }
+    });
+
     // gestion des ellipses en js
     String.prototype.trunc =
         function(n) {
             return this.substr(0, n - 1) + (this.length > n ? '...' : '');
         };
-    // select.onchange = updateStorage();
-    //content.onchange = updateStorage();
+
+    number.onchange = () => {
+        if (type.value == 2) {
+            localStorage.page_num = number.value;
+        }
+        if (type.value == 4) {
+            localStorage.annexe_num = number.value;
+        }
+    }
+
     function AddRowSelect() {
         let rows = table.getElementsByTagName("tr");
         for (let i = 1; i < rows.length; i++) {
             let rowCurrent = rows[i];
-
             rowCurrent.onclick = () => {
                 rowSelected = rowCurrent; // on récupère en global le row sélectionné
                 sceditor.instance(content).val(rowCurrent.cells[3].innerHTML);
                 btnAdd.classList.add("hidden");
                 btnModify.classList.remove("hidden");
-                lblTitle.innerHTML = title.value;
                 lblType.innerHTML = rowCurrent.cells[0].innerHTML
             }
         }
@@ -335,7 +346,7 @@
     initEditor();
     sceditor.instance(content).bind('keypress', function(e) {
         modified = true;
-
     });
+    lblTitle.value = "<?= session()->title; ?>";
 </script>
 <?= $this->endSection() ?>
