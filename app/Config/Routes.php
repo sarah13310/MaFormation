@@ -66,6 +66,8 @@ $routes->get('/company/profile', 'User::profilecompany'); //profil company
 //article et publication
 $routes->add('/admin/dashboard/article', 'Dashboard::listarticles');
 $routes->add('/admin/dashboard/publishes', 'Dashboard::listpublishes');
+$routes->add('/former/dashboard/article', 'Dashboard::listformerarticles');
+$routes->add('/former/dashboard/publishes', 'Dashboard::listformerpublishes');
 $routes->match(['get', 'post'],'/article/list', 'News::list_articles_home');// liste des articles page home
 $routes->add('/article/list/details', 'News::details_article_home');// détails de l'article page home
 $routes->match(['get', 'post'],'/publishes/list', 'News::list_publishes_home');// liste des publications page home

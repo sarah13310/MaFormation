@@ -128,7 +128,7 @@ class DashBoard extends BaseController
 
             $query = $builder->get();
             $user = $query->getResultArray();
-            
+
             /* auteur de l'article*/
             $authors = [];
             foreach ($user as $u) {
@@ -161,7 +161,6 @@ class DashBoard extends BaseController
             }
 
             $listpublishes[$i]["article"] = $news;
-
         }
 
         $data = [
@@ -178,13 +177,13 @@ class DashBoard extends BaseController
 
         $title = "Liste des articles";
 
-        $article_helper= new ArticleHelper();
+        $article_helper = new ArticleHelper();
 
-        $public=$article_helper->getArticles();
+        $public = $article_helper->getArticles();
 
-        $builder=$public['builder'];
+        $builder = $public['builder'];
 
-        $articles=$public['articles'];
+        $articles = $public['articles'];
 
         $listarticles = [];
 
@@ -230,6 +229,109 @@ class DashBoard extends BaseController
     }
 
 
+    public function listformerpublishes()
+    {
+
+        $title = "Liste des publications";
+
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+
+        $builder->select('publication.id_publication,publication.subject,publication.description,publication.datetime');
+
+        $builder->where('user.id_user', '36');
+        $builder->join('user_has_article', 'user_has_article.id_user = user.id_user');
+        $builder->join('article', 'user_has_article.id_article = article.id_article');
+        $builder->join('publication_has_article', 'publication_has_article.id_article = article.id_article');
+        $builder->join('publication', 'publication_has_article.id_publication = publication.id_publication');
+        $builder->groupBy('publication.id_publication');
+        $query   = $builder->get();
+        $publishes = $query->getResultArray();
+
+
+        $listpublishes = [];
+
+        foreach ($publishes as $publishe) {
+            $listpublishes[] = [
+                "id_publication" => $publishe['id_publication'],
+                "subject" => $publishe['subject'],
+                "description" => $publishe['description'],
+                "datetime" => $publishe['datetime'],
+            ];
+        }
+
+        
+
+        for ($i = 0; $i < count($listpublishes); $i++) {
+
+            $builder->select('article.id_article,article.subject,article.description,article.datetime');
+
+            $builder->where('user.id_user', '36');
+            $builder->join('user_has_article', 'user_has_article.id_user = user.id_user');
+            $builder->join('article', 'user_has_article.id_article = article.id_article');
+            $builder->join('publication_has_article', 'publication_has_article.id_article = article.id_article');
+            $builder->join('publication', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+
+            $news = [];
+            foreach ($articles as $article) {
+                $news[] = [
+                    "id_article" => $article['id_article'],
+                    "subject" => $article['subject'],
+                    "description" => $article['description'],
+                    "datetime" => $article['datetime'],
+                ];
+            }
+
+
+
+            $listpublishes[$i]["article"] = $news;
+        }
+
+        $data = [
+            "title" => $title,
+            "listpublishes" => $listpublishes,
+        ];
+
+
+        return view('Former/list_publishes_former.php', $data);
+    }
+
+    public function listformerarticles()
+    {
+
+        $title = "Liste des articles";
+
+        $article_helper = new ArticleHelper();
+
+        $public = $article_helper->getArticles();
+
+        $builder = $public['builder'];
+
+        $articles = $public['articles'];
+
+        $listarticles = [];
+
+        foreach ($articles as $article) {
+            $listarticles[] = [
+                "id_article" => $article['id_article'],
+                "subject" => $article['subject'],
+                "description" => $article['description'],
+                "datetime" => $article['datetime'],
+            ];
+        }
+
+        $data = [
+            "title" => $title,
+            "listarticles" => $listarticles,
+        ];
+
+        return view('Former/list_article_former.php', $data);
+    }
+
+
     private function getUserSession()
     {
         $user = [
@@ -242,7 +344,7 @@ class DashBoard extends BaseController
             'image_url' => session()->get('image_url'),
             'gender' => session()->get('gender'),
             'isLoggedIn' => true,
-        ];        
+        ];
         return $user;
     }
 
@@ -275,7 +377,7 @@ class DashBoard extends BaseController
                 "mail" => $former['mail'],
                 "phone" => $former['phone'],
                 "type" => $former['type'],
-                "rights"=>$former['rights'],
+                "rights" => $former['rights'],
             ];
         }
 
@@ -330,13 +432,13 @@ class DashBoard extends BaseController
             ];
         }
 
-        $user=$this->getUserSession();
+        $user = $this->getUserSession();
 
         $data = [
             "title" => $title,
             "listformers" => $listformers,
             "jobs" => $jobs,
-            "user"=>$user,
+            "user" => $user,
         ];
 
         return view('Admin/list_privileges.php', $data);

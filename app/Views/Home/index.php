@@ -20,6 +20,7 @@
   </button>
 </div>
 
+
 <div class="infohome">
   <img src="<?= base_url() ?>/assets/img/97e1ffb95c4e03e98046c612ba4d0f5e.jpg" class="d-block w-100" alt="Info Home" />
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -48,51 +49,52 @@
   <button class="btn btn-outline-primary" onclick="location = '/funding'">Me financer</button>
 </div>
 <section class="">
-                <form action="/" method="post">
-                    <!--Grid row-->
-                    <div class="row d-flex justify-content-center">
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong>S'abonner à la lettre d'informations</strong>
-                            </p>
-                        </div>
-                        <!--Grid column-->
+  <form action="/" method="post">
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center">
+      <!--Grid column-->
+      <div class="col-auto">
+        <p class="pt-2">
+          <strong>S'abonner à la lettre d'informations</strong>
+        </p>
+      </div>
+      <!--Grid column-->
 
-                        <!--Grid column-->
-                        <div class="col-md-5 col-12">
-                            <!-- Email input -->
-                            <div class="form-outline form-white mb-4">
-                              <input class="form-control mb-2" type="text" name="mail" id="mail" placeholder="Adresse mail" value="">
-                            </div>
-                        </div>
-                        <!--Grid column-->
+      <!--Grid column-->
+      <div class="col-md-5 col-12">
+        <!-- Email input -->
+        <div class="form-outline form-white mb-4">
+          <input class="form-control mb-2" type="text" name="mail" id="mail" placeholder="Adresse mail" value="">
+        </div>
+      </div>
+      <!--Grid column-->
 
-                        <?php if (isset($validation)) : ?>
-                        <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
-                                <?= $validation->listErrors() ?>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-outline-dark mb-4">
-                                Souscrire
-                            </button>
-                        </div>
-                        <!--Grid column-->
-                    </div>
-                    <!--Grid row-->
-                </form>
-            </section>
-            <!-- Section: Form -->
+      <?php if (isset($validation)) : ?>
+        <div class="col-12">
+          <div class="alert alert-danger" role="alert">
+            <?= $validation->listErrors() ?>
+          </div>
+        </div>
+      <?php endif; ?>
+      <!--Grid column-->
+      <div class="col-auto">
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-outline-dark mb-4">
+          Souscrire
+        </button>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </form>
+</section>
+<!-- Section: Form -->
 
 
 <?= $this->endSection() ?>
 
 
 <?= $this->section('js') ?>
+
 
 <?= $this->endSection() ?>
