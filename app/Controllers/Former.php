@@ -12,7 +12,7 @@ use App\Libraries\FormerHelper;
 use App\Libraries\CategoryHelper;
 use App\Libraries\TrainingHelper;
 
-// Date 19-12-2022
+// Date 22-12-2022
 class Former extends BaseController
 {
     public function list_formers_home()
@@ -88,7 +88,6 @@ class Former extends BaseController
 
         return view('Former/list_former.php', $data);
     }
-
 
     public function details_former_home()
     {

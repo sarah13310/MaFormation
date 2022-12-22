@@ -1,0 +1,131 @@
+@import url(https://fonts.googleapis.com/css2?family=Montserrat);
+
+html body {
+  background:whitesmoke;
+  background-size: cover;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  align-content: center;
+
+  width: 100%;
+
+  padding: 25px 25px 25px 25px;
+}
+
+/* Carousel base class */
+.carousel {
+  background-color: rgba(0, 0, 0, 0.85);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 1rem;
+  z-index: 10;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 45px;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.card {
+  /*box-shadow: rgb(255, 255, 255) 0 3px 8px;*/
+  transition: all 0.5s ease;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+  overflow: hidden;
+  color: var(--main-color);
+  text-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  padding: 7px;
+}
+
+.card:hover {
+  color: whitesmoke;
+  background: linear-gradient(#3071db, rgb(149, 187, 204));
+  border: solid 2px rgb(149, 204, 198);
+  border-radius: 13px;
+  padding: 7px;
+}
+
+.card-img-overlay {
+  text-shadow: #060a0a 2px 2px 2px;
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+.card-img-overlay:hover {
+  text-shadow: #060a0a 2px 4px 2px;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.carousel-item>img {
+  position: absolute;
+  background-color: rgba(2, 11, 10, 0.21);
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .carousel {
+
+    height: 60%;
+    
+  }
+
+  .carousel-inner .carousel-item>div {
+    display: none;
+  }
+
+  .carousel-inner .carousel-item>div:first-child {
+    display: block;
+  }
+
+  .carousel-inner{
+    width: 90%;
+  }
+
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+
+  .carousel-inner .carousel-item-end.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(33.3333%);
+  }
+
+  .carousel-inner .carousel-item-start.active,
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-33.3333%);
+  }
+
+  .carousel-control-next {
+    right: 2px;
+  }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start {
+  transform: translateX(0);
+}

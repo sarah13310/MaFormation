@@ -16,11 +16,13 @@ class PublishHelper
         ];
     }
 
-    function getValidatePublishes()
+    function getFilterPublishes($filter=VALIDE)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('publication');
-        $builder->where('status', 1); // juste les publications valides
+        if ($filter!=ALL){
+            $builder->where('status', $filter); 
+        }
         $query   = $builder->get();
         $publishes = $query->getResultArray();
         return $publishes;

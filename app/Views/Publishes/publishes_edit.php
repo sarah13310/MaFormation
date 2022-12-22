@@ -65,15 +65,14 @@
             </div>
             <div class="col-12 col-md-4 ">
                 <div class="row mb-2">
-                    <div class="col-12 col-md-2"><a href="/admin/articles/edit" class="btn btn-primary"><i class="bi bi-plus-circle"></i></a></div>
+                    <div class="col-12 col-md-2"><a href="/admin/articles/edit" class="btn btn-primary" title="Nouvel Article" data-bs-toggle="tooltip"><i class="bi bi-plus-circle"></i></a></div>
                     <div class="col-12 col-md-10">Sélectionner vos articles dans la liste :</div>
                 </div>
-                <select name='list_articles' id="list_articles" style="width:100%;VISIBILITY: visible;" size=17>
+                <select multiple="multiple" name='list_articles[]' id="list_articles" style="width:100%;VISIBILITY: visible;" size=15>
                     <?php foreach ($articles as $article) : ?>
                         <option value="<?= $article['id_article'] ?>"><?= $article['subject'] ?></option>
                     <?php endforeach ?>
                 </select>
-
                 <div class="row align-items-center mt-2">
                     <div class="col-12 col-md-3"><button type="submit" class="btn btn-primary">Sauver</button></div>
                     <div class="col-12 col-md-3 ">
@@ -88,9 +87,14 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
+<!-- chargements des modules -->
 <script src="<?= base_url() . '/js/infos.js' ?>" type="module"></script>
 <script src="<?= base_url() . '/js/editor.js' ?>" type="module"></script>
-<script>    
-   
+<script>
+    // autorise les tooltips
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 </script>
 <?= $this->endSection() ?>

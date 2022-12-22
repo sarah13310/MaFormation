@@ -1,25 +1,39 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 <?= $this->extend('layouts/default') ?>
+<?= $this->section('header') ?>
+<link rel="stylesheet" href="<?= base_url() ?>/css/carousel.css">
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
-  <!-- <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div> -->
+<!-- Carousel des formations -->
 
-  <?= listCarousel() ?>
+  <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+    <?= $trainings ?>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+<!-- Carousel des articles -->
+<?php if (count($articles) > 0) : ?>
+  <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+    <?= listCarousel($articles) ?>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<?php endif ?>
 
+<!--  -->
 <div class="infohome">
   <img src="<?= base_url() ?>/assets/img/97e1ffb95c4e03e98046c612ba4d0f5e.jpg" class="d-block w-100" alt="Info Home" />
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -48,51 +62,50 @@
   <button class="btn btn-outline-primary" onclick="location = '/funding'">Me financer</button>
 </div>
 <section class="">
-                <form action="/" method="post">
-                    <!--Grid row-->
-                    <div class="row d-flex justify-content-center">
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong>S'abonner à la lettre d'informations</strong>
-                            </p>
-                        </div>
-                        <!--Grid column-->
+  <form action="/" method="post">
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center">
+      <!--Grid column-->
+      <div class="col-auto">
+        <p class="pt-2">
+          <strong>S'abonner à la lettre d'informations</strong>
+        </p>
+      </div>
+      <!--Grid column-->
 
-                        <!--Grid column-->
-                        <div class="col-md-5 col-12">
-                            <!-- Email input -->
-                            <div class="form-outline form-white mb-4">
-                              <input class="form-control mb-2" type="text" name="mail" id="mail" placeholder="Adresse mail" value="">
-                            </div>
-                        </div>
-                        <!--Grid column-->
+      <!--Grid column-->
+      <div class="col-md-5 col-12">
+        <!-- Email input -->
+        <div class="form-outline form-white mb-4">
+          <input class="form-control mb-2" type="text" name="mail" id="mail" placeholder="Adresse mail" value="">
+        </div>
+      </div>
+      <!--Grid column-->
 
-                        <?php if (isset($validation)) : ?>
-                        <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
-                                <?= $validation->listErrors() ?>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-outline-dark mb-4">
-                                Souscrire
-                            </button>
-                        </div>
-                        <!--Grid column-->
-                    </div>
-                    <!--Grid row-->
-                </form>
-            </section>
-            <!-- Section: Form -->
+      <?php if (isset($validation)) : ?>
+        <div class="col-12">
+          <div class="alert alert-danger" role="alert">
+            <?= $validation->listErrors() ?>
+          </div>
+        </div>
+      <?php endif; ?>
+      <!--Grid column-->
+      <div class="col-auto">
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-outline-dark mb-4">
+          Souscrire
+        </button>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </form>
+</section>
+<!-- Section: Form -->
 
 
 <?= $this->endSection() ?>
 
-
 <?= $this->section('js') ?>
-
+<script src="<?= base_url() ?>/js/carousel.js"></script>
 <?= $this->endSection() ?>

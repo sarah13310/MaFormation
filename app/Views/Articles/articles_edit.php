@@ -1,3 +1,4 @@
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 <?php $base = base_url(); ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('header') ?>
@@ -39,8 +40,8 @@
     <form action="/admin/articles/edit" method="post">
         <div class="row">
             <div class='form-floating mb-3 col-12 col-md-4'>
-                <input class='form-control' id='subject' type='text' name='subject' placeholder="Nom de l'article" />
-                <label for='subject'>&nbsp;Nom de l'article (*)</label>
+                <input class='form-control' id='subject' type='text' name='subject' placeholder="Sujet de l'article" />
+                <label for='subject'>&nbsp;Sujet de l'article (*)</label>
             </div>
             <div class='form-floating mb-3 col-12 col-md-4'>
                 <input class='form-control' id='name' type='text' name='name' placeholder="Nom de l'auteur" readonly value="<?= session()->name . " " . session()->firstname; ?> " />
@@ -48,21 +49,22 @@
             </div>
         </div>
         <div class="form-group row align-items-center">
-            <label for="select" class="col-12 col-md-2 ">Catégorie</label>
+            <label for="category" class="col-12 col-md-2 ">Catégorie</label>
             <div class="col-12 col-md-4">
-                <select id="select" name="category" class="form-select">
+                <select id="category" name="category" class="form-select">
                     <!-- remplit les catégories disponibles  -->
                     <?php foreach ($categories as $category) : ?>
                         <option value="<?= $category['id_category'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-            <a id="btnlink" class="btn btn-primary col-1 col-md-1" onclick="onLink()"><i class="bi bi-link"></i></a>
+            <a id="btnlink" class="btn btn-primary col-1 col-md-1" title="Associer à une publication" data-bs-toggle="tooltip" onclick="onLink()"><i class="bi bi-link"></i></a>
             <div class="col-12 col-md-5">
-                <select id="select_training" name="select" class="form-select" disabled="true">
+                <select id="select_training" name="select_training" class="form-select" disabled="true">
+                    <option value='0'>Aucune association</option>
                     <!-- remplit les formations disponibles  -->
                     <?php foreach ($publishes as $publish) : ?>
-                        <option value="<?= $publish['id_publication'] ?>"><?= $publish['subject'] ?></option>
+                        <option value="<?= $publish['id_publication'] ?>"><?= $publish['subject'] ?> <?= getStatus($publish['status'], true) ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -85,39 +87,25 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
+<script src="<?= base_url() . '/js/infos.js' ?>" type="module"></script>
+<script src="<?= base_url() . '/js/editor.js' ?>" type="module"></script>
+
 <script>
-    let warning = document.getElementById("warning");
-    let error = document.getElementById("error");
-    let success = document.getElementById("success");
     let btnLink = document.getElementById("btnlink");
     let select_training = document.getElementById("select_training");
-
-    sceditor.create(document.getElementById('editor'), {
-        format: 'bbcode',
-        width: '100%',
-        height: '330px',
-        icons: 'monocons',
-        style: '<?= $base ?>/css/default.min.css',
-        locale: 'fr-FR'
-    });
-
-    setTimeout(() => {
-        if (warning) {
-            warning.remove();
-        }
-        if (error) {
-            error.remove();
-        }
-        if (success) {
-            success.remove();
-        }
-    }, 1500);
-
-
     let disabled = true;
 
     function onLink() {
         disabled = select_training.toggleAttribute("disabled");
+        if (disabled == false) {
+            select_training.value = 0;
+        }
     }
+
+    // autorise les tooltips
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 </script>
 <?= $this->endSection() ?>

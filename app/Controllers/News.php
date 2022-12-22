@@ -32,9 +32,7 @@ class News extends BaseController
 
     public function articles_edit()
     {
-
         $article = new ArticleModel();
-        $user_has_article = new UserHasArticleModel();
         //
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();
@@ -43,7 +41,7 @@ class News extends BaseController
         $categories = $category_helper->getCategories();
         //
         $publishe_helper = new PublishHelper();
-        $publishes = $publishe_helper->getValidatePublishes();
+        $publishes = $publishe_helper->getFilterPublishes(ALL);
 
         $data = [
             "title" => "Création Article",
@@ -57,21 +55,25 @@ class News extends BaseController
             unset($data['warning']);
         }
 
-        if (isset(session()->success)){
+        if (isset(session()->success)) {
             session()->remove('succes');
         }
 
         if ($this->request->getMethod() == 'post') {
 
+            $user_has_article = new UserHasArticleModel();
+            $publication_has_article = new PublicationHasArticleModel();
+
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             $dataSave['subject'] = $this->request->getVar('subject');
             $dataSave['description'] = $this->request->getVar('description');
-            $dataSave['category'] = $this->request->getVar('category');
-            $dataSave['datetime'] = date("Y-m-d H:i:s");
+            $id_publish = $this->request->getVar('select_training'); // on récupère l'id de la publication
+            $dataSave['category'] = $this->request->getVar('category'); // on la categorie
+            $dataSave['datetime'] = date("Y-m-d H:i:s"); // on horodate 
             $dataSave['media_id_media'] = 0;
-            $dataSave['status'] = $ispublished;
+            $dataSave['status'] = $ispublished; // status de la publication
             $subject =  $dataSave['subject'] . trim("");
-
+             
             $rules = [
                 'subject' => 'required|min_length[6]|max_length[30]',
             ];
@@ -102,8 +104,16 @@ class News extends BaseController
                         'id_user' => session()->id_user,
                         'id_article' => $id_article,
                     ];
-                    // en dernier la table intermédiaire
+                    // en avant-dernier la table intermédiaire user_has_article
                     $user_has_article->save($datatemp);
+                    // en dernier la table intermédiaire publication_has_article
+                    if ($id_publish>0){
+                        $datatemp2 = [
+                            'id_publication' => $id_publish,
+                            'id_article' => $id_article,
+                        ];
+                        $publication_has_article->save($datatemp2);
+                    }                    
                     session()->setFlashdata('success', 'Article en cours de validation...');
                 }
             }
@@ -119,31 +129,29 @@ class News extends BaseController
         $category_helper = new CategoryHelper();
         $categories = $category_helper->getCategories();
 
-        $article_helper=new ArticleHelper();
-        $articles=$article_helper->getTitleArticles();
+        $article_helper = new ArticleHelper();
+        $articles = $article_helper->getFilterArticles();
 
         $data = [
             "title" => "Création Publication",
             "subtitle" => "Création et mise en ligne de vos publications.",
             "user" => $user,
             "categories" => $categories,
-            "articles"=>$articles,
+            "articles" => $articles,
         ];
 
         if (isset($data['warning'])) {
             unset($data['warning']);
         }
-
-        if (isset(session()->success)){
+        if (isset(session()->success)) {
             session()->remove('success');
         }
-        
+
         if ($this->request->getMethod() == 'post') {
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             $dataSave['subject'] = $this->request->getVar('subject');
             $dataSave['description'] = $this->request->getVar('description');
             $dataSave['category'] = $this->request->getVar('category');
-            $dataSave['articles'] = $this->request->getVar('articles');
             $dataSave['datetime'] = date("Y-m-d H:i:s");
             $dataSave['article_id_article'] = 0;
             $dataSave['status'] = $ispublished;
@@ -181,10 +189,11 @@ class News extends BaseController
                     $data_temp = [
                         'id_publication' => $id_publication,
                     ];
-                    $list_articles = [];
-
+                    //
+                    $list_articles = $this->request->getVar('list_articles');
+                    //
                     foreach ($list_articles as $article) {
-                        $data_temp['id_article'] = $article['id_article'];
+                        $data_temp['id_article'] = $article;
                         $publication_has_article->insert($data_temp);
                     }
                     session()->setFlashdata('success', 'Publication en cours de validation...');

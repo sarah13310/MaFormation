@@ -15,10 +15,23 @@ class ArticleHelper
             'articles' => $articles,
         ];
     }
-    function getTitleArticles()
+
+    function getTitleAllArticles()
     {
         $db = \Config\Database::connect();
         $builder = $db->table('article');
+        $query   = $builder->get();
+        $articles = $query->getResultArray();
+        return $articles;
+    }
+
+    function getFilterArticles($filter = VALIDE)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('article');
+        if ($filter!=ALL){
+            $builder->where('status', $filter);
+        }
         $query   = $builder->get();
         $articles = $query->getResultArray();
         return $articles;

@@ -1,6 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
 
 define("THEME_SUPER_ADMIN", "3");
 define("THEME_ADMIN", "5");
@@ -24,30 +23,13 @@ function indicatorCarousel($index, $count)
 }
 
 // éléments du carousel
-function listCarousel($index = 0)
+function listCarousel($list, $index = 0, $showIndicator = false)
 {
-    $base = base_url();
-    $list = [
-        [
-            "url_image" => $base . "/assets/img/img1.jpg",
-            "title" => "Débutant",
-            "description" => "Vous débutez...",
-        ],
-        [
-            "url_image" => $base . "/assets/img/img2.jpg",
-            "title" => "Avancé",
-            "description" => "Vous avancez...",
-        ],
-        [
-            "url_image" => $base . "/assets/img/img3.jpg",
-            "title" => "Entreprise",
-            "description" => "Vous êtes un entreprise...",
-        ],
-    ];
+    $str = "";
     $i = 0;
-
-    $str = indicatorCarousel($index, count($list));
-
+    if ($showIndicator) {
+        $str = indicatorCarousel($index, count($list));
+    }
     $str .= "<div class='carousel-inner'>";
     foreach ($list as $item) {
         $active = ($i == $index) ? "active" : "";
@@ -63,6 +45,10 @@ function listCarousel($index = 0)
     $str .= "</div>";
     return $str;
 }
+
+// éléments du carousel
+
+
 
 /*********************************************/
 // Les profils utilisateur
@@ -777,4 +763,38 @@ function translateRights($right)
     }
     $icons .= "</div>";
     return $icons;
+}
+
+
+function getStatus($status, $parenthese = false)
+{
+    $str = "";
+    if ($parenthese) {
+        $str .= "( ";
+    }
+
+    switch ($status) {
+        case VALIDE:
+            $str .= "validé";
+            break;
+        case EN_COURS:
+            $str .= "en cours ...";
+            break;
+        case BROUILLON:
+            $str .= "brouillon";
+            break;
+        case EDITE:
+            $str .= "édité";
+            break;
+        case REEDITE:
+            $str .= "réédité";
+            break;
+        case EXPORTE:
+            $str .= "exporté";
+            break;
+    }
+    if ($parenthese) {
+        $str .= " )";
+    }
+    return $str;
 }
