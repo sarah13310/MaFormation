@@ -128,7 +128,8 @@ class DashBoard extends BaseController
 
             $query = $builder->get();
             $user = $query->getResultArray();
-
+            
+            /* auteur de l'article*/
             $authors = [];
             foreach ($user as $u) {
                 $authors[] = [
