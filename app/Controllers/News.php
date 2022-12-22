@@ -119,11 +119,15 @@ class News extends BaseController
         $category_helper = new CategoryHelper();
         $categories = $category_helper->getCategories();
 
+        $article_helper=new ArticleHelper();
+        $articles=$article_helper->getTitleArticles();
+
         $data = [
             "title" => "Création Publication",
             "subtitle" => "Création et mise en ligne de vos publications.",
             "user" => $user,
             "categories" => $categories,
+            "articles"=>$articles,
         ];
 
         if (isset($data['warning'])) {

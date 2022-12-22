@@ -15,6 +15,14 @@ class ArticleHelper
             'articles' => $articles,
         ];
     }
+    function getTitleArticles()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('article');
+        $query   = $builder->get();
+        $articles = $query->getResultArray();
+        return $articles;
+    }
 
     function isExist($subject)
     {

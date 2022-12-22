@@ -69,7 +69,11 @@
                     <div class="col-12 col-md-10">Sélectionner vos articles dans la liste :</div>
                 </div>
                 <select name='list_articles' id="list_articles" style="width:100%;VISIBILITY: visible;" size=17>
+                    <?php foreach ($articles as $article) : ?>
+                        <option value="<?= $article['id_article'] ?>"><?= $article['subject'] ?></option>
+                    <?php endforeach ?>
                 </select>
+
                 <div class="row align-items-center mt-2">
                     <div class="col-12 col-md-3"><button type="submit" class="btn btn-primary">Sauver</button></div>
                     <div class="col-12 col-md-3 ">
@@ -84,29 +88,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-<script>
-    let warning = document.getElementById("warning");
-    let error = document.getElementById("error");
-    let success = document.getElementById("success");
-    sceditor.create(document.getElementById('editor'), {
-        format: 'bbcode',
-        width: '100%',
-        height: '330px',
-        icons: 'monocons',
-        style: '<?= $base ?>/css/default.min.css',
-        locale: 'fr-FR'
-    });
-
-    setTimeout(() => {
-        if (warning) {
-            warning.remove();
-        }
-        if (error) {
-            error.remove();
-        }
-        if (success) {
-            success.remove();
-        }
-    }, 1500);
+<script src="<?= base_url() . '/js/infos.js' ?>" type="module"></script>
+<script src="<?= base_url() . '/js/editor.js' ?>" type="module"></script>
+<script>    
+   
 </script>
 <?= $this->endSection() ?>

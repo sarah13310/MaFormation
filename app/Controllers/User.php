@@ -8,6 +8,7 @@ use App\Models\UserHasCertificateModel;
 use App\Models\UserHasCompanyModel;
 use App\Models\CompanyModel;
 use App\Libraries\UserHelper;
+use CodeIgniter\HTTP\Message;
 
 class User extends BaseController
 {
@@ -18,41 +19,58 @@ class User extends BaseController
             'isLoggedIn' => false,
         ];
         helper(['form']);
-        
 
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
 
             $rules = [
                 'mail' => 'required|min_length[6]|max_length[50]|valid_email',
-                'password' => 'required|min_length[8]|max_length[255]',
+                'password' => 'required|min_length[8]|max_length[30]',
             ];
 
             $error = [
                 'mail' => [
                     'required' => "Adresse mail vide!",
+                    'min_length' => 'Mail trop court',
+                    'max_length' => 'Mail trop long',
                     'valid_email' => 'Format mail incorrect.',
                 ],
-                'password' => ['required' => "Mode de passe requis!"],
+                'password' => [
+                    'required'  => "Mode de passe vide!",
+                    'min_length' => 'Mot de passe trop court',
+                    'max_length' => 'Mot de passe trop long',
+                ],
             ];
+            // on restitue les informations
+            $mail = $this->request->getVar('mail');
+            session()->set('mail', $mail);
+            $password = $this->request->getVar('password');
+            session()->set('password', $password);
+
 
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
                 $model = new UserModel();
+                $user = null;
+                try {
+                    $user = $model->where('mail', $mail)->first();
+                } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {                    
+                    session()->setFlashdata('infos', 'Connexion impossible!');
+                    return view('/Login/login', $data);
+                } finally {
 
-                $user = $model->where('mail', $this->request->getVar('mail'))->first();
-                if (!$user) {
-                    session()->setFlashdata('infos', 'Cet utilisateur n\'existe pas');
-                } else {
-                    $pw = $this->request->getVar('password');
-                    $pwh = $user['password'];
+                    if (!$user) {
+                        session()->setFlashdata('infos', 'Cet utilisateur n\'existe pas');
+                    } else {
+                        $pw = $this->request->getVar('password');
+                        $pwh = $user['password'];
 
-                    if (password_verify($pw, $pwh)) { // vérifie si password ok et dispatche
-                       
-                        $data = $this->dispatch($user);
-                        $route = $data['route'];
-                        return view($route, $data);
+                        if (password_verify($pw, $pwh)) { // vérifie si password ok et dispatche
+                            $data = $this->dispatch($user);
+                            $route = $data['route'];
+                            return view($route, $data);
+                        }
                     }
                 }
             }
@@ -63,11 +81,8 @@ class User extends BaseController
     private function dispatch($user)
     {
         helper(['form']);
-
-        $user_info= new UserHelper();
+        $user_info = new UserHelper();
         $user_info->setUserSession($user);
-        // $this->setUserSession($user);
-
         $type = $user['type'];
 
         if ($user['image_url'] == null)
@@ -84,7 +99,9 @@ class User extends BaseController
                     "jobs" => $jobs,
                     "skills" => $skills,
                     "route" => "Admin/super_profile",
+                    "type" => $type,
                 ];
+
                 break;
 
             case TYPE_ADMIN: // administrateur
@@ -96,6 +113,7 @@ class User extends BaseController
                     "jobs" => $jobs,
                     "skills" => $skills,
                     "route" => "Admin/profile_admin",
+                    "type" => $type,
                 ];
                 break;
 
@@ -108,6 +126,7 @@ class User extends BaseController
                     "jobs" => $jobs,
                     "skills" => $skills,
                     "route" => "Former/profile_former",
+                    "type" => $type,
                 ];
                 break;
 
@@ -116,6 +135,7 @@ class User extends BaseController
                     "title" => "Mode Utilisateur Particulier",
                     "user" => $user,
                     "route" => "User/profile_user",
+                    "type" => $type,
                 ];
                 break;
 
@@ -126,17 +146,13 @@ class User extends BaseController
                     "user" => $user,
                     "companies" => $jobs,
                     "route" => "User/profile_company",
+                    "type" => $type,
                 ];
                 break;
         }
         return $data;
     }
 
-   
-
-    
-
-    
     private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
         $modelu = new UserModel();
@@ -252,7 +268,7 @@ class User extends BaseController
     public function profileuser()
     {
 
-        helper(['form']);  
+        helper(['form']);
 
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
@@ -306,13 +322,12 @@ class User extends BaseController
         ];
         return view('Login/forgetpassword.php', $data);
     }
-    
+
 
     public function logout()
     {
         session()->destroy();
         return redirect()->to('/');
-        //return view('Home/index.php');
     }
 
 
@@ -320,7 +335,7 @@ class User extends BaseController
     {
         $data = ["title" => "Inscription"];
         helper(['form']);
-        $user_info= new UserHelper();
+        $user_info = new UserHelper();
         if ($this->request->getMethod() == 'post') {
 
             $index = $this->request->getVar('index');
