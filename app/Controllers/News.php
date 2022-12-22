@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\ArticleModel;
 use App\Models\PublicationModel;
 
@@ -87,11 +88,9 @@ class News extends BaseController
     {
         $title = "Liste des articles";
         $db      = \Config\Database::connect();
-        $builder = $db->table('article');   
-        
-        $status=1;
-        
-        $builder->where('status', $status);
+        $builder = $db->table('article');
+
+        $builder->where('status', '1');
         $query   = $builder->get();
         $articles = $query->getResultArray();
 
@@ -138,52 +137,170 @@ class News extends BaseController
     }
 
 
-    public function details_former_home()
+    public function details_article_home()
     {
-        $title = "Cv du formateur";
+        $title = "Détails de l'article";
 
         if ($this->request->getMethod() == 'post') {
 
-            $mail = $this->request->getVar('mail');
+            $id = $this->request->getVar('id_article');
 
             $db      = \Config\Database::connect();
-            $builder = $db->table('user');
-            $builder->where('mail', $mail);
+            $builder = $db->table('article');
+            $builder->where('id_article', $id);
             $query   = $builder->get();
-            $former = $query->getResultArray();
+            $article = $query->getResultArray();
 
 
-            $id = $former[0]['id_user'];
-
-
-            $builder->where('user.id_user', $id);
-            $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-            $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
+            $builder->where('article.id_article', $id);
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
 
             $query = $builder->get();
-            $certificates = $query->getResultArray();
+            $user = $query->getResultArray();
 
-            $skills = [];
-            foreach ($certificates as $certificate) {
-                $skills[] = [
-                    "name" => $certificate['name'],
-                    "content" => $certificate['content'],
-                    "date" => $certificate['date'],
-                    "organism" => $certificate['organism'],
-                    "address" => $certificate['address'],
-                    "city" => $certificate['city'],
-                    "cp" => $certificate['cp'],
-                    "country" => $certificate['country'],
+            $author = [];
+            foreach ($user as $u) {
+                $author[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                    "image_url" => $u['image_url'],
                 ];
             }
 
             $data = [
                 "title" => $title,
-                "former" => $former,
-                "skills" => $skills,
+                "article" => $article,
+                "author" => $author,
             ];
 
-            return view('Former/list_former_cv.php', $data);
+            return view('Articles/list_article_details.php', $data);
+        }
+    }
+
+    public function list_publishes_home()
+    {
+        $title = "Liste des publication";
+        $db      = \Config\Database::connect();
+        $builder = $db->table('publication');
+
+        $builder->where('status', '1');
+        $query   = $builder->get();
+        $publishes = $query->getResultArray();
+
+        $listpublishes = [];
+
+        foreach ($publishes as $publishe) {
+            $listpublishes[] = [
+                "id_publication" => $publishe['id_publication'],
+                "subject" => $publishe['subject'],
+                "description" => $publishe['description'],
+                "datetime" => $publishe['datetime'],
+            ];
+        }
+
+        /* auteur de l'article*/
+
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listpublishes); $i++) {
+
+            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+            $builder->groupBy('user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+
+            $listpublishes[$i]["user"] = $authors;
+        }
+
+        $data = [
+            "title" => $title,
+            "listpublishes" => $listpublishes,
+        ];
+
+        return view('Publishes/list_publishes.php', $data);
+    }
+
+
+    public function details_publishes_home()
+    {
+        $title = "Détails de la publication";
+
+        if ($this->request->getMethod() == 'post') {
+
+            $id = $this->request->getVar('id_publication');
+
+            $db      = \Config\Database::connect();
+            $builder = $db->table('publication');
+            $builder->where('id_publication', $id);
+            $query   = $builder->get();
+            $publication = $query->getResultArray();
+
+
+            $builder->select('article.id_article,article.subject,article.description,article.datetime');
+
+            $builder->where('publication.id_publication', $id);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+
+            $listarticles = [];
+
+            foreach ($articles as $article) {
+                $listarticles[] = [
+                    "id_article" => $article['id_article'],
+                    "subject" => $article['subject'],
+                    "description" => $article['description'],
+                    "datetime" => $article['datetime'],
+                ];
+            }
+
+
+
+            $builder->where('publication.id_publication', $id);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+            $builder->groupBy('user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                    "image_url" => $u['image_url'],
+                ];
+            }
+
+            $data = [
+                "title" => $title,
+                "publication" => $publication,
+                "listarticles" => $listarticles,
+                "authors" => $authors,
+            ];
+
+
+
+            return view('Publishes/list_publishes_details.php', $data);
         }
     }
 }

@@ -117,6 +117,7 @@ function ratings($number, $max = 10)
     }
     return $str;
 }
+
 // Formatage des dates
 function dateFormat($date)
 {
@@ -124,6 +125,7 @@ function dateFormat($date)
     if ($date == null) {
     } else {
         $data = explode('-', $date);
+        $data[2]=substr($data[2], 0, 2);
         $strDate = $data[2] . " " . getMonth($data[1]) . " " . $data[0];
     }
     return $strDate;

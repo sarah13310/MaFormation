@@ -1,0 +1,507 @@
+CRITICAL - 2022-12-21 14:22:08 --> Invalid file: Publishes/list_publishes.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Publishes/list_publishes.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Publishes/list_publishes.php', [], true)
+ 3 APPPATH\Controllers\News.php(234): view('Publishes/list_publishes.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 14:22:24 --> Undefined array key "id_article"
+in APPPATH\Views\Publishes\list_publishes.php on line 22.
+ 1 APPPATH\Views\Publishes\list_publishes.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_article"', 'APPPATH\\Views\\Publishes\\list_publishes.php', 22)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Publishes\\list_publishes.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Publishes/list_publishes.php', [], true)
+ 5 APPPATH\Controllers\News.php(234): view('Publishes/list_publishes.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 14:24:47 --> Cannot access offset of type string on string
+in APPPATH\Controllers\News.php on line 222.
+ 1 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 2 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 3 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 14:26:24 --> Cannot access offset of type string on string
+in APPPATH\Controllers\News.php on line 223.
+ 1 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 2 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 3 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 14:27:01 --> Cannot access offset of type string on string
+in APPPATH\Views\Publishes\list_publishes.php on line 16.
+ 1 SYSTEMPATH\View\View.php(213): include()
+ 2 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Publishes/list_publishes.php', [], true)
+ 4 APPPATH\Controllers\News.php(235): view('Publishes/list_publishes.php', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 6 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 7 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 14:28:47 --> Undefined array key 2
+in FCPATH\php\functions\util.php on line 128.
+ 1 FCPATH\php\functions\util.php(128): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 2', 'FCPATH\\php\\functions\\util.php', 128)
+ 2 APPPATH\Views\Publishes\list_publishes.php(16): dateFormat('2')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Publishes\\list_publishes.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Publishes/list_publishes.php', [], true)
+ 6 APPPATH\Controllers\News.php(235): view('Publishes/list_publishes.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 14:46:32 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'distinct(user.id_user)
+WHERE `publication`.`id_publication` = '1'' at line 6 in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `user`.`...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `user`.`...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `user`.`...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `user`.`...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(213): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 14:46:32 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'distinct(user.id_user)
+WHERE `publication`.`id_publication` = '1'' at line 6
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = distinct(user.id_user)
+WHERE `publication`.`id_publication` = \'1\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = distinct(user.id_user)
+WHERE `publication`.`id_publication` = \'1\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = distinct(user.id_user)
+WHERE `publication`.`id_publication` = \'1\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = distinct(user.id_user)
+WHERE `publication`.`id_publication` = :publication.id_publication:', [...], false)
+ 5 APPPATH\Controllers\News.php(213): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:23:45 --> mysqli_sql_exception: Unknown column 'users.id' in 'group statement' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `user`.`...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `user`.`...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `user`.`...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `user`.`...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(214): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:23:45 --> Unknown column 'users.id' in 'group statement'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = \'1\'
+GROUP BY `users`.`id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = \'1\'
+GROUP BY `users`.`id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = \'1\'
+GROUP BY `users`.`id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = :publication.id_publication:
+GROUP BY `users`.`id`', [...], false)
+ 5 APPPATH\Controllers\News.php(214): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:24:11 --> mysqli_sql_exception: Unknown column 'users' in 'group statement' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `user`.`...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `user`.`...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `user`.`...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `user`.`...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(214): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:24:11 --> Unknown column 'users' in 'group statement'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = \'1\'
+GROUP BY `users`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = \'1\'
+GROUP BY `users`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = \'1\'
+GROUP BY `users`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `user`.`name`, `user`.`firstname`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `publication`.`id_publication` = :publication.id_publication:
+GROUP BY `users`', [...], false)
+ 5 APPPATH\Controllers\News.php(214): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:30:11 --> mysqli_sql_exception: Unknown column 'article.id_article' in 'where clause' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(276): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:30:11 --> Unknown column 'article.id_article' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = :article.id_article:', [...], false)
+ 5 APPPATH\Controllers\News.php(276): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:34:18 --> mysqli_sql_exception: Unknown column 'article.id_article' in 'where clause' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(278): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:34:18 --> Unknown column 'article.id_article' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = :article.id_article:', [...], false)
+ 5 APPPATH\Controllers\News.php(278): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:38:21 --> mysqli_sql_exception: Unknown column 'subject.description' in 'field list' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `article...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `article...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `article...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `article...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(259): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:38:21 --> Unknown column 'subject.description' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `article`.`id_article`, `article`.`subject`, `subject`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `article`.`id_article`, `article`.`subject`, `subject`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `article`.`id_article`, `article`.`subject`, `subject`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `article`.`id_article`, `article`.`subject`, `subject`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = :publication.id_publication:', [...], false)
+ 5 APPPATH\Controllers\News.php(259): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:38:33 --> mysqli_sql_exception: Unknown column 'subject.datetime' in 'field list' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `article...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `article...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `article...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `article...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(259): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:38:33 --> Unknown column 'subject.datetime' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `subject`.`datetime`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = :publication.id_publication:', [...], false)
+ 5 APPPATH\Controllers\News.php(259): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 15:39:17 --> mysqli_sql_exception: Unknown column 'article.id_article' in 'where clause' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\News.php(280): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 15:39:17 --> Unknown column 'article.id_article' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `publication`
+JOIN `user_has_article` ON `user_has_article`.`id_article` = `article`.`id_article`
+JOIN `user` ON `user_has_article`.`id_user` = `user`.`id_user`
+WHERE `article`.`id_article` = :article.id_article:', [...], false)
+ 5 APPPATH\Controllers\News.php(280): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 16:01:20 --> Undefined array key "user"
+in APPPATH\Views\Publishes\list_publishes_details.php on line 20.
+ 1 APPPATH\Views\Publishes\list_publishes_details.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "user"', 'APPPATH\\Views\\Publishes\\list_publishes_details.php', 20)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Publishes\\list_publishes_details.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Publishes/list_publishes_details.php', [], true)
+ 5 APPPATH\Controllers\News.php(303): view('Publishes/list_publishes_details.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 16:08:46 --> Undefined array key "authors"
+in APPPATH\Views\Publishes\list_publishes_details.php on line 19.
+ 1 APPPATH\Views\Publishes\list_publishes_details.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "authors"', 'APPPATH\\Views\\Publishes\\list_publishes_details.php', 19)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Publishes\\list_publishes_details.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Publishes/list_publishes_details.php', [], true)
+ 5 APPPATH\Controllers\News.php(305): view('Publishes/list_publishes_details.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 17:41:17 --> Undefined array key "address"
+in APPPATH\Controllers\DashBoard.php on line 113.
+ 1 APPPATH\Controllers\DashBoard.php(113): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "address"', 'APPPATH\\Controllers\\DashBoard.php', 113)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listpublishes()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-21 17:41:33 --> mysqli_sql_exception: Unknown column 'article.address' in 'field list' in D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `article...', 0)
+#1 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `article...')
+#2 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `article...')
+#3 D:\xampp\htdocs\Ma_formation\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `article...', Array, false)
+#4 D:\xampp\htdocs\Ma_formation\MaFormation\app\Controllers\DashBoard.php(149): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->listpublishes()
+#6 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#7 D:\xampp\htdocs\Ma_formation\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\xampp\htdocs\Ma_formation\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\xampp\htdocs\Ma_formation\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-12-21 17:41:33 --> Unknown column 'article.address' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `article`.`address`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `article`.`address`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `article`.`address`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = \'1\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `article`.`id_article`, `article`.`subject`, `article`.`description`, `article`.`address`
+FROM `publication`
+JOIN `publication_has_article` ON `publication_has_article`.`id_publication` = `publication`.`id_publication`
+JOIN `article` ON `publication_has_article`.`id_article` = `article`.`id_article`
+WHERE `publication`.`id_publication` = :publication.id_publication:', [...], false)
+ 5 APPPATH\Controllers\DashBoard.php(149): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listpublishes()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-21 17:41:45 --> Undefined variable $publishes
+in APPPATH\Views\Admin\list_publishes_admin.php on line 15.
+ 1 APPPATH\Views\Admin\list_publishes_admin.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $publishes', 'APPPATH\\Views\\Admin\\list_publishes_admin.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\list_publishes_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_publishes_admin.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(172): view('Admin/list_publishes_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listpublishes()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

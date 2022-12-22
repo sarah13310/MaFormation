@@ -93,6 +93,85 @@ class DashBoard extends BaseController
         return view('Admin/list_former_admin.php', $data);
     }
 
+    public function listpublishes()
+    {
+
+        $title = "Liste des publications";
+
+        $db      = \Config\Database::connect();
+        $builder = $db->table('publication');
+        $query   = $builder->get();
+        $publishes = $query->getResultArray();
+
+        $listpublishes = [];
+
+        foreach ($publishes as $publishe) {
+            $listpublishes[] = [
+                "id_publication" => $publishe['id_publication'],
+                "subject" => $publishe['subject'],
+                "description" => $publishe['description'],
+                "datetime" => $publishe['datetime'],
+            ];
+        }
+
+
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listpublishes); $i++) {
+
+            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+            $builder->groupBy('user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+
+            $listpublishes[$i]["user"] = $authors;
+
+            $builder->select('article.id_article,article.subject,article.description,article.datetime');
+
+
+            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+
+            $news = [];
+            foreach ($articles as $article) {
+                $news[] = [
+                    "id_article" => $article['id_article'],
+                    "subject" => $article['subject'],
+                    "description" => $article['description'],
+                    "datetime" => $article['datetime'],
+                ];
+            }
+
+            $listpublishes[$i]["article"] = $news;
+
+        }
+
+        $data = [
+            "title" => $title,
+            "listpublishes" => $listpublishes,
+        ];
+
+
+        return view('Admin/list_publishes_admin.php', $data);
+    }
+
     public function listarticles()
     {
 

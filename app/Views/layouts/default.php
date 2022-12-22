@@ -37,10 +37,10 @@
                                 A propos
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="former/list">Nos formateurs</a></li>
+                                <li><a class="dropdown-item" href=<?= base_url() . "/former/list" ?>>Nos formateurs</a></li>
                                 <li><a class="dropdown-item" href="formations">Page formation</a></li>
-                                <li><a class="dropdown-item" href="funding">Mon financement</a></li>
-                                <li><a class="dropdown-item" href="faq">F.A.Q.</a></li>
+                                <li><a class="dropdown-item" href=<?= base_url() . "/funding" ?>>Mon financement</a></li>
+                                <li><a class="dropdown-item" href=<?= base_url() . "/faq" ?>>F.A.Q.</a></li>
                                 <li>
                             </ul>
                         </li>
@@ -49,7 +49,7 @@
                                 Actualités
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="articles">Articles</a></li>
+                                <li><a class="dropdown-item" href=<?= base_url() . "/article/list" ?>>Articles</a></li>
                                 <li><a class="dropdown-item" href="publications">Publications</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -60,7 +60,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
+                            <a class="nav-link" href=<?= base_url() . "/contact" ?>>Contact</a>
                         </li>
                     </ul>
                     <?php if (!session()->get('isLoggedIn')) : ?>

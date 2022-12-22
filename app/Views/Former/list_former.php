@@ -1,4 +1,5 @@
 <?= $this->extend('layouts/default') ?>
+<link href="<?= base_url() . '/css/former.css' ?>" rel="stylesheet">
 <?= $this->section('content') ?>
 <h1><?= $title ?></h1>
 <div class="container">
@@ -8,7 +9,7 @@
             <div class="col-xxl-3 col-lg-4 col-md-5 col-sm-8">
                 <form action="/former/list/cv" method="post">
                     <div class="card mb-2" style="width: 18rem;">
-                        <img src=<?php if (!isset($former['image_url'])) : ?> <?= base_url()."/assets/img/avatar.png" ?> <?php else : ?> <?= base_url().$former['image_url'] ?> <?php endif ?> class="card-img-top">
+                        <img src=<?php if (!isset($former['image_url'])) : ?> <?= base_url() . "/assets/img/avatar.png" ?> <?php else : ?> <?= base_url() . $former['image_url'] ?> <?php endif ?> class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title"><?= $former['name'] . " " . $former['firstname'] ?></h5>
                             <input type="hidden" name="mail" value="<?= $former['mail'] ?>">

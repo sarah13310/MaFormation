@@ -1,33 +1,40 @@
 <?= $this->extend('layouts/default') ?>
+<link href="<?= base_url() . '/css/former.css' ?>" rel="stylesheet">
 <?= $this->section('content') ?>
 <h1><?= $title ?></h1>
-
 <?php $i = 0;
-        foreach ($listformers as $former) : ?>
-            <div class="col-md-4">
-                <form action="/former/list/cv" method="post">
-                    <div class="card" style="width: 18rem;">
-                        <img src=<?php if (!isset($former['image_url'])) : ?> <?= "/assets/img/avatar.png" ?> <?php else : ?> <?= $former['image_url'] ?> <?php endif ?> class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $former['name'] . " " . $former['firstname'] ?></h5>
-                            <input type="hidden" name="mail" value="<?= $former['mail'] ?>">
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                Formateur en <?php $j = 0;
-                                                foreach ($former['skills'] as $skill) : ?>
-                                    <?= $skill['name'] ?>
-                                <?php $j++;
-                                                endforeach ?>
-                            </h6>
-                            <button type="submit" class="btn mr-2">Voir Plus</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+foreach ($former as $f) : ?>
+    <div class="card w-50 align-items-center justify-content-center mb-2">
+        <img src=<?php if (!isset($former['image_url'])) : ?> <?= base_url() . "/assets/img/avatar.png" ?> <?php else : ?> <?= base_url() . $f['image_url'] ?> <?php endif ?> class="card-img-top w-50 mt-2">
+        <div class="card-body w-75">
+            <h4 class="card-title text-center"><?= $f['name'] . " "  .$f['firstname']  ?></h4>
+            <hr class="hr" />
+            <p class="card-subtitle mb-3 mt-3 text-center">
+                <b>Certificat(s) </b>
+            </p>
+            <p class="card-subtitle mb-3 mt-3 text-center">
 
+                <?php $j = 0;
+                foreach ($skills as $skill) : ?>
+                    <?= $skill['name'] ?>
+                <?php $j++;
+                endforeach ?>
+            </p>
+            <hr class="hr" />
+            <p class="card-subtitle mb-3 mt-3 text-center">
+                <b>Contacts</b>
+            </p>
+            <p class="text-center">
+                <?= "Mail : " . $f['mail'] ?>
+            </p>
+            <p class="text-center">
+                <?= "Téléphone : " . $f['phone'] ?>
+            </p>
+        </div>
+    </div>
+<?php $i++;
+endforeach ?>
 
-        <?php $i++;
-        endforeach ?>
- 
 
 <?= $this->endSection() ?>
 

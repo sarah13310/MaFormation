@@ -6,7 +6,7 @@
 <tr>
     <th scope="col">Sujet</th>
     <th scope="col">Description</th>
-    <th scope="col">Date</th>
+    <th scope="col">Date et heure</th>
     <th scope="col">Nom de l'auteur</th>
     <th scope="col">Prénom de l'auteur</th>
 </tr>
