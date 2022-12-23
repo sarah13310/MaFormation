@@ -9,9 +9,7 @@ html body {
   display: flex;
   align-items: center;
   align-content: center;
-
   width: 100%;
-
   padding: 25px 25px 25px 25px;
 }
 
@@ -25,7 +23,8 @@ html body {
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 1rem;
-  z-index: 10;
+  z-index: 10;  
+  background-color: rgba(0, 0, 0, 0.32);
 }
 
 .carousel-control-next,
@@ -46,11 +45,14 @@ html body {
   user-select: none;
   z-index: 10;
   overflow: hidden;
-  color: var(--main-color);
+  color: rgb(149, 148, 148);
   text-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  border: solid 2px rgb(149, 204, 198);
   background-color: var(--bg-color);
   border-radius: 10px;
   padding: 7px;
+  margin-left:2px;
+  margin-right:2px;
 }
 
 .card:hover {
@@ -77,8 +79,14 @@ html body {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 300px;
   object-fit: cover;
+}
+
+.carousel-item>button{
+  position: absolute;
+  bottom: 5px;
+  margin-left:5px;
+  margin-right:5px;
 }
 
 @media (max-width: 767px) {

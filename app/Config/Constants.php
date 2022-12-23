@@ -112,3 +112,4 @@ define ("ADMIN", 5);
 define ("FORMER", 7);
 define ("USER", 9);
 define ("COMPANY", 11);
+

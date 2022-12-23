@@ -57,21 +57,26 @@ class CarouselHelper
         $str = "";
         $i = 0;
         $str .= "<div class='carousel-inner' role='listbox'>\n";
+        
         foreach ($list as $item) {
+            
             $active = ($i == $index) ? " active" : "";
             $str .= "<div class='carousel-item" . $active . "' >\n";
             $str .= "<div class='col-md-4'>\n";
             $str .= "<div class='card'>\n";
+            $str.="<div class='card-body'>";
             //
             $str .= "<div class='card-img' ><img src='" . $item['url_image'] . "' class='img-fluid' alt='...'></div>\n";
-            $str .= "<div class='card-img-overlay'>" . $item['title'] . "</div>\n";
-            // $str .= "<a href='#' class='btn btn-primary'>Go somewhere</a>\n";
+            $str .= "<div class='card-caption'>" . $item['subject'] . "</div>\n";
+            $str .= "<a href='/login' class='btn btn-primary mt-1'>En savoir plus</a>\n";
             $str .= "</div>\n"; //img-overlay                   
             $str .= "</div>\n"; // img
+            $str .= "</div>\n"; // img    
             $str .= "</div>\n"; // img     
-            $i++;
+            $i++;            
         }
-        $str .= "</div>\n\n";
+        $str .= "</div>\n";
+        
         return $str;
     }
 }

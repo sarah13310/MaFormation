@@ -16,6 +16,7 @@ class TrainingModel extends Model
     protected $allowedFields = [
         'title',
         "description",
+        'image_url',
         "date",
         "duration",
         "rating",

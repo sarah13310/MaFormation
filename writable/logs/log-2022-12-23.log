@@ -1,0 +1,46 @@
+CRITICAL - 2022-12-23 09:02:11 --> syntax error, unexpected double-quote mark
+in APPPATH\Libraries\CarouselHelper.php on line 68.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(259): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Libraries\\CarouselHelper.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(237): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Libraries\\CarouselHelper')
+ 3 APPPATH\Controllers\Home.php(12): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Libraries\\CarouselHelper')
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 09:25:46 --> Undefined array key "id_training"
+in APPPATH\Libraries\CarouselHelper.php on line 63.
+ 1 APPPATH\Libraries\CarouselHelper.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_training"', 'APPPATH\\Libraries\\CarouselHelper.php', 63)
+ 2 APPPATH\Controllers\Home.php(94): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 09:45:28 --> Undefined array key "title"
+in APPPATH\Libraries\CarouselHelper.php on line 71.
+ 1 APPPATH\Libraries\CarouselHelper.php(71): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Libraries\\CarouselHelper.php', 71)
+ 2 APPPATH\Controllers\Home.php(96): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 09:47:34 --> Undefined array key "title"
+in APPPATH\Libraries\CarouselHelper.php on line 70.
+ 1 APPPATH\Libraries\CarouselHelper.php(70): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Libraries\\CarouselHelper.php', 70)
+ 2 APPPATH\Controllers\Home.php(96): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 09:47:46 --> Undefined array key "suject"
+in APPPATH\Libraries\CarouselHelper.php on line 70.
+ 1 APPPATH\Libraries\CarouselHelper.php(70): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "suject"', 'APPPATH\\Libraries\\CarouselHelper.php', 70)
+ 2 APPPATH\Controllers\Home.php(96): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

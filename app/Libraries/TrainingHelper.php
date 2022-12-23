@@ -37,10 +37,25 @@ class TrainingHelper{
         session()->set($data);
     }
 
-    function getTrainingsTitle(){
+    function getTrainingsTitle($status=ALL){
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
+        
         $builder->select("id_training, title");
+        $query = $builder->get();
+        return $query->getResultArray();        
+    }
+
+    function getFilterTrainings($status=ALL, $limit=-1){
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');        
+        $builder->select("id_training, title");
+        if ($status!=ALL){
+            $builder->where("status", $status);
+        }
+        if ($limit!=-1){
+            $builder->limit($limit);
+        }
         $query = $builder->get();
         return $query->getResultArray();        
     }

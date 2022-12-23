@@ -68,7 +68,6 @@ class Home extends BaseController
                 $newData = [
                     'mail' => $this->request->getVar('mail'),
                 ];
-
                 $model->save($newData);
             }
         }
@@ -77,18 +76,21 @@ class Home extends BaseController
         $trainings = [
             [
                 "url_image" => $base . "/assets/img/img1.jpg",
-                "title" => "Débutant",
+                "subject" => "Débutant",
                 "description" => "Vous débutez...",
+                "id_training"=>1,
             ],
             [
                 "url_image" => $base . "/assets/img/img2.jpg",
-                "title" => "Avancé",
+                "subject" => "Avancé",
                 "description" => "Vous avancez...",
+                "id_training"=>2,
             ],
             [
                 "url_image" => $base . "/assets/img/img3.jpg",
-                "title" => "Entreprise",
+                "subject" => "Entreprise",
                 "description" => "Vous êtes un entreprise...",
+                "id_training"=>3,
             ],
         ];
         $carousel1 = $carousel_helper->listCardImgCarousel($trainings);
