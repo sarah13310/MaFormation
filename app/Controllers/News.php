@@ -73,7 +73,7 @@ class News extends BaseController
             $dataSave['media_id_media'] = 0;
             $dataSave['status'] = $ispublished; // status de la publication
             $subject =  $dataSave['subject'] . trim("");
-             
+
             $rules = [
                 'subject' => 'required|min_length[6]|max_length[30]',
             ];
@@ -107,13 +107,13 @@ class News extends BaseController
                     // en avant-dernier la table intermédiaire user_has_article
                     $user_has_article->save($datatemp);
                     // en dernier la table intermédiaire publication_has_article
-                    if ($id_publish>0){
+                    if ($id_publish > 0) {
                         $datatemp2 = [
                             'id_publication' => $id_publish,
                             'id_article' => $id_article,
                         ];
                         $publication_has_article->save($datatemp2);
-                    }                    
+                    }
                     session()->setFlashdata('success', 'Article en cours de validation...');
                 }
             }
@@ -191,11 +191,14 @@ class News extends BaseController
                     ];
                     //
                     $list_articles = $this->request->getVar('list_articles');
-                    //
-                    foreach ($list_articles as $article) {
-                        $data_temp['id_article'] = $article;
-                        $publication_has_article->insert($data_temp);
+                    if ($list_articles) {
+                        foreach ($list_articles as $article) {
+                            $data_temp['id_article'] = $article;
+                            $publication_has_article->insert($data_temp);
+                        }
                     }
+                    //
+
                     session()->setFlashdata('success', 'Publication en cours de validation...');
                 }
             }
@@ -280,6 +283,123 @@ class News extends BaseController
                 "author" => $author,
             ];
             return view('Articles/list_article_details.php', $data);
+        }
+    }
+
+    public function list_publishes_home()
+    {
+        $title = "Liste des publication";
+        $db      = \Config\Database::connect();
+        $builder = $db->table('publication');
+
+        $builder->where('status', '1');
+        $query   = $builder->get();
+        $publishes = $query->getResultArray();
+
+        $listpublishes = [];
+
+        foreach ($publishes as $publishe) {
+            $listpublishes[] = [
+                "id_publication" => $publishe['id_publication'],
+                "subject" => $publishe['subject'],
+                "description" => $publishe['description'],
+                "datetime" => $publishe['datetime'],
+            ];
+        }
+        /* auteur de l'article*/
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listpublishes); $i++) {
+
+            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+            $builder->groupBy('user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+
+            $listpublishes[$i]["user"] = $authors;
+        }
+
+        $data = [
+            "title" => $title,
+            "listpublishes" => $listpublishes,
+        ];
+
+        return view('Publishes/list_publishes.php', $data);
+    }
+
+    public function details_publishes_home()
+    {
+        $title = "Détails de la publication";
+
+        if ($this->request->getMethod() == 'post') {
+
+            $id = $this->request->getVar('id_publication');
+            $db      = \Config\Database::connect();
+            $builder = $db->table('publication');
+            $builder->where('id_publication', $id);
+            $query   = $builder->get();
+            $publication = $query->getResultArray();
+
+            $builder->select('article.id_article,article.subject,article.description,article.datetime');
+            $builder->where('publication.id_publication', $id);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+
+            $query = $builder->get();
+            $articles = $query->getResultArray();
+
+            $listarticles = [];
+
+            foreach ($articles as $article) {
+                $listarticles[] = [
+                    "id_article" => $article['id_article'],
+                    "subject" => $article['subject'],
+                    "description" => $article['description'],
+                    "datetime" => $article['datetime'],
+                ];
+            }
+            $builder->where('publication.id_publication', $id);
+            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
+            $builder->join('article', 'publication_has_article.id_article = article.id_article');
+            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+            $builder->join('user', 'user_has_article.id_user = user.id_user');
+            $builder->groupBy('user.id_user');
+
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                    "image_url" => $u['image_url'],
+                ];
+            }
+
+            $data = [
+                "title" => $title,
+                "publication" => $publication,
+                "listarticles" => $listarticles,
+                "authors" => $authors,
+            ];
+
+
+
+            return view('Publishes/list_publishes_details.php', $data);
         }
     }
 }

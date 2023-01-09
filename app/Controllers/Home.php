@@ -32,7 +32,6 @@ class Home extends BaseController
         }
 
         /* auteur de l'article*/
-
         $builder->select('user.name,user.firstname');
 
         for ($i = 0; $i < count($listarticles); $i++) {

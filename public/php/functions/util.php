@@ -194,7 +194,8 @@ function fillMenuDashBoard($type)
             $menu .= fillMenu("Edition", "menu2", "Edition", $type);
             $menu .= fillMenu("Rendez-vous", "menu3", "Agenda", $type);
             $menu .= fillMenu("Formations", "menu4", "Formations", $type);
-            $menu .= fillMenu("Clients", "menu5", "Clients", $type);
+            $menu .= fillMenu("Média", "menu5", "Media", $type);
+            $menu .= fillMenu("Clients", "menu6", "Clients", $type);
             $menu .= fillMenu2("Factures", "#", "Factures", $type);
             break;
 

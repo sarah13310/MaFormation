@@ -1,7 +1,20 @@
 <?php
 namespace App\Libraries;
 
+use CodeIgniter\Database\MySQLi\Builder;
+
 class UserHelper{
+
+    function getFilterUser($id_user=ALL){
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+        if ($id_user!=ALL){
+            $builder->where('id_user', $id_user);
+        }
+        $query=$builder->get();
+        $user = $query->getResultArray();
+        return ["builder"=>$builder, "user"=>$user];
+    }
 
     function getUserSession()
     {

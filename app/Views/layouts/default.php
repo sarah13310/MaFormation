@@ -37,10 +37,10 @@
                                 A propos
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="formateurs">Nos formateurs</a></li>
-                                <li><a class="dropdown-item" href="formations">Page formation</a></li>
-                                <li><a class="dropdown-item" href="financement">Mon financement</a></li>
-                                <li><a class="dropdown-item" href="faq">F.A.Q.</a></li>
+                                <li><a class="dropdown-item" href="/former/list">Nos formateurs</a></li>
+                                <li><a class="dropdown-item" href="/training/list">Page formation</a></li>
+                                <li><a class="dropdown-item" href="/funding">Mon financement</a></li>
+                                <li><a class="dropdown-item" href="/faq">F.A.Q.</a></li>
                                 <li>
                             </ul>
                         </li>
@@ -49,8 +49,8 @@
                                 Actualités
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="articles">Articles</a></li>
-                                <li><a class="dropdown-item" href="publications">Publications</a></li>
+                                <li><a class="dropdown-item" href="/article/list">Articles</a></li>
+                                <li><a class="dropdown-item" href="/publishes/list">Publications</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

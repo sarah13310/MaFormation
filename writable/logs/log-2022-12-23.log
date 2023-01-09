@@ -44,3 +44,280 @@ in APPPATH\Libraries\CarouselHelper.php on line 70.
  5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
  7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-23 11:39:09 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\Home.php(20): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MaFormation\app\Controllers\Home.php(20): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#5 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#9 {main}
+CRITICAL - 2022-12-23 11:39:09 --> Unable to connect to the database.
+Main connection [MySQLi]: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+in SYSTEMPATH\Database\BaseConnection.php on line 418.
+ 1 SYSTEMPATH\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+WHERE `status` = :status:
+ORDER BY `datetime` DESC
+ LIMIT 6', [...], false)
+ 3 APPPATH\Controllers\Home.php(20): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 13:16:37 --> Invalid file: Admin/list_publishes_admin.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_publishes_admin.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_publishes_admin.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(404): view('Admin/list_publishes_admin.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listpublishes()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 13:24:19 --> require_once(util.php): Failed to open stream: No such file or directory
+in APPPATH\Views\Login\signin.php on line 4.
+ 1 APPPATH\Views\Login\signin.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(util.php): Failed to open stream: No such file or directory', 'APPPATH\\Views\\Login\\signin.php', 4)
+ 2 APPPATH\Views\Login\signin.php(4): require_once()
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Login\\signin.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Login/signin', [], true)
+ 6 APPPATH\Controllers\User.php(530): view('Login/signin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->signin()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 13:53:38 --> foreach() argument must be of type array|object, null given
+in APPPATH\Controllers\News.php on line 195.
+ 1 APPPATH\Controllers\News.php(195): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'APPPATH\\Controllers\\News.php', 195)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->publishes_edit()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-23 14:33:12 --> mysqli_sql_exception: Unknown column 'id_user' in 'where clause' in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\DashBoard.php(23): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+CRITICAL - 2022-12-23 14:33:12 --> Unknown column 'id_user' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `article`
+WHERE `id_user` = \'52\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `article`
+WHERE `id_user` = \'52\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `article`
+WHERE `id_user` = \'52\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+WHERE `id_user` = :id_user:', [...], false)
+ 5 APPPATH\Controllers\DashBoard.php(23): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-23 14:34:24 --> mysqli_sql_exception: Not unique table/alias: 'article' in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+CRITICAL - 2022-12-23 14:34:24 --> Not unique table/alias: 'article'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `id_user` = \'52\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `id_user` = \'52\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `id_user` = \'52\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `id_user` = :id_user:', [...], false)
+ 5 APPPATH\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-23 14:34:40 --> mysqli_sql_exception: Not unique table/alias: 'article' in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+CRITICAL - 2022-12-23 14:34:40 --> Not unique table/alias: 'article'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = :user.id_user:', [...], false)
+ 5 APPPATH\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-23 14:34:41 --> mysqli_sql_exception: Not unique table/alias: 'article' in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+CRITICAL - 2022-12-23 14:34:41 --> Not unique table/alias: 'article'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = :user.id_user:', [...], false)
+ 5 APPPATH\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2022-12-23 14:34:41 --> mysqli_sql_exception: Not unique table/alias: 'article' in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+CRITICAL - 2022-12-23 14:34:41 --> Not unique table/alias: 'article'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = \'52\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+JOIN `user_has_article` ON `user_has_article`.`id_user` = `user`.`id_user`
+JOIN `article` ON `user_has_article`.`id_article` = `article`.`id_article`
+WHERE `user`.`id_user` = :user.id_user:', [...], false)
+ 5 APPPATH\Controllers\DashBoard.php(25): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2022-12-23 14:51:00 --> Undefined variable $user
+in APPPATH\Controllers\DashBoard.php on line 42.
+ 1 APPPATH\Controllers\DashBoard.php(42): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'APPPATH\\Controllers\\DashBoard.php', 42)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerarticles()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

@@ -1,7 +1,7 @@
 
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
-<?php require_once ("util.php"); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 
 <div class="container d-flex align-items-center justify-content-center">
     <form class="" action="/signin" method="post">
