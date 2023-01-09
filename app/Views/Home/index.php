@@ -6,32 +6,31 @@
 <?= $this->section('content') ?>
 <!-- Carousel des formations -->
 
-  <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
-    <?= $trainings ?>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+<div id="carouselTraining" class="carousel slide" data-bs-ride="carousel">
+  <?= $trainings ?>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselTraining" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselTraining" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 <!-- Carousel des articles -->
-<?php if (count($articles) > 0) : ?>
-  <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
-    <?= listCarousel($articles) ?>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+
+  <div id="carouselArticles" class="carousel slide" data-bs-ride="carousel">
+    <?= $articles ?>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselArticles" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselArticles" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<?php endif ?>
 
 <!--  -->
 <div class="infohome">
@@ -103,9 +102,12 @@
 </section>
 <!-- Section: Form -->
 
-
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
 <script src="<?= base_url() ?>/js/carousel.js"></script>
+<script>
+  new MultiCarousel(".carousel .carousel-item","#carouselTraining",  3);
+  new MultiCarousel(".carousel .carousel-item","#carouselArticles",  3);
+</script>
 <?= $this->endSection() ?>

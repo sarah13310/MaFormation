@@ -1,0 +1,240 @@
+ERROR - 2023-01-09 11:17:36 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(20): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(20): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#5 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-01-09 11:17:36 --> Unable to connect to the database.
+Main connection [MySQLi]: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+in SYSTEMPATH\Database\BaseConnection.php on line 418.
+ 1 SYSTEMPATH\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `article`
+WHERE `status` = :status:
+ORDER BY `datetime` DESC
+ LIMIT 6', [...], false)
+ 3 APPPATH\Controllers\Home.php(20): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 12:35:10 --> Undefined array key "url_image"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "url_image"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(99): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 12:36:49 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(99): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 12:36:51 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(99): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 12:45:04 --> Undefined array key "subject"
+in APPPATH\Libraries\CarouselHelper.php on line 70.
+ 1 APPPATH\Libraries\CarouselHelper.php(70): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "subject"', 'APPPATH\\Libraries\\CarouselHelper.php', 70)
+ 2 APPPATH\Controllers\Home.php(99): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 12:59:33 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(83): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:32:11 --> count(): Argument #1 ($value) must be of type Countable|array, string given
+in APPPATH\Views\Home\index.php on line 22.
+ 1 SYSTEMPATH\View\View.php(213): include()
+ 2 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 4 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 6 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:33:13 --> foreach() argument must be of type array|object, string given
+in FCPATH\php\functions\util.php on line 34.
+ 1 FCPATH\php\functions\util.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'FCPATH\\php\\functions\\util.php', 34)
+ 2 APPPATH\Views\Home\index.php(24): listCarousel('<div class=\'carousel-inner\' role=\'listbox\'>
+</div>
+')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Home\\index.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 6 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:59:09 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(80): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:59:54 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(80): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:59:55 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(80): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:59:56 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(80): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 13:59:56 --> Undefined array key "image_url"
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Libraries\CarouselHelper.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\CarouselHelper.php', 69)
+ 2 APPPATH\Controllers\Home.php(80): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:01:17 --> foreach() argument must be of type array|object, string given
+in FCPATH\php\functions\util.php on line 34.
+ 1 FCPATH\php\functions\util.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'FCPATH\\php\\functions\\util.php', 34)
+ 2 APPPATH\Views\Home\index.php(24): listCarousel('<div class=\'carousel-inner\' role=\'listbox\'>
+</div>
+')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Home\\index.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 6 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:02:13 --> foreach() argument must be of type array|object, string given
+in FCPATH\php\functions\util.php on line 34.
+ 1 FCPATH\php\functions\util.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'FCPATH\\php\\functions\\util.php', 34)
+ 2 APPPATH\Views\Home\index.php(24): listCarousel('ROOTPATH\\public')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Home\\index.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 6 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:02:14 --> foreach() argument must be of type array|object, string given
+in FCPATH\php\functions\util.php on line 34.
+ 1 FCPATH\php\functions\util.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'FCPATH\\php\\functions\\util.php', 34)
+ 2 APPPATH\Views\Home\index.php(24): listCarousel('ROOTPATH\\public')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Home\\index.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 6 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:02:14 --> foreach() argument must be of type array|object, string given
+in FCPATH\php\functions\util.php on line 34.
+ 1 FCPATH\php\functions\util.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'FCPATH\\php\\functions\\util.php', 34)
+ 2 APPPATH\Views\Home\index.php(24): listCarousel('ROOTPATH\\public')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Home\\index.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 6 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:02:14 --> foreach() argument must be of type array|object, string given
+in FCPATH\php\functions\util.php on line 34.
+ 1 FCPATH\php\functions\util.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'FCPATH\\php\\functions\\util.php', 34)
+ 2 APPPATH\Views\Home\index.php(24): listCarousel('ROOTPATH\\public')
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Home\\index.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Home/index.php', [], true)
+ 6 APPPATH\Controllers\Home.php(90): view('Home/index.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:08:27 --> Undefined variable $article
+in APPPATH\Controllers\Home.php on line 83.
+ 1 APPPATH\Controllers\Home.php(83): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $article', 'APPPATH\\Controllers\\Home.php', 83)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-09 14:17:29 --> Unsupported operand types: string + string
+in APPPATH\Libraries\CarouselHelper.php on line 69.
+ 1 APPPATH\Controllers\Home.php(84): App\Libraries\CarouselHelper->listCardImgCarousel([...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

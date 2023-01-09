@@ -49,7 +49,7 @@ class TrainingHelper{
     function getFilterTrainings($status=ALL, $limit=-1){
         $db      = \Config\Database::connect();
         $builder = $db->table('training');        
-        $builder->select("id_training, title");
+        $builder->select("id_training, title, description,image_url");
         if ($status!=ALL){
             $builder->where("status", $status);
         }

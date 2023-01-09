@@ -43,11 +43,11 @@ html body {
   transition: all 0.5s ease;
   cursor: pointer;
   user-select: none;
-  z-index: 10;
+  z-index: 5;
   overflow: hidden;
   color: rgb(149, 148, 148);
   text-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-  border: solid 2px rgb(149, 204, 198);
+  border: solid 2px rgb(149, 204, 198/51%);
   background-color: var(--bg-color);
   border-radius: 10px;
   padding: 7px;
@@ -136,4 +136,20 @@ html body {
 .carousel-inner .carousel-item-end,
 .carousel-inner .carousel-item-start {
   transform: translateX(0);
+}
+
+
+.carousel-control-next-icon,.carousel-control-prev-icon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;  
+  background: aquamarine;  
+  font-size: 22px!important;
+  opacity: 1.0!important;
+  z-index: 88;
+  border: 2px solid whitesmoke;
+  box-shadow: 1px 1px 3px black;
 }

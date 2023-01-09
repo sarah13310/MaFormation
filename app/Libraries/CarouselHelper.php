@@ -52,31 +52,40 @@ class CarouselHelper
         return $str;
     }
 
-    function listCardImgCarousel($list, $index = 0,)
+    function listCardImgCarousel($list, $index = 0, $target = "#")
     {
         $str = "";
         $i = 0;
         $str .= "<div class='carousel-inner' role='listbox'>\n";
-        
+
         foreach ($list as $item) {
-            
+            if (isset($item['title'])) {
+                $title = $item['title'];
+            }
+            if (isset($item['subject'])) {
+                $title = $item['subject'];
+            }
+            if ($item['image_url']==null){
+                $item['image_url']=base_url()."/assets/placeholder.svg";
+            }
+            //
             $active = ($i == $index) ? " active" : "";
             $str .= "<div class='carousel-item" . $active . "' >\n";
             $str .= "<div class='col-md-4'>\n";
             $str .= "<div class='card'>\n";
-            $str.="<div class='card-body'>";
+            $str .= "<div class='card-body'>\n";
             //
-            $str .= "<div class='card-img' ><img src='" . $item['url_image'] . "' class='img-fluid' alt='...'></div>\n";
-            $str .= "<div class='card-caption'>" . $item['subject'] . "</div>\n";
-            $str .= "<a href='/login' class='btn btn-primary mt-1'>En savoir plus</a>\n";
+            $str .= "<div class='card-img' ><img src='" . $item['image_url'] . "' class='img-fluid' alt='...'></div>\n";
+            $str .= "<div class='card-caption'>" . $title . "</div>\n";
+            $str .= "<a href='." . $target . "' class='btn btn-primary mt-1'>En savoir plus</a>\n";
             $str .= "</div>\n"; //img-overlay                   
             $str .= "</div>\n"; // img
             $str .= "</div>\n"; // img    
             $str .= "</div>\n"; // img     
-            $i++;            
+            $i++;
         }
         $str .= "</div>\n";
-        
+
         return $str;
     }
 }

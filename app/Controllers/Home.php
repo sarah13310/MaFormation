@@ -4,12 +4,16 @@ namespace App\Controllers;
 
 use App\Models\LettersModel;
 use App\Libraries\CarouselHelper;
+use App\Libraries\TrainingHelper;
+use App\Libraries\ArticleHelper;
 
 class Home extends BaseController
 {
     public function index()
     {
         $carousel_helper = new CarouselHelper();
+        $training_helper=new TrainingHelper();
+        $article_helper=new ArticleHelper();
 
         $db      = \Config\Database::connect();
         $builder = $db->table('article');
@@ -32,6 +36,7 @@ class Home extends BaseController
         }
 
         /* auteur de l'article*/
+
         $builder->select('user.name,user.firstname');
 
         for ($i = 0; $i < count($listarticles); $i++) {
@@ -70,36 +75,22 @@ class Home extends BaseController
                 $model->save($newData);
             }
         }
-        $base = base_url();
-
-        $trainings = [
-            [
-                "url_image" => $base . "/assets/img/img1.jpg",
-                "subject" => "Débutant",
-                "description" => "Vous débutez...",
-                "id_training"=>1,
-            ],
-            [
-                "url_image" => $base . "/assets/img/img2.jpg",
-                "subject" => "Avancé",
-                "description" => "Vous avancez...",
-                "id_training"=>2,
-            ],
-            [
-                "url_image" => $base . "/assets/img/img3.jpg",
-                "subject" => "Entreprise",
-                "description" => "Vous êtes un entreprise...",
-                "id_training"=>3,
-            ],
-        ];
+                
+        $trainings=$training_helper->getFilterTrainings();
         $carousel1 = $carousel_helper->listCardImgCarousel($trainings);
+
+        $articles=$article_helper->getFilterArticles(EN_COURS);
+   
+        $carousel2 = $carousel_helper->listCardImgCarousel($articles);
         $data = [
             "title" => "Accueil",
             "articles" => $listarticles,
             "trainings" => $carousel1,
+            "articles"=>$carousel2,
         ];
         return view('Home/index.php', $data);
     }
+
     public function faq()
     {
         $data = [
