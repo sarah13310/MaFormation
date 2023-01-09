@@ -5,33 +5,33 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <!-- Carousel des formations -->
-<?php if ($count_training > 0) : ?>
+
   <div id="carouselTraining" class="carousel slide" data-bs-ride="carousel">
     <?= $trainings ?>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselTraining" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselTraining" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<?php endif ?>
+
 <!-- Carousel des articles -->
-<?php if ($count_articles > 0) : ?>
+
   <div id="carouselArticles" class="carousel slide" data-bs-ride="carousel">
     <?= $articles ?>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselArticles" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselArticles" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></i></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<?php endif ?>
+
 
 <!--  -->
 <div class="infohome">

@@ -139,7 +139,7 @@ html body {
 }
 
 
-.carousel-control-next-icon,.carousel-control-prev-icon {
+/*.carousel-control-next-icon,.carousel-control-prev-icon {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -152,5 +152,5 @@ html body {
   z-index: 88;
   border: 2px solid whitesmoke;
   box-shadow: 1px 1px 3px black;
-}
+}*/
 

@@ -218,7 +218,7 @@ class News extends BaseController
 
         foreach ($articles as $article) {
             if ($article['image_url'] == null) {
-                $article['image_url'] = base_url() . "/assets/placeholder.svg";
+                $article['image_url'] = base_url() . "/assets/article.svg";
             }
             $listarticles[] = [
                 "id_article" => $article['id_article'],
@@ -227,7 +227,6 @@ class News extends BaseController
                 "datetime" => $article['datetime'],
                 "image_url" => $article['image_url'],
             ];
-
         }
         /* auteur de l'article*/
         $builder->select('user.name,user.firstname');
@@ -267,14 +266,13 @@ class News extends BaseController
             $builder->where('id_article', $id);
             $query   = $builder->get();
             $article = $query->getResultArray();
-            $article=$article[0];
-           // print_r($article);
-            
-            $image_url = $article['image_url']; 
-            
-                if ($image_url == null or $image_url==="") {
-                    $article['image_url'] = base_url() . "/assets/placeholder.svg";
-                }
+            $article = $article[0];
+
+            $image_url = $article['image_url'];
+
+            if ($image_url == null or $image_url === "") {
+                $article['image_url'] = base_url() . "/assets/article.svg";
+            }
 
             $builder->where('article.id_article', $id);
             $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
@@ -283,7 +281,7 @@ class News extends BaseController
             $user = $query->getResultArray();
 
             $author = [];
-            foreach ($user as $u) {                
+            foreach ($user as $u) {
 
                 $author[] = [
                     "name" => $u['name'],
@@ -303,7 +301,7 @@ class News extends BaseController
 
     public function list_publishes_home()
     {
-        $title = "Liste des publication";
+        $title = "Liste des publications";
         $db      = \Config\Database::connect();
         $builder = $db->table('publication');
 
@@ -314,11 +312,17 @@ class News extends BaseController
         $listpublishes = [];
 
         foreach ($publishes as $publishe) {
+            $image_url = $publishe['image_url'];
+
+            if ($image_url == null or $image_url === "") {
+                $publishe['image_url'] = base_url() . "/assets/publication.svg";
+            }
             $listpublishes[] = [
                 "id_publication" => $publishe['id_publication'],
                 "subject" => $publishe['subject'],
                 "description" => $publishe['description'],
                 "datetime" => $publishe['datetime'],
+                "image_url" => $publishe['image_url'],
             ];
         }
         /* auteur de l'article*/
@@ -368,8 +372,13 @@ class News extends BaseController
             $builder->where('id_publication', $id);
             $query   = $builder->get();
             $publication = $query->getResultArray();
+            $publication = $publication[0];
+            $image_url = $publication['image_url'];
+            if ($image_url == null or $image_url === "") {
+                $publication['image_url'] = base_url() . "/assets/publication.svg";
+            }
 
-            $builder->select('article.id_article,article.subject,article.description,article.datetime');
+            $builder->select('article.id_article,article.subject,article.description,article.datetime,article.image_url');
             $builder->where('publication.id_publication', $id);
             $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
             $builder->join('article', 'publication_has_article.id_article = article.id_article');
@@ -380,11 +389,16 @@ class News extends BaseController
             $listarticles = [];
 
             foreach ($articles as $article) {
+                $image_url = $article['image_url'];
+                if ($image_url == null or $image_url === "") {
+                    $article['image_url'] = base_url() . "/assets/article.svg";
+                }
                 $listarticles[] = [
                     "id_article" => $article['id_article'],
                     "subject" => $article['subject'],
                     "description" => $article['description'],
                     "datetime" => $article['datetime'],
+                    "image_url" => $article['image_url'],
                 ];
             }
             $builder->where('publication.id_publication', $id);

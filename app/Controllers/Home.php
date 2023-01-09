@@ -11,6 +11,8 @@ class Home extends BaseController
 {
     public function index()
     {
+        helper(['form']);
+
         $carousel_helper = new CarouselHelper();
         $training_helper=new TrainingHelper();
         $article_helper=new ArticleHelper();
@@ -36,7 +38,6 @@ class Home extends BaseController
         }
 
         /* auteur de l'article*/
-
         $builder->select('user.name,user.firstname');
 
         for ($i = 0; $i < count($listarticles); $i++) {
@@ -54,7 +55,7 @@ class Home extends BaseController
             }
             $listarticles[$i]["user"] = $authors;
         }
-        helper(['form']);
+        
 
         if ($this->request->getMethod() == 'post') {
             $rules = [
@@ -77,14 +78,17 @@ class Home extends BaseController
         }
                 
         $trainings=$training_helper->getFilterTrainings();
-        $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "");
+        //print_r($trainings);
+        $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "/training/list/details/");
 
-        $articles=$article_helper->getFilterArticles(VALIDE);       
+        $articles=$article_helper->getFilterArticles(VALIDE);      
+        //print_r($trainings);
+        
         $carousel2 = $carousel_helper->listCardImgCarousel($articles,"/article/list/details/");
         $data = [
             "title" => "Accueil",
-            "count_articles" => count($listarticles),
-            "count_training"=>count($trainings),
+            //"count_articles" => count($listarticles),
+            //"count_training"=>count($trainings),
             "trainings" => $carousel1,
             "articles"=>$carousel2,
         ];

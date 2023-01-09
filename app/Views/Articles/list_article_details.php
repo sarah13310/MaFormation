@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="container mx-auto w-50">
 
-    <div class="row jjustify-content-between">
+    <div class="row justify-content-between">
         <div class="col">
             <h1 class="col mt-2 mb-2"><?= $title ?></h1>
         </div>
@@ -14,7 +14,7 @@
 
     <div class="card align-items-center justify-content-center mb-2" style="background-color:#b3cdfd;">
         <div class="gradient-gray w-50 mt-2 rounded p-2">
-            <img src=<?= $article['image_url'] ?> class="mb-2 mt-2 ">
+            <img src=<?= $article['image_url'] ?> class="w-100 mb-2 mt-2 ">
         </div>
         <div class="card-body ">
             <h4 class="card-title text-center"><?= $article['subject'] ?></h4>

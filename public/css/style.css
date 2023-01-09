@@ -722,6 +722,7 @@ tr {
 									supported by Chrome and Opera */
 }
 
+
 .card-description {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
@@ -731,16 +732,20 @@ tr {
 }
 
 .card-img-left {
-	background: linear-gradient(-45deg,var(--mf-gray-3), var(--mf-b-gray-2));
-	border-radius: 4px;
+	background: linear-gradient(-45deg,#ccdbe8, var(--mf-b-gray-2));	
+	border-top-left-radius: 4px ;
+	border-bottom-left-radius:4px ;
 	padding: 9px;
 }
 
 .gradient-gray {
-	background: linear-gradient(-45deg,var(--mf-gray-3), var(--mf-b-gray-2));
+	background: linear-gradient(-45deg,#ccced0,#abb3ba73);
 }
 
 .section-bg{
 	background: #e9ecef;
-	
   }
+
+.card{
+	box-shadow: 1px 2px 7px 0px #696f71;
+}
