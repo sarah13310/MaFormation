@@ -52,7 +52,7 @@ class CarouselHelper
         return $str;
     }
 
-    function listCardImgCarousel($list, $index = 0, $target = "#")
+    function listCardImgCarousel($list,  $target = "#")
     {
         $str = "";
         $i = 0;
@@ -61,15 +61,17 @@ class CarouselHelper
         foreach ($list as $item) {
             if (isset($item['title'])) {
                 $title = $item['title'];
+                $id=$item['id_training'];
             }
             if (isset($item['subject'])) {
                 $title = $item['subject'];
+                $id=$item['id_article'];
             }
             if ($item['image_url']==null){
                 $item['image_url']=base_url()."/assets/placeholder.svg";
             }
             //
-            $active = ($i == $index) ? " active" : "";
+            $active = ($i == 0) ? " active" : "";
             $str .= "<div class='carousel-item" . $active . "' >\n";
             $str .= "<div class='col-md-4'>\n";
             $str .= "<div class='card'>\n";
@@ -77,7 +79,7 @@ class CarouselHelper
             //
             $str .= "<div class='card-img' ><img src='" . $item['image_url'] . "' class='img-fluid' alt='...'></div>\n";
             $str .= "<div class='card-caption'>" . $title . "</div>\n";
-            $str .= "<a href='." . $target . "' class='btn btn-primary mt-1'>En savoir plus</a>\n";
+            $str .= "<a href='".$target . $id . "' class='btn btn-primary mt-1'>En savoir plus</a>\n";
             $str .= "</div>\n"; //img-overlay                   
             $str .= "</div>\n"; // img
             $str .= "</div>\n"; // img    

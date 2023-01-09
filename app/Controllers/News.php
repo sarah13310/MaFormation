@@ -11,7 +11,7 @@ use App\Libraries\PublishHelper;
 use App\Models\PublicationHasArticleModel;
 use App\Models\TagModel;
 use App\Models\UserHasArticleModel;
-
+// le 09/01/2023
 class News extends BaseController
 {
     public function index()
@@ -217,12 +217,17 @@ class News extends BaseController
         $listarticles = [];
 
         foreach ($articles as $article) {
+            if ($article['image_url'] == null) {
+                $article['image_url'] = base_url() . "/assets/placeholder.svg";
+            }
             $listarticles[] = [
                 "id_article" => $article['id_article'],
                 "subject" => $article['subject'],
                 "description" => $article['description'],
                 "datetime" => $article['datetime'],
+                "image_url" => $article['image_url'],
             ];
+
         }
         /* auteur de l'article*/
         $builder->select('user.name,user.firstname');
@@ -262,6 +267,14 @@ class News extends BaseController
             $builder->where('id_article', $id);
             $query   = $builder->get();
             $article = $query->getResultArray();
+            $article=$article[0];
+           // print_r($article);
+            
+            $image_url = $article['image_url']; 
+            
+                if ($image_url == null or $image_url==="") {
+                    $article['image_url'] = base_url() . "/assets/placeholder.svg";
+                }
 
             $builder->where('article.id_article', $id);
             $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
@@ -270,21 +283,23 @@ class News extends BaseController
             $user = $query->getResultArray();
 
             $author = [];
-            foreach ($user as $u) {
+            foreach ($user as $u) {                
+
                 $author[] = [
                     "name" => $u['name'],
                     "firstname" => $u['firstname'],
                     "image_url" => $u['image_url'],
                 ];
             }
-            $data = [
-                "title" => $title,
-                "article" => $article,
-                "author" => $author,
-            ];
-            return view('Articles/list_article_details.php', $data);
         }
+        $data = [
+            "title" => $title,
+            "article" => $article,
+            "author" => $author,
+        ];
+        return view('Articles/list_article_details.php', $data);
     }
+
 
     public function list_publishes_home()
     {
@@ -339,6 +354,7 @@ class News extends BaseController
 
         return view('Publishes/list_publishes.php', $data);
     }
+
 
     public function details_publishes_home()
     {

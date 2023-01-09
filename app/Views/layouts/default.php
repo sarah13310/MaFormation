@@ -82,7 +82,7 @@
             </div>
         </nav>
     </header>
-    <section>
+    <section class="section-bg">
         <?= $this->renderSection("content") ?>
     </section>
     <!-- Footer -->

@@ -77,14 +77,14 @@ class Home extends BaseController
         }
                 
         $trainings=$training_helper->getFilterTrainings();
-        $carousel1 = $carousel_helper->listCardImgCarousel($trainings);
+        $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "");
 
-        $articles=$article_helper->getFilterArticles(EN_COURS);
-   
-        $carousel2 = $carousel_helper->listCardImgCarousel($articles);
+        $articles=$article_helper->getFilterArticles(VALIDE);       
+        $carousel2 = $carousel_helper->listCardImgCarousel($articles,"/article/list/details/");
         $data = [
             "title" => "Accueil",
-            "articles" => $listarticles,
+            "count_articles" => count($listarticles),
+            "count_training"=>count($trainings),
             "trainings" => $carousel1,
             "articles"=>$carousel2,
         ];
