@@ -24,6 +24,13 @@ body {
     text-align: center;
 }
 
+.payment-subtitle {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: rgb(99, 99, 99);
+}
+
 .form-container .field-container:first-of-type {
     grid-area: name;
 }

@@ -15,6 +15,6 @@ class PageModel extends Model
     protected $allowedFields = [
         'id_page',
         'title',
-        'code'
+        'content'
     ];
 }

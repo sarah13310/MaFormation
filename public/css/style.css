@@ -741,6 +741,9 @@ tr {
 .gradient-gray {
 	background: linear-gradient(-45deg,#ccced0,#abb3ba73);
 }
+.gradient-darkgray {
+	background: linear-gradient(-45deg,#ccced0,#abb3ba73);
+}
 
 .section-bg{
 	background: #e9ecef;

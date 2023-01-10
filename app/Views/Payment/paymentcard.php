@@ -7,14 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Raleway|Rock+Salt|Source+Code+Pro:300,400,600" rel="stylesheet">
     <link href="<?=base_url() ?>/css/payment.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Facturation</title>
 </head>
 <body>
 
 <div class="payment-title">
     <h1>Informations de paiement</h1>
+    <p class="payment-subtitle"><b>Formation</b> <?= $title ?></p>
 </div>
-<div class="container preload">
+<div class="container preload gradient-darkgray">
     <div class="creditcard">
         <div class="front">
             <div id="ccsingle"></div>
@@ -110,7 +111,7 @@
                     </g>
                     <text transform="matrix(1 0 0 1 621.999 227.2734)" id="svgsecurity" class="st6 st7">985</text>
                     <g class="st8">
-                        <text transform="matrix(1 0 0 1 518.083 280.0879)" class="st9 st6 st10">code de sécurité</text>
+                        <text transform="matrix(1 0 0 1 473 280.0879)" class="st9 st6 st10">code de sécurité</text>
                     </g>
                     <rect x="58.1" y="378.6" class="st11" width="375.5" height="13.5"/>
                     <rect x="58.1" y="405.6" class="st11" width="421.7" height="13.5"/>
@@ -138,11 +139,11 @@
         <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
     </div>
     <div class="field-container">
-        <label for="securitycode">Security Code</label>
+        <label for="securitycode">Code de Sécurité</label>
         <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
     </div>
 </div>
-<script src="<?=base_url() ?>/js/paymentcb.js"></script>
+<script src="<?=base_url() ?>/js/payment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ use App\Libraries\CarouselHelper;
 use App\Libraries\TrainingHelper;
 use App\Libraries\ArticleHelper;
 
+// Le 10/01/2023
 class Home extends BaseController
 {
     public function index()
@@ -79,7 +80,7 @@ class Home extends BaseController
                 
         $trainings=$training_helper->getFilterTrainings();
         //print_r($trainings);
-        $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "/training/list/details/");
+        $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "/training/details/");
 
         $articles=$article_helper->getFilterArticles(VALIDE);      
         //print_r($trainings);

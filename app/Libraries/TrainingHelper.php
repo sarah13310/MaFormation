@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Libraries;
 
 use App\Controllers\Training;
 
-class TrainingHelper{
+class TrainingHelper
+{
 
     function add($post_data)
     {
@@ -13,70 +15,85 @@ class TrainingHelper{
         return $db->insertID();
     }
 
-    function getTrainingSession(){
+    function getTrainingSession()
+    {
         $data = [
             'id_training' => session()->get('id_training'),
             'title' => session()->get('title'),
             'description' => session()->get('description'),
-            'date' =>session()->get('date'),
+            'date' => session()->get('date'),
             'duration' => session()->get('duration'),
-            'rating' =>session()->get('rating'),          
+            'rating' => session()->get('rating'),
         ];
         return $data;
     }
 
-    function setTrainingSession($training){
+    function setTrainingSession($training)
+    {
         $data = [
             //'id_training' => $training['id_training'],
             'title' => $training['title'],
             'description' => $training['description'],
             'date' => $training['date'],
             'duration' => $training['duration'],
-            'rating' => $training['rating'],          
+            'rating' => $training['rating'],
         ];
         session()->set($data);
     }
 
-    function getTrainingsTitle($status=ALL){
+    function getTrainingById($id)
+    {
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
-        
-        $builder->select("id_training, title");
+        //$builder->select("*");
+        $builder->where("id_training", $id);
         $query = $builder->get();
-        return $query->getResultArray();        
+        return $query->getResultArray();
     }
 
-    function getFilterTrainings($status=ALL, $limit=-1){
+    function getTrainingsTitle($status = ALL)
+    {
         $db      = \Config\Database::connect();
-        $builder = $db->table('training');        
+        $builder = $db->table('training');
+
+        $builder->select("id_training, title");
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    function getFilterTrainings($status = ALL, $limit = -1)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
         $builder->select("id_training, title, description,image_url");
-        if ($status!=ALL){
+        if ($status != ALL) {
             $builder->where("status", $status);
         }
-        if ($limit!=-1){
+        if ($limit != -1) {
             $builder->limit($limit);
         }
         $query = $builder->get();
-        return $query->getResultArray();        
+        return $query->getResultArray();
     }
 
-    function isExist($title){
+    function isExist($title)
+    {
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
         $builder->where("title", $title);
         $query = $builder->get();
-        return ($query->getResultArray()==null)?false:true; 
+        return ($query->getResultArray() == null) ? false : true;
     }
 
-    function fillOptionsTraining($index){
-        $trainings=$this->getTrainingsTitle();
-        $str="";        
-        foreach ($trainings as $training){        
-            $id=$training['id_training'];
-            $selected=($id==$index)?"selected":"";
-            $str.="<option value='".$training['id_training']."' ".$selected.">".$training['title']."</option>";
+    function fillOptionsTraining($index)
+    {
+        $trainings = $this->getTrainingsTitle();
+        $str = "";
+        foreach ($trainings as $training) {
+            $id = $training['id_training'];
+            $selected = ($id == $index) ? "selected" : "";
+            $str .= "<option value='" . $training['id_training'] . "' " . $selected . ">" . $training['title'] . "</option>";
         }
         return $str;
     }
-   
 }

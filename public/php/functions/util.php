@@ -116,6 +116,18 @@ function dateFormat($date)
     return $strDate;
 }
 
+function dateTimeFormat($date)
+{
+    $strDate = "Aucune date renseignée";
+    if ($date == null) {
+    } else {
+        $data = explode(' ', $date);
+        $date = explode('-', $data[0]);
+        $strDate = $date[2] . " " . getMonth($date[1]) . " " . $date[0];
+    }
+    return $strDate;
+}
+
 // Le mois en format texte
 function getMonth($month)
 {

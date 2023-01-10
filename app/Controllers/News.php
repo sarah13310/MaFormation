@@ -253,49 +253,65 @@ class News extends BaseController
         return view('Articles/list_article.php', $data);
     }
 
-    public function details_article_home()
+    private function home_article_details($title, $id=0)
     {
-        $title = "Détails de l'article";
+        $db      = \Config\Database::connect();
+        $builder = $db->table('article');
+        $builder->where('id_article', $id);
+        $query   = $builder->get();
+        $article = $query->getResultArray();
+        $article = $article[0];
 
-        if ($this->request->getMethod() == 'post') {
+        $image_url = $article['image_url'];
 
-            $id = $this->request->getVar('id_article');
+        if ($image_url == null or $image_url === "") {
+            $article['image_url'] = base_url() . "/assets/article.svg";
+        }
 
-            $db      = \Config\Database::connect();
-            $builder = $db->table('article');
-            $builder->where('id_article', $id);
-            $query   = $builder->get();
-            $article = $query->getResultArray();
-            $article = $article[0];
+        $builder->where('article.id_article', $id);
+        $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
+        $builder->join('user', 'user_has_article.id_user = user.id_user');
+        $query = $builder->get();
+        $user = $query->getResultArray();
 
-            $image_url = $article['image_url'];
+        $author = [];
+        foreach ($user as $u) {
 
-            if ($image_url == null or $image_url === "") {
-                $article['image_url'] = base_url() . "/assets/article.svg";
-            }
-
-            $builder->where('article.id_article', $id);
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $query = $builder->get();
-            $user = $query->getResultArray();
-
-            $author = [];
-            foreach ($user as $u) {
-
-                $author[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                    "image_url" => $u['image_url'],
-                ];
-            }
+            $author[] = [
+                "name" => $u['name'],
+                "firstname" => $u['firstname'],
+                "image_url" => $u['image_url'],
+            ];
         }
         $data = [
             "title" => $title,
             "article" => $article,
             "author" => $author,
         ];
+
+        return $data;
+    }
+
+    public function get_details_article_home($id)
+    {
+        $title = "Détails de l'article";
+        if ($id)
+        {            
+            $data=$this->home_article_details($title, $id);
+        }
         return view('Articles/list_article_details.php', $data);
+    }
+    
+    public function details_article_home()
+    {
+        $title = "Détails de l'article";       
+
+        if ($this->request->getMethod() == 'post') {
+            $id= $this->request->getVar('id_article');
+            $data=$this->home_article_details($title, $id); 
+            return view('Articles/list_article_details.php', $data);           
+        }
+        
     }
 
 
