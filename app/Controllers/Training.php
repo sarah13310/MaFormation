@@ -62,26 +62,39 @@ class Training extends BaseController
         // if ($this->request->getMethod() == 'post') {
         //$id = $this->request->getVar('id_training');
         $training = $training_helper->getTrainingById($id);
-        
+
 
         if ($training) {
             $training = $training[0];
-            $pages=$page_helper->getPageById($training['id_training']);
+            $pages = $page_helper->getPageById($training['id_training']);
+            $list_description = [];
+            $list_images=[];
+
+            foreach ($pages as $page) {
+                $list_description[] = $page['content'];
+                if ($page['image_url']==null){
+                    $page['image_url']=base_url()."/assets/chapter.svg";
+                }
+                $list_images[]=$page['image_url'];
+            }
+            $descriptions = json_encode($list_description);
+            $images=json_encode($list_images);
+
             $data = [
                 "title" => $training['title'],
                 "training" => $training,
                 "date" => dateTimeFormat($training['date']),
-                "count"=>count($pages),
-                "pages"=>$pages,
-
+                "count" => count($pages),
+                "pages" => $pages,
+                "descriptions" => $descriptions,
+                "images"=>$images,
             ];
+
             return view('Training/training_view.php', $data);
         } else {
             return view('errors/html/error_404.php');
         }
 
         //}
-
-
     }
 }

@@ -755,7 +755,7 @@ tr {
 }
 
 .side-right {
-	background: whitesmoke;
+	background: white;
 	border: 1px solid gray;
 	border-radius: 8px;
 	box-shadow: 1px 1px 2px #dee2e6;
@@ -764,7 +764,7 @@ tr {
 }
 
 .side-left {
-	background: whitesmoke;
+	background: white;
 	border: 1px solid gray;
 	border-radius: 8px;
 	box-shadow: 1px 1px 2px darkgray;

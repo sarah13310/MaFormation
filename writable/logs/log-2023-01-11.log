@@ -1,0 +1,152 @@
+CRITICAL - 2023-01-11 09:29:02 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:29:54 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:25 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:26 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:27 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:27 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:27 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:27 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:32 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:32 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:30:39 --> Undefined array key "description"
+in APPPATH\Controllers\Training.php on line 73.
+ 1 APPPATH\Controllers\Training.php(73): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "description"', 'APPPATH\\Controllers\\Training.php', 73)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:31:49 --> Array to string conversion
+in APPPATH\Views\Training\training_view.php on line 83.
+ 1 APPPATH\Views\Training\training_view.php(83): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Views\\Training\\training_view.php', 83)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_view.php', [], true)
+ 5 APPPATH\Controllers\Training.php(85): view('Training/training_view.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:32:24 --> Array to string conversion
+in APPPATH\Views\Training\training_view.php on line 83.
+ 1 APPPATH\Views\Training\training_view.php(83): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Views\\Training\\training_view.php', 83)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_view.php', [], true)
+ 5 APPPATH\Controllers\Training.php(85): view('Training/training_view.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:33:19 --> Array to string conversion
+in APPPATH\Controllers\Training.php on line 75.
+ 1 APPPATH\Controllers\Training.php(75): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Controllers\\Training.php', 75)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 09:36:29 --> Array to string conversion
+in APPPATH\Views\Training\training_view.php on line 84.
+ 1 APPPATH\Views\Training\training_view.php(84): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Views\\Training\\training_view.php', 84)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_view.php', [], true)
+ 5 APPPATH\Controllers\Training.php(86): view('Training/training_view.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 11:01:30 --> Undefined array key "image_url"
+in APPPATH\Controllers\Training.php on line 75.
+ 1 APPPATH\Controllers\Training.php(75): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Controllers\\Training.php', 75)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-11 11:20:47 --> Undefined array key "content"
+in APPPATH\Views\Training\training_view.php on line 91.
+ 1 APPPATH\Views\Training\training_view.php(91): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "content"', 'APPPATH\\Views\\Training\\training_view.php', 91)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_view.php', [], true)
+ 5 APPPATH\Controllers\Training.php(93): view('Training/training_view.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

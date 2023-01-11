@@ -12,11 +12,15 @@
     <div class="col" id="bargraph">
         <div class="row mb-2 p-2 align-items-center">
             <?php if ($count > 0) : ?>
-                <div id="home" class="col-1 d-flex justify-content-center"><button class="btn btn-primary rounded2"><i class="bi bi-house bi-bold"></i></button></div>
+                <div id="home" class="col-1 d-flex justify-content-center">
+                    <button onclick="home()" class="btn btn-primary rounded2"><i class="bi bi-house bi-bold"></i></button>
+                </div>
                 <?php for ($i = 0; $i < $count; $i++) : ?>
                     <div class="col bargraph d-flex"></div>
                 <?php endfor; ?>
-                <div id="trophy" class="col-1 d-flex justify-content-center"><button class="btn btn-primary rounded2"><i class="bi bi-trophy bi-bold"></i></button></div>
+                <div id="trophy" class="col-1 d-flex justify-content-center">
+                    <button onclick="trophy()" class="btn btn-primary rounded2"><i class="bi bi-trophy bi-bold"></i></button>
+                </div>
             <?php endif; ?>
         </div>
     </div>
@@ -24,16 +28,14 @@
         <div id="menu" class="row">
             <div class="col-12 col-md-8  side-left ">
                 <div class="card mb-2 mt-2 gradient-darkgray ">
-
+                    <small class="text-center"><?= "Ecrit le " . $date ?></small>
                     <div class="mx-auto mb-2 " style="height:300px;">
-                        <img src="<?= $training['image_url'] ?>" class=" img-fluid rounded mt-2 mb-2" style="height:290px;">
+                        <img id ="image" src="<?= $training['image_url'] ?>" class=" img-fluid rounded mt-2 mb-2" style="height:290px;">
                     </div>
-
                     <div class="card-body" style="background:white;">
-                        <h5 class="card-title"><?= $training['title'] ?></h5>
-                        <small><?= "Ecrit le " . $date ?></small>
+                        <h5 id='title_chapter' class="card-title"><?= $training['title'] ?></h5>
                         <div class="mt-3">
-                            <p class="card-description" style="height: auto"><?= $training['description'] ?></p>
+                            <p id="description" class="card-description" style="height: auto"><?= $training['description'] ?></p>
                         </div>
                     </div>
                 </div>
@@ -76,8 +78,19 @@
     const listnum = document.getElementsByClassName('list-item');
     let btn_left = document.getElementById('btn-left');
     let btn_right = document.getElementById('btn-right');
+    let title = document.getElementById('title_chapter');
+    let description = document.getElementById('description');
+    let image_url = document.getElementById('image');
     let selected = getFirst();
-    let index = 0;
+    let index = -1;
+    let list_description = <?= $descriptions ?>;
+    let list_images=<?= $images ?>;
+
+    function home(){
+        title.innerHTML="<?=$training['title']?>";
+        description.innerHTML="<?=$training['description']?>";
+        image_url.src="<?=$training['image_url'] ?>";
+    }
 
     function getFirst() {
         return listnum[0];
@@ -106,8 +119,7 @@
         if (selected) {
             selected = prevItem();
 
-            if (selected)
-            {
+            if (selected) {
                 selected.classList.toggle("focus");
                 selected.click();
             }
@@ -118,13 +130,12 @@
         UnSelectAll();
         if (selected) {
             selected = nextItem();
-            if (selected){
+            if (selected) {
                 selected.classList.toggle("focus");
                 selected.click();
             }
         }
     });
-
 
     function UnSelectAll() {
         for (let i = 0; i < listnum.length; i++) {
@@ -132,13 +143,20 @@
         }
     }
 
-
     for (let i = 0; i < listnum.length; i++) {
+        listnum[i].setAttribute("indice", i);
         listnum[i].addEventListener("click", () => {
             UnSelectAll();
             let sel = listnum[i].classList.toggle("focus");
+
             if (sel) {
                 selected = listnum[i];
+                if (selected.hasAttribute("indice")) {
+                    let indice = selected.getAttribute('indice');
+                    description.innerHTML = list_description[indice];
+                    title.innerHTML = selected.innerHTML;
+                    image_url.src=list_images[indice];
+                }
             }
         });
     };
