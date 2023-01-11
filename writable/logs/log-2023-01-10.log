@@ -211,3 +211,93 @@ in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
  6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:18:18 --> Undefined variable $data
+in APPPATH\Controllers\Training.php on line 69.
+ 1 APPPATH\Controllers\Training.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'APPPATH\\Controllers\\Training.php', 69)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:18:49 --> Undefined variable $training
+in APPPATH\Controllers\Training.php on line 65.
+ 1 APPPATH\Controllers\Training.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $training', 'APPPATH\\Controllers\\Training.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:21:22 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 63.
+ 1 APPPATH\Controllers\Training.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 63)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:21:57 --> Undefined array key "title"
+in APPPATH\Controllers\Training.php on line 67.
+ 1 APPPATH\Controllers\Training.php(67): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Controllers\\Training.php', 67)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:28:58 --> Invalid file: error/html/error_404.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('error/html/error_404.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('error/html/error_404.php', [], true)
+ 3 APPPATH\Controllers\Training.php(73): view('error/html/error_404.php')
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:41:57 --> Undefined variable $training
+in APPPATH\Views\Training\training_view.php on line 10.
+ 1 APPPATH\Views\Training\training_view.php(10): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $training', 'APPPATH\\Views\\Training\\training_view.php', 10)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_view.php', [], true)
+ 5 APPPATH\Controllers\Training.php(70): view('Training/training_view.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 13:43:29 --> Undefined variable $date
+in APPPATH\Views\Training\training_view.php on line 15.
+ 1 APPPATH\Views\Training\training_view.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $date', 'APPPATH\\Views\\Training\\training_view.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_view.php', [], true)
+ 5 APPPATH\Controllers\Training.php(71): view('Training/training_view.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 15:55:33 --> Undefined array key 10
+in APPPATH\Controllers\Training.php on line 65.
+ 1 APPPATH\Controllers\Training.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 10', 'APPPATH\\Controllers\\Training.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 15:56:16 --> Undefined array key "id_training"
+in APPPATH\Controllers\Training.php on line 65.
+ 1 APPPATH\Controllers\Training.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_training"', 'APPPATH\\Controllers\\Training.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-10 15:57:59 --> Undefined array key "id_training"
+in APPPATH\Controllers\Training.php on line 65.
+ 1 APPPATH\Controllers\Training.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_training"', 'APPPATH\\Controllers\\Training.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

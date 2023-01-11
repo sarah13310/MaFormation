@@ -1,6 +1,9 @@
 <?php
 
 namespace Config;
+
+use App\Controllers\Training;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -75,6 +78,7 @@ $routes->group('/training', static function ($routes) {
     $routes->get('list', 'Training::index');
     $routes->get('details/(:num)', 'Training::details/$1');
     $routes->add('payment', 'Training::payment'); // paiement
+    $routes->add('view', 'Training::view');//Formation payante visualisée
 });
 
 
