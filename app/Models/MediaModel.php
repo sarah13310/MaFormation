@@ -12,7 +12,6 @@ class MediaModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['name', 'url', 'type','status','status_id_status'];
-    
+    protected $allowedFields = ['name', 'description', 'author', 'url', 'type', 'status', 'id_tag'];
     
 }

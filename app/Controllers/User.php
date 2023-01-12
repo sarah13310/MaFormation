@@ -554,12 +554,12 @@ class User extends BaseController
     {
 
         $user_helper = new UserHelper();
-        $bill_helper= new BillHelper();
+        $bill_helper = new BillHelper();
 
         $user = $user_helper->getUserSession();
 
         $type = $user['type'];
-        $bills=[];
+        $bills = [];
         switch ($type) {
             case USER:
             case COMPANY:
@@ -568,48 +568,79 @@ class User extends BaseController
                 break;
             case ADMIN:
             case SUPER_ADMIN:
-                $bills=$bill_helper->getFilterBill();
+                $bills = $bill_helper->getFilterBill();
                 break;
         }
-        $data=[
-            "title"=>"Factures",
-            "bills"=>$bills,
-            "user"=>$user,
+        $data = [
+            "title" => "Factures",
+            "bills" => $bills,
+            "user" => $user,
         ];
 
         return view("Payment/bill.php", $data);
     }
 
-    public function modif_contact(){
+    public function modif_contact()
+    {
+        helper(["form"]);
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();
-        $data=[
-            "title"=>"Informations de contact",            
-            "user"=>$user,
-        ];
-        return view("User/modif_contact.php", $data);       
-    }
 
-    public function modif_perso(){
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
-        $data=[
-            "title"=>"Informations Personnelles",            
-            "user"=>$user,
+        if ($this->request->getMethod() == 'post') {
+
+            $model = new UserModel();
+            $updateData = [
+                'name' => $this->request->getVar('name'),
+                'firstname' => $this->request->getVar('firstname'),
+                'address' => $this->request->getVar('address'),
+                'city' => $this->request->getVar('city'),
+                'cp' => $this->request->getVar('cp'),
+                'country' => $this->request->getVar('country'),
+                'phone' => $this->request->getVar('phone'),
+                'mail' => $this->request->getVar('mail'),
+                'birthday' => $this->request->getVar('birthday'),
+                'gender' => $this->request->getVar('gender'),
+            ];
+            $model->update(session()->id_user ,$updateData);
+            $updateData['id_user'] = session()->id_user;
+            $updateData['password'] = session()->password;
+            $updateData['image_url'] = session()->image_url;
+            $updateData['type'] = session()->type;
+            $user_helper->setUserSession($updateData);
+        }
+        $data = [
+            "title" => "Informations de contact",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
         ];
+
         return view("User/modif_contact.php", $data);
-       
     }
 
-    public function modif_password(){
+    public function modif_perso()
+    {
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();
-        $data=[
-            "title"=>"Modification mot de passe",            
-            "user"=>$user,
+        $data = [
+            "title" => "Informations Personnelles",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+        ];
+        if ($this->request->getMethod() == 'post') {
+
+            return view("User/modif_contact.php", $data);
+        }
+    }
+
+    public function modif_password()
+    {
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data = [
+            "title" => "Modification mot de passe",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
         ];
         return view("User/modif_password.php", $data);
-       
     }
 }
-

@@ -54,8 +54,8 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="videos">Vidéos</a></li>
-                                <li><a class="dropdown-item" href="livres">Livres</a></li>
+                                <li><a class="dropdown-item" href="/media/videos/list">Vidéos</a></li>
+                                <li><a class="dropdown-item" href="/media/books/list">Livres</a></li>
                             </ul>
                         </li>
 

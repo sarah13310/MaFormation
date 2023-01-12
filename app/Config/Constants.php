@@ -113,3 +113,6 @@ define ("FORMER", 7);
 define ("USER", 9);
 define ("COMPANY", 11);
 
+
+define("VIDEO", 1);
+define("BOOK", 2);

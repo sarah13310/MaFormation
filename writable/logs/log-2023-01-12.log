@@ -74,3 +74,326 @@ in APPPATH\Views\Training\training_list.php on line 11.
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:09:23 --> Invalid file: Admin/list_videos_former.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_videos_former.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_videos_former.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(604): view('Admin/list_videos_former.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformervideos()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:09:41 --> Invalid file: Admin/list_videos_former.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_videos_former.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_videos_former.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(604): view('Admin/list_videos_former.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformervideos()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:10:03 --> Invalid file: Admin/list_books_former.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_books_former.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_books_former.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(642): view('Admin/list_books_former.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerbooks()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:10:15 --> Invalid file: Admin/list_videos_former.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_videos_former.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_videos_former.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(604): view('Admin/list_videos_former.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformervideos()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:12:15 --> Invalid file: Admin/list_books_former.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_books_former.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_books_former.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(642): view('Admin/list_books_former.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerbooks()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:16:19 --> Undefined variable $listbooks
+in APPPATH\Views\Admin\list_books_admin.php on line 15.
+ 1 APPPATH\Views\Admin\list_books_admin.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $listbooks', 'APPPATH\\Views\\Admin\\list_books_admin.php', 15)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\list_books_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_books_admin.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(642): view('Admin/list_books_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformerbooks()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 15:18:17 --> Invalid file: Admin/list_videos_former.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Admin/list_videos_former.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_videos_former.php', [], true)
+ 3 APPPATH\Controllers\DashBoard.php(604): view('Admin/list_videos_former.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listformervideos()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 15:29:19 --> mysqli_sql_exception: Not unique table/alias: 'user_has_bill' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(571): App\Libraries\BillHelper->getFilterBill()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->bill()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-01-12 15:29:19 --> Not unique table/alias: 'user_has_bill'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`', [], false)
+ 5 APPPATH\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(571): App\Libraries\BillHelper->getFilterBill()
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 15:34:45 --> mysqli_sql_exception: Not unique table/alias: 'user_has_bill' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(571): App\Libraries\BillHelper->getFilterBill()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->bill()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-01-12 15:34:45 --> Not unique table/alias: 'user_has_bill'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`', [], false)
+ 5 APPPATH\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(571): App\Libraries\BillHelper->getFilterBill()
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 16:03:05 --> mysqli_sql_exception: Not unique table/alias: 'user_has_bill' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(571): App\Libraries\BillHelper->getFilterBill()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->bill()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-01-12 16:03:05 --> Not unique table/alias: 'user_has_bill'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`', [], false)
+ 5 APPPATH\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(571): App\Libraries\BillHelper->getFilterBill()
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 16:42:23 --> mysqli_sql_exception: Column 'firstname' cannot be null in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1916): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\system\Model.php(279): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\MaFormation\system\BaseModel.php(749): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\MaFormation\system\Model.php(667): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\MaFormation\system\BaseModel.php(659): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(601): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+#10 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-01-12 16:42:23 --> Column 'firstname' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1916): CodeIgniter\Database\BaseConnection->query('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (:name:, :firstname:, :address:, :city:, :cp:, :country:, :phone:, :mail:, :birthday:, :gender:)', [...], false)
+ 5 SYSTEMPATH\Model.php(279): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(749): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(667): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(659): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\User.php(601): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+11 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+12 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 16:43:21 --> mysqli_sql_exception: Column 'firstname' cannot be null in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1916): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\system\Model.php(279): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\MaFormation\system\BaseModel.php(749): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\MaFormation\system\Model.php(667): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\MaFormation\system\BaseModel.php(659): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(602): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+#10 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-01-12 16:43:21 --> Column 'firstname' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1916): CodeIgniter\Database\BaseConnection->query('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (:name:, :firstname:, :address:, :city:, :cp:, :country:, :phone:, :mail:, :birthday:, :gender:)', [...], false)
+ 5 SYSTEMPATH\Model.php(279): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(749): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(667): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(659): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\User.php(602): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+11 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+12 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 16:43:46 --> mysqli_sql_exception: Column 'firstname' cannot be null in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1916): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\system\Model.php(279): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\MaFormation\system\BaseModel.php(749): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\MaFormation\system\Model.php(667): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\MaFormation\system\BaseModel.php(659): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(603): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+#10 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-01-12 16:43:46 --> Column 'firstname' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (\'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'Null\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1916): CodeIgniter\Database\BaseConnection->query('INSERT INTO `user` (`name`, `firstname`, `address`, `city`, `cp`, `country`, `phone`, `mail`, `birthday`, `gender`) VALUES (:name:, :firstname:, :address:, :city:, :cp:, :country:, :phone:, :mail:, :birthday:, :gender:)', [...], false)
+ 5 SYSTEMPATH\Model.php(279): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(749): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(667): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(659): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\User.php(603): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+11 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+12 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 16:55:42 --> CodeIgniter\BaseModel::transformDataToArray(): Return value must be of type array, string returned
+in SYSTEMPATH\BaseModel.php on line 1624.
+ 1 SYSTEMPATH\BaseModel.php(709): CodeIgniter\BaseModel->transformDataToArray('3', 'insert')
+ 2 SYSTEMPATH\Model.php(667): CodeIgniter\BaseModel->insert('3', false)
+ 3 SYSTEMPATH\BaseModel.php(659): CodeIgniter\Model->insert('3', false)
+ 4 APPPATH\Controllers\User.php(604): CodeIgniter\BaseModel->save('3', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+ 6 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 7 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 16:59:58 --> Undefined array key "id_user"
+in APPPATH\Libraries\UserHelper.php on line 43.
+ 1 APPPATH\Libraries\UserHelper.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_user"', 'APPPATH\\Libraries\\UserHelper.php', 43)
+ 2 APPPATH\Controllers\User.php(606): App\Libraries\UserHelper->setUserSession([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 17:01:09 --> Undefined array key "password"
+in APPPATH\Libraries\UserHelper.php on line 47.
+ 1 APPPATH\Libraries\UserHelper.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "password"', 'APPPATH\\Libraries\\UserHelper.php', 47)
+ 2 APPPATH\Controllers\User.php(606): App\Libraries\UserHelper->setUserSession([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 17:01:43 --> Undefined array key "image_url"
+in APPPATH\Libraries\UserHelper.php on line 54.
+ 1 APPPATH\Libraries\UserHelper.php(54): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "image_url"', 'APPPATH\\Libraries\\UserHelper.php', 54)
+ 2 APPPATH\Controllers\User.php(607): App\Libraries\UserHelper->setUserSession([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 17:02:10 --> Undefined array key "type"
+in APPPATH\Libraries\UserHelper.php on line 55.
+ 1 APPPATH\Libraries\UserHelper.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "type"', 'APPPATH\\Libraries\\UserHelper.php', 55)
+ 2 APPPATH\Controllers\User.php(608): App\Libraries\UserHelper->setUserSession([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_contact()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 use App\Libraries\UserHelper;
 use App\Libraries\ArticleHelper;
-
+use App\Libraries\BookHelper;
+use App\Libraries\VideoHelper;
 
 class DashBoard extends BaseController
 {
@@ -109,6 +110,8 @@ class DashBoard extends BaseController
 
     public function listformers()
     {
+
+
         $title = "Liste des formateurs";
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
@@ -175,11 +178,14 @@ class DashBoard extends BaseController
                 "country" => $company['country'],
             ];
         }
-
+        $user_helper= new UserHelper();
+        $user=$user_helper->getUserSession();
         $data = [
             "title" => $title,
             "listformers" => $listformers,
             "jobs" => $jobs,
+            "user"=>$user,
+            "headerColor"=>getTheme($user['type'], "header"),
         ];
 
         return view('Admin/list_former_admin.php', $data);
@@ -399,4 +405,240 @@ class DashBoard extends BaseController
 
         return view('Admin/list_publishes_admin.php', $data);
     }
+
+    public function previewarticle()
+    {
+        $title = "Aperçu de l'article";
+
+        if ($this->request->getMethod() == 'post') {
+
+            $id = $this->request->getVar('id_article');
+
+            $db      = \Config\Database::connect();
+            $builder = $db->table('article');
+            $builder->where('id_article', $id);
+            $query   = $builder->get();
+            $article = $query->getResultArray();
+            $article=$article[0];
+
+            $user_helper= new UserHelper();
+            $user=$user_helper->getUserSession();
+            if ($article["image_url"]==null){
+                $article["image_url"]=base_url()."/assets/article.svg";
+            }
+            $data = [
+                "title" => $title,
+                "article" => $article,
+                "user"=>$user,
+            ];
+            return view('Articles/preview_article.php', $data);
+        }
+    }
+
+    public function previewpublish()
+    {
+        $title = "Aperçu de la publication";
+
+        if ($this->request->getMethod() == 'post') {
+
+            $id = $this->request->getVar('id_publication');
+
+            $db      = \Config\Database::connect();
+            $builder = $db->table('publication');
+            $builder->where('id_publication', $id);
+            $query   = $builder->get();
+            $publication = $query->getResultArray();
+            $user_helper= new UserHelper();
+            $user=$user_helper->getUserSession();
+
+            if ($user["image_url"]==null){
+                $user["image_url"]=base_url()."/assets/publication.svg";
+            }
+            $data = [
+                "title" => $title,
+                "publication" => $publication,
+                "user"=>$user,
+            ];
+            return view('Publishes/preview_publish.php', $data);
+        }
+    }
+
+    public function listvideos()
+    {
+        $title = "Liste des vidéos";
+
+        $video_helper = new VideoHelper();
+        $public = $video_helper->getVideos();
+        $builder = $public['builder'];
+        $videos = $public['videos'];
+        $listvideos = [];
+
+        foreach ($videos as $video) {
+            $listvideos[] = [
+                "id_media" => $video['id_media'],
+                "name" => $video['name'],
+                "description" => $video['description'],
+                "author" => $video['author'],
+                "url" => $video['url'],
+            ];
+        }
+
+        /* auteur de l'article*/
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listvideos); $i++) {
+            $builder->where('media.id_media', $listvideos[$i]['id_media']);
+            $builder->join('user_has_media', 'user_has_media.id_media = media.id_media');
+            $builder->join('user', 'user_has_media.id_user = user.id_user');
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+            $listvideos[$i]["user"] = $authors;
+        }
+
+
+
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data = [
+            "title" => $title,
+            "listvideos" => $listvideos,
+            "user" => $user,
+            "type" => session()->type,
+        ];
+        return view('Admin/list_videos_admin.php', $data);
+    }
+
+    public function listbooks()
+    {
+        $title = "Liste des livres";
+
+        $book_helper = new BookHelper();
+        $public = $book_helper->getBooks();
+        $builder = $public['builder'];
+        $books = $public['books'];
+        $listbooks = [];
+
+        foreach ($books as $book) {
+            $listbooks[] = [
+                "id_media" => $book['id_media'],
+                "name" => $book['name'],
+                "description" => $book['description'],
+                "author" => $book['author'],
+                "url" => $book['url'],
+            ];
+        }
+
+        /* auteur de l'article*/
+        $builder->select('user.name,user.firstname');
+
+        for ($i = 0; $i < count($listbooks); $i++) {
+            $builder->where('media.id_media', $listbooks[$i]['id_media']);
+            $builder->join('user_has_media', 'user_has_media.id_media = media.id_media');
+            $builder->join('user', 'user_has_media.id_user = user.id_user');
+            $query = $builder->get();
+            $user = $query->getResultArray();
+
+            $authors = [];
+            foreach ($user as $u) {
+                $authors[] = [
+                    "name" => $u['name'],
+                    "firstname" => $u['firstname'],
+                ];
+            }
+            $listbooks[$i]["user"] = $authors;
+        }
+
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data = [
+            "title" => $title,
+            "listbooks" => $listbooks,
+            "user" => $user,
+            "type" => session()->type,
+        ];
+        return view('Admin/list_books_admin.php', $data);
+    }
+
+    public function listformervideos()
+    {
+        $user_helper = new UserHelper();
+        // on récupère la sessions associé à cet utilisateur
+        $session = $user_helper->getUserSession();
+        // on récupère la requete pour user
+        $public = $user_helper->getFilterUser();
+        //
+        $title = "Liste des videos";
+        $builder = $public['builder'];
+        $builder->where("user.id_user", $session['id_user']);
+        $builder->join('user_has_media', 'user_has_media.id_user = user.id_user');
+        $builder->join('media', 'user_has_media.id_media = media.id_media');
+        $builder->where('media.type', VIDEO);
+        $query   = $builder->get();
+        $videos = $query->getResultArray();
+
+        $listvideos = [];
+        //
+        foreach ($videos as $video) {
+            $listvideos[] = [
+                "id_media" => $video['id_media'],
+                "name" => $video['name'],
+                "description" => $video['description'],
+                "author" => $video['author'],
+                "url" => $video['url'],
+            ];
+        }
+
+        $data = [
+            "title" => $title,
+            "listvideos" => $listvideos,
+            "user" => $session,
+        ];
+        return view('Admin/list_videos_admin.php', $data);
+    }
+
+    public function listformerbooks()
+    {
+        $user_helper = new UserHelper();
+        // on récupère la sessions associé à cet utilisateur
+        $session = $user_helper->getUserSession();
+        // on récupère la requete pour user
+        $public = $user_helper->getFilterUser();
+        //
+        $title = "Liste des livres";
+        $builder = $public['builder'];
+        $builder->where("user.id_user", $session['id_user']);
+        $builder->join('user_has_media', 'user_has_media.id_user = user.id_user');
+        $builder->join('media', 'user_has_media.id_media = media.id_media');
+        $builder->where('media.type', BOOK);
+        $query   = $builder->get();
+        $books = $query->getResultArray();
+
+        $listbooks = [];
+        //
+        foreach ($books as $book) {
+            $listbooks[] = [
+                "id_media" => $book['id_media'],
+                "name" => $book['name'],
+                "description" =>$book['description'],
+                "author" => $book['author'],
+                "url" => $book['url'],
+            ];
+        }
+
+        $data = [
+            "title" => $title,
+            "listbooks" => $listbooks,
+            "user" => $session,
+        ];
+        return view('Admin/list_books_admin.php', $data);
+    }
+
 }
