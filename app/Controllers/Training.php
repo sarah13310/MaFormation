@@ -10,12 +10,37 @@ use App\Libraries\PageHelper;
 // Le 10/01/2023
 class Training extends BaseController
 {
-    public function index()
+    public function list()
     {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+        $id = session()->get('id_user');
+
+        $builder->where('id_user', $id);
+        $query   = $builder->get();
+        $user = $query->getResultArray();
+        $user = $user[0]; // juste le premier 
+
+        $training_helper = new TrainingHelper();
+        $trainings = $training_helper->getFilterTrainings();
+        $list_training = [];
+
+        foreach ($trainings as $training) {
+            $list_training[] = [
+                "id_training" => $training['id_training'],
+                "title" => $training['title'],
+                "date" => dateTimeFormat($training['date']),
+                "description" => textEllipsis($training['description'], 20),
+            ];
+        }
         $data = [
-            "title" => "Les formations"
+            "title" => "Liste des formations",
+            "trainings" => $list_training,
+            "user" => $user,
+            "theme_button" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'],"header"),
         ];
-        return view('Training/index.php', $data);
+        return view('Training/training_list.php', $data);
     }
 
     public function details($id)
@@ -56,45 +81,52 @@ class Training extends BaseController
 
     public function view()
     {
-        $id = 10;
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+        $id = session()->get('id_user');
+
+        $builder->where('id_user', $id);
+        $query   = $builder->get();
+        $user = $query->getResultArray();
+        $user = $user[0]; // juste le premier 
+
         $training_helper = new TrainingHelper();
         $page_helper = new PageHelper();
-        // if ($this->request->getMethod() == 'post') {
-        //$id = $this->request->getVar('id_training');
-        $training = $training_helper->getTrainingById($id);
+        if ($this->request->getMethod() == 'post') {
+            $id = $this->request->getVar('id_training');
+            $training = $training_helper->getTrainingById($id);
 
+            if ($training) {
+                $training = $training[0];
+                $pages = $page_helper->getPageById($training['id_training']);
+                $list_description = [];
+                $list_images = [];
 
-        if ($training) {
-            $training = $training[0];
-            $pages = $page_helper->getPageById($training['id_training']);
-            $list_description = [];
-            $list_images=[];
-
-            foreach ($pages as $page) {
-                $list_description[] = $page['content'];
-                if ($page['image_url']==null){
-                    $page['image_url']=base_url()."/assets/chapter.svg";
+                foreach ($pages as $page) {
+                    $list_description[] = $page['content'];
+                    if ($page['image_url'] == null) {
+                        $page['image_url'] = base_url() . "/assets/chapter.svg";
+                    }
+                    $list_images[] = $page['image_url'];
                 }
-                $list_images[]=$page['image_url'];
+                $descriptions = json_encode($list_description);
+                $images = json_encode($list_images);
+
+                $data = [
+                    "title" => $training['title'],
+                    "training" => $training,
+                    "date" => dateTimeFormat($training['date']),
+                    "count" => count($pages),
+                    "pages" => $pages,
+                    "descriptions" => $descriptions,
+                    "images" => $images,
+                    "user"=>$user,
+                    "theme_button" => getTheme($user['type'], "button"),
+                ];
+                return view('Training/training_view.php', $data);
+            } else {
+                return view('errors/html/error_404.php');
             }
-            $descriptions = json_encode($list_description);
-            $images=json_encode($list_images);
-
-            $data = [
-                "title" => $training['title'],
-                "training" => $training,
-                "date" => dateTimeFormat($training['date']),
-                "count" => count($pages),
-                "pages" => $pages,
-                "descriptions" => $descriptions,
-                "images"=>$images,
-            ];
-
-            return view('Training/training_view.php', $data);
-        } else {
-            return view('errors/html/error_404.php');
         }
-
-        //}
     }
 }

@@ -1,0 +1,106 @@
+.button_superadmin {
+    background: #620375;
+    color: white;
+}
+
+.header_superadmin {
+    background: #4c0cab;
+    color: white;
+}
+
+.button_admin {
+    background: #7c0694;
+    color: white;
+}
+
+.header_admin {
+    background: #4c0cab;
+    color: white;
+}
+
+.button_user {
+    background: #3e5dab;
+    color: white;
+}
+
+.button_superadmin:hover,
+.button_admin:hover,
+.button_user:hover,
+.button_former:hover {
+    filter: brightness(1.2);
+    color:whitesmoke;
+}
+
+.header_user {
+    background: #1f4985;
+    color: white;
+}
+
+.button_former {
+    background: #892a90;
+    color: white;
+}
+
+.header_former {
+    background: #6c2573;
+    color: white;
+}
+
+
+.nav_superadmin {
+    background: linear-gradient(#51067d, #a23bff, #540285);
+}
+
+.nav_left_superadmin {
+    background: linear-gradient(#51067d, #4714e1);
+}
+
+.footer_superadmin {
+    background: linear-gradient( #4714e1,#51067d);
+
+}
+
+.nav_admin {
+    background: linear-gradient(#6c2573, #c361cd, #6c2573);
+}
+
+.nav_left_admin {
+    background: linear-gradient(#892a90, #962e9e, #dc99e1);
+}
+
+.footer_admin {
+    background: linear-gradient(#d68fdb, #a241aa, #9d39a5);
+
+}
+
+.nav_user {
+    background: linear-gradient(#194b96, #175ab2, #072b79);
+}
+
+.nav_left_user {
+    background: linear-gradient(#4e81ce, #175ab2, #072b79);
+}
+
+.footer_user {
+    background: linear-gradient(#072b79, #4391e9, #000000);
+
+}
+
+.nav_former {
+    background: linear-gradient(#6c2573, #c361cd, #6c2573);
+}
+
+.nav_left_former {
+    background: linear-gradient(#892a90, #962e9e, #dc99e1);
+}
+
+.footer_former {
+    background: linear-gradient(#d68fdb, #a241aa, #9d39a5);
+
+}
+
+
+/* coouleurs des fonts*/
+.navbar-brand, .navbar-nav .nav-link {
+    color: white;
+}

@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <h1><?= $title ?></h1>
 <table class="table">

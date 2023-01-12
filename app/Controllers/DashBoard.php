@@ -323,7 +323,7 @@ class DashBoard extends BaseController
 
     public function listpublishes()
     {
-
+        
         $title = "Liste des publications";
 
         $db      = \Config\Database::connect();
@@ -387,10 +387,13 @@ class DashBoard extends BaseController
 
             $listpublishes[$i]["article"] = $news;
         }
-
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        
         $data = [
             "title" => $title,
             "listpublishes" => $listpublishes,
+            "user"=>$user,
         ];
 
 

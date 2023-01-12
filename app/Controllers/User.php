@@ -2,16 +2,22 @@
 
 namespace App\Controllers;
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
+
 use App\Models\UserModel;
 use App\Models\CertificateModel;
 use App\Models\UserHasCertificateModel;
 use App\Models\UserHasCompanyModel;
 use App\Models\CompanyModel;
 use App\Libraries\UserHelper;
-use CodeIgniter\HTTP\Message;
+use App\Libraries\BillHelper;
+//use CodeIgniter\HTTP\Message;
 
+// le 12/01/2023
 class User extends BaseController
 {
+
+    /* connexion utlitisateur */
     public function login()
     {
         $data = [
@@ -55,7 +61,7 @@ class User extends BaseController
                 $user = null;
                 try {
                     $user = $model->where('mail', $mail)->first();
-                } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {                    
+                } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {
                     session()->setFlashdata('infos', 'Connexion impossible!');
                     return view('/Login/login', $data);
                 } finally {
@@ -78,6 +84,7 @@ class User extends BaseController
         return view('Login/login', $data);
     }
 
+    /* fonction de redirection suivant profil utilisateur */
     private function dispatch($user)
     {
         helper(['form']);
@@ -100,6 +107,8 @@ class User extends BaseController
                     "skills" => $skills,
                     "route" => "Admin/super_profile",
                     "type" => $type,
+                    "buttonColor" => getTheme($type, "button"),
+                    "headerColor" => getTheme($type, "header"),
                 ];
 
                 break;
@@ -114,6 +123,8 @@ class User extends BaseController
                     "skills" => $skills,
                     "route" => "Admin/profile_admin",
                     "type" => $type,
+                    "buttonColor" => getTheme($type, "button"),
+                    "headerColor" => getTheme($type, "header"),
                 ];
                 break;
 
@@ -127,6 +138,8 @@ class User extends BaseController
                     "skills" => $skills,
                     "route" => "Former/profile_former",
                     "type" => $type,
+                    "headerColor" => getTheme($type, "button"),
+
                 ];
                 break;
 
@@ -136,6 +149,8 @@ class User extends BaseController
                     "user" => $user,
                     "route" => "User/profile_user",
                     "type" => $type,
+                    "buttonColor" => getTheme($type, "button"),
+                    "headerColor" => getTheme($type, "button"),
                 ];
                 break;
 
@@ -147,6 +162,8 @@ class User extends BaseController
                     "companies" => $jobs,
                     "route" => "User/profile_company",
                     "type" => $type,
+                    "buttonColor" => getTheme($type, "button"),
+                    "headerColor" => getTheme($type, "button"),
                 ];
                 break;
         }
@@ -265,9 +282,9 @@ class User extends BaseController
         }
     }
 
+    /* profil utilisateur */
     public function profileuser()
     {
-
         helper(['form']);
 
         $db      = \Config\Database::connect();
@@ -282,12 +299,13 @@ class User extends BaseController
         $data = [
             "title" => "Membre",
             "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
         ];
 
         return view('User/profile_user.php', $data);
     }
 
-
+    /* profil entreprise */
     public function profilecompany()
     {
         $db      = \Config\Database::connect();
@@ -315,6 +333,7 @@ class User extends BaseController
         return $company;
     }
 
+    /* mot de passe oublié */
     public function forgetpassword()
     {
         $data = [
@@ -323,14 +342,14 @@ class User extends BaseController
         return view('Login/forgetpassword.php', $data);
     }
 
-
+    /* Deconnexion utilisateur */
     public function logout()
     {
         session()->destroy();
         return redirect()->to('/');
     }
 
-
+    /* Inscription utilisateur*/
     public function signin()
     {
         $data = ["title" => "Inscription"];
@@ -529,4 +548,68 @@ class User extends BaseController
         }
         return view('Login/signin', $data);
     }
+
+    /* liste des factures suivant profil utilisateur */
+    public function bill()
+    {
+
+        $user_helper = new UserHelper();
+        $bill_helper= new BillHelper();
+
+        $user = $user_helper->getUserSession();
+
+        $type = $user['type'];
+        $bills=[];
+        switch ($type) {
+            case USER:
+            case COMPANY:
+                break;
+            case FORMER:
+                break;
+            case ADMIN:
+            case SUPER_ADMIN:
+                $bills=$bill_helper->getFilterBill();
+                break;
+        }
+        $data=[
+            "title"=>"Factures",
+            "bills"=>$bills,
+            "user"=>$user,
+        ];
+
+        return view("Payment/bill.php", $data);
+    }
+
+    public function modif_contact(){
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data=[
+            "title"=>"Informations de contact",            
+            "user"=>$user,
+        ];
+        return view("User/modif_contact.php", $data);       
+    }
+
+    public function modif_perso(){
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data=[
+            "title"=>"Informations Personnelles",            
+            "user"=>$user,
+        ];
+        return view("User/modif_contact.php", $data);
+       
+    }
+
+    public function modif_password(){
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data=[
+            "title"=>"Modification mot de passe",            
+            "user"=>$user,
+        ];
+        return view("User/modif_password.php", $data);
+       
+    }
 }
+

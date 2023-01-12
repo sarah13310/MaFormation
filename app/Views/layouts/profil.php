@@ -11,38 +11,57 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="<?= base_url() . '/css/style.css' ?>" rel="stylesheet">
+    <link href="<?= base_url() . '/css/theme.css' ?>" rel="stylesheet">
     <?= $this->renderSection("header") ?>
     <title><?= $title; ?></title>
 </head>
+
 <body>
     <header>
-        <nav class="navbar   navbar-expand-lg <?=changeMainTheme($user['type']) ?>">
+        <div class="modal fade" id="modalexit" tabindex="-1" aria-labelledby="modalexit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Quitter profil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Etes-vous sûr de quitter la connexion?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                        <button onclick="onExit();" type="button" class="btn btn-primary">Oui</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg <?= changeMainTheme($user['type']) ?>">
             <div class="container-fluid">
-                <a class="noselect navbar-brand" href="/"><img class="noselect logo" src="<?=base_url() ?>/assets/<?= getLogoColor($user['type'])?>"> Ma Formation</a>
+                <a id="btn_home" class="noselect navbar-brand"><img class="noselect logo" src="<?= base_url() ?>/assets/<?= getLogoColor($user['type']) ?>"> Ma Formation</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <form action="#" class="d-flex search me-4">
                     <input class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
-                    <button class="noselect btn <?= getMenuButtonColor($user['type'])?>" type="submit">Chercher</button>
+                    <button class="noselect btn <?= getMenuButtonColor($user['type']) ?>" type="submit">Chercher</button>
                 </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="noselect navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="noselect nav-link active" aria-current="page" href="/">Accueil</a>
+                            <a id="btn_home2" class="noselect nav-link active" aria-current="page">Accueil</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 A propos
                             </a>
-                            <?=fillMenuNav("About") ?>
+                            <?= fillMenuNav("About") ?>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="noselect nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Actualités
                             </a>
-                            <?=fillMenuNav("News") ?>
+                            <?= fillMenuNav("News") ?>
                         </li>
                         <li class="nav-item">
                             <a class="noselect nav-link" href="contact">Contact</a>
@@ -50,7 +69,7 @@
                     </ul>
                     <?php if (!session()->get('isLoggedIn')) : ?>
                         <!-- Bouton de connexion -->
-                        <a href='/login' class="noselect btn btn-primary btn-login">
+                        <a href='/user/login' class="noselect btn btn-primary btn-login">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z">
                                 </path>
@@ -61,18 +80,18 @@
                         <!-- Menu Drop de déconnexion -->
                     <?php else : ?>
                         <div class="noselect dropdown ">
-                                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= $user['image_url'] ?>" alt="MF" width="50px" height="50px" class="rounded-circle-frame">
-                                    <span class="d-none d-sm-inline mx-3"><?=$user['name']  ?></span>
-                                </a>
-                                <ul class="noselect dropdown-menu dropdown-menu text-small shadow">
-                                    <li><a class="dropdown-item" href="/parameters">Paramètres</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="/logout">Se déconnecter</a></li>
-                                </ul>
-                            </div>                            
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<?= $user['image_url'] ?>" alt="MF" width="50px" height="50px" class="rounded-circle-frame">
+                                <span class="d-none d-sm-inline mx-3"><?= $user['name']  ?></span>
+                            </a>
+                            <ul class="noselect dropdown-menu dropdown-menu text-small shadow">
+                                <li><a class="dropdown-item" href="/user/parameters">Paramètres</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a id="btn_home3" class="dropdown-item">Se déconnecter</a></li>
+                            </ul>
+                        </div>
                     <?php endif ?>
                 </div>
             </div>
@@ -82,19 +101,19 @@
         <section>
             <div class="container-fluid">
                 <div class="row flex-nowrap">
-                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?=changeMenuTheme($user['type']) ?>">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?= changeMenuTheme($user['type']) ?>">
                         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                             <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
-                                <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
+                            <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
                             <!-- </a> -->
                             <div class=" pb-4">
                                 <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none" > -->
-                                    <span class="d-none d-sm-inline "><?=$user['name'] ?></span>
-                                    <span class="d-none d-sm-inline "><?=$user['firstname']  ?></span>
+                                <span class="d-none d-sm-inline "><?= $user['name'] ?></span>
+                                <span class="d-none d-sm-inline "><?= $user['firstname']  ?></span>
                                 <!-- </a>                                 -->
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                                                             
+
                                 <?= fillMenuDashBoard($user['type']) ?>
                             </ul>
                             <hr>
@@ -109,7 +128,7 @@
 
     </section>
     <!-- Footer -->
-    <footer class="noselect <?=changeFooterTheme($user['type']) ?> text-center text-white">
+    <footer class="noselect <?= changeFooterTheme($user['type']) ?> text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->
@@ -278,6 +297,30 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <script>
+        let myModalExit = document.getElementById('modalexit');
+        let modal = bootstrap.Modal.getOrCreateInstance(myModalExit);
+        let btnHome = document.getElementById("btn_home");
+        let btnHome2 = document.getElementById("btn_home2");
+        let btnHome3 = document.getElementById("btn_home3");
+
+        function addExitEvent(btn) {
+            btn.addEventListener("click", () => {
+                modal.show();
+            });
+        }
+
+        addExitEvent(btnHome);
+        addExitEvent(btnHome2);
+        addExitEvent(btnHome3);
+
+
+        function onExit() {
+            sessionStorage.clear();
+            window.location.href = "/user/logout";
+
+        }
     </script>
     <?= $this->renderSection("js") ?>
 

@@ -1,6 +1,98 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
+<div class="modal " tabindex="-1" id="myModalName">
+    <div class="modal-dialog">
+        <form action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification du nom</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id_user" id="id_user" value="<?= set_value('id_user') ?>">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" class="form-control mb-2" name="name" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Prénom</label>
+                        <input type="text" class="form-control mb-2" name="firstname" id="firstname">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                    <button type="submit" class="btn <?= $buttonColor?>">Modifier</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal " tabindex="-1" id="myModalContact">
+    <div class="modal-dialog">
+        <form action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informations de contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row">
+                    <input type="hidden" name="id_user" id="id_user" value="<?= set_value('id_user') ?>">
+                    <div class="col-md-6">
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="address" id="address" placeholder='Adresse'>
+                            <label for="name">Adresse</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="cp" id="cp" placeholder='Code postal'>
+                            <label for="cp">CP</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="city" id="city" placeholder='Ville'>
+                            <label for="city">Ville</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="country" id="country" placeholder='Pays'>
+                            <label for="country">Pays</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="mail" id="mail" placeholder='Mail'>
+                            <label for="mail">Mail</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="site" id="site" placeholder='Site'>
+                            <label for="site">Site</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder='Téléphone'>
+                            <label for="phone">Téléphone</label>
+                        </div>
+                        <div class='form-floating mb-3'>
+                            <input type="date" class="form-control" name="birthday" id="birthday" placeholder='Anniversaire'>
+                            <label for="birthday">Anniversaire</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class='form-select' id='gender' name="gender" aria-label='Genre'>
+                                <option value='0'>Madame</option>
+                                <option value='1'>Monsieur</option>
+                                <option value='Null' selected>Non renseigné</option>
+                            </select>
+                            <label for="gender">Genre</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                    <button type="submit" class="btn <?= $buttonColor?>">Modifier</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- boite modal snapshot -->
 <div class="modal" tabindex="-1" id="myCamera">
     <div class="modal-dialog">
@@ -60,14 +152,14 @@
                     <div class="flex-between">
                         <span><?= $user['firstname'] . " " . $user['name'] ?> </span>
                         <span class="title2"><i class="bi bi-geo-alt" style="width:14px"></i><?= "  " . $user['city'] . ", " . $user['country'] ?></span>
-                        <div><button class="btn-title0 mt-1">Modifier</button></div>
+                        <div><button class="btn-title0 mt-1" data-bs-toggle="modal" data-bs-target="#myModalName">Modifier</button></div>
                     </div>
                 </div>
                 <div class="mb-4 title0"><span><i class="bi bi-chat-left-fill "></i> Envoyer un message</span></div>
                 <div class="mb-1 title0">
                     <div class="title0 flex">
                         <div class="start"><i class="bi bi-person-fill"></i>&nbsp;Informations de contact</div>
-                        <div><button class="btn-title0 mt-1">Modifier</button></div>
+                        <div><button class="btn-title0 mt-1 "data-bs-toggle="modal" data-bs-target="#myModalContact">Modifier</button></div>
                     </div>
                     <hr class="fade-1">
                 </div>

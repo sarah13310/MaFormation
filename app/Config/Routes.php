@@ -61,12 +61,23 @@ $routes->add('/former/profil/edit', 'Former::profile_view'); // modification du 
 $routes->add('/former/training/add', 'Former::training_add'); // création de la formation
 $routes->add('/former/training/edit', 'Former::training_edit'); // création de la page
 // user
+$routes->group('/user', static function ($routes) {
+    $routes->match(['get', 'post'], 'login', 'User::login'); //login user
+    $routes->get('logout', 'User::logout'); //logout user
+    $routes->match(['get', 'post'], 'forgetpassword', 'User::forgetpassword'); //login user
+    $routes->match(['get', 'post'], 'signin', 'User::signin'); //signin user
+    $routes->match(['get', 'post'], 'company', 'User::confirmation'); //signin user
+    $routes->add('profil', 'User::profileuser'); //profil user   
+    $routes->add('bill', 'User::bill'); //profil user   
+});
+/*
 $routes->match(['get', 'post'], '/login', 'User::login'); //login user
 $routes->get('logout', 'User::logout'); //logout user
 $routes->match(['get', 'post'], '/forgetpassword', 'User::forgetpassword'); //login user
 $routes->match(['get', 'post'], '/signin', 'User::signin'); //signin user
 $routes->match(['get', 'post'], '/company', 'User::confirmation'); //signin user
 $routes->get('/user/profile', 'User::profileuser'); //profil user
+*/
 $routes->get('/company/profile', 'User::profilecompany'); //profil company
 
 // menu à propos
@@ -75,10 +86,10 @@ $routes->get('/funding', 'Home::funding');
 
 // Formations
 $routes->group('/training', static function ($routes) {
-    $routes->get('list', 'Training::index');
-    $routes->get('details/(:num)', 'Training::details/$1');
+    $routes->get('list', 'Training::list');// Liste des formations visible suivant le profil utilisateur 
+    $routes->get('details/(:num)', 'Training::details/$1');// Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment'); // paiement
-    $routes->add('view', 'Training::view');//Formation payante visualisée
+    $routes->add('view', 'Training::view');// Contenu de la formation payante
 });
 
 

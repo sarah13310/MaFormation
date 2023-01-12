@@ -46,6 +46,15 @@ function listCarousel($list, $index = 0, $showIndicator = false)
     return $str;
 }
 
+function textEllipsis($string, $max = 50)
+{
+    if (strlen($string) > $max) {
+        $string = substr($string, 0, strlen($string));
+        $string = $string . "...";
+    }
+    return $string;
+}
+
 // éléments du carousel
 
 
@@ -187,32 +196,32 @@ function fillMenuDashBoard($type)
     $menu = "";
     switch ($type) {
         case THEME_USER:
-            $menu .= fillMenu2("Accueil", "#", "Accueil", $type);
+            $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Formations", "menu2", "Formations", $type);
-            $menu .= fillMenu2("Factures", "#", "Factures", $type);
+            $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
         case THEME_COMPANY:
-            $menu .= fillMenu2("Accueil", "#", "Accueil", $type);
+            $menu .= fillMenu2("Accueil", "/company/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Formations", "menu2", "Formations", $type);
-            $menu .= fillMenu2("Factures", "#", "Factures", $type);
+            $menu .= fillMenu2("Factures", "/company/bill", "Factures", $type);
             break;
 
         case THEME_FORMER:
-            $menu .= fillMenu2("Accueil", "#", "Accueil", $type);
+            $menu .= fillMenu2("Accueil", "/former/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Edition", "menu2", "Edition", $type);
             $menu .= fillMenu("Rendez-vous", "menu3", "Agenda", $type);
             $menu .= fillMenu("Formations", "menu4", "Formations", $type);
             $menu .= fillMenu("Média", "menu5", "Media", $type);
             $menu .= fillMenu("Clients", "menu6", "Clients", $type);
-            $menu .= fillMenu2("Factures", "#", "Factures", $type);
+            $menu .= fillMenu2("Factures", "/former/bill", "Factures", $type);
             break;
 
         case THEME_ADMIN:
-            $menu .= fillMenu2("Accueil", "/login", "Accueil", $type);
+            $menu .= fillMenu2("Accueil", "/admin/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
             $menu .= fillMenu("Edition", "menu3", "Edition", $type);
@@ -220,7 +229,7 @@ function fillMenuDashBoard($type)
             $menu .= fillMenu("Formateurs", "menu5", "Formateurs", $type);
             $menu .= fillMenu("Média", "menu6", "Media", $type);
             $menu .= fillMenu("Clients", "menu7", "Clients", $type);
-            $menu .= fillMenu2("Factures", "#", "Factures", $type);
+            $menu .= fillMenu2("Factures", "/admin/bill", "Factures", $type);
             break;
 
         case THEME_SUPER_ADMIN:
@@ -232,7 +241,7 @@ function fillMenuDashBoard($type)
             $menu .= fillMenu("Formateurs", "menu5", "Formateurs", $type);
             $menu .= fillMenu("Média", "menu6", "Media", $type);
             $menu .= fillMenu("Clients", "menu7", "Clients", $type);
-            $menu .= fillMenu2("Factures", "#", "Factures", $type);
+            $menu .= fillMenu2("Factures", "/superdamin/bill","Factures", $type);
             break;
     }
     return $menu;
@@ -337,8 +346,8 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_USER:
                     $items = [
-                        ["ref" => "", "name" => "Nom - Mot de passe"],
-                        ["ref" => "", "name" => "Informations contact"],
+                        ["ref" => "/profil/password", "name" => "Nom - Mot de passe"],
+                        ["ref" => "/profil/contact", "name" => "Informations contact"],
                     ];
                     break;
                 case THEME_COMPANY:
@@ -362,8 +371,8 @@ function fillMenuRight($category, $type)
 
         case "Clients": // Liste Type d'ahérents
             $items = [
-                ["ref" => "", "name" => "Particulier"],
-                ["ref" => "", "name" => "Entreprise"],
+                ["ref" => "/user/list", "name" => "Particulier"],
+                ["ref" => "/user/list", "name" => "Entreprise"],
             ];
             break;
 
@@ -373,14 +382,14 @@ function fillMenuRight($category, $type)
                 case THEME_FORMER:
                 case THEME_SUPER_ADMIN:
                     $items = [
-                        ["ref" => "", "name" => "Liste"],
+                        ["ref" => "/training/list", "name" => "Liste"],
                     ];
                     break;
                 case THEME_USER:
                 case THEME_COMPANY:
                     $items = [
-                        ["ref" => "", "name" => "Liste"],
-                        ["ref" => "", "name" => "Filtre"],
+                        ["ref" => "/training/list", "name" => "Liste"],
+                        ["ref" => "/training/filter", "name" => "Filtre"],
                     ];
                     break;
             }
@@ -388,8 +397,8 @@ function fillMenuRight($category, $type)
 
         case "Formateurs": // Liste des formateurs
             $items = [
-                ["ref" => "", "name" => "Liste"],
-                ["ref" => "", "name" => "Filtre"],
+                ["ref" => "/former/list", "name" => "Liste"],
+                ["ref" => "/former/filter", "name" => "Filtre"],
             ];
             break;
 
@@ -415,7 +424,7 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_ADMIN:
                     $items = [
-                        ["ref" => "", "name" => "Permissions"],
+                        ["ref" => "/admin/priviliges", "name" => "Permissions"],
                     ];
                     break;
                 case THEME_SUPER_ADMIN:
@@ -568,7 +577,7 @@ function changeMenuTheme($type, $navbar = true, $dark = true)
 }
 // On change le theme pour le menu et le footer
 function changeMainTheme($type, $navbar = true, $dark = true)
-{;
+{
     $theme = ($navbar == true) ? "navbar" : "";
     if (!empty($theme)) {
         $theme .= ($dark == true) ? "-dark" : "-light";
@@ -666,6 +675,7 @@ function getMenuButtonColor($type)
     }
     return $theme;
 }
+
 function getButtonColor($type)
 {
     $theme = "";
@@ -728,6 +738,28 @@ function getLogoColor($type)
             break;
     }
     return $theme;
+}
+
+
+/* header des tables */
+function getTheme($type,$css="button") 
+{
+    
+    switch ($type) {
+        case USER:
+            $css .= "_user";
+            break;
+        case FORMER:
+            $css .= "_former";
+            break;
+        case ADMIN:
+            $css .= "_admin";
+            break;
+        case SUPER_ADMIN:
+            $css .= "_superadmin";
+            break;
+    }
+    return $css;
 }
 
 // extractions des droits pour un utilisateur

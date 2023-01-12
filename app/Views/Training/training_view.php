@@ -1,7 +1,8 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->extend('layouts/profil') ?>
 
 <?= $this->section('header') ?>
 <link href='<?= base_url() ?>/css/training.css' rel='stylesheet' />
+<link href='<?= base_url() ?>/css/theme.css' rel='stylesheet' />
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -13,13 +14,13 @@
         <div class="row mb-2 p-2 align-items-center">
             <?php if ($count > 0) : ?>
                 <div id="home" class="col-1 d-flex justify-content-center">
-                    <button onclick="home()" class="btn btn-primary rounded2"><i class="bi bi-house bi-bold"></i></button>
+                    <button onclick="home()" class="<?= $theme_button ?> rounded2"><i class="bi bi-house bi-bold"></i></button>
                 </div>
                 <?php for ($i = 0; $i < $count; $i++) : ?>
-                    <div class="col bargraph d-flex"></div>
+                    <div id="<?=$i ?>" class="col bargraph d-flex"></div>
                 <?php endfor; ?>
                 <div id="trophy" class="col-1 d-flex justify-content-center">
-                    <button onclick="trophy()" class="btn btn-primary rounded2"><i class="bi bi-trophy bi-bold"></i></button>
+                    <button onclick="trophy()" class="<?= $theme_button ?> rounded2"><i class="bi bi-trophy bi-bold"></i></button>
                 </div>
             <?php endif; ?>
         </div>
@@ -76,6 +77,7 @@
 
 <script>
     const listnum = document.getElementsByClassName('list-item');
+    const bargraphs = document.getElementsByClassName('bargraph');
     let btn_left = document.getElementById('btn-left');
     let btn_right = document.getElementById('btn-right');
     let title = document.getElementById('title_chapter');
@@ -90,6 +92,7 @@
         title.innerHTML="<?=$training['title']?>";
         description.innerHTML="<?=$training['description']?>";
         image_url.src="<?=$training['image_url'] ?>";
+        UnSelectAll();
     }
 
     function getFirst() {
@@ -152,14 +155,25 @@
             if (sel) {
                 selected = listnum[i];
                 if (selected.hasAttribute("indice")) {
-                    let indice = selected.getAttribute('indice');
-                    description.innerHTML = list_description[indice];
+                    index = selected.getAttribute('indice');
+                    description.innerHTML = list_description[index];
                     title.innerHTML = selected.innerHTML;
-                    image_url.src=list_images[indice];
+                    image_url.src=list_images[index];
                 }
             }
         });
     };
+
+    for (let i=0; i<bargraphs.length;i++){
+        bargraphs[i].addEventListener('click', ()=>{
+            if (bargraphs[i].hasAttribute("id")) {
+                    index = bargraphs[i].getAttribute('id');
+                    description.innerHTML = list_description[index];
+                    title.innerHTML = listnum[index].innerHTML;
+                    image_url.src=list_images[index];
+                }
+        });
+    }
 </script>
 
 <?= $this->endSection() ?>
