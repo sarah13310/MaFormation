@@ -83,7 +83,7 @@ class User extends BaseController
         }
         return view('Login/login', $data);
     }
-
+    
     /* fonction de redirection suivant profil utilisateur */
     private function dispatch($user)
     {
@@ -95,77 +95,23 @@ class User extends BaseController
         if ($user['image_url'] == null)
             $user['image_url'] = base_url() . "/assets/blank.png";
 
-        switch ($type) {
-            case TYPE_SUPER_ADMIN: // super administrateur
-                $jobs = $user_info->getInfosCompany($user['id_user']);
-                $skills = $user_info->getInfosCertificates($user['id_user']);
+        $jobs = $user_info->getInfosCompany($user['id_user']);
+        $skills = $user_info->getInfosCertificates($user['id_user']);
 
-                $data = [
-                    "title" => "Profil",
-                    "user" => $user,
-                    "jobs" => $jobs,
-                    "skills" => $skills,
-                    "route" => "Admin/super_profile",
-                    "type" => $type,
-                    "buttonColor" => getTheme($type, "button"),
-                    "headerColor" => getTheme($type, "header"),
-                ];
-                break;
+        $data = [
 
-            case TYPE_ADMIN: // administrateur
-                $jobs = $user_info->getInfosCompany($user['id_user']);
-                $skills = $user_info->getInfosCertificates($user['id_user']);
-                $data = [
-                    "title" => "Mode Administrateur",
-                    "user" => $user,
-                    "jobs" => $jobs,
-                    "skills" => $skills,
-                    "route" => "Admin/profile_admin",
-                    "type" => $type,
-                    "buttonColor" => getTheme($type, "button"),
-                    "headerColor" => getTheme($type, "header"),
-                ];
-                break;
+            "user" => $user,
+            "jobs" => $jobs,
+            "skills" => $skills,
+            "route" => "User/profile_user",
+            "type" => $type,
+            "buttonColor" => getTheme($type, "button"),
+            "headerColor" => getTheme($type, "header"),
+            "gender" => getGender($user['gender']),
+            "birthday" => dateFormat($user['birthday']),
+            "title" => getTypeName($type),
+        ];
 
-            case TYPE_FORMER: // formateur
-                $jobs = $user_info->getInfosCompany($user['id_user']);
-                $skills = $user_info->getInfosCertificates($user['id_user']);
-                $data = [
-                    "title" => "Mode Formateur",
-                    "user" => $user,
-                    "jobs" => $jobs,
-                    "skills" => $skills,
-                    "route" => "Former/profile_former",
-                    "type" => $type,
-                    "headerColor" => getTheme($type, "button"),
-
-                ];
-                break;
-
-            case TYPE_USER: // particulier
-                $data = [
-                    "title" => "Mode Utilisateur Particulier",
-                    "user" => $user,
-                    "route" => "User/profile_user",
-                    "type" => $type,
-                    "buttonColor" => getTheme($type, "button"),
-                    "headerColor" => getTheme($type, "button"),
-                ];
-                break;
-
-            case TYPE_COMPANY: // entreprise
-                $jobs = $user_info->getInfosCompany($user['id_user']);
-                $data = [
-                    "title" => "Mode Utilisateur Entreprise",
-                    "user" => $user,
-                    "companies" => $jobs,
-                    "route" => "User/profile_company",
-                    "type" => $type,
-                    "buttonColor" => getTheme($type, "button"),
-                    "headerColor" => getTheme($type, "button"),
-                ];
-                break;
-        }
         return $data;
     }
 
@@ -284,23 +230,15 @@ class User extends BaseController
     /* profil utilisateur */
     public function profileuser()
     {
-        helper(['form']);
-
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $id =  session()->get('id_user');
-
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier 
-
+        helper(['form']);        
+        $user_info = new UserHelper();
+        $user = $user_info->getUserSession();
+                
         $data = [
-            "title" => "Membre",
+            "title" => getTypeName($user['type']),
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
         ];
-
         return view('User/profile_user.php', $data);
     }
 
@@ -551,7 +489,6 @@ class User extends BaseController
     /* liste des factures suivant profil utilisateur */
     public function bill()
     {
-
         $user_helper = new UserHelper();
         $bill_helper = new BillHelper();
 
@@ -575,8 +512,8 @@ class User extends BaseController
             "title" => "Factures",
             "bills" => $bills,
             "user" => $user,
-            "buttonColor"=>getTheme($user['type'],"button"),
-            "headerColor"=>getTheme($user['type'],"header"),
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
         ];
 
         return view("Payment/bill.php", $data);
@@ -602,7 +539,7 @@ class User extends BaseController
                 'birthday' => $this->request->getVar('birthday'),
                 'gender' => $this->request->getVar('gender'),
             ];
-            $model->update(session()->id_user ,$updateData);
+            $model->update(session()->id_user, $updateData);
             $updateData['id_user'] = session()->id_user;
             $updateData['password'] = session()->password;
             $updateData['image_url'] = session()->image_url;

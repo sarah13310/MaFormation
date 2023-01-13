@@ -1,4 +1,3 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php/functions/util.php') ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <span class="title3"><?= $title ?></span>
@@ -6,23 +5,21 @@
     <div class="row ">
         <div class="col-12  col-md-4 mb-4">
             <div class="row">
-                <img src="<?= $user['image_url']?>" style="width: 200px;" alt="Avatar" />
+                <img src="<?= $user['image_url'] ?>" style="width: 200px;" alt="Avatar" />
             </div>
             <div class="mb-1 title0">
                 <div class="title0 flex">
                     <div class="start"><i class="bi bi-wrench-adjustable-circle-fill"></i>&nbsp;Travail</div>
-                    <div><button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier Travail" class="btn-title0 mt-1">Modifier</button></div>
+                    <div><button data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier Travail" class="btn-title0 mt-1">Modifier</button></div>
                 </div>
                 <hr class="fade-1">
             </div>
-            <?php $i = 0;
-            foreach ($jobs as $job) : ?>
+            <?php foreach ($jobs as $job) : ?>
                 <div class="row">
                     <span class="title5"><?= $job['name'] ?></span>
                     <span class="title2"><?= $job['address'] ?></span>
                 </div>
-            <?php $i++;
-            endforeach ?>
+            <?php endforeach ?>
             <div class="mb-1 title0">
                 <div class="title0 flex">
                     <div class="start"><i class="bi bi-award-fill"></i>&nbsp;Compétences</div>
@@ -53,7 +50,7 @@
             <div class="ton-blue-6 mb-4">
                 <span>
                     <span class="title1"><?= $user['ratings'] ?></span>
-                    <?= ratings($user['ratings']) ?>
+                    <?= $ratings?>
                 </span>
             </div>
             <div class="mb-4 title0"><span><i class="bi bi-chat-left-fill "></i> Envoyer un message</span></div>
@@ -83,10 +80,10 @@
                 <hr class="fade-2">
             </div>
             <div>
-                <span class="title2 mt-1">Anniversaire : <span class="ton-blue-5"><?= dateFormat($user['birthday']) ?></span></span>
+                <span class="title2 mt-1">Anniversaire : <span class="ton-blue-5"><?= $birthday ?></span></span>
             </div>
             <div>
-                <span class="title2 mt-1">Genre : <span class="ton-blue-5"><?= ($user['gender'] == 0) ? "Féminin" : "Masculin" ?></span></span>
+                <span class="title2 mt-1">Genre : <span class="ton-blue-5"><?= $gender ?></span></span>
             </div>
         </div>
     </div>

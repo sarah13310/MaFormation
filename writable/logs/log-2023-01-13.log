@@ -230,3 +230,19 @@ in APPPATH\Controllers\Former.php on line 27.
  4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 15:52:02 --> Undefined constant "App\Controllers\TYPE_SUPER_ADMIN"
+in APPPATH\Controllers\User.php on line 88.
+ 1 APPPATH\Controllers\User.php(263): App\Controllers\User->getTypeName('11')
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->profileuser()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 15:55:16 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\User.php on line 77.
+ 1 APPPATH\Controllers\User.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\User.php', 77)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

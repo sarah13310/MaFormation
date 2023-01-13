@@ -72,13 +72,13 @@ $routes->group('/former', static function ($routes) {
     $routes->add('books/edit', 'Media::books_edit');
 });
 
-// user
+// user (profils communs)
 $routes->group('/user', static function ($routes) {
-    $routes->match(['get', 'post'], 'login', 'User::login'); //login user
+    $routes->add( 'login', 'User::login'); //login user
     $routes->get('logout', 'User::logout'); //logout user
-    $routes->match(['get', 'post'], 'forgetpassword', 'User::forgetpassword'); //login user
-    $routes->match(['get', 'post'], 'signin', 'User::signin'); //signin user
-    $routes->match(['get', 'post'], 'company', 'User::confirmation'); //signin user
+    $routes->add( 'forgetpassword', 'User::forgetpassword'); //login user
+    $routes->add( 'signin', 'User::signin'); //signin user
+    $routes->add( 'company', 'User::confirmation'); //signin user
     $routes->add('profil', 'User::profileuser'); //profil user   
     $routes->add('bill', 'User::bill'); //profil user  
     $routes->add('profil/contact', 'User::modif_contact'); //modif contact user

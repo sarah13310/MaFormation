@@ -512,111 +512,32 @@ function fillMenuNav($category = "News")
     return $str;
 }
 
-// On change le footer
-function changeFooterTheme($type, $navbar = true, $dark = true)
+
+function getTypeName($type)
 {
-    $theme = ($navbar == true) ? "navbar" : "";
-    if (!empty($theme)) {
-        $theme .= ($dark == true) ? "-dark" : "-light";
-    }
-
+    $title = "";
     switch ($type) {
-        case THEME_USER: // Particulier
-            $theme .= " f-blue";
+        case SUPER_ADMIN: // super administrateur
+            $title = "Super Administrateur";
             break;
 
-        case THEME_COMPANY: // Entreprise
-            $theme .= " f-blue2";
+        case ADMIN: // administrateur
+            $title = "Administrateur";
             break;
 
-        case THEME_ADMIN: //Administrateur
-            $theme = " f-yellow";
+        case FORMER: // formateur
+            $title = "Formateur";
             break;
 
-        case THEME_SUPER_ADMIN: // Super Administrateur
-            $theme .= " f-velvet";
+        case USER: // particulier
+            $data = "Particulier";
             break;
 
-        case THEME_FORMER: // Formateur
-            $theme .= " f-green";
-            break;
-
-        default: // par défaut
-            $theme .= " f-dark";
+        case COMPANY: // entreprise
+            $title = "Entreprise";
             break;
     }
-    return $theme;
-}
-
-function changeMenuTheme($type, $navbar = true, $dark = true)
-{
-    $theme = ($navbar == true) ? "navbar" : "";
-    if (!empty($theme)) {
-        $theme .= ($dark == true) ? "-dark" : "-light";
-    }
-    $theme .= " menu-";
-
-    switch ($type) {
-        case THEME_USER: // Particulier
-            $theme .= "bg-blue";
-            break;
-
-        case THEME_COMPANY: // Entreprise
-            $theme .= "bg-blue2";
-            break;
-
-        case THEME_ADMIN: //Administrateur
-            $theme = "bg-yellow";
-            break;
-
-        case THEME_SUPER_ADMIN: // Super Administrateur
-            $theme .= "bg-velvet";
-            break;
-
-        case THEME_FORMER: // Formateur
-            $theme .= "bg-green";
-            break;
-
-        default: // par défaut
-            $theme .= "bg-dark";
-            break;
-    }
-    return $theme;
-}
-// On change le theme pour le menu et le footer
-function changeMainTheme($type, $navbar = true, $dark = true)
-{
-    $theme = ($navbar == true) ? "navbar" : "";
-    if (!empty($theme)) {
-        $theme .= ($dark == true) ? "-dark" : "-light";
-    }
-
-    switch ($type) {
-        case THEME_USER: // Particulier
-            $theme .= " bg-blue";
-            break;
-
-        case THEME_COMPANY: // Entreprise
-            $theme .= " bg-blue2";
-            break;
-
-        case THEME_ADMIN: //Administrateur
-            $theme = " bg-yellow";
-            break;
-
-        case THEME_SUPER_ADMIN: // Super Administrateur
-            $theme .= " bg-velvet";
-            break;
-
-        case THEME_FORMER: // Formateur
-            $theme .= " bg-green";
-            break;
-
-        default: // par défaut
-            $theme .= " bg-dark";
-            break;
-    }
-    return $theme;
+    return $title;
 }
 
 
@@ -738,7 +659,7 @@ function getLogoColor($type)
             break;
 
         case THEME_FORMER: // Formateur
-            $theme = "logo1.png";
+            $theme = "logo2.png";
             break;
 
         default: // par défaut

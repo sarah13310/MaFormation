@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-lg <?= changeMainTheme($user['type']) ?>">
+        <nav class="navbar navbar-expand-lg <?= getTheme($user['type'],"nav") ?>">
             <div class="container-fluid">
                 <a id="btn_home" class="noselect navbar-brand"><img class="noselect logo" src="<?= base_url() ?>/assets/<?= getLogoColor($user['type']) ?>"> Ma Formation</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
                 </button>
                 <form action="#" class="d-flex search me-4">
                     <input class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
-                    <button class="noselect btn <?= getMenuButtonColor($user['type']) ?>" type="submit">Chercher</button>
+                    <button class="noselect btn <?= getTheme($user['type'],"button") ?>" type="submit">Chercher</button>
                 </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -101,7 +101,7 @@
         <section>
             <div class="container-fluid">
                 <div class="row flex-nowrap">
-                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?= changeMenuTheme($user['type']) ?>">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?= getTheme($user['type'],"nav_left") ?>">
                         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                             <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
                             <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
@@ -110,7 +110,7 @@
                                 <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none" > -->
                                 <span class="d-none d-sm-inline "><?= $user['name'] ?></span>
                                 <span class="d-none d-sm-inline "><?= $user['firstname']  ?></span>
-                                <!-- </a>                                 -->
+                                <p>Utilisateur</p>
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
@@ -128,7 +128,7 @@
 
     </section>
     <!-- Footer -->
-    <footer class="noselect <?= changeFooterTheme($user['type']) ?> text-center text-white">
+    <footer class="noselect <?= getTheme($user['type'],"footer") ?> text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->

@@ -1,3 +1,4 @@
+/* theme super admin */
 .button_superadmin {
     background: #620375;
     color: white;
@@ -8,56 +9,6 @@
     color: white;
 }
 
-.button_admin {
-    background: #7c0694;
-    color: white;
-}
-
-.header_admin {
-    background: #4c0cab;
-    color: white;
-}
-
-.button_user {
-    background: #3e5dab;
-    color: white;
-}
-
-.button_superadmin:hover,
-.button_admin:hover,
-.button_user:hover,
-.button_former:hover,
-.button_default:hover {
-    filter: brightness(1.2);
-    color:whitesmoke;
-}
-
-.header_user {
-    background: #1f4985;
-    color: white;
-}
-
-.button_former {
-    background: #892a90;
-    color: white;
-}
-
-.header_former {
-    background: #6c2573;
-    color: white;
-}
-
-.header_default {
-    background: #2e2e2e;
-    color: white;
-}
-
-.button_default {
-    background: #2e2e2e;
-    color: white;
-}
-
-
 .nav_superadmin {
     background: linear-gradient(#51067d, #a23bff, #540285);
 }
@@ -67,8 +18,19 @@
 }
 
 .footer_superadmin {
-    background: linear-gradient( #4714e1,#51067d);
+    background: linear-gradient(#4714e1, #51067d);
 
+}
+
+/* theme admin */
+.button_admin {
+    background: #7c0694;
+    color: white;
+}
+
+.header_admin {
+    background: #4c0cab;
+    color: white;
 }
 
 .nav_admin {
@@ -84,6 +46,18 @@
 
 }
 
+
+/* theme particulier */
+.button_user {
+    background: #3e5dab;
+    color: white;
+}
+
+.header_user {
+    background: #1f4985;
+    color: white;
+}
+
 .nav_user {
     background: linear-gradient(#194b96, #175ab2, #072b79);
 }
@@ -95,6 +69,17 @@
 .footer_user {
     background: linear-gradient(#072b79, #4391e9, #000000);
 
+}
+
+/* theme formateur */
+.button_former {
+    background: #892a90;
+    color: white;
+}
+
+.header_former {
+    background: #6c2573;
+    color: white;
 }
 
 .nav_former {
@@ -110,8 +95,39 @@
 
 }
 
+/* default */
+.header_default {
+    background: #2e2e2e;
+    color: white;
+}
+
+.button_default {
+    background: #2e2e2e;
+    color: white;
+}
+
+/* gestion hover des boutons */
+.button_superadmin:hover,
+.button_admin:hover,
+.button_user:hover,
+.button_former:hover,
+.button_default:hover {
+    filter: brightness(1.2);
+    color: whitesmoke;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* coouleurs des fonts*/
-.navbar-brand, .navbar-nav .nav-link {
+.navbar-brand,
+.navbar-nav .nav-link {
     color: white;
 }
