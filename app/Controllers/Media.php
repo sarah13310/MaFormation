@@ -223,7 +223,7 @@ class Media extends BaseController
     // Gestion des vidéos
     public function list_videos_home()
     {
-        $title = "Liste des videos";
+        $title = "Liste des vidéos";
         $db      = \Config\Database::connect();
         $builder = $db->table('media');
         $builder->where('status', '1');
@@ -233,6 +233,9 @@ class Media extends BaseController
         $listvideos = [];
 
         foreach ($videos as $video) {
+            /*if ($video['url']==null){
+                $video['url']=base_url()."/assets/video.svg";
+            }*/
             $listvideos[] = [
                 "id_media" => $video['id_media'],
                 "name" => $video['name'],
@@ -249,4 +252,3 @@ class Media extends BaseController
         return view('/Media/list_videos.php', $data);
     }
 }
-?>

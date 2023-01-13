@@ -49,14 +49,16 @@ class Training extends BaseController
         $list_training = [];
 
         foreach ($trainings as $training) {
-            if ($training['image_url']==null){
-                $training['image_url']=base_url()."/assets/training.svg";
+            if ($training['image_url'] == null) {
+                $training['image_url'] = base_url() . "/assets/training.svg";
             }
             $list_training[] = [
                 "id_training" => $training['id_training'],
                 "title" => $training['title'],
                 "date" => dateTimeFormat($training['date']),
                 "description" => textEllipsis($training['description'], 20),
+                "full_description" => $training['description'],
+                "image_url" => $training['image_url'],
             ];
         }
         $data = [
@@ -69,8 +71,13 @@ class Training extends BaseController
     }
 
 
-    public function details($id)
+    public function details($id = 0)
     {
+
+        if ($this->request->getMethod() == 'post') {
+            $id = $this->request->getVar('id_training');
+        }
+
         $training_helper = new TrainingHelper();
         $training = $training_helper->getTrainingById($id);
         $training = $training[0];
@@ -88,6 +95,8 @@ class Training extends BaseController
         ];
         return view('Training/training_details.php', $data);
     }
+
+   
 
     public function payment()
     {

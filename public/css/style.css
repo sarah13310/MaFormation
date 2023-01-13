@@ -738,6 +738,10 @@ tr {
 	padding: 9px;
 }
 
+.card-img{
+	background: ghostwhite;
+}
+
 .gradient-gray {
 	background: linear-gradient(-45deg, #ccced0, #abb3ba73);
 }

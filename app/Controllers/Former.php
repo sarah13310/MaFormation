@@ -15,16 +15,19 @@ use App\Libraries\TrainingHelper;
 // Date 22-12-2022
 class Former extends BaseController
 {
-    public function list_formers_home()
+    public function list_former_home()
     {
         $title = "Liste des formateurs";
         $helper = new FormerHelper();
         $public = $helper->getFormers();
         $builder = $public["builder"];
         $formers = $public["formers"];
-        $listformers = [];
-
+        $listformers = [];        
+        
         foreach ($formers as $former) {
+            if ($former['image_url']==null){
+                $former['image_url']=base_url()."/assets/Blank_nogender.svg";
+            }
             $listformers[] = [
                 "id_user" => $former['id_user'],
                 "name" => $former['name'],
@@ -35,6 +38,7 @@ class Former extends BaseController
                 "country" => $former['country'],
                 "mail" => $former['mail'],
                 "phone" => $former['phone'],
+                "image_url"=>$former['image_url'],
             ];
         }
         /* compétences certificats*/
@@ -82,7 +86,7 @@ class Former extends BaseController
 
         $data = [
             "title" => $title,
-            "listformers" => $listformers,
+            "formers" => $listformers,
             "jobs" => $jobs,
         ];
 
@@ -91,8 +95,7 @@ class Former extends BaseController
 
     public function details_former_home()
     {
-        $title = "Cv du formateur";
-
+        
         if ($this->request->getMethod() == 'post') {
 
             $mail = $this->request->getVar('mail');
@@ -122,7 +125,7 @@ class Former extends BaseController
                 ];
             }
             $data = [
-                "title" => $title,
+                "title" => "C.V. du formateur",
                 "former" => $former,
                 "skills" => $skills,
             ];

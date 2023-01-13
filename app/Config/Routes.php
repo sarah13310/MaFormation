@@ -54,7 +54,7 @@ $routes->add('/contact', 'Contact::index'); // page contact
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers'); //dashboard des formateurs
 //Former
 $routes->group('/former', static function ($routes) {
-    $routes->add('list', 'Former::list_formers_home'); // liste des formateurs page home
+    $routes->add('list', 'Former::list_former_home'); // liste des formateurs page home
     $routes->add('list/cv', 'Former::details_former_home'); // détails du formateur page home
     $routes->add('articles/edit', 'News::articles_edit');
     $routes->add('publishes/edit', 'News::publishes_edit');
@@ -95,7 +95,7 @@ $routes->get('/funding', 'Home::funding');
 $routes->group('/training', static function ($routes) {
     $routes->get('home', 'Training::home'); // Liste des formations visible (page homse)     
     $routes->get('list', 'Training::list'); // Liste des formations visible suivant le profil utilisateur 
-    $routes->get('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
+    $routes->add('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment'); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
 });

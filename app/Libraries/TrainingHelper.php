@@ -65,7 +65,7 @@ class TrainingHelper
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
-        $builder->select("id_training, title,date, description,image_url");
+        $builder->select("id_training, title,date, description, image_url");
         if ($status != ALL) {
             $builder->where("status", $status);
         }
