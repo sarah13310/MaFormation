@@ -31,6 +31,7 @@ class UserHelper{
             'city' => session()->city,
             'country' => session()->country,
             'phone' => session()->phone,
+            'birthday' => session()->birthday,
             'type'=>session()->type,
             'isLoggedIn' => true,
         ];        
@@ -53,6 +54,8 @@ class UserHelper{
             'phone' => $user['phone'],
             'image_url' => $user['image_url'],
             'type'=>$user['type'],
+            'gender'=>$user['gender'],
+            'birthday'=>$user['birthday'],
             'isLoggedIn' => true,
         ];
         session()->set($data);

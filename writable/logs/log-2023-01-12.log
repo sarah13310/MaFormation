@@ -397,3 +397,90 @@ in APPPATH\Libraries\UserHelper.php on line 55.
  5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
  7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-12 20:01:50 --> mysqli_sql_exception: Not unique table/alias: 'user_has_bill' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(565): App\Libraries\BillHelper->getFilterBill('38')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->bill()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-01-12 20:01:50 --> Not unique table/alias: 'user_has_bill'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`
+WHERE `id_user` = \'38\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`
+WHERE `id_user` = \'38\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`
+WHERE `id_user` = \'38\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `bill`.`id_bill`, `bill`.`ref_name`, `bill`.`status`, `bill`.`datetime`, `bill`.`price`
+FROM `user_has_bill`
+JOIN `user_has_bill` ON `user_has_bill`.`id_bill`=`bill`.`id_bill`
+WHERE `id_user` = :id_user:', [...], false)
+ 5 APPPATH\Libraries\BillHelper.php(18): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(565): App\Libraries\BillHelper->getFilterBill('38')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 20:26:35 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 22.
+ 1 APPPATH\Controllers\Training.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->list()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 20:29:59 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 22.
+ 1 APPPATH\Controllers\Training.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->list()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 20:30:14 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 22.
+ 1 APPPATH\Controllers\Training.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->list()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 20:30:26 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 22.
+ 1 APPPATH\Controllers\Training.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->list()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 20:43:54 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 85.
+ 1 APPPATH\Controllers\Training.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 85)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-12 20:49:14 --> Undefined array key 0
+in APPPATH\Controllers\Training.php on line 85.
+ 1 APPPATH\Controllers\Training.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\Training.php', 85)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->view()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

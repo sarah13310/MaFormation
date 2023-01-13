@@ -110,7 +110,6 @@ class User extends BaseController
                     "buttonColor" => getTheme($type, "button"),
                     "headerColor" => getTheme($type, "header"),
                 ];
-
                 break;
 
             case TYPE_ADMIN: // administrateur
@@ -563,6 +562,7 @@ class User extends BaseController
         switch ($type) {
             case USER:
             case COMPANY:
+                $bills = $bill_helper->getFilterBill($user['id_user']);
                 break;
             case FORMER:
                 break;
@@ -575,6 +575,8 @@ class User extends BaseController
             "title" => "Factures",
             "bills" => $bills,
             "user" => $user,
+            "buttonColor"=>getTheme($user['type'],"button"),
+            "headerColor"=>getTheme($user['type'],"header"),
         ];
 
         return view("Payment/bill.php", $data);
@@ -587,7 +589,6 @@ class User extends BaseController
         $user = $user_helper->getUserSession();
 
         if ($this->request->getMethod() == 'post') {
-
             $model = new UserModel();
             $updateData = [
                 'name' => $this->request->getVar('name'),
@@ -607,6 +608,7 @@ class User extends BaseController
             $updateData['image_url'] = session()->image_url;
             $updateData['type'] = session()->type;
             $user_helper->setUserSession($updateData);
+            session()->setFlashdata('success', 'Informations de contact modifiées');
         }
         $data = [
             "title" => "Informations de contact",

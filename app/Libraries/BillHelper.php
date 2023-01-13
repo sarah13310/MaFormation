@@ -14,7 +14,7 @@ class BillHelper
             $builder->where('id_user', $id_user);
         }
         $builder->select("bill.id_bill, bill.ref_name, bill.status,bill.datetime,bill.price");
-        $builder->join("user_has_bill","user_has_bill.id_bill=bill.id_bill");
+        $builder->join("bill","user_has_bill.id_bill=bill.id_bill");
         $query = $builder->get();
         $user = $query->getResultArray();
         return $user;

@@ -346,13 +346,13 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_USER:
                     $items = [
-                        ["ref" => "/user/profil/password", "name" => "Nom - Mot de passe"],
+                        ["ref" => "/user/profil/password", "name" => "Mot de passe"],
                         ["ref" => "/user/profil/contact", "name" => "Informations contact"],
                     ];
                     break;
                 case THEME_COMPANY:
                     $items = [
-                        ["ref" => "/user/profil/password", "name" => "Nom - Mot de passe"],
+                        ["ref" => "/user/profil/password", "name" => "Mot de passe"],
                         ["ref" => "/user/profil/contact", "name" => "Informations contact"],
                         ["ref" => "/user/profil/work", "name" => "Travail"],
                     ];
@@ -360,7 +360,7 @@ function fillMenuRight($category, $type)
                 case THEME_ADMIN:
                 case THEME_SUPER_ADMIN:
                     $items = [
-                        ["ref" => "/user/profil/password", "name" => "Nom - Mot de passe"],
+                        ["ref" => "/user/profil/password", "name" => "Mot de passe"],
                         ["ref" => "/user/profil/contact", "name" => "Informations contact"],
                         ["ref" => "/user/profil/work", "name" => "Travail"],
                         ["ref" => "/user/profil/skill", "name" => "Compétences"],
@@ -397,9 +397,9 @@ function fillMenuRight($category, $type)
 
         case "Formateurs": // Tableau de bord (la Liste des formateurs)
             switch ($type) {
-               
+
                 case ADMIN:
-                    
+
                 case SUPER_ADMIN:
                     $items = [
                         ["ref" => "/admin/dashboard/former", "name" => "Liste"],
@@ -407,7 +407,7 @@ function fillMenuRight($category, $type)
                     ];
                     break;
             }
-            
+
             break;
 
         case "Agenda": // Gestion des rendez-vous
@@ -492,8 +492,8 @@ function fillMenuNav($category = "News")
         case "About":
             $items = [
                 ["ref" => "/former/list", "name" => "Nos formateurs"],
-                ["ref" => "", "name" => "Nos formations"],
-                ["ref" => "", "name" => "Mon financement"],
+                ["ref" => "/training/list", "name" => "Nos formations"],
+                ["ref" => "/funding", "name" => "Mon financement"],
             ];
             break;
     }
@@ -755,6 +755,7 @@ function getTheme($type, $css = "button")
 
     switch ($type) {
         case USER:
+        case COMPANY:
             $css .= "_user";
             break;
         case FORMER:
@@ -765,6 +766,9 @@ function getTheme($type, $css = "button")
             break;
         case SUPER_ADMIN:
             $css .= "_superadmin";
+            break;
+        default:
+            $css .= "_default";
             break;
     }
     return $css;

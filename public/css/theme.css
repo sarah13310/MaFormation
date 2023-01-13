@@ -26,7 +26,8 @@
 .button_superadmin:hover,
 .button_admin:hover,
 .button_user:hover,
-.button_former:hover {
+.button_former:hover,
+.button_default:hover {
     filter: brightness(1.2);
     color:whitesmoke;
 }
@@ -43,6 +44,16 @@
 
 .header_former {
     background: #6c2573;
+    color: white;
+}
+
+.header_default {
+    background: #2e2e2e;
+    color: white;
+}
+
+.button_default {
+    background: #2e2e2e;
     color: white;
 }
 

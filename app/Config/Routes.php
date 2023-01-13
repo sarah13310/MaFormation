@@ -54,7 +54,6 @@ $routes->add('/contact', 'Contact::index'); // page contact
 $routes->get('/admin/dashboard/former', 'Dashboard::listformers'); //dashboard des formateurs
 //Former
 $routes->group('/former', static function ($routes) {
-
     $routes->add('list', 'Former::list_formers_home'); // liste des formateurs page home
     $routes->add('list/cv', 'Former::details_former_home'); // détails du formateur page home
     $routes->add('articles/edit', 'News::articles_edit');
@@ -94,22 +93,27 @@ $routes->get('/funding', 'Home::funding');
 
 // Formations
 $routes->group('/training', static function ($routes) {
+    $routes->get('home', 'Training::home'); // Liste des formations visible (page homse)     
     $routes->get('list', 'Training::list'); // Liste des formations visible suivant le profil utilisateur 
     $routes->get('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment'); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
 });
 
+// Articles 
+$routes->group('/article', static function ($routes) {
+$routes->add('list', 'News::list_articles_home'); // liste des articles page home
+$routes->get('list/details/(:num)', 'News::get_details_article_home/$1'); // détails de l'article page home
+$routes->post('list/details', 'News::details_article_home'); // détails de l'article page home
+$routes->add('preview', 'Dashboard::previewarticle'); //aperçu d'un article
+});
 
-// Articles et publication 
-$routes->add('/article/list', 'News::list_articles_home'); // liste des articles page home
-$routes->get('/article/list/details/(:num)', 'News::get_details_article_home/$1'); // détails de l'article page home
-$routes->post('/article/list/details', 'News::details_article_home'); // détails de l'article page home
-$routes->add('/articles/preview', 'Dashboard::previewarticle'); //aperçu d'un article
-
-$routes->add('/publishes/list', 'News::list_publishes_home'); // liste des publications page home
-$routes->add('/publishes/list/details', 'News::details_publishes_home'); // détails de la publication page home
-$routes->add('/publishes/preview', 'Dashboard::previewpublish'); //aperçu d'une publication
+// Publications
+$routes->group('/publishes', static function ($routes) {
+    $routes->add('list', 'News::list_publishes_home'); // liste des publications page home
+    $routes->add('list/details', 'News::details_publishes_home'); // détails de la publication page home
+    $routes->add('preview', 'Dashboard::previewpublish'); //aperçu d'une publication
+});
 
 //Medias
 $routes->group('/media', static function ($routes) {

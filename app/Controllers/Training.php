@@ -4,22 +4,18 @@ namespace App\Controllers;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
 
+use App\Libraries\UserHelper;
 use App\Libraries\TrainingHelper;
 use App\Libraries\PageHelper;
 
-// Le 10/01/2023
+// Le 12/01/2023
 class Training extends BaseController
 {
+
     public function list()
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $id = session()->get('id_user');
-
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier 
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
 
         $training_helper = new TrainingHelper();
         $trainings = $training_helper->getFilterTrainings();
@@ -38,10 +34,40 @@ class Training extends BaseController
             "trainings" => $list_training,
             "user" => $user,
             "theme_button" => getTheme($user['type'], "button"),
-            "headerColor" => getTheme($user['type'],"header"),
+            "headerColor" => getTheme($user['type'], "header"),
         ];
         return view('Training/training_list.php', $data);
     }
+
+    public function home()
+    {
+        //$user_helper= new UserHelper();
+        //$user=$user_helper->getUserSession();
+
+        $training_helper = new TrainingHelper();
+        $trainings = $training_helper->getFilterTrainings();
+        $list_training = [];
+
+        foreach ($trainings as $training) {
+            if ($training['image_url']==null){
+                $training['image_url']=base_url()."/assets/training.svg";
+            }
+            $list_training[] = [
+                "id_training" => $training['id_training'],
+                "title" => $training['title'],
+                "date" => dateTimeFormat($training['date']),
+                "description" => textEllipsis($training['description'], 20),
+            ];
+        }
+        $data = [
+            "title" => "Liste des formations",
+            "trainings" => $list_training,
+            //"theme_button" => getTheme($user['type'], "button"),
+            //"headerColor" => getTheme($user['type'],"header"),
+        ];
+        return view('Training/training_list_home.php', $data);
+    }
+
 
     public function details($id)
     {
@@ -120,7 +146,7 @@ class Training extends BaseController
                     "pages" => $pages,
                     "descriptions" => $descriptions,
                     "images" => $images,
-                    "user"=>$user,
+                    "user" => $user,
                     "theme_button" => getTheme($user['type'], "button"),
                 ];
                 return view('Training/training_view.php', $data);

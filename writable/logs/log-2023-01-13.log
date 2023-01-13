@@ -1,0 +1,130 @@
+CRITICAL - 2023-01-13 09:40:47 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:45 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:45 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:45 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:45 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:45 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:45 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:46 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:46 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:46 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:41:58 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(65): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:43:57 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(66): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-13 09:47:44 --> Invalid file: Training/training_list_home.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Training/training_list_home.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_list_home.php', [], true)
+ 3 APPPATH\Controllers\Training.php(66): view('Training/training_list_home.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->home()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

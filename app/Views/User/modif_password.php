@@ -1,6 +1,11 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <h1 class="ms-4 mb-3"><?= $title ?></h1>
+<?php if (session()->get('success')) : ?>
+    <div id="success" class="alert alert-success" role="alert">
+        <?= session()->get('success') ?>
+    </div>
+<?php endif; ?>
 <div class="container">
     <form action="/user/profil/password" method="post">
         <div class='col-6 form-floating mb-3'>
