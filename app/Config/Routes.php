@@ -87,6 +87,9 @@ $routes->group('/user', static function ($routes) {
     $routes->add('profil/skill', 'User::modif_skill'); //modif skills user  
     $routes->add('profil/skill/delete/(:num)', 'User::delete_skill/$1'); //delete skills user  
     $routes->add('skill/add', 'User::add_skill'); //delete skills user  
+    $routes->add('profil/name', 'User::modif_name'); //modif name user 
+    $routes->add('profil/save/photo', 'User::save_photo'); //save the picture (user profil)  
+    
 });
 
 //$routes->get('/company/profile', 'User::profilecompany'); //profil company

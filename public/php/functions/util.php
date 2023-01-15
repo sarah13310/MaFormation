@@ -363,7 +363,7 @@ function fillMenuRight($category, $type)
                 case THEME_SUPER_ADMIN:
                     $items = [
                         ["ref" => "/user/profil/password", "name" => "Mot de passe"],
-                        ["ref" => "/user/profil/contact", "name" => "Informations contact"],                        
+                        ["ref" => "/user/profil/contact", "name" => "Informations contact"],
                         ["ref" => "/user/profil/skill", "name" => "Compétences"],
                     ];
                     break;
@@ -516,8 +516,9 @@ function fillMenuNav($category = "News")
 
 function getTypeName($type)
 {
-    $title = "";
+    $title = "Inconnu";
     switch ($type) {
+
         case SUPER_ADMIN: // super administrateur
             $title = "Super Administrateur";
             break;
@@ -531,7 +532,7 @@ function getTypeName($type)
             break;
 
         case USER: // particulier
-            $data = "Particulier";
+            $title = "Particulier";
             break;
 
         case COMPANY: // entreprise
@@ -776,4 +777,42 @@ function getStatus($status, $parenthese = false)
         $str .= " )";
     }
     return $str;
+}
+
+
+function base64_to_jpeg($base64_string, $output_file)
+{
+    $filename = "./assets/blank.png";
+    $data = explode(',', $base64_string);
+    if (count($data) == 2) {
+        // on ouvre le fichier en mode binaire
+        $ifp = fopen($output_file, 'wb');
+        // on sépare les informations
+        // $data[ 0 ] == "data:image/png;base64" type mime du fichier
+        // $data[ 1 ] == <actual base64 string>  contenu binaire (base 64) du fichier
+        $data = explode(',', $base64_string);
+        // on décode la partie binaire base 64
+        fwrite($ifp, base64_decode($data[1]));
+        // on ferme le fichier
+        fclose($ifp);
+        $filename=$output_file;
+    }
+    return $filename;
+}
+
+function image_crop($filename)
+{
+    $im = imagecreatefromjpeg($filename);
+
+    // find the size of image
+    $size = min(imagesx($im), imagesy($im));
+
+    // Set the crop image size 
+    $im2 = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => 250, 'height' => 250]);
+    if ($im2 !== FALSE) {
+        header("Content-type: image/jpeg");
+        imagejpeg($im2);
+        imagedestroy($im2);
+    }
+    imagedestroy($im);
 }

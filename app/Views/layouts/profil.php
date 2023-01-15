@@ -111,7 +111,7 @@
                                 <span class="d-none d-sm-inline "><?= $user['name'] ?></span>
                                 <span class="d-none d-sm-inline "><?= $user['firstname']  ?></span>
                                 <p></p>
-                                <p><small><i>( <?= getTypeName($user['type']) ?> )</i></small></p>
+                                <p><small><i>( <?= getTypeName(session()->get('type')) ?> )</i></small></p>
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                 <?= fillMenuDashBoard($user['type']) ?>

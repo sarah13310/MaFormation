@@ -1,77 +1,86 @@
 <?php
+
 namespace App\Libraries;
 
 use CodeIgniter\Database\MySQLi\Builder;
 
-class UserHelper{
+// le 15/01/2023
+class UserHelper
+{
 
-    function getFilterUser($id_user=ALL){
+    function getFilterUser($id_user = ALL)
+    {
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-        if ($id_user!=ALL){
+        if ($id_user != ALL) {
             $builder->where('id_user', $id_user);
         }
-        $query=$builder->get();
+        $query = $builder->get();
         $user = $query->getResultArray();
-        return ["builder"=>$builder, "user"=>$user];
+        return ["builder" => $builder, "user" => $user];
     }
 
+    // Restitue les informations de session
     function getUserSession()
     {
         $user = [
+            'type' => session()->type,
             'id_user' => session()->id_user,
             'name' => session()->name,
             'firstname' => session()->firstname,
             'mail' => session()->mail,
-            'password' => session()->password,            
+            'password' => session()->password,
             'image_url' => session()->image_url,
-            'gender' => session()->gender,
-            'address'=>session()->address,
+            'address' => session()->address,
             'cp' => session()->cp,
             'city' => session()->city,
             'country' => session()->country,
             'phone' => session()->phone,
+            'gender' => session()->gender,
             'birthday' => session()->birthday,
-            'type'=>session()->type,
+            'site' => session()->site,
             'isLoggedIn' => true,
-        ];        
+        ];
         return $user;
     }
 
+    // Associe les données de la base à la session en cours
     function setUserSession($user)
     {
         $data = [
+            'type' => $user['type'],
             'id_user' => $user['id_user'],
             'name' => $user['name'],
             'firstname' => $user['firstname'],
             'mail' => $user['mail'],
             'password' => $user['password'],
+            'image_url' => $user['image_url'],
             'address' => $user['address'],
             'cp' => $user['cp'],
-            'city' => $user['city'],           
+            'city' => $user['city'],
             'country' => $user['country'],
-            'gender' => $user['gender'],
             'phone' => $user['phone'],
-            'image_url' => $user['image_url'],
-            'type'=>$user['type'],
-            'gender'=>$user['gender'],
-            'birthday'=>$user['birthday'],
+            'gender' => $user['gender'],
+            'birthday' => $user['birthday'],
+            'ratings' => $user['ratings'],
+            'site' => "www.maformation.com",
+            'status' => $user['status'],
+            'current_job' => $user['current_job'],
             'isLoggedIn' => true,
         ];
         session()->set($data);
         return true;
     }
 
+    // récupère les noms des certificats en fonction de l'ID 
     function getInfosCertificates($id)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-
         $builder->select('certificate.name');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
         $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
         $query = $builder->get();
         $certificates = $query->getResultArray();
         $skills = [];
@@ -81,23 +90,21 @@ class UserHelper{
         return $skills;
     }
 
+    // récupère les certificats en fonction de l'ID 
     function getCertificates($id)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-
         $builder->select('certificate.*');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
         $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
         $query = $builder->get();
         $skills = $query->getResultArray();
-      
         return $skills;
     }
 
-
+    // récupère les informations des entreprises en fonction de l'ID 
     function getInfosCompany($id, $single = true)
     {
         $db      = \Config\Database::connect();
@@ -129,7 +136,7 @@ class UserHelper{
         }
         return $jobs;
     }
-    
+
 
     function setCompanySession($user, $company)
     {
@@ -151,15 +158,14 @@ class UserHelper{
         ];
         session()->set($data);
         return true;
-    }   
-
-    function removeCertificate($id){
-        $db      = \Config\Database::connect();
-        $builder = $db->table('certificate');
-        $builder->where('id_certificate', $id);        
-        $builder->delete();
     }
 
-    
-   
+    // Suppression d'un certificat en fonction de son id
+    function removeCertificate($id)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('certificate');
+        $builder->where('id_certificate', $id);
+        $builder->delete();
+    }
 }

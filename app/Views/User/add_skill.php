@@ -54,7 +54,7 @@
                     <label for="country">Pays</label>
                 </div>
                 <div>
-                    <button id="btnModify" type="submit" class="btn <?= $buttonColor ?>">Modifier</button>
+                    <button id="btnModify" type="submit" class="btn <?= $buttonColor ?>">Ajouter</button>
                 </div>
             </form>
         </div>

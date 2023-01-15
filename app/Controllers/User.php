@@ -87,6 +87,7 @@ class User extends BaseController
     private function dispatch($user)
     {
         helper(['form']);
+       
         $user_info = new UserHelper();
         $user_info->setUserSession($user);
         $type = $user['type'];
@@ -228,13 +229,53 @@ class User extends BaseController
     public function profileuser()
     {
         helper(['form']);
-        $user_info = new UserHelper();
-        $user = $user_info->getUserSession();
-
+        $user_helper = new UserHelper();
+        
+        if ($this->request->getMethod() == "post") {
+            // on met à jour les informations de session
+            //session()->id_user=$this->request->getVar('id_user');
+            session()->mail=$this->request->getVar('mail');
+           // session()->password=$this->request->getVar('password');
+           // session()->image_url=$this->request->getVar('image_url');
+            session()->address=$this->request->getVar('address');
+            session()->cp=$this->request->getVar('cp');
+            session()->city=$this->request->getVar('city');
+            session()->country=$this->request->getVar('country');
+            session()->phone=$this->request->getVar('phone');
+            session()->gender=$this->request->getVar('gender');
+            session()->birthday=$this->request->getVar('birthday');
+            session()->site=$this->request->getVar('site');
+            
+            // On met à jour les informations utilisateur
+            $dataUpdate = [
+                //'id_user' => session()->id_user,
+                'mail' => session()->mail,
+                'password' => session()->password,
+                'image_url' => session()->image_url,
+                'address' => session()->address,
+                'cp' => session()->cp,
+                'city' => session()->city,
+                'country' => session()->country,
+                'phone' => session()->phone,
+                'gender' =>session()->gender,
+                'birthday' => session()->birthday,
+                'site' => session()->site,
+            ];
+            $model = new UserModel();
+            $model->update(session()->id_user,$dataUpdate);               
+        }
+        $user = $user_helper->getUserSession();
+        $skills = $user_helper->getCertificates($user['id_user']);
+        if ($user['image_url'] == null) {
+            $user['image_url'] = base_url() . "/assets/blank.png";
+        }
         $data = [
             "title" => getTypeName($user['type']),
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
+            "birthday" => dateFormat($user['birthday']),
+            "gender" => getGender($user['gender']),
+            "skills" => $skills,
         ];
         return view('User/profile_user.php', $data);
     }
@@ -516,6 +557,38 @@ class User extends BaseController
         return view("Payment/bill.php", $data);
     }
 
+    public function modif_name(){
+
+        $user_helper=new UserHelper();
+
+        if ($this->request->getMethod() == "post") {
+            // on met à jour les informations de session
+            session()->name= $this->request->getVar('name');
+            session()->firstname=$this->request->getVar('firstname');
+            $dataUpdate=[
+                "name"=>session()->name,
+                "firstname"=>session()->firstname,
+            ];                
+            // On met à jour les informations utilisateur
+            $model = new UserModel();
+            $model->update(session()->id_user,$dataUpdate);            
+        }
+        $user = $user_helper->getUserSession();
+        $skills = $user_helper->getCertificates($user['id_user']);
+        if ($user['image_url'] == null) {
+            $user['image_url'] = base_url() . "/assets/blank.png";
+        }
+        $data = [
+            "title" => getTypeName($user['type']),
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "birthday" => dateFormat($user['birthday']),
+            "gender" => getGender($user['gender']),
+            "skills" => $skills,
+        ];
+        return view('User/profile_user.php', $data);
+    }
+
     public function modif_contact()
     {
         helper(["form"]);
@@ -524,24 +597,31 @@ class User extends BaseController
 
         if ($this->request->getMethod() == 'post') {
             $model = new UserModel();
+            session()->name=$this->request->getVar('name');
+            session()->firstname=$this->request->getVar('firstname');
+            session()->address=$this->request->getVar('address');
+            session()->city=$this->request->getVar('city');
+            session()->cp=$this->request->getVar('cp');
+            session()->country=$this->request->getVar('country');
+            session()->phone=$this->request->getVar('phone');
+            session()->mail=$this->request->getVar('mail');
+            session()->birthday=$this->request->getVar('birthday');
+            session()->gender=$this->request->getVar('gender');
+
             $updateData = [
-                'name' => $this->request->getVar('name'),
-                'firstname' => $this->request->getVar('firstname'),
-                'address' => $this->request->getVar('address'),
-                'city' => $this->request->getVar('city'),
-                'cp' => $this->request->getVar('cp'),
-                'country' => $this->request->getVar('country'),
-                'phone' => $this->request->getVar('phone'),
-                'mail' => $this->request->getVar('mail'),
-                'birthday' => $this->request->getVar('birthday'),
-                'gender' => $this->request->getVar('gender'),
+                'name' => session()->name,
+                'firstname' => session()->firstname,
+                'address' => session()->address,
+                'city' => session()->city,
+                'cp' => session()->cp,
+                'country' => session()->country,
+                'phone' => session()->phone,
+                'mail' => session()->mail,
+                'birthday' => session()->birthday,
+                'gender' => session()->gender,
             ];
             $model->update(session()->id_user, $updateData);
-            $updateData['id_user'] = session()->id_user;
-            $updateData['password'] = session()->password;
-            $updateData['image_url'] = session()->image_url;
-            $updateData['type'] = session()->type;
-            $user_helper->setUserSession($updateData);
+            
             session()->setFlashdata('success', 'Informations de contact modifiées');
         }
         $data = [
@@ -604,7 +684,7 @@ class User extends BaseController
             ];
 
             $id_cetificate = $this->request->getVar('id_certificate');
-             //on modifie la compétence dans la table certificate
+            //on modifie la compétence dans la table certificate
             if ($id_cetificate) {
                 $model = new CertificateModel();
                 $model->update($id_cetificate, $updateData);
@@ -689,7 +769,45 @@ class User extends BaseController
             "buttonColor" => getTheme($user['type'], "button"),
             "headerColor" => getTheme($user['type'], "header"),
         ];
-
         return view("User/add_skill.php", $data);
+    }
+
+
+    function save_photo()
+    {
+        helper(['form']);
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+
+        if ($this->request->getMethod() == 'post') {
+            //on récupère le contenu base 64
+            $photo = $this->request->getVar('photo');
+            $file = "photo_0" . session()->id_user . ".jpeg";
+            // on convertir le contenu base 64 en format jpeg
+            $url_photo =  './assets/photos/' . $file;
+            base64_to_jpeg($photo, $url_photo);
+            // on déplace le fichier dans le répertoire photos
+            //move_uploaded_file('./'.$file, $url_photo);
+            session()->image_url= base_url() . "/assets/photos/" . $file;
+
+            $model = new UserModel();
+            $dataUpdate = [
+                "image_url" => base_url() . "/assets/photos/" . $file,
+            ];
+            $model->update($user['id_user'], $dataUpdate);
+        }
+        $skills = $user_helper->getCertificates($user['id_user']);
+
+        $data = [
+            "title" => "Ajouter des compétences",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "birthday" => dateFormat($user['birthday']),
+            "gender" => getGender($user['gender']),
+            "skills" => $skills,
+        ];
+
+        return view("User/profile_user.php", $data);
     }
 }

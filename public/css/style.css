@@ -452,7 +452,7 @@ hr {
 	border: 1px solid #1e70cd;
 }
 
-#frame_snapshot {
+.frame_snapshot {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -460,20 +460,21 @@ hr {
 	height: 205px;
 	background: black;
 	border-radius: 5px;
-}
-
-#snapshot {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	width: 200px;
-	height: 112.5px;
-}
-
-.contain {
 	object-fit: contain;
 }
+
+.snapshot {		
+	max-width: 200px;
+	max-height: 200px;
+}
+
+.cropped {
+    width: 205px; /* width of container */
+    height: 205px; /* height of container */
+    overflow: hidden;
+    border: 5px solid black;
+}
+
 
 .end {
 	display: flex;
@@ -840,3 +841,13 @@ tr {
 	top: 0;
 	z-index: 1;
 }
+
+.thumb-photo {
+	background: #000000;
+	margin-top: 1rem;
+	object-fit: contain; /* keep aspect ratio */
+	width: 100%;
+	max-height: 200px;
+	margin-bottom: 1rem;
+	padding-right: 10px;
+  }

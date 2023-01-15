@@ -33,8 +33,10 @@ class UserModel extends Model
         "newsletters",
         "gender",
         "birthday",
+        "ratings",
         "type",
-        "status"
+        "status",
+        
     ];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];

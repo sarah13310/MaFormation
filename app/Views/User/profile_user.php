@@ -1,23 +1,22 @@
-<!-- <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?> -->
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<div class="modal " tabindex="-1" id="myModalName">
+<div class="modal" tabindex="-1" id="myModalName">
     <div class="modal-dialog">
-        <form action="" method="POST">
+        <form action="/user/profil/name" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Modification du nom</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id_user" id="id_user" value="<?= set_value('id_user') ?>">
+                    <input type="hidden" name="id_user" id="id_user" value="<?= session()->id_user?>">
                     <div class="form-group">
                         <label for="name">Nom</label>
-                        <input type="text" class="form-control mb-2" name="name" id="name">
+                        <input type="text" class="form-control mb-2" name="name" id="name" value="<?=session()->name?>">
                     </div>
                     <div class="form-group">
                         <label for="name">Prénom</label>
-                        <input type="text" class="form-control mb-2" name="firstname" id="firstname">
+                        <input type="text" class="form-control mb-2" name="firstname" id="firstname" value="<?=session()->firstname?>">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -29,27 +28,26 @@
     </div>
 </div>
 
-<div class="modal " tabindex="-1" id="myModalContact">
+<div class="modal" tabindex="-1" id="myModalContact">
     <div class="modal-dialog">
-        <form action="" method="POST">
+        <form action="/user/profil" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Informations de contact</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body row">
-                    <input type="hidden" name="id_user" id="id_user" value="<?= set_value('id_user') ?>">
+                <div class="modal-body row">                   
                     <div class="col-md-6">
                         <div class='form-floating mb-3'>
-                            <input type="text" class="form-control" name="address" id="address" value="<?= set_value('address') ?>" placeholder='Adresse'>
+                            <input type="text" class="form-control" name="address" id="address" value="<?= session()->address ?>" placeholder='Adresse'>
                             <label for="name">Adresse</label>
                         </div>
                         <div class='form-floating mb-3'>
-                            <input type="text" class="form-control" name="cp" id="cp" value="<?= set_value('cp') ?>" placeholder='Code postal'>
+                            <input type="text" class="form-control" name="cp" id="cp" value="<?= session()->cp ?>" placeholder='Code postal'>
                             <label for="cp">CP</label>
                         </div>
                         <div class='form-floating mb-3'>
-                            <input type="text" class="form-control" name="city" id="city" value="<?= set_value('city') ?>" placeholder='Ville'>
+                            <input type="text" class="form-control" name="city" id="city" value="<?= session()->city ?>" placeholder='Ville'>
                             <label for="city">Ville</label>
                         </div>
                         <div class='form-floating mb-3'>
@@ -59,26 +57,26 @@
                     </div>
                     <div class="col-md-6">
                         <div class='form-floating mb-3'>
-                            <input type="text" class="form-control" name="mail" id="mail" value="<?= set_value('mail') ?>" placeholder='Mail'>
+                            <input type="text" class="form-control" name="mail" id="mail" value="<?= session()->mail ?>" placeholder='Mail'>
                             <label for="mail">Mail</label>
                         </div>
                         <div class='form-floating mb-3'>
-                            <input type="text" class="form-control" name="site" id="site" value="<?= set_value('site') ?>" placeholder='Site'>
+                            <input type="text" class="form-control" name="site" id="site" value="<?= session()->site ?>" placeholder='Site'>
                             <label for="site">Site</label>
                         </div>
                         <div class='form-floating mb-3'>
-                            <input type="text" class="form-control" name="phone" id="phone" value="<?= set_value('phone') ?>" placeholder='Téléphone'>
+                            <input type="text" class="form-control" name="phone" id="phone" value="<?= session()->phone ?>" placeholder='Téléphone'>
                             <label for="phone">Téléphone</label>
                         </div>
                         <div class='form-floating mb-3'>
-                            <input type="date" class="form-control" name="birthday" id="birthday" value="<?= set_value('birthday') ?>" placeholder='Anniversaire'>
+                            <input type="date" class="form-control" name="birthday" id="birthday" value="<?= session()->birthday ?>" placeholder='Anniversaire'>
                             <label for="birthday">Anniversaire</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class='form-select' id='gender' name="gender" value="<?= set_value('gender') ?>" aria-label='Genre'>
-                                <option value='0'>Madame</option>
-                                <option value='1'>Monsieur</option>
-                                <option value='Null' selected>Non renseigné</option>
+                            <select class='form-select' id='gender' name="gender" aria-label='Genre'>
+                                <option value='0'<?= (session()->gender==0)?"selected":"" ?> >Madame</option>
+                                <option value='1'<?= (session()->gender==1)?"selected":"" ?>>Monsieur</option>
+                                <option value='Null' <?= (session()->gender=='')?"selected":"" ?>>Non renseigné</option>
                             </select>
                             <label for="gender">Genre</label>
                         </div>
@@ -96,49 +94,54 @@
 <!-- boite modal snapshot -->
 <div class="modal" tabindex="-1" id="myCamera">
     <div class="modal-dialog">
-        <div class="modal-content" style="align-items:center">
-            <div class="modal-header">
-                <h5 class="modal-title">Caméra - prendre une photo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form>
+            <div class="modal-content" style="align-items:center">
+                <div class="modal-header">
+                    <h5 class="modal-title">Caméra - prendre une photo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="my_camera" class="mb-2"></div>
+                    <div id="results"></div>
+                </div>
+                <div class="modal-footer mb-0">
+                    <button type=button class="btn btn-outline-primary" onClick="take_snapshot()">Prendre Image</button>
+                    <button type=button class="btn btn-outline-primary" onClick="save_snapshot()" data-bs-dismiss="modal">Sauver Image</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <div id="my_camera" class="mb-2"></div>
-                <div id="results"></div>
-            </div>
-            <div class="modal-footer mb-0">
-                <button type=button class="btn btn-outline-primary" onClick="take_snapshot()">Prendre Image</button>
-                <button type=button class="btn btn-outline-primary" onClick="save_snapshot()" data-bs-dismiss="modal">Sauver Image</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 <!-- boite modal import -->
-<div class="modal" tabindex="-1" id="myPicture">
+<div name="modalImport" class="modal" tabindex="-1" id="myPicture">
     <div class="modal-dialog">
-        <div class="modal-content" style="align-items:center">
-            <div class="modal-header">
-                <h5 class="modal-title">Avatar - Importer un fichier</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form onsubmit="return save_snapshot()" method="POST" action="/user/profil/save/photo">
+            <input id="photo" type="hidden" name="photo" value="<?= session()->image_url ?>">
+            <div class="modal-content" style="align-items:center">
+                <div class="modal-header">
+                    <h5 class="modal-title">Avatar - Importer un fichier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id='output' style="height:100px; width:100px;">
+                </div>
+                <div class="modal-footer mb-0">
+                    <input type='file' accept="<?= base_url() . '/assets/photos/*' ?>" class="btn btn-outline-primary" onchange='openFile(event)'>
+                    <button type=submit class="btn btn-outline-primary" data-bs-dismiss="modal">Sauver Image</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <img id='output' style="height:100px; width:100px;">
-            </div>
-            <div class="modal-footer mb-0">
-                <input type='file' accept='image/*' class="btn btn-outline-primary" onchange='openFile(event)'>
-                <button type=button class="btn btn-outline-primary" onClick="save_snapshot()" data-bs-dismiss="modal">Sauver Image</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <div class="container mt-3">
     <div class="row ">
         <div class="col-12 col-md-4 mb-4">
-            <div id="frame_snapshot" class="row mb-2">
-                <div id="snapshot" class="contain">
-                    <img src='<?= $user['image_url'] ?>' style="width: 200px;" alt="Avatar" />
+            <div id="frame_snapshot " class="row mb-2">
+                <div id="snapshot" class="frame_snapshot cropped">
+                    <img src='<?= $user['image_url'] ?>' class="snapshot" alt="Photo" />
                 </div>
             </div>
             <div>
@@ -183,10 +186,10 @@
                     <hr class="fade-2">
                 </div>
                 <div>
-                    <span class="title2 mt-1">Anniversaire : <span class="ton-blue-5"><?= dateFormat($user['birthday']) ?></span></span>
+                    <span class="title2 mt-1">Anniversaire : <span class="ton-blue-5"><?= $birthday ?></span></span>
                 </div>
                 <div>
-                    <span class="title2 mt-1">Genre : <span class="ton-blue-5"><?= ($user['gender'] == 0) ? "Féminin" : "Masculin" ?></span></span>
+                    <span class="title2 mt-1">Genre : <span class="ton-blue-5"><?= $gender ?></span></span>
                 </div>
             </div>
         </div>
@@ -196,6 +199,8 @@
     <?= $this->section('js') ?>
     <script type="text/javascript" src="<?= base_url() ?>/webcamjs/webcam.min.js"></script>
     <script>
+        let photo_url = document.getElementById("photo");
+
         const snapshot = document.getElementById('snapshot');
         // Configure a few settings and attach camera
         Webcam.set({
@@ -209,7 +214,7 @@
         var shutter = new Audio();
         shutter.autoplay = false;
         shutter.src = "<?= base_url() ?>/webcamjs/shutter.ogg";
-        var img_snap = "";
+        let img_snap = "<?= $user['image_url'] ?>";
 
         function take_snapshot() {
             // play sound effect
@@ -225,6 +230,8 @@
         }
 
         function save_snapshot() {
+            photo_url.value = img_snap;
+
             snapshot.innerHTML = '<img style="width:200px" src="' + img_snap + '"/>';
         }
 
