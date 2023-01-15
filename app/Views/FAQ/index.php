@@ -1,9 +1,9 @@
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
-<h1><?= $title ?></h1>
+<h1 class="mb-3 text-center"><?= $title ?></h1>
 
 <div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
+  <div class="accordion-item mb-2 ">
     <h2 class="accordion-header" id="flush-headingOne">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
         Qui sommes nous ?
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+  <div class="accordion-item mb-2 ">
     <h2 class="accordion-header" id="flush-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
         Quelle est la passerelle de paiement?
@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+  <div class="accordion-item mb-2 ">
     <h2 class="accordion-header" id="flush-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
         Puis-je payer avec mon compte Paypal?
@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+  <div class="accordion-item mb-2 ">
     <h2 class="accordion-header" id="flush-headingFour">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
         La plateforme accepte t-elle le paiement bancaire classique?
@@ -55,7 +55,7 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+  <div class="accordion-item mb-2 ">
     <h2 class="accordion-header" id="flush-headingFive">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseThree">
         Est t-il possible d’utiliser un règlement international pour ce type de prestations?
@@ -68,7 +68,7 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+  <div class="accordion-item mb-2 ">
     <h2 class="accordion-header" id="flush-headingSix">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseThree">
         Le prix indiqué est t-il toutes taxes comprises?

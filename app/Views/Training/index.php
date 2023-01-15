@@ -5,5 +5,4 @@
 
 
 <?= $this->section('js') ?>
-
 <?= $this->endSection() ?>

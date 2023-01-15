@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<h1><?= $title ?></h1>
+<h1 class="mb-2"><?= $title ?></h1>
 <table class="table">
     <thead class="t_former">
         <tr>
@@ -8,8 +8,7 @@
             <th scope="col">Sujet</th>
             <th scope="col">Description</th>
             <th scope="col">Date et heure</th>
-            <th scope="col">Auteur</th>
-            
+            <th scope="col">Auteur</th>            
         </tr>
     </thead>
     <?php $i = 0;

@@ -81,6 +81,23 @@ class UserHelper{
         return $skills;
     }
 
+    function getCertificates($id)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('user');
+
+        $builder->select('certificate.*');
+        $builder->where('user.id_user', $id);
+        $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
+        $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
+
+        $query = $builder->get();
+        $skills = $query->getResultArray();
+      
+        return $skills;
+    }
+
+
     function getInfosCompany($id, $single = true)
     {
         $db      = \Config\Database::connect();
@@ -91,7 +108,6 @@ class UserHelper{
         $builder->join('company', 'user_has_company.id_company=company.id_company');
         $query = $builder->get();
         $companies = $query->getResultArray();
-
         $jobs = [];
 
         if ($companies == null)
@@ -136,5 +152,14 @@ class UserHelper{
         session()->set($data);
         return true;
     }   
+
+    function removeCertificate($id){
+        $db      = \Config\Database::connect();
+        $builder = $db->table('certificate');
+        $builder->where('id_certificate', $id);        
+        $builder->delete();
+    }
+
+    
    
 }

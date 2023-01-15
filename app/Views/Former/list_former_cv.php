@@ -31,7 +31,7 @@
                     <?= "Téléphone : " . $f['phone'] ?>
                 </p>
             </div>
-            <a href="/former/list" class="btn btn-outline-primary">Retour à la liste</a>
+            <a href="/former/list" class="mb-2 btn btn-outline-primary">Retour à la liste</a>
         </div>
     <?php $i++;
     endforeach ?>

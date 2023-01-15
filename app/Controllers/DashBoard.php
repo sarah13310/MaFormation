@@ -7,6 +7,7 @@ use App\Libraries\ArticleHelper;
 use App\Libraries\BookHelper;
 use App\Libraries\VideoHelper;
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
 class DashBoard extends BaseController
 {
 
@@ -502,8 +503,6 @@ class DashBoard extends BaseController
             }
             $listvideos[$i]["user"] = $authors;
         }
-
-
 
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();

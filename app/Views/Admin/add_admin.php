@@ -19,8 +19,8 @@
                     <label for='mail'>Adresse mail (*)</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='motDePasse' name='password' type='password' placeholder='Mot de passe' />
-                    <label for='motDePasse'>Mot de passe (*)</label>
+                    <input class='form-control' id='password' name='password' type='password' placeholder='Mot de passe' />
+                    <label for='password'>Mot de passe (*)</label>
                 </div>
                 <div class='form-floating mb-3'>
                     <select class='form-select' id='genre' name="gender"aria-label='Genre'>
@@ -31,43 +31,43 @@
                     <label for='genre'>Genre</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='nom' name="name" type='text' placeholder='Nom' />
-                    <label for='nom'>Nom (*)</label>
+                    <input class='form-control' id='name' name="name" type='text' placeholder='Nom (*)' />
+                    <label for='name'>Nom (*)</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='prenom' name="firstname" type='text' placeholder='Prénom' />
-                    <label for='prenom'>Prénom (*)</label>
+                    <input class='form-control' id='firstname' name="firstname" type='text' placeholder='Prénom' />
+                    <label for='firstname'>Prénom (*)</label>
                 </div>
                 <div class='mb-3'>
                     <div class='form-check'>
-                        <input class='form-check-input' id='inscrit' type='checkbox' name='newsletters'checked />
                         <label class='form-check-label' for='inscrit'>S&#x27;abonner à la newsletters</label>
+                        <input class='form-check-input' id='inscrit' type='checkbox' name='newsletters'checked />
                     </div>
                 </div>
                 <div class='d-grid'>
-                    <button class='btn btn-primary col-sm-6 btn-lg' type='submit'>Ajouter</button>
+                    <button class='btn <?= $buttonColor?> col-sm-6 btn-lg' type='submit'>Ajouter</button>
                 </div>                
             </div>
             <div class='col-md-6'>
                 <div class='form-floating mb-3'>
-                    <textarea class='form-control' id='adresse' name="address" type='text' placeholder='adresse' style='height: 8.2rem;'></textarea>
-                    <label for='adresse'>adresse</label>
+                    <textarea class='form-control' id='adress' name="address" type='text' placeholder='adresse' style='height: 8.2rem;'></textarea>
+                    <label for='adress'>adresse</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='codePostal' name="cp" type='text' placeholder='code postal' />
-                    <label for='codePostal'>code postal</label>
+                    <input class='form-control' id='cp' name="cp" type='text' placeholder='code postal' />
+                    <label for='cp'>code postal</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='ville' name="city" type='text' placeholder='Ville' />
-                    <label for='ville'>Ville</label>
+                    <input class='form-control' id='city' name="city" type='text' placeholder='Ville' />
+                    <label for='city'>Ville</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='pays' name="country" type='text' placeholder='Pays' value="France"/>
-                    <label for='pays'>Pays</label>
+                    <input class='form-control' id='country' name="country" type='text' placeholder='Pays' />
+                    <label for="country">Pays</label>
                 </div>
                 <div class='form-floating mb-3'>
-                    <input class='form-control' id='telephone' name="phone" type='text' placeholder='Téléphone' />
-                    <label for='telephone'>Téléphone</label>
+                    <input class='form-control' id="phone" name="phone" type='text' placeholder="Téléphone" />
+                    <label for="phone">Téléphone</label>
                 </div>
                 <?php if (isset($validation)) : ?>
                     <div class="col-12 mt-2">

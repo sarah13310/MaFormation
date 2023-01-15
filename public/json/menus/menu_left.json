@@ -1,0 +1,272 @@
+{
+    "superadmin": {
+        "profil": [
+            {
+                "ref": "/user/profil/password",
+                "name": "Mot de passe"
+            },
+            {
+                "ref": "/user/profil/contact",
+                "name": "Informations contact"
+            },
+            {
+                "ref": "/user/profil/skill",
+                "name": "Compétences"
+            }
+        ],
+        "media": [
+            {
+                "ref": "/former/articles/list",
+                "name": "Liste des Articles"
+            },
+            {
+                "ref": "/former/publishes/list",
+                "name": "Liste des Publications"
+            },
+            {
+                "ref": "/former/videos/list",
+                "name": "Liste des Articles"
+            },
+            {
+                "ref": "/former/publishes/list",
+                "name": "Liste des Vidéos"
+            },
+            {
+                "ref": "/former/products/list",
+                "name": "Liste des Produits"
+            }
+        ],
+        "edition": [
+            {
+                "ref": "/admin/articles/edit",
+                "name": "Création Article"
+            },
+            {
+                "ref": "/admin/publishes/edit",
+                "name": "Création Publication"
+            },
+            {
+                "ref": "/admin/videos/edit",
+                "name": "Création Vidéo"
+            },
+            {
+                "ref": "/admin/books/edit",
+                "name": "Ajouter un Livre"
+            },
+            {
+                "ref": "/admin/products/edit",
+                "name": "Ajouter un Produit"
+            }
+        ],
+        "formation": [
+            {
+                "ref": "/training/list",
+                "name": "Liste"
+            }
+        ],
+        "clients": [
+            {
+                "ref": "/user/list",
+                "name": "Particulier"
+            },
+            {
+                "ref": "/user/list",
+                "name": "Entreprise"
+            }
+        ]
+    },
+    "admin": {
+        "profil": [
+            {
+                "ref": "/user/profil/password",
+                "name": "Mot de passe"
+            },
+            {
+                "ref": "/user/profil/contact",
+                "name": "Informations contact"
+            },
+            {
+                "ref": "/user/profil/skill",
+                "name": "Compétences"
+            }
+        ],
+        "media": [
+            {
+                "ref": "/former/articles/list",
+                "name": "Liste des Articles"
+            },
+            {
+                "ref": "/former/publishes/list",
+                "name": "Liste des Publications"
+            },
+            {
+                "ref": "/former/videos/list",
+                "name": "Liste des Articles"
+            },
+            {
+                "ref": "/former/publishes/list",
+                "name": "Liste des Vidéos"
+            },
+            {
+                "ref": "/former/products/list",
+                "name": "Liste des Produits"
+            }
+        ],
+        "edition": [
+            {
+                "ref": "/admin/articles/edit",
+                "name": "Création Article"
+            },
+            {
+                "ref": "/admin/publishes/edit",
+                "name": "Création Publication"
+            },
+            {
+                "ref": "/admin/videos/edit",
+                "name": "Création Vidéo"
+            },
+            {
+                "ref": "/admin/books/edit",
+                "name": "Ajouter un Livre"
+            },
+            {
+                "ref": "/admin/products/edit",
+                "name": "Ajouter un Produit"
+            }
+        ],
+        "formation": [
+            {
+                "ref": "/training/list",
+                "name": "Liste"
+            }
+        ],
+        "clients": [
+            {
+                "ref": "/user/list",
+                "name": "Particulier"
+            },
+            {
+                "ref": "/user/list",
+                "name": "Entreprise"
+            }
+        ]
+    },
+    "former": {
+        "profil": [
+            {
+                "ref": "/user/profil/password",
+                "name": "Mot de passe"
+            },
+            {
+                "ref": "/user/profil/contact",
+                "name": "Informations contact"
+            },
+            {
+                "ref": "/user/profil/skill",
+                "name": "Compétences"
+            }
+        ],
+        "media": [
+            {
+                "ref": "/former/articles/list",
+                "name": "Liste des Articles"
+            },
+            {
+                "ref": "/former/publishes/list",
+                "name": "Liste des Publications"
+            },
+            {
+                "ref": "/former/videos/list",
+                "name": "Liste des Articles"
+            },
+            {
+                "ref": "/former/publishes/list",
+                "name": "Liste des Vidéos"
+            },
+            {
+                "ref": "/former/products/list",
+                "name": "Liste des Produits"
+            }
+        ],
+        "edition": [
+            {
+                "ref": "/former/training/add",
+                "name": "Création Formation"
+            },
+            {
+                "ref": "/former/training/edit",
+                "name": "Création Page"
+            },
+            {
+                "ref": "/admin/articles/edit",
+                "name": "Création Article"
+            },
+            {
+                "ref": "/admin/publishes/edit",
+                "name": "Création Publication"
+            },
+            {
+                "ref": "/user/skill/add",
+                "name": "Ajouter Compétence"
+            },
+            {
+                "ref": "/admin/videos/edit",
+                "name": "Création Vidéo"
+            },
+            {
+                "ref": "/admin/books/edit",
+                "name": "Ajouter un Livre"
+            },
+            {
+                "ref": "/admin/products/edit",
+                "name": "Ajouter un Produit"
+            }
+        ],
+        "formation": [
+            {
+                "ref": "/training/list",
+                "name": "Liste"
+            }
+        ]
+    },
+    "company": {
+        "profil": [
+            {
+                "ref": "/user/profil/password",
+                "name": "Mot de passe"
+            },
+            {
+                "ref": "/user/profil/contact",
+                "name": "Informations contact"
+            },
+            {
+                "ref": "/user/profil/skill",
+                "name": "Compétences"
+            }
+        ],
+        "formation": [
+            {
+                "ref": "/training/list",
+                "name": "Liste"
+            }
+        ]
+    },
+    "user": {
+        "profil": [
+            {
+                "ref": "/user/profil/password",
+                "name": "Mot de passe"
+            },
+            {
+                "ref": "/user/profil/contact",
+                "name": "Informations contact"
+            }
+        ],
+        "formation": [
+            {
+                "ref": "/training/list",
+                "name": "Liste"
+            }
+        ]
+    }
+}

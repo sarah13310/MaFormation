@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
-<h1><?= $title ?></h1>
+<h1 class="text-center"><?= $title ?></h1>
 <div class="row justify-content-center align-items-center">
     <div class="myfunding1 d-flex p-3 m-4 justify-content-center align-items-center">
         <img src="assets/img/funding_1.png" class="float-start" width="320" height="300">
@@ -26,7 +26,7 @@
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Turpis egestas maecenas pharetra convallis posuere morbi leo.
         </p>
-        <button class="myfundingbutton" type="button">Bouton</button>
+        <button class="btn btn-primary" type="button">Infos</button>
     </div>
     <div class="myfunding3 d-flex justify-content-center align-items-center">
         <div class="myfundingcard d-block p-3 m-4 text-center">

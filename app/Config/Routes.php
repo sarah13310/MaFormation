@@ -35,15 +35,16 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 // admin
-$routes->get('/superadmin/profil', 'Admin::superprofile'); //Page profil super administrateur
-$routes->get('/admin/profil', 'Admin::profileadmin'); // Page profil administrateur
-$routes->match(['get', 'post'], '/superadmin/add/admin', 'Admin::add_admin'); // Ajout administrateur
+
+$routes->add('/superadmin/add/admin', 'Admin::add_admin'); // Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges'); //dashboard des privileges
-$routes->match(['get', 'post'], '/admin/articles/edit', 'News::articles_edit');
-$routes->match(['get', 'post'], '/admin/publishes/edit', 'News::publishes_edit');
+
+$routes->add('/admin/articles/edit', 'News::articles_edit');
+$routes->add('/admin/publishes/edit', 'News::publishes_edit');
 $routes->add('/admin/articles/list', 'Dashboard::listarticles');
 $routes->add('/admin/publishes/list', 'Dashboard::listpublishes');
 $routes->get('/admin', 'Admin::index');
+
 $routes->add('/admin/videos/list', 'Dashboard::listvideos'); //dashboard des videos de tous les formateurs/admins
 $routes->add('/admin/books/list', 'Dashboard::listbooks'); //dashboard des livres de tous les formateurs/admins
 $routes->add('/admin/videos/edit', 'Media::videos_edit');
@@ -74,18 +75,21 @@ $routes->group('/former', static function ($routes) {
 
 // user (profils communs)
 $routes->group('/user', static function ($routes) {
-    $routes->add( 'login', 'User::login'); //login user
+    $routes->add('login', 'User::login'); //login user
     $routes->get('logout', 'User::logout'); //logout user
-    $routes->add( 'forgetpassword', 'User::forgetpassword'); //login user
-    $routes->add( 'signin', 'User::signin'); //signin user
-    $routes->add( 'company', 'User::confirmation'); //signin user
+    $routes->add('forgetpassword', 'User::forgetpassword'); //login user
+    $routes->add('signin', 'User::signin'); //signin user
+    $routes->add('company', 'User::confirmation'); //signin user
     $routes->add('profil', 'User::profileuser'); //profil user   
     $routes->add('bill', 'User::bill'); //profil user  
     $routes->add('profil/contact', 'User::modif_contact'); //modif contact user
     $routes->add('profil/password', 'User::modif_password'); //modif password user  
+    $routes->add('profil/skill', 'User::modif_skill'); //modif skills user  
+    $routes->add('profil/skill/delete/(:num)', 'User::delete_skill/$1'); //delete skills user  
+    $routes->add('skill/add', 'User::add_skill'); //delete skills user  
 });
 
-$routes->get('/company/profile', 'User::profilecompany'); //profil company
+//$routes->get('/company/profile', 'User::profilecompany'); //profil company
 
 // menu à propos
 $routes->get('/faq', 'FAQ::index');
@@ -102,10 +106,10 @@ $routes->group('/training', static function ($routes) {
 
 // Articles 
 $routes->group('/article', static function ($routes) {
-$routes->add('list', 'News::list_articles_home'); // liste des articles page home
-$routes->get('list/details/(:num)', 'News::get_details_article_home/$1'); // détails de l'article page home
-$routes->post('list/details', 'News::details_article_home'); // détails de l'article page home
-$routes->add('preview', 'Dashboard::previewarticle'); //aperçu d'un article
+    $routes->add('list', 'News::list_articles_home'); // liste des articles page home
+    $routes->get('list/details/(:num)', 'News::get_details_article_home/$1'); // détails de l'article page home
+    $routes->post('list/details', 'News::details_article_home'); // détails de l'article page home
+    $routes->add('preview', 'Dashboard::previewarticle'); //aperçu d'un article
 });
 
 // Publications

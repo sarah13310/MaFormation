@@ -1,7 +1,7 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<h1><?= $title ?></h1>
+<h1 class="mb-2" ><?= $title ?></h1>
 <table class="table" id="table_admin">
     <thead class="t_former">
         <tr>

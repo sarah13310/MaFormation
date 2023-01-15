@@ -738,7 +738,15 @@ tr {
 	padding: 9px;
 }
 
-.card-img{
+.card-img-center {
+	display: flex;
+	justify-content: center;
+	max-width: 100%;
+	height: auto;
+
+}
+
+.card-img {
 	background: ghostwhite;
 }
 
@@ -752,6 +760,8 @@ tr {
 
 .section-bg {
 	background: #e9ecef;
+	padding-top: 4px;
+	padding-bottom: 8px;
 }
 
 .card {
@@ -777,4 +787,56 @@ tr {
 
 }
 
+.h-80 {
+	height: 80%;
+}
 
+.h-90 {
+	height: 90%;
+}
+
+.h-95 {
+	height: 95%;
+}
+
+
+/* scrollbars */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 4px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.tbodyDiv {
+	max-height: clamp(5em, 80vh, 560px);
+	overflow: auto;
+}
+
+/* pour fixer le header d'une table lors d'un scroll */
+
+.tableFixHead {
+	overflow:auto;
+	height: 100%;
+}
+
+.tableFixHead  {
+
+	position: fixed;
+	top: 0;
+	z-index: 1;
+}

@@ -10,19 +10,19 @@
 <table class="table table-hover">
     <thead class="<?=$headerColor?>">
         <tr>
-            <th scope="col">Titre</th>
-            <th scope="col">Description</th>
-            <th scope="col">Date et heure</th>
-            <th scope="col">Voir</th>
+            <th class="col" scope="col">Titre</th>
+            <th class="col" scope="col">Description</th>
+            <th class="col" scope="col">Date et heure</th>
+            <th class="col" scope="col">Voir</th>
         </tr>
     </thead>
     <?php foreach ($trainings as $training) : ?>
         <form action="\training\view" method="POST">
             <tr>
-                <td scope="col"><?= $training['title'] ?></td>
-                <td scope="col"><?= $training['description'] ?></td>
-                <td scope="col"><?= $training['date'] ?></td>
-                <td class="view" scope="col"><button class="<?= $theme_button ?>" type="submit" value="<?= $training['id_training'] ?>" name='id_training'><i class="bi bi-eye"></i></button></td>
+                <td class="col" scope="col"><?= $training['title'] ?></td>
+                <td class="col" scope="col"><?= $training['description'] ?></td>
+                <td class="col" scope="col"><?= $training['date'] ?></td>
+                <td class="view col" scope="col"><button class="<?= $theme_button ?>" type="submit" value="<?= $training['id_training'] ?>" name='id_training'><i class="bi bi-eye"></i></button></td>
             </tr>
         </form>
     <?php endforeach ?>

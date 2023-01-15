@@ -16,7 +16,6 @@ use App\Libraries\BillHelper;
 // le 12/01/2023
 class User extends BaseController
 {
-
     /* connexion utlitisateur */
     public function login()
     {
@@ -83,7 +82,7 @@ class User extends BaseController
         }
         return view('Login/login', $data);
     }
-    
+
     /* fonction de redirection suivant profil utilisateur */
     private function dispatch($user)
     {
@@ -99,7 +98,6 @@ class User extends BaseController
         $skills = $user_info->getInfosCertificates($user['id_user']);
 
         $data = [
-
             "user" => $user,
             "jobs" => $jobs,
             "skills" => $skills,
@@ -111,7 +109,6 @@ class User extends BaseController
             "birthday" => dateFormat($user['birthday']),
             "title" => getTypeName($type),
         ];
-
         return $data;
     }
 
@@ -230,10 +227,10 @@ class User extends BaseController
     /* profil utilisateur */
     public function profileuser()
     {
-        helper(['form']);        
+        helper(['form']);
         $user_info = new UserHelper();
         $user = $user_info->getUserSession();
-                
+
         $data = [
             "title" => getTypeName($user['type']),
             "user" => $user,
@@ -245,10 +242,9 @@ class User extends BaseController
     /* profil entreprise */
     public function profilecompany()
     {
+        $id =  session()->get('id_user');
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-        $id =  session()->get('id_user');
-
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
@@ -259,7 +255,6 @@ class User extends BaseController
         $builder->join('company', 'user_has_company.id_company=company.id_company');
         $query = $builder->get();
         $infos = $query->getResultArray();
-
         $infos = $infos[0];
 
         $company = [
@@ -311,6 +306,7 @@ class User extends BaseController
                 'password' => 'required|min_length[8]|max_length[255]',
                 'password_confirm' => 'matches[password]',
             ];
+
             $error = [
                 'name' => ['required' => "Nom vide!"],
                 'firstname' => ['required' => "Prénom vide!"],
@@ -333,6 +329,7 @@ class User extends BaseController
                 'f_cp' => 'required|min_length[3]|max_length[16]',
                 'f_country' => 'required|min_length[3]|max_length[16]',
             ];
+
             $errorf = [
                 'f_name' => ['required' => "Nom de la certification vide!"],
                 'f_content' => ['required' => "Contenu de la certification vide!"],
@@ -552,12 +549,12 @@ class User extends BaseController
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
         ];
-
         return view("User/modif_contact.php", $data);
     }
 
     public function modif_perso()
     {
+        helper(["form"]);
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();
         $data = [
@@ -566,13 +563,13 @@ class User extends BaseController
             "buttonColor" => getTheme($user['type'], "button"),
         ];
         if ($this->request->getMethod() == 'post') {
-
             return view("User/modif_contact.php", $data);
         }
     }
 
     public function modif_password()
     {
+        helper(["form"]);
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();
         $data = [
@@ -581,5 +578,118 @@ class User extends BaseController
             "buttonColor" => getTheme($user['type'], "button"),
         ];
         return view("User/modif_password.php", $data);
+    }
+
+    public function modif_skill()
+    {
+        helper(["form"]);
+        // on récupère l'id de la session active
+        $id = session()->get("id_user");
+        // on récupère les informations utilisateur de la session active     
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $skills = $user_helper->getCertificates($id);
+
+        if ($this->request->getMethod() == 'post') {
+
+            $updateData = [
+                'name' => $this->request->getVar('name'),
+                'date' => $this->request->getVar('date'),
+                'content' => $this->request->getVar('content'),
+                'organism' => $this->request->getVar('organism'),
+                'address' => $this->request->getVar('address'),
+                'city' => $this->request->getVar('city'),
+                'cp' => $this->request->getVar('cp'),
+                'country' => $this->request->getVar('country'),
+            ];
+
+            $id_cetificate = $this->request->getVar('id_certificate');
+             //on modifie la compétence dans la table certificate
+            if ($id_cetificate) {
+                $model = new CertificateModel();
+                $model->update($id_cetificate, $updateData);
+            }
+            // on met à jour la liste des compétences
+            $skills = $user_helper->getCertificates($id);
+        }
+        // on prépare les données pour la page html
+        $data = [
+            "title" => "Modification des compétences",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "skills" => $skills,
+        ];
+
+        return view("User/modif_skill.php", $data);
+    }
+
+    public function delete_skill($id_skill)
+    {
+        // on récupère l'id de la session active
+        $id = session()->get("id_user");
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        //on supprime le certificat dans la table certificate
+        $user_helper->removeCertificate($id_skill);
+        // on met à jour la liste des compétences
+        $skills = $user_helper->getCertificates($id);
+        // on prépare les données pour la page html
+        $data = [
+            "title" => "Modification des compétences",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "skills" => $skills,
+        ];
+        // on supprime en fonction de l'id utilisateur
+        $user_has_certificate = new UserHasCertificateModel();
+        $user_has_certificate->delete(['id_user', $id]);
+
+        return view("User/modif_skill.php", $data);
+    }
+
+    public function add_skill()
+    {
+        // on récupère les informations utilisateur de la session active        
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+
+        if ($this->request->getMethod() == 'post') {
+
+            $updateData = [
+                'name' => $this->request->getVar('name'),
+                'date' => $this->request->getVar('date'),
+                'content' => $this->request->getVar('content'),
+                'organism' => $this->request->getVar('organism'),
+                'address' => $this->request->getVar('address'),
+                'city' => $this->request->getVar('city'),
+                'cp' => $this->request->getVar('cp'),
+                'country' => $this->request->getVar('country'),
+            ];
+            // on ajoute la compétence dans la table certificate
+            $model = new CertificateModel();
+            $model->save($updateData);
+
+            $user_has_certificate = new UserHasCertificateModel();
+            // on enrichit la table intermédaire pour faire la jonction
+            $id_certificate = $model->getInsertID();
+            $data2 = [
+                "id_user" => session()->get('id_user'),
+                "id_certificate" => $id_certificate,
+            ];
+            $user_has_certificate->save($data2);
+            // on informe visuelement de l'ajout     
+            session()->setFlashdata('success', 'Compétence ajoutée!');
+        }
+        // on prépare les données pour la page html
+        $data = [
+            "title" => "Ajouter des compétences",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+        ];
+
+        return view("User/add_skill.php", $data);
     }
 }

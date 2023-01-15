@@ -49,8 +49,8 @@ function listCarousel($list, $index = 0, $showIndicator = false)
 function textEllipsis($string, $max = 50)
 {
     if (strlen($string) > $max) {
-        $string = substr($string, 0, strlen($string));
-        $string = $string . "...";
+        $trunc = substr($string, 0, $max);
+        $string = $trunc . "...";
     }
     return $string;
 }
@@ -299,6 +299,7 @@ function fillMenuRight($category, $type)
                         ["ref" => "/former/training/add", "name" => "Création Formation"],
                         ["ref" => "/former/training/edit", "name" => "Création Page"],
                         ["ref" => "/former/videos/edit", "name" => "Création Vidéo"],
+                        ["ref" => "/user/skill/add", "name" => "Ajouter Compétence"],
                         ["ref" => "/former/books/edit", "name" => "Association Livre"],
                         ["ref" => "/former/products/edit", "name" => "Association Produit"],
                         ["ref" => "/former/articles/edit", "name" => "Création Article"],
@@ -311,6 +312,7 @@ function fillMenuRight($category, $type)
                         ["ref" => "/admin/articles/edit", "name" => "Création Article"],
                         ["ref" => "/admin/publishes/edit", "name" => "Création Publication"],
                         ["ref" => "/admin/videos/edit", "name" => "Création Vidéo"],
+                        ["ref" => "/user/skill/add", "name" => "Ajouter Compétence"],
                         ["ref" => "/admin/books/edit", "name" => "Association Livre"],
                         ["ref" => "/admin/products/edit", "name" => "Association Produit"],
                     ];
@@ -361,8 +363,7 @@ function fillMenuRight($category, $type)
                 case THEME_SUPER_ADMIN:
                     $items = [
                         ["ref" => "/user/profil/password", "name" => "Mot de passe"],
-                        ["ref" => "/user/profil/contact", "name" => "Informations contact"],
-                        ["ref" => "/user/profil/work", "name" => "Travail"],
+                        ["ref" => "/user/profil/contact", "name" => "Informations contact"],                        
                         ["ref" => "/user/profil/skill", "name" => "Compétences"],
                     ];
                     break;

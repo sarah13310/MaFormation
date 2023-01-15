@@ -56,8 +56,8 @@ class Training extends BaseController
                 "id_training" => $training['id_training'],
                 "title" => $training['title'],
                 "date" => dateTimeFormat($training['date']),
-                "description" => textEllipsis($training['description'], 20),
-                "full_description" => $training['description'],
+                "description" => textEllipsis($training['description'], 30),
+                //"full_description" => $training['description'],
                 "image_url" => $training['image_url'],
             ];
         }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
 
 class Admin extends BaseController
 {
@@ -26,7 +27,7 @@ class Admin extends BaseController
             'image_url' => session()->get('image_url'),
             'gender' => session()->get('gender'),
             'isLoggedIn' => true,
-        ];        
+        ];
         return $user;
     }
 
@@ -42,7 +43,7 @@ class Admin extends BaseController
         $query   = $builder->get();
         $user = $query->getResultArray();
         $user = $user[0]; // juste le premier 
-        
+
         /* compétences certificats*/
         $builder->select('certificate.name');
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
@@ -66,7 +67,7 @@ class Admin extends BaseController
                 "name" => $company['name'],
                 "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
             ];
-        }        
+        }
         $data = [
             "title" => "Mode Administrateur",
             "user" => $user,
@@ -85,7 +86,7 @@ class Admin extends BaseController
 
         $builder->where('id_user', $id);
         $query   = $builder->get();
-        $user = $query->getResultArray();        
+        $user = $query->getResultArray();
         $user = $user[0]; // juste le premier 
 
         /* compétences certificats*/
@@ -125,10 +126,12 @@ class Admin extends BaseController
 
     public function add_admin()
     {
-       $data = [
+        $user = $this->getUserSession();
+        $data = [
             "title" => "Profil",
             "subtitle" => "Ajouter un administrateur",
-            "user" => $this->getUserSession(),
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
         ];
 
         if ($this->request->getMethod() == 'post') {
@@ -166,7 +169,6 @@ class Admin extends BaseController
 
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
-              
             } else {
 
                 $model = new UserModel();
@@ -174,7 +176,7 @@ class Admin extends BaseController
                 if ($user) {
                     session()->setFlashdata('infos', 'Cet Administrateur existe déjà!');
                 } else {
-                    $rights = "1F 1F 1F 05 1F 05";                   
+                    $rights = "1F 1F 1F 05 1F 05";
 
                     $newData = [
                         'name' => $this->request->getVar('name'),
@@ -188,12 +190,13 @@ class Admin extends BaseController
                         'mail' => $this->request->getVar('mail'),
                         'password' => $this->request->getVar('password'),
                         'newsletters' => true,
-                        'country'=>"France",
-                        'type'=>$this->request->getVar('type'),
-                        'status'=>2,
-                        'gender'=>$this->request->getVar('gender'),
-                    ];       
-                    $data['title']="Liste des privilèges";
+                        'country' => "France",
+                        'type' => $this->request->getVar('type'),
+                        'status' => 2,
+                        'gender' => $this->request->getVar('gender'),
+                    ];
+                    $data['title'] = "Liste des privilèges";
+                    $data['buttonColor'] = getTheme($user['type'], "button");
                     $model->save($newData);
                     session()->setFlashdata('succes', "Création réussie de l'administrateur");
                     return  redirect()->to(base_url('//superadmin/privileges'));

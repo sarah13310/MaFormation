@@ -110,10 +110,10 @@
                                 <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none" > -->
                                 <span class="d-none d-sm-inline "><?= $user['name'] ?></span>
                                 <span class="d-none d-sm-inline "><?= $user['firstname']  ?></span>
-                                <p>Utilisateur</p>
+                                <p></p>
+                                <p><small><i>( <?= getTypeName($user['type']) ?> )</i></small></p>
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-
                                 <?= fillMenuDashBoard($user['type']) ?>
                             </ul>
                             <hr>

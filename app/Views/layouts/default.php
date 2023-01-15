@@ -74,9 +74,19 @@
                             </svg> Se connecter
                         </a>
                     <?php else : ?>
-                        <a href='/user/logout' class="btn btn-primary btn-login">
-                            <i class="bi bi-box-arrow-left"></i> Se déconnecter
-                        </a>
+                        <div class="noselect dropdown ">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<?= session()->get('image_url') ?>" alt="MF" width="50px" height="50px" class="rounded-circle-frame">
+                                <span class="d-none d-sm-inline mx-3"><?= session()->get('name')  ?></span>
+                            </a>
+                            <ul class="noselect dropdown-menu dropdown-menu text-small shadow">
+                                <!-- <li><a class="dropdown-item" href="/user/parameters">Paramètres</a></li> -->
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a href="/user/profil" id="btn_home3" class="dropdown-item">Revenir au profil</a></li>
+                            </ul>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

@@ -1,0 +1,20 @@
+CRITICAL - 2023-01-15 09:19:38 --> Undefined variable $user
+in APPPATH\Views\layouts\default.php on line 80.
+ 1 APPPATH\Views\layouts\default.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'APPPATH\\Views\\layouts\\default.php', 80)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\layouts\\default.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->render('layouts/default', [], true)
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Former/list_former.php', [], true)
+ 6 APPPATH\Controllers\Former.php(93): view('Former/list_former.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Former->list_former_home()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Former))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-15 11:17:59 --> Too few arguments to function App\Controllers\User::add_skill(), 0 passed in C:\xampp\htdocs\MaFormation\system\CodeIgniter.php on line 927 and exactly 1 expected
+in APPPATH\Controllers\User.php on line 643.
+ 1 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->add_skill()
+ 2 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 3 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
