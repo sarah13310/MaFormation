@@ -1,0 +1,24 @@
+CRITICAL - 2023-01-16 12:46:32 --> Undefined variable $headerColor
+in APPPATH\Views\Admin\list_article_admin.php on line 5.
+ 1 APPPATH\Views\Admin\list_article_admin.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $headerColor', 'APPPATH\\Views\\Admin\\list_article_admin.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\list_article_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_article_admin.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(328): view('Admin/list_article_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listarticles()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-16 13:06:29 --> Undefined variable $headerColor
+in APPPATH\Views\Admin\list_privileges.php on line 6.
+ 1 APPPATH\Views\Admin\list_privileges.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $headerColor', 'APPPATH\\Views\\Admin\\list_privileges.php', 6)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\list_privileges.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_privileges.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(277): view('Admin/list_privileges.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->privileges()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

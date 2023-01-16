@@ -80,16 +80,16 @@ $routes->group('/user', static function ($routes) {
     $routes->add('forgetpassword', 'User::forgetpassword'); //login user
     $routes->add('signin', 'User::signin'); //signin user
     $routes->add('company', 'User::confirmation'); //signin user
-    $routes->add('profil', 'User::profileuser'); //profil user   
-    $routes->add('bill', 'User::bill'); //profil user  
-    $routes->add('profil/contact', 'User::modif_contact'); //modif contact user
-    $routes->add('profil/password', 'User::modif_password'); //modif password user  
-    $routes->add('profil/skill', 'User::modif_skill'); //modif skills user  
-    $routes->add('profil/skill/delete/(:num)', 'User::delete_skill/$1'); //delete skills user  
-    $routes->add('skill/add', 'User::add_skill'); //delete skills user  
-    $routes->add('profil/name', 'User::modif_name'); //modif name user 
+    $routes->add('profil', 'User::profileuser'); //profil (user profil)    
+    $routes->add('bill', 'User::bill'); //bill (user profil)   
+    $routes->add('profil/contact', 'User::modif_contact'); //modif contact (user profil) 
+    $routes->add('profil/password', 'User::modif_password'); //modif password (user profil)   
+    $routes->add('profil/skill', 'User::modif_skill'); //modif skills (user profil)   
+    $routes->add('profil/skill/delete/(:num)', 'User::delete_skill/$1'); //delete skills (user profil)   
+    $routes->add('skill/add', 'User::add_skill'); //delete skills (user profil)   
+    $routes->add('profil/name', 'User::modif_name'); //modif name (user profil)  
     $routes->add('profil/save/photo', 'User::save_photo'); //save the picture (user profil)  
-    
+    $routes->add('parameters', 'User::parameters'); //parameters of user (user profil)  
 });
 
 //$routes->get('/company/profile', 'User::profilecompany'); //profil company

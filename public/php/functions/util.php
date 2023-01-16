@@ -433,7 +433,7 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_ADMIN:
                     $items = [
-                        ["ref" => "/admin/priviliges", "name" => "Permissions"],
+                        ["ref" => "/superadmin/privileges", "name" => "Permissions"],
                     ];
                     break;
                 case THEME_SUPER_ADMIN:

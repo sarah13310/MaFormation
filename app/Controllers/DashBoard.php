@@ -10,7 +10,6 @@ use App\Libraries\VideoHelper;
 require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
 class DashBoard extends BaseController
 {
-
     public function listformerarticles()
     {
         $user_helper = new UserHelper();
@@ -108,7 +107,6 @@ class DashBoard extends BaseController
         return view('Former/list_publishes_former.php', $data);
     }
 
-
     public function listformers()
     {
 
@@ -179,14 +177,14 @@ class DashBoard extends BaseController
                 "country" => $company['country'],
             ];
         }
-        $user_helper= new UserHelper();
-        $user=$user_helper->getUserSession();
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
         $data = [
             "title" => $title,
             "listformers" => $listformers,
             "jobs" => $jobs,
-            "user"=>$user,
-            "headerColor"=>getTheme($user['type'], "header"),
+            "user" => $user,
+            "headerColor" => getTheme($user['type'], "header"),
         ];
 
         return view('Admin/list_former_admin.php', $data);
@@ -204,7 +202,6 @@ class DashBoard extends BaseController
         $builder->orWhere('type', $typed);
         $query   = $builder->get();
         $formers = $query->getResultArray();
-
         $listformers = [];
 
         foreach ($formers as $former) {
@@ -255,7 +252,7 @@ class DashBoard extends BaseController
         $builder->join('company', 'user_has_company.id_company=company.id_company');
         $query = $builder->get();
         $companies = $query->getResultArray();
-
+        //
         $jobs = [];
         foreach ($companies as $company) {
             $jobs[] = [
@@ -267,15 +264,15 @@ class DashBoard extends BaseController
             ];
         }
         $user = $user_helper->getUserSession();
-
+        //
         $data = [
             "title" => $title,
             "listformers" => $listformers,
             "jobs" => $jobs,
             "user" => $user,
             "type=" => $user['type'],
+            "headerColor" => getTheme(session()->type, "header"),
         ];
-
         return view('Admin/list_privileges.php', $data);
     }
 
@@ -296,6 +293,7 @@ class DashBoard extends BaseController
                 "subject" => $article['subject'],
                 "description" => $article['description'],
                 "datetime" => $article['datetime'],
+
             ];
         }
         /* auteur de l'article*/
@@ -324,13 +322,14 @@ class DashBoard extends BaseController
             "listarticles" => $listarticles,
             "user" => $user,
             "type" => session()->type,
+            "headerColor" => getTheme(session()->type, "header"),
         ];
         return view('Admin/list_article_admin.php', $data);
     }
 
     public function listpublishes()
     {
-        
+
         $title = "Liste des publications";
 
         $db      = \Config\Database::connect();
@@ -396,11 +395,11 @@ class DashBoard extends BaseController
         }
         $user_helper = new UserHelper();
         $user = $user_helper->getUserSession();
-        
+
         $data = [
             "title" => $title,
             "listpublishes" => $listpublishes,
-            "user"=>$user,
+            "user" => $user,
         ];
 
 
@@ -420,17 +419,17 @@ class DashBoard extends BaseController
             $builder->where('id_article', $id);
             $query   = $builder->get();
             $article = $query->getResultArray();
-            $article=$article[0];
+            $article = $article[0];
 
-            $user_helper= new UserHelper();
-            $user=$user_helper->getUserSession();
-            if ($article["image_url"]==null){
-                $article["image_url"]=base_url()."/assets/article.svg";
+            $user_helper = new UserHelper();
+            $user = $user_helper->getUserSession();
+            if ($article["image_url"] == null) {
+                $article["image_url"] = base_url() . "/assets/article.svg";
             }
             $data = [
                 "title" => $title,
                 "article" => $article,
-                "user"=>$user,
+                "user" => $user,
             ];
             return view('Articles/preview_article.php', $data);
         }
@@ -449,16 +448,16 @@ class DashBoard extends BaseController
             $builder->where('id_publication', $id);
             $query   = $builder->get();
             $publication = $query->getResultArray();
-            $user_helper= new UserHelper();
-            $user=$user_helper->getUserSession();
+            $user_helper = new UserHelper();
+            $user = $user_helper->getUserSession();
 
-            if ($user["image_url"]==null){
-                $user["image_url"]=base_url()."/assets/publication.svg";
+            if ($user["image_url"] == null) {
+                $user["image_url"] = base_url() . "/assets/publication.svg";
             }
             $data = [
                 "title" => $title,
                 "publication" => $publication,
-                "user"=>$user,
+                "user" => $user,
             ];
             return view('Publishes/preview_publish.php', $data);
         }
@@ -626,7 +625,7 @@ class DashBoard extends BaseController
             $listbooks[] = [
                 "id_media" => $book['id_media'],
                 "name" => $book['name'],
-                "description" =>$book['description'],
+                "description" => $book['description'],
                 "author" => $book['author'],
                 "url" => $book['url'],
             ];
@@ -639,5 +638,4 @@ class DashBoard extends BaseController
         ];
         return view('Admin/list_books_admin.php', $data);
     }
-
 }

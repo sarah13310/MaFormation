@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <h1 class="mb-2" ><?= $title ?></h1>
 <table class="table" id="table_admin">
-    <thead class="t_former">
+    <thead class="<?= $headerColor?>">
         <tr>
             <th class="hidden" scope="col">Id</th>
             <th scope="col">Nom</th>

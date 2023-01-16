@@ -232,11 +232,8 @@ class User extends BaseController
         $user_helper = new UserHelper();
         
         if ($this->request->getMethod() == "post") {
-            // on met à jour les informations de session
-            //session()->id_user=$this->request->getVar('id_user');
-            session()->mail=$this->request->getVar('mail');
-           // session()->password=$this->request->getVar('password');
-           // session()->image_url=$this->request->getVar('image_url');
+            // on met à jour les informations de session           
+            session()->mail=$this->request->getVar('mail');         
             session()->address=$this->request->getVar('address');
             session()->cp=$this->request->getVar('cp');
             session()->city=$this->request->getVar('city');
@@ -265,6 +262,8 @@ class User extends BaseController
             $model->update(session()->id_user,$dataUpdate);               
         }
         $user = $user_helper->getUserSession();
+        
+
         $skills = $user_helper->getCertificates($user['id_user']);
         if ($user['image_url'] == null) {
             $user['image_url'] = base_url() . "/assets/blank.png";
@@ -809,5 +808,19 @@ class User extends BaseController
         ];
 
         return view("User/profile_user.php", $data);
+    }
+
+    function parameters(){
+        helper(['form']);
+        $user_helper = new UserHelper();
+        $user = $user_helper->getUserSession();
+        $data = [
+            "title" => "Paramètres du profil",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),            
+        ];
+
+        return view("User/parameters.php", $data);
     }
 }

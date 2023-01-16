@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 <h1 class="mb-2"><?= $title ?></h1>
 <table class="table">
-    <thead class="t_former">
+    <thead class="<?= $headerColor ?>">
         <tr>
             <th scope="col">Aperçu</th>
             <th scope="col">Sujet</th>
@@ -15,7 +15,7 @@
     foreach ($listarticles as $article) : ?>
         <tr>
             <td>
-                <form action="/articles/preview" method="post">
+                <form action="/article/preview" method="post">
                     <input type="hidden" name="id_article" value="<?= $article['id_article'] ?>">
                     <button type="submit" class="btn mr-2 float-end"><i class="bi bi-arrow-up-right-circle-fill"></i></button>
                 </form>
