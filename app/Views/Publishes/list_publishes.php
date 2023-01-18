@@ -8,9 +8,9 @@
         <?php $i = 0;
         foreach ($listpublishes as $publishe) : ?>
             <form action="/publishes/list/details" method="post">
-                <div class="card mb-2 flex-row ">
+                <div class="card mb-2 flex-row d-flex">
                     <img src=<?= $publishe['image_url'] ?> class="p-5 card-img-left" style="width: 33%;">
-                    <div class="card-body">
+                    <div class="card-body flex-column d-flex">
                         <h5 class="card-title"><?= $publishe['subject'] ?></h5>
                         <?php $j = 0;
                         foreach ($publishe['user'] as $user) : ?>
@@ -21,7 +21,7 @@
                             <p class="card-description" style="height: 6rem;"><?= $publishe['description'] ?></p>
                         </div>
                         <input type="hidden" name="id_publication" value="<?= $publishe['id_publication'] ?>">
-                        <button type="submit" class="btn btn-outline-primary mr-2 float-end">Voir Plus</button>
+                        <button type="submit" class="mt-auto btn btn-outline-primary mr-2 float-end align-self-end">Voir Plus</button>
                     </div>
                 </div>
             </form>

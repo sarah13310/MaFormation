@@ -15,17 +15,22 @@ class Home extends BaseController
         helper(['form']);
 
         $carousel_helper = new CarouselHelper();
-        $training_helper=new TrainingHelper();
-        $article_helper=new ArticleHelper();
+        $training_helper = new TrainingHelper();
+        $article_helper = new ArticleHelper();
+        try {
+            $db      = \Config\Database::connect();
+            $builder = $db->table('article');
 
-        $db      = \Config\Database::connect();
-        $builder = $db->table('article');
+            $builder->where('status', '1');
+            $builder->orderBy('datetime', 'DESC');
+            $builder->limit(6);
+            $query   = $builder->get();
+            $articles = $query->getResultArray();
 
-        $builder->where('status', '1');
-        $builder->orderBy('datetime', 'DESC');
-        $builder->limit(6);
-        $query   = $builder->get();
-        $articles = $query->getResultArray();
+        } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {
+            session()->setFlashdata('infos', 'Connexion impossible!');
+            return view("/errors/html/error_connexion.php");
+        }
 
         $listarticles = [];
 
@@ -56,7 +61,7 @@ class Home extends BaseController
             }
             $listarticles[$i]["user"] = $authors;
         }
-        
+
 
         if ($this->request->getMethod() == 'post') {
             $rules = [
@@ -77,21 +82,21 @@ class Home extends BaseController
                 $model->save($newData);
             }
         }
-                
-        $trainings=$training_helper->getFilterTrainings();
+
+        $trainings = $training_helper->getFilterTrainings();
         //print_r($trainings);
         $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "/training/details/");
 
-        $articles=$article_helper->getFilterArticles(VALIDE);      
+        $articles = $article_helper->getFilterArticles(VALIDE);
         //print_r($trainings);
-        
-        $carousel2 = $carousel_helper->listCardImgCarousel($articles,"/article/list/details/");
+
+        $carousel2 = $carousel_helper->listCardImgCarousel($articles, "/article/list/details/");
         $data = [
             "title" => "Accueil",
             //"count_articles" => count($listarticles),
             //"count_training"=>count($trainings),
             "trainings" => $carousel1,
-            "articles"=>$carousel2,
+            "articles" => $carousel2,
         ];
         return view('Home/index.php', $data);
     }

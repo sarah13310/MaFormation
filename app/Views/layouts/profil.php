@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-lg <?= getTheme($user['type'],"nav") ?>">
+        <nav class="navbar navbar-expand-lg <?= getTheme($user['type'], "nav") ?>">
             <div class="container-fluid">
                 <a id="btn_home" class="noselect navbar-brand"><img class="noselect logo" src="<?= base_url() ?>/assets/<?= getLogoColor($user['type']) ?>"> Ma Formation</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
                 </button>
                 <form action="#" class="d-flex search me-4">
                     <input class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
-                    <button class="noselect btn <?= getTheme($user['type'],"button") ?>" type="submit">Chercher</button>
+                    <button class="noselect btn <?= getTheme($user['type'], "button") ?>" type="submit">Chercher</button>
                 </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -101,7 +101,7 @@
         <section>
             <div class="container-fluid">
                 <div class="row flex-nowrap">
-                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?= getTheme($user['type'],"nav_left") ?>">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?= getTheme($user['type'], "nav_left") ?>">
                         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                             <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
                             <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
@@ -128,7 +128,7 @@
 
     </section>
     <!-- Footer -->
-    <footer class="noselect <?= getTheme($user['type'],"footer") ?> text-center text-white">
+    <footer class="noselect <?= getTheme($user['type'], "footer") ?> text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->
@@ -319,7 +319,71 @@
         function onExit() {
             sessionStorage.clear();
             window.location.href = "/user/logout";
+        }
 
+        // on récupère les éléments de table
+        var table = document.getElementById("mytable"),
+            // le nombre de lignes par page
+            n = 1,
+            // le nombre de lignes du tableau
+            rowCount = table.rows.length,
+            // on récupère le nom du tag de la première cellule (dans la première ligne)
+            firstRow = table.rows[0].firstElementChild.tagName,
+            // le booléen var pour vérifier si la table a une ligne d'en-tête
+            hasHead = (firstRow === "TH"),
+            // un tableau pour contenir chaque ligne
+            tr = [],
+            // une boucle pour commencer à compter à partir de la ligne[1] (2e ligne) si la première ligne a une balise d'en-tête
+            i, ii, j = (hasHead) ? 1 : 0,
+            // on contient la première ligne si elle a un (<TH>) ou rien si (<TD>)
+            th = (hasHead ? table.rows[(0)].outerHTML : "");
+        // on compte le nombre de pages
+        var pageCount = Math.ceil(rowCount / n);
+        // si on n'a qu'une page, alors on n'aura rien à faire..
+        if (pageCount > 1) {
+            // on attribue à chaque ligne outHTML (tag name et innerHTML) au tableau
+            for (i = j, ii = 0; i < rowCount; i++, ii++)
+                tr[ii] = table.rows[i].outerHTML;
+            // on crée un bloc div pour contenir les boutons
+            table.insertAdjacentHTML("afterend", "<div id='buttons'></div>");
+            // la page par défaut est la première
+            sort(1);
+        }
+
+        // ($p) est le numéro de page sélectionné. il sera généré lorsqu'un utilisateur cliquera sur un bouton
+        function sort(p) {
+            /* on crée ($rows) une variable pour contenir le groupe de lignes
+              à afficher sur la page sélectionnée,
+              ($s) le point de départ (la première ligne de chaque page)
+             */
+            var rows = th,
+                s = ((n * p) - n);
+            for (i = s; i < (s + n) && i < tr.length; i++)
+                rows += tr[i];
+
+            // maintenant le tableau a un groupe de lignes traitées
+            table.innerHTML = rows;
+            // on crée les boutons de pagination
+            document.getElementById("buttons").innerHTML = pageButtons(pageCount, p);
+            // le css
+            document.getElementById("id" + p).setAttribute("class", "active");
+        }
+
+        // ($pCount) : nombre de pages,($cur) : page courante
+        function pageButtons(pCount, cur) {
+            /* cette variable désactivera le bouton "Précédent" sur la 1ère page
+               et bouton "Suivant" sur la dernière */
+            var prevDis = (cur == 1) ? "disabled" : "",
+                nextDis = (cur == pCount) ? "disabled" : "",
+                /* ce ($buttons) contiendra chaque bouton nécessaire
+                  il créera chaque bouton et définira l'attribut onclick
+                  à la fonction "sort" avec un numéro spécial ($p)
+                 */
+                $buttons = "<input type='button' class='btn btn-outline-primary' value='<< Précédent' onclick='sort(" + (cur - 1) + ")' " + prevDis + ">";
+            for (i = 1; i <= pCount; i++)
+                buttons += "<input type='button' class='btn btn-outline-primary' id='id" + i + "'value='" + i + "' onclick='sort(" + i + ")'> ";
+            buttons += "<input type='button' class='btn btn-outline-primary' value='Suivant >>' onclick='sort(" + (cur + 1) + ")' " + nextDis + ">";
+            return buttons;
         }
     </script>
     <?= $this->renderSection("js") ?>

@@ -39,13 +39,17 @@
 
     <form action="/admin/articles/edit" method="post">
         <div class="row">
-            <div class='form-floating mb-3 col-12 col-md-4'>
+            <div class='form-floating mb-3 col-12 col-md-6'>
                 <input class='form-control' id='subject' type='text' name='subject' placeholder="Sujet de l'article" />
                 <label for='subject'>&nbsp;Sujet de l'article (*)</label>
             </div>
-            <div class='form-floating mb-3 col-12 col-md-4'>
+            <div class='form-floating mb-3 col-12 col-md-6'>
                 <input class='form-control' id='name' type='text' name='name' placeholder="Nom de l'auteur" readonly value="<?= session()->name . " " . session()->firstname; ?> " />
                 <label for='name'>&nbsp;Nom de l'auteur </label>
+            </div>
+            <div class='form-floating mb-3 col-12 col'>
+                <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de l'image" value="<?= session()->url_image; ?> " />
+                <label for='name'>&nbsp;URL de l'image </label>
             </div>
         </div>
         <div class="form-group row align-items-center">
@@ -71,8 +75,7 @@
         </div>
 
         <div class="fullwidth editor mt-2">
-            <textarea id="editor" name="description" style="width:95%; height:400px">
-        </textarea>
+            <textarea class="yesselect " id="editor" name="description" style="width:95%; height:400px"></textarea>
         </div>
         <div class="row fullwidth align-items-center mt-2">
             <div class="col-sm-12 col-md-3 col-xl-1"><button type="submit" class="btn btn-primary">Sauver</button></div>

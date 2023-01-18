@@ -122,12 +122,21 @@
 .sub_header_user,
 .sub_header_default {
     filter: brightness(1.3);
-    color: whitesmoke;}
+    color: whitesmoke;
+}
 
 
 
+.btn-collapse {
+    text-align: left;
+    color: #fff;    
+}
 
-
+.btn-collapse:hover {
+    color: #fff;
+    background-color: #4714e1;
+    border-color: #1e0666;
+}
 
 
 

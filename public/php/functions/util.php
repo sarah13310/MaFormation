@@ -433,13 +433,17 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case THEME_ADMIN:
                     $items = [
+                        ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
+                        ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
                         ["ref" => "/superadmin/privileges", "name" => "Permissions"],
                     ];
                     break;
                 case THEME_SUPER_ADMIN:
                     $items = [
-                        ["ref" => "/superadmin/add/admin", "name" => "+ Administrateur"],
+                        ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
+                        ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
                         ["ref" => "/superadmin/privileges", "name" => "Permissions"],
+                        ["ref" => "/superadmin/add/admin", "name" => "+ Administrateur"],
                     ];
                     break;
             }
@@ -672,7 +676,7 @@ function getLogoColor($type)
 }
 
 
-/* header des tables */
+/* function générique pour les themes dans le fichier theme.css */
 function getTheme($type, $css = "button")
 {
 
@@ -816,3 +820,14 @@ function image_crop($filename)
     }
     imagedestroy($im);
 }
+
+function getLastUrl($parent){
+    $refer =null;
+    $parent->load->library('user_agent');
+    if ($parent->agent->is_referral())
+    {
+        $refer =  $parent->agent->referrer();
+    }
+    return $refer;
+}
+

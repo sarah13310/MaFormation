@@ -11,10 +11,12 @@ use App\Libraries\PublishHelper;
 use App\Models\PublicationHasArticleModel;
 use App\Models\TagModel;
 use App\Models\UserHasArticleModel;
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
+
 // le 09/01/2023
 class News extends BaseController
 {
-    
 
     public function articles_edit()
     {
@@ -51,12 +53,19 @@ class News extends BaseController
             $publication_has_article = new PublicationHasArticleModel();
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
+            switch (session()->type) {
+                case ADMIN:
+                case SUPER_ADMIN:
+                    $ispublished = VALIDE;
+                    break;
+            }
             $dataSave['subject'] = $this->request->getVar('subject');
             $dataSave['description'] = $this->request->getVar('description');
             $id_publish = $this->request->getVar('select_training'); // on récupère l'id de la publication
             $dataSave['category'] = $this->request->getVar('category'); // on la categorie
             $dataSave['datetime'] = date("Y-m-d H:i:s"); // on horodate 
-            $dataSave['media_id_media'] = 0;
+            $dataSave['image_url'] = $this->request->getVar('image_url');
+            //$dataSave['media_id_media'] = 0;
             $dataSave['status'] = $ispublished; // status de la publication
             $subject =  $dataSave['subject'] . trim("");
 
@@ -114,7 +123,6 @@ class News extends BaseController
         $user = $user_helper->getUserSession();
         $category_helper = new CategoryHelper();
         $categories = $category_helper->getCategories();
-
         $article_helper = new ArticleHelper();
         $articles = $article_helper->getFilterArticles();
 
@@ -135,6 +143,13 @@ class News extends BaseController
 
         if ($this->request->getMethod() == 'post') {
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
+
+            switch (session()->type) {
+                case ADMIN:
+                case SUPER_ADMIN:
+                    $ispublished = VALIDE;
+                    break;
+            }
             $dataSave['subject'] = $this->request->getVar('subject');
             $dataSave['description'] = $this->request->getVar('description');
             $dataSave['category'] = $this->request->getVar('category');
@@ -142,6 +157,7 @@ class News extends BaseController
             $dataSave['article_id_article'] = 0;
             $dataSave['status'] = $ispublished;
             $subject =  $dataSave['subject'] . trim("");
+            $dataSave['image_url'] = $this->request->getVar('image_url');
             //
             $rules = [
                 'subject' => 'required|min_length[6]|max_length[30]',
@@ -184,7 +200,6 @@ class News extends BaseController
                         }
                     }
                     //
-
                     session()->setFlashdata('success', 'Publication en cours de validation...');
                 }
             }
@@ -239,7 +254,7 @@ class News extends BaseController
         return view('Articles/list_article.php', $data);
     }
 
-    private function home_article_details($title, $id=0)
+    private function home_article_details($title, $id = 0)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('article');
@@ -281,23 +296,21 @@ class News extends BaseController
     public function get_details_article_home($id)
     {
         $title = "Détails de l'article";
-        if ($id)
-        {            
-            $data=$this->home_article_details($title, $id);
+        if ($id) {
+            $data = $this->home_article_details($title, $id);
         }
         return view('Articles/list_article_details.php', $data);
     }
-    
+
     public function details_article_home()
     {
-        $title = "Détails de l'article";       
+        $title = "Détails de l'article";
 
         if ($this->request->getMethod() == 'post') {
-            $id= $this->request->getVar('id_article');
-            $data=$this->home_article_details($title, $id); 
-            return view('Articles/list_article_details.php', $data);           
+            $id = $this->request->getVar('id_article');
+            $data = $this->home_article_details($title, $id);
+            return view('Articles/list_article_details.php', $data);
         }
-        
     }
 
 
@@ -433,5 +446,27 @@ class News extends BaseController
 
             return view('Publishes/list_publishes_details.php', $data);
         }
+    }
+
+    // suppression de l'article en fonction de son Id
+    public function delete_article()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $id = $this->request->getVar('id_article');
+            $article_helper = new ArticleHelper();
+            $article_helper->deleteArticle($id);
+        }
+        return redirect()->to(previous_url());
+    }
+
+    // suppression de la publication en fonction de son Id
+    public function delete_publish()
+    {        
+        if ($this->request->getMethod() == 'post') {
+            $id = $this->request->getVar('id_publication');
+            $publishe_helper = new PublishHelper();
+            $publishe_helper->deletePublishe($id);
+        }
+        return redirect()->to(previous_url());
     }
 }

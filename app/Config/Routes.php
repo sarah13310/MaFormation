@@ -38,17 +38,18 @@ $routes->get('/', 'Home::index');
 
 $routes->add('/superadmin/add/admin', 'Admin::add_admin'); // Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges'); //dashboard des privileges
+$routes->group('/former', static function ($routes) {
+    $routes->add('articles/edit', 'News::articles_edit');
+    $routes->add('publishes/edit', 'News::publishes_edit');
+    $routes->add('articles/list', 'Dashboard::listarticles');
+    $routes->add('publishes/list', 'Dashboard::listpublishes');
+    $routes->get('/', 'Admin::index');
 
-$routes->add('/admin/articles/edit', 'News::articles_edit');
-$routes->add('/admin/publishes/edit', 'News::publishes_edit');
-$routes->add('/admin/articles/list', 'Dashboard::listarticles');
-$routes->add('/admin/publishes/list', 'Dashboard::listpublishes');
-$routes->get('/admin', 'Admin::index');
-
-$routes->add('/admin/videos/list', 'Dashboard::listvideos'); //dashboard des videos de tous les formateurs/admins
-$routes->add('/admin/books/list', 'Dashboard::listbooks'); //dashboard des livres de tous les formateurs/admins
-$routes->add('/admin/videos/edit', 'Media::videos_edit');
-$routes->add('/admin/books/edit', 'Media::books_edit');
+    $routes->add('videos/list', 'Dashboard::listmedias/1'); //dashboard des videos de tous les formateurs/admins
+    $routes->add('books/list', 'Dashboard::listmedias/2'); //dashboard des livres de tous les formateurs/admins
+    $routes->add('videos/edit', 'Media::medias_edit/1');
+    $routes->add('books/edit', 'Media::medias_edit/2');
+});
 
 $routes->add('/contact', 'Contact::index'); // page contact
 
@@ -67,12 +68,12 @@ $routes->group('/former', static function ($routes) {
     $routes->add('profil/edit', 'Former::profile_view'); // modification du profil
     $routes->add('training/add', 'Former::training_add'); // création de la formation
     $routes->add('training/edit', 'Former::training_edit'); // création de la page
-    $routes->add('videos/list', 'Dashboard::listformervideos'); //dashboard des videos du formateur
-    $routes->add('books/list', 'Dashboard::listformerbooks'); //dashboard des livres du formateur
-    $routes->add('videos/edit', 'Media::videos_edit');
-    $routes->add('books/edit', 'Media::books_edit');
+    $routes->add('videos/list', 'Dashboard::listformermedias/1'); //dashboard des videos du formateur
+    $routes->add('books/list', 'Dashboard::listformermedias/2'); //dashboard des livres du formateur
+    $routes->add('videos/edit', 'Media::medias_edit/1');
+    $routes->add('books/edit', 'Media::medias_edit/2'); 
 });
-
+   
 // user (profils communs)
 $routes->group('/user', static function ($routes) {
     $routes->add('login', 'User::login'); //login user
@@ -90,6 +91,7 @@ $routes->group('/user', static function ($routes) {
     $routes->add('profil/name', 'User::modif_name'); //modif name (user profil)  
     $routes->add('profil/save/photo', 'User::save_photo'); //save the picture (user profil)  
     $routes->add('parameters', 'User::parameters'); //parameters of user (user profil)  
+
 });
 
 //$routes->get('/company/profile', 'User::profilecompany'); //profil company
@@ -109,24 +111,28 @@ $routes->group('/training', static function ($routes) {
 
 // Articles 
 $routes->group('/article', static function ($routes) {
-    $routes->add('list', 'News::list_articles_home'); // liste des articles page home
+    $routes->add('list', 'News::list_articles_home'); // liste des articles (page home)
     $routes->get('list/details/(:num)', 'News::get_details_article_home/$1'); // détails de l'article page home
     $routes->post('list/details', 'News::details_article_home'); // détails de l'article page home
     $routes->add('preview', 'Dashboard::previewarticle'); //aperçu d'un article
+    $routes->add('dashboard', 'Dashboard::dashboard_article'); //tableau de bord des articles (page profil)   
+    $routes->add('delete', 'News::delete_article'); //delete article (page profil)  
 });
 
 // Publications
 $routes->group('/publishes', static function ($routes) {
-    $routes->add('list', 'News::list_publishes_home'); // liste des publications page home
+    $routes->add('list', 'News::list_publishes_home'); // liste des publications (page home)
     $routes->add('list/details', 'News::details_publishes_home'); // détails de la publication page home
     $routes->add('preview', 'Dashboard::previewpublish'); //aperçu d'une publication
+    $routes->add('dashboard', 'Dashboard::dashboard_publishes'); //tableau de bord des publications (page profil)  
+    $routes->add('delete', 'News::delete_publish'); //delete publishe (page profil)   
 });
 
 //Medias
 $routes->group('/media', static function ($routes) {
-    $routes->add('videos/list', 'Media::list_videos_home'); // liste des vidéos page home
-    $routes->add('books/list', 'Media::list_books_home'); // liste des livres page home
     $routes->get('slides', 'Media::slides');
+    $routes->add('videos/list', 'Media::list_media_home/1'); // liste des vidéos (page home)
+    $routes->add('books/list', 'Media::list_media_home/2'); // liste des livres (page home)
 });
 
 /*

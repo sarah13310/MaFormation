@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="row">
     <h1 class="col "><?= $title ?></h1>
-    <a href="/admin/articles/list"class="col-2 btn btn-primary float-end me-2 mb-3">Retour</a>
+    <a href="javascript:window.history.go(-1);"class="col-2 btn <?=$buttonColor ?> float-end me-2 mb-3">Retour</a>
 </div>
 <hr class="mb-4">
 <div class="card w-75 align-items-center justify-content-center mb-3" style="background-color:#b3cdfd;">

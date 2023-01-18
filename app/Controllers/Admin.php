@@ -131,7 +131,7 @@ class Admin extends BaseController
             "title" => "Profil",
             "subtitle" => "Ajouter un administrateur",
             "user" => $user,
-            "buttonColor" => getTheme($user['type'], "button"),
+            "buttonColor" => getTheme(session()->type, "button"),
         ];
 
         if ($this->request->getMethod() == 'post') {
@@ -196,7 +196,7 @@ class Admin extends BaseController
                         'gender' => $this->request->getVar('gender'),
                     ];
                     $data['title'] = "Liste des privilèges";
-                    $data['buttonColor'] = getTheme($user['type'], "button");
+                    $data['buttonColor'] = getTheme(session()->type, "button");
                     $model->save($newData);
                     session()->setFlashdata('succes', "Création réussie de l'administrateur");
                     return  redirect()->to(base_url('//superadmin/privileges'));

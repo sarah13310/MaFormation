@@ -10,7 +10,7 @@
             <form action="/article/list/details" method="post">
                 <div class="card mb-2 flex-row ">
                     <img src="<?=$articles['image_url']?>" class="card-img-left" style="width: 33%;">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?= $articles['subject'] ?></h5>
                         <?php $j = 0;
                             foreach ($articles['user'] as $user) : ?>
@@ -21,10 +21,9 @@
                             <p class="card-description" style="height: 6rem;"><?= $articles['description'] ?></p>
                         </div>
                         <input type="hidden" name="id_article" value="<?= $articles['id_article'] ?>">
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            
+                        <h6 class="card-subtitle mb-2 text-muted">                            
                         </h6>
-                        <button type="submit" class="btn btn-primary mr-2 float-end">Voir Plus</button>
+                        <button type="submit" class="mt-auto btn btn-primary mr-2 align-self-end  float-end">Voir Plus</button>
                     </div>
                 </div>
             </form>

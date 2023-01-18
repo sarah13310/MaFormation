@@ -38,13 +38,17 @@
         <div class="row">
             <div class="col-12 col-md-8">
                 <div class="row">
-                    <div class='form-floating mb-3 col-12 col-md-4'>
+                    <div class='form-floating mb-3 col-12 col-md-6'>
                         <input class='form-control' id='subject' type='text' name='subject' placeholder="Nom de l'article" />
                         <label for='subject'>&nbsp;Nom de la publication (*)</label>
                     </div>
-                    <div class='form-floating mb-3 col-12 col-md-4'>
+                    <div class='form-floating mb-3 col-12 col-md-6'>
                         <input class='form-control' id='name' type='text' name='name' placeholder="Nom de l'auteur" readonly value="<?= session()->name . " " . session()->firstname; ?> " />
                         <label for='name'>&nbsp;Nom de l'auteur </label>
+                    </div>
+                    <div class='form-floating mb-3 col'>
+                        <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de la publication"   />
+                        <label for='name'>&nbsp;Url de la publication</label>
                     </div>
                 </div>
                 <div class="form-group row">

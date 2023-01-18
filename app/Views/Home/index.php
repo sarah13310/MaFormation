@@ -6,62 +6,64 @@
 <?= $this->section('content') ?>
 <!-- Carousel des formations -->
 
-  <div id="carouselTraining" class="carousel slide" data-bs-ride="carousel">
-    <?= $trainings ?>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTraining" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselTraining" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+<div id="carouselTraining" class="carousel slide" data-bs-ride="carousel">
+  <?= $trainings ?>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselTraining" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselTraining" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 <!-- Carousel des articles -->
 
-  <div id="carouselArticles" class="carousel slide" data-bs-ride="carousel">
-    <?= $articles ?>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselArticles" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselArticles" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></i></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+<div id="carouselArticles" class="carousel slide" data-bs-ride="carousel">
+  <?= $articles ?>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselArticles" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselArticles" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></i></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 
 <!--  -->
-<div class="infohome">
-  <img src="<?= base_url() ?>/assets/img/97e1ffb95c4e03e98046c612ba4d0f5e.jpg" class="d-block w-100" alt="Info Home" />
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Habitant morbi tristique senectus et netus. Proin fermentum leo vel orci porta.
-    Lacus sed turpis tincidunt id aliquet risus feugiat in.
-    Lacinia at quis risus sed vulputate. Nulla facilisi nullam vehicula ipsum.
-    Ultrices vitae auctor eu augue ut. Et netus et malesuada fames ac turpis egestas integer eget.
-    Arcu non odio euismod lacinia at. Porttitor lacus luctus accumsan tortor posuere ac ut.
-    Fermentum dui faucibus in ornare quam viverra. Nibh ipsum consequat nisl vel pretium.
-    Odio aenean sed adipiscing diam donec. Lorem mollis aliquam ut porttitor leo a diam.
-    Ultrices eros in cursus turpis massa tincidunt.
-    Porttitor massa id neque aliquam. Morbi non arcu risus quis varius quam.</p>
+<div class="d-flex justify-content-center" >
+  <div class="w-50 m-2 p-2 text-center">
+    <img src="<?= base_url() ?>/assets/img/97e1ffb95c4e03e98046c612ba4d0f5e.jpg" class="w-50 m-2" alt="Info Home" />
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Habitant morbi tristique senectus et netus. Proin fermentum leo vel orci porta.
+      Lacus sed turpis tincidunt id aliquet risus feugiat in.
+      Lacinia at quis risus sed vulputate. Nulla facilisi nullam vehicula ipsum.
+      Ultrices vitae auctor eu augue ut. Et netus et malesuada fames ac turpis egestas integer eget.
+      Arcu non odio euismod lacinia at. Porttitor lacus luctus accumsan tortor posuere ac ut.
+      Fermentum dui faucibus in ornare quam viverra. Nibh ipsum consequat nisl vel pretium.
+    </p>
+  </div>
 </div>
-<div class="infofund">
-  <img src="<?= base_url() ?>/assets/img/7ad690549ef9ac94a7d292587006dc5b.jpg" class="d-block w-100" alt="Info Funding" />
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+<div class="d-flex justify-content-center">
+<div class="w-50 m-2 p-2 text-center">
+  <img src="<?= base_url() ?>/assets/img/7ad690549ef9ac94a7d292587006dc5b.jpg" class="w-50 m-2" alt="Info Funding" />
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     Habitant morbi tristique senectus et netus. Proin fermentum leo vel orci porta.
     Lacus sed turpis tincidunt id aliquet risus feugiat in.
     Lacinia at quis risus sed vulputate. Nulla facilisi nullam vehicula ipsum.
     Ultrices vitae auctor eu augue ut. Et netus et malesuada fames ac turpis egestas integer eget.
     Arcu non odio euismod lacinia at. Porttitor lacus luctus accumsan tortor posuere ac ut.
     Fermentum dui faucibus in ornare quam viverra. Nibh ipsum consequat nisl vel pretium.
-    Odio aenean sed adipiscing diam donec. Lorem mollis aliquam ut porttitor leo a diam.
-    Ultrices eros in cursus turpis massa tincidunt.
-    Porttitor massa id neque aliquam. Morbi non arcu risus quis varius quam.</p>
+  </p>
   <button class="btn btn-outline-primary" onclick="location = '/funding'">Me financer</button>
 </div>
-<section class="">
+</div>
+<section class="m-2">
   <form action="/" method="post">
     <!--Grid row-->
     <div class="row d-flex justify-content-center">

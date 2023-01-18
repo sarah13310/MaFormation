@@ -5,8 +5,16 @@ namespace App\Libraries;
 use CodeIgniter\Database\MySQLi\Builder;
 
 class BillHelper
-{
-    function getFilterBill($id_user = ALL)
+{    
+    /**
+     * getFilterBill
+     *
+     * Retourne les factures en fonction du profil utilisateur 
+     * ou toutes les factures sans filtre
+     * @param  int  $id_user (identification de l'utilisateur ou ALL)
+     * @return array tableau des factures
+     */
+    function getFilterBill(int $id_user = ALL)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('user_has_bill');
