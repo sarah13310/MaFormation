@@ -173,24 +173,22 @@ class Former extends BaseController
             "user" => $user,
             "options" => $options,
         ];
-
-        $rules = [
-            'title' => 'required|min_length[3]|max_length[30]',
-        ];
-        $error = [
-            'title' => [
-                'required' => "Titre vide!",
-                'min_length' => "Titre trop court",
-                'max_length' => "Titre trop long",
-            ],
-        ];
-
+        
         if ($this->request->getMethod() == 'post') {
             $training = new TrainingHelper();
             $dateStart = $this->request->getVar('dateStart');
             $dateEnd = $this->request->getVar('dateEnd');
             $timeStart = $this->request->getVar('timeStart');
             $timeEnd = $this->request->getVar('timeEnd');
+            $image_url=$this->request->getVar("image_url");
+            echo($image_url);             
+            if ($image_url==null){
+                $image_url=base_url()."/assets/training.svg";
+            }
+            if (!str_contains($image_url,base_url())){
+                $image_url=base_url()."/assets//".$image_url;
+            }
+
             $dateTimeStart = date('Y-m-d H:i:s', strtotime($dateStart . ' ' . $timeStart));
             $dateTimeEnd = date('Y-m-d H:i:s', strtotime($dateEnd . ' ' . $timeEnd));
             $title = $this->request->getVar('title');
@@ -200,10 +198,11 @@ class Former extends BaseController
                 "date" => $dateTimeStart,
                 "duration" => $dateTimeEnd,
                 "rating" => 0,
-                "bill_id_bill" => 0,
-                "type_slide_id_type" => 0,
-                "status_id_status" => 0,
+                "id_bill" => 0,
+                "id_type_slide" => 0,
+                "status" => 0,
                 "id_tag" => 0,
+                "image_url"=>$image_url,
             ];
             $types = [
                 ["id" => 1, "name" => "Introduction"],
@@ -212,13 +211,23 @@ class Former extends BaseController
                 ["id" => 4, "name" => "Annexe"],
             ];
             $data['types'] = $types;
-
+            $rules = [
+                'title' => 'required|min_length[3]|max_length[40]',
+            ];
+            $error = [
+                'title' => [
+                    'required' => "Titre vide!",
+                    'min_length' => "Titre trop court",
+                    'max_length' => "Titre trop long",
+                ],
+            ];
+    
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
                 if ($training->isExist($title) === true) {
                     // la formation existe déjà avec ce titre
-                    // on doit avertir le formateur
+                    // alors on doit avertir le formateur
                     $session_add = [
                         "description" => $this->request->getVar('description'),
                         "dateStart" => $dateStart,
@@ -229,7 +238,9 @@ class Former extends BaseController
                     $data["warning"] = "true";
                     session()->set($session_add);
                     return view('Training/training_add.php', $data);
+
                 } else {
+
                     $training = new TrainingHelper();
                     $last_id = $training->add($data_save);
                     $training->setTrainingSession($data_save);
@@ -266,13 +277,14 @@ class Former extends BaseController
         ];
         //
         $data = [
-            "title" => "Création contenu",
+            "title" => "Création contenu de page",
             "id_user" => $user['id_user'],
             "user" => $user,
             "options" => $options,
             "types" => $types,
             "id_training" => $id_training,
             "trainings" => $trainings,
+            "headerColor"=>getTheme(session()->type, "header"),
         ];
 
         if ($this->request->getMethod() == 'post') {

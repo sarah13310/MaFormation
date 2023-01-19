@@ -2,10 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\LettersModel;
+
 use App\Libraries\CarouselHelper;
-use App\Libraries\TrainingHelper;
-use App\Libraries\ArticleHelper;
+
 
 // Le 10/01/2023
 class Home extends BaseController
@@ -15,8 +14,7 @@ class Home extends BaseController
         helper(['form']);
 
         $carousel_helper = new CarouselHelper();
-        $training_helper = new TrainingHelper();
-        $article_helper = new ArticleHelper();
+       
         try {
             $db      = \Config\Database::connect();
             $builder = $db->table('article');
@@ -74,20 +72,20 @@ class Home extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                $model = new LettersModel();
+                
 
                 $newData = [
                     'mail' => $this->request->getVar('mail'),
                 ];
-                $model->save($newData);
+                $this->letters_model->save($newData);
             }
         }
 
-        $trainings = $training_helper->getFilterTrainings();
+        $trainings = $this->training_model->getFilterTrainings();
         //print_r($trainings);
         $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "/training/details/");
 
-        $articles = $article_helper->getFilterArticles(VALIDE);
+        $articles = $this->article_model->getFilterArticles(VALIDE);
         //print_r($trainings);
 
         $carousel2 = $carousel_helper->listCardImgCarousel($articles, "/article/list/details/");

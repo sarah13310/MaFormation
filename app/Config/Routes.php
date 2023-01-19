@@ -38,7 +38,8 @@ $routes->get('/', 'Home::index');
 
 $routes->add('/superadmin/add/admin', 'Admin::add_admin'); // Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges'); //dashboard des privileges
-$routes->group('/former', static function ($routes) {
+
+$routes->group('/admin', static function ($routes) {
     $routes->add('articles/edit', 'News::articles_edit');
     $routes->add('publishes/edit', 'News::publishes_edit');
     $routes->add('articles/list', 'Dashboard::listarticles');

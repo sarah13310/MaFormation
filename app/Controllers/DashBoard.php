@@ -7,7 +7,7 @@ use App\Libraries\ArticleHelper;
 use App\Libraries\PublishHelper;
 use App\Libraries\MediaHelper;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
+
 class DashBoard extends BaseController
 {
     public function listformerarticles()

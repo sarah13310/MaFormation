@@ -2,20 +2,15 @@
 
 namespace App\Controllers;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
-
-use App\Models\UserModel;
-use App\Models\CertificateModel;
-use App\Models\UserHasCertificateModel;
-use App\Models\UserHasCompanyModel;
-use App\Models\CompanyModel;
-use App\Libraries\UserHelper;
-use App\Libraries\BillHelper;
-//use CodeIgniter\HTTP\Message;
 
 // le 12/01/2023
 class User extends BaseController
 {
+    public function __construct()
+    {
+        helper(['util']); // déclaration des fonctions helper
+    }
+
     /* connexion utlitisateur */
     public function login()
     {
@@ -56,10 +51,10 @@ class User extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                $model = new UserModel();
+
                 $user = null;
                 try {
-                    $user = $model->where('mail', $mail)->first();
+                    $user = $this->user_model->where('mail', $mail)->first();
                 } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {
                     session()->setFlashdata('infos', 'Connexion impossible!');
                     return view('/Login/login', $data);
@@ -87,16 +82,16 @@ class User extends BaseController
     private function dispatch($user)
     {
         helper(['form']);
-       
-        $user_info = new UserHelper();
-        $user_info->setUserSession($user);
+
+
+        $this->user_model->setUserSession($user);
         $type = $user['type'];
 
         if ($user['image_url'] == null)
             $user['image_url'] = base_url() . "/assets/blank.png";
 
-        $jobs = $user_info->getInfosCompany($user['id_user']);
-        $skills = $user_info->getInfosCertificates($user['id_user']);
+        $jobs = $this->user_model->getInfosCompany($user['id_user']);
+        $skills = $this->user_model->getInfosCertificates($user['id_user']);
 
         $data = [
             "user" => $user,
@@ -115,53 +110,49 @@ class User extends BaseController
 
     private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
-        $modelu = new UserModel();
-        $modelcp = new CompanyModel();
-        $modelucf = new UserHasCompanyModel();
+
+
+
 
         //table utilisateur
-        $modelu->save($data_user);
+        $this->user_model->save($data_user);
 
         // table entreprise    
         $data_company['siret'] = $siret;
         $data_company['kbis'] = $kbis;
-        $modelcp->save($data_company);
+        $this->company_model->save($data_company);
 
         // table jointure
-        $id_user = $modelu->getInsertID();
-        $id_company = $modelcp->getInsertID();
+        $id_user = $this->user_model->getInsertID();
+        $id_company = $this->company_model->getInsertID();
         $data_jointure = [
             "id_user" => $id_user,
             "id_company" => $id_company,
         ];
-        $modelucf->save($data_jointure);
+        $this->user_has_company_model->save($data_jointure);
     }
 
     private function associateCompany($data_user, $id_company, $kbis, $siret)
     {
-        $modelu = new UserModel();
-        //$modelcp = new CompanyModel();
-        $modelucf = new UserHasCompanyModel();
 
         //table utilisateur
-        $modelu->save($data_user);
+        $this->user_model->save($data_user);
 
         // table jointure
-        $id_user = $modelu->getInsertID();
+        $id_user = $this->user_model->getInsertID();
 
         $data_jointure = [
             "id_user" => $id_user,
             "id_company" => $id_company,
         ];
-        $modelucf->save($data_jointure);
+        $this->user_has_company_model->save($data_jointure);
     }
 
     private function ifNotExistCompany($data_company)
     {
         // on part du principe une seule société par ville
-        // une évolution future: vérifier l'adresse
-        $modelcp = new CompanyModel();
-        $company = $modelcp->where("name", $data_company['name'])
+        // une évolution future: vérifier l'adresse        
+        $company = $this->company_model->where("name", $data_company['name'])
             ->where("cp", $data_company['cp'])
             ->where("city", $data_company['city'])
             ->first();
@@ -229,20 +220,20 @@ class User extends BaseController
     public function profileuser()
     {
         helper(['form']);
-        $user_helper = new UserHelper();
-        
+
+
         if ($this->request->getMethod() == "post") {
             // on met à jour les informations de session           
-            session()->mail=$this->request->getVar('mail');         
-            session()->address=$this->request->getVar('address');
-            session()->cp=$this->request->getVar('cp');
-            session()->city=$this->request->getVar('city');
-            session()->country=$this->request->getVar('country');
-            session()->phone=$this->request->getVar('phone');
-            session()->gender=$this->request->getVar('gender');
-            session()->birthday=$this->request->getVar('birthday');
-            session()->site=$this->request->getVar('site');
-            
+            session()->mail = $this->request->getVar('mail');
+            session()->address = $this->request->getVar('address');
+            session()->cp = $this->request->getVar('cp');
+            session()->city = $this->request->getVar('city');
+            session()->country = $this->request->getVar('country');
+            session()->phone = $this->request->getVar('phone');
+            session()->gender = $this->request->getVar('gender');
+            session()->birthday = $this->request->getVar('birthday');
+            session()->site = $this->request->getVar('site');
+
             // On met à jour les informations utilisateur
             $dataUpdate = [
                 //'id_user' => session()->id_user,
@@ -254,17 +245,17 @@ class User extends BaseController
                 'city' => session()->city,
                 'country' => session()->country,
                 'phone' => session()->phone,
-                'gender' =>session()->gender,
+                'gender' => session()->gender,
                 'birthday' => session()->birthday,
                 'site' => session()->site,
             ];
-            $model = new UserModel();
-            $model->update(session()->id_user,$dataUpdate);               
-        }
-        $user = $user_helper->getUserSession();
-        
 
-        $skills = $user_helper->getCertificates($user['id_user']);
+            $this->user_model->update(session()->id_user, $dataUpdate);
+        }
+        $user = $this->user_model->getUserSession();
+
+
+        $skills = $this->user_model->getCertificates($user['id_user']);
         if ($user['image_url'] == null) {
             $user['image_url'] = base_url() . "/assets/blank.png";
         }
@@ -326,7 +317,7 @@ class User extends BaseController
     {
         $data = ["title" => "Inscription"];
         helper(['form']);
-        $user_info = new UserHelper();
+
         if ($this->request->getMethod() == 'post') {
 
             $index = $this->request->getVar('index');
@@ -433,7 +424,7 @@ class User extends BaseController
 
             if ($main && $sub) {
 
-                $model = new UserModel();
+
                 $newData = [
                     'name' => $this->request->getVar('name'),
                     'firstname' => $this->request->getVar('firstname'),
@@ -452,15 +443,15 @@ class User extends BaseController
                 if ($index == 4) { //Particulier
                     $newData['type'] = TYPE_USER;
                     $newData['status'] = 1;
-                    $model->save($newData);
+                    $this->user_model->save($newData);
                 }
 
                 if ($index == 2) { // Formateur
                     $newData['type'] = TYPE_FORMER;
                     $newData['status'] = 1;
-                    $model->save($newData);
-                    $id_user = $model->getInsertID();
-                    $modelf = new CertificateModel();
+                    $this->user_model->save($newData);
+                    $id_user = $this->user_model->getInsertID();
+
 
                     $newDataf = [
                         'name' => $this->request->getVar('f_name'),
@@ -472,18 +463,15 @@ class User extends BaseController
                         'cp' => $this->request->getVar('f_cp'),
                         'country' => $this->request->getVar('f_country'),
                     ];
-                    $modelf->save($newDataf);
-
-                    $modelce = new UserHasCertificateModel();
-
-                    $id_certificate = $modelf->getInsertID();
+                    $this->certificat_model->save($newDataf);
+                    $id_certificate = $this->certificat_model->getInsertID();
 
                     $newDatace = [
                         'id_user' => $id_user,
                         'id_certificate' => $id_certificate,
                     ];
 
-                    $modelce->save($newDatace);
+                    $this->user_has_company_model->save($newDatace);
                 }
                 if ($index == 3) { //Entreprise
                     $newData['type'] = TYPE_COMPANY;
@@ -503,7 +491,7 @@ class User extends BaseController
 
                     if (empty($kbis) || empty($siret)) {
                         $data['title'] = "Inscrire entreprise";
-                        $user_info->setCompanySession($newData, $newDatac);
+                        $this->user_model->setCompanySession($newData, $newDatac);
                         return view("Login/confirmation", $data);
                     } else {
                         $company = $this->ifNotExistCompany($newDatac);
@@ -526,23 +514,19 @@ class User extends BaseController
     /* liste des factures suivant profil utilisateur */
     public function bill()
     {
-        $user_helper = new UserHelper();
-        $bill_helper = new BillHelper();
+        $user = $this->user_model->getUserSession();
 
-        $user = $user_helper->getUserSession();
-
-        $type = $user['type'];
         $bills = [];
-        switch ($type) {
+        switch (session()->type) {
             case USER:
             case COMPANY:
-                $bills = $bill_helper->getFilterBill($user['id_user']);
+                $bills = $this->bill_model->getFilterBill($user['id_user']);
                 break;
             case FORMER:
                 break;
             case ADMIN:
             case SUPER_ADMIN:
-                $bills = $bill_helper->getFilterBill();
+                $bills = $this->bill_model->getFilterBill();
                 break;
         }
         $data = [
@@ -556,24 +540,25 @@ class User extends BaseController
         return view("Payment/bill.php", $data);
     }
 
-    public function modif_name(){
+    public function modif_name()
+    {
 
-        $user_helper=new UserHelper();
+
 
         if ($this->request->getMethod() == "post") {
             // on met à jour les informations de session
-            session()->name= $this->request->getVar('name');
-            session()->firstname=$this->request->getVar('firstname');
-            $dataUpdate=[
-                "name"=>session()->name,
-                "firstname"=>session()->firstname,
-            ];                
+            session()->name = $this->request->getVar('name');
+            session()->firstname = $this->request->getVar('firstname');
+            $dataUpdate = [
+                "name" => session()->name,
+                "firstname" => session()->firstname,
+            ];
             // On met à jour les informations utilisateur
-            $model = new UserModel();
-            $model->update(session()->id_user,$dataUpdate);            
+
+            $this->user_model->update(session()->id_user, $dataUpdate);
         }
-        $user = $user_helper->getUserSession();
-        $skills = $user_helper->getCertificates($user['id_user']);
+        $user = $this->user_model->getUserSession();
+        $skills = $this->user_model->getCertificates($user['id_user']);
         if ($user['image_url'] == null) {
             $user['image_url'] = base_url() . "/assets/blank.png";
         }
@@ -591,21 +576,21 @@ class User extends BaseController
     public function modif_contact()
     {
         helper(["form"]);
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $this->user_model->getUserSession();
 
         if ($this->request->getMethod() == 'post') {
-            $model = new UserModel();
-            session()->name=$this->request->getVar('name');
-            session()->firstname=$this->request->getVar('firstname');
-            session()->address=$this->request->getVar('address');
-            session()->city=$this->request->getVar('city');
-            session()->cp=$this->request->getVar('cp');
-            session()->country=$this->request->getVar('country');
-            session()->phone=$this->request->getVar('phone');
-            session()->mail=$this->request->getVar('mail');
-            session()->birthday=$this->request->getVar('birthday');
-            session()->gender=$this->request->getVar('gender');
+
+            session()->name = $this->request->getVar('name');
+            session()->firstname = $this->request->getVar('firstname');
+            session()->address = $this->request->getVar('address');
+            session()->city = $this->request->getVar('city');
+            session()->cp = $this->request->getVar('cp');
+            session()->country = $this->request->getVar('country');
+            session()->phone = $this->request->getVar('phone');
+            session()->mail = $this->request->getVar('mail');
+            session()->birthday = $this->request->getVar('birthday');
+            session()->gender = $this->request->getVar('gender');
 
             $updateData = [
                 'name' => session()->name,
@@ -619,8 +604,8 @@ class User extends BaseController
                 'birthday' => session()->birthday,
                 'gender' => session()->gender,
             ];
-            $model->update(session()->id_user, $updateData);
-            
+            $this->user_model->update(session()->id_user, $updateData);
+
             session()->setFlashdata('success', 'Informations de contact modifiées');
         }
         $data = [
@@ -634,8 +619,8 @@ class User extends BaseController
     public function modif_perso()
     {
         helper(["form"]);
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => "Informations Personnelles",
             "user" => $user,
@@ -649,8 +634,8 @@ class User extends BaseController
     public function modif_password()
     {
         helper(["form"]);
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => "Modification mot de passe",
             "user" => $user,
@@ -664,10 +649,9 @@ class User extends BaseController
         helper(["form"]);
         // on récupère l'id de la session active
         $id = session()->get("id_user");
-        // on récupère les informations utilisateur de la session active     
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
-        $skills = $user_helper->getCertificates($id);
+        // on récupère les informations utilisateur de la session active           
+        $user = $this->user_model->getUserSession();
+        $skills = $this->user_model->getCertificates($id);
 
         if ($this->request->getMethod() == 'post') {
 
@@ -685,11 +669,10 @@ class User extends BaseController
             $id_cetificate = $this->request->getVar('id_certificate');
             //on modifie la compétence dans la table certificate
             if ($id_cetificate) {
-                $model = new CertificateModel();
-                $model->update($id_cetificate, $updateData);
+                $this->certificat_model->update($id_cetificate, $updateData);
             }
             // on met à jour la liste des compétences
-            $skills = $user_helper->getCertificates($id);
+            $skills = $this->user_model->getCertificates($id);
         }
         // on prépare les données pour la page html
         $data = [
@@ -707,12 +690,12 @@ class User extends BaseController
     {
         // on récupère l'id de la session active
         $id = session()->get("id_user");
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $this->user_model->getUserSession();
         //on supprime le certificat dans la table certificate
-        $user_helper->removeCertificate($id_skill);
+        $this->user_model->removeCertificate($id_skill);
         // on met à jour la liste des compétences
-        $skills = $user_helper->getCertificates($id);
+        $skills = $this->user_model->getCertificates($id);
         // on prépare les données pour la page html
         $data = [
             "title" => "Modification des compétences",
@@ -722,8 +705,8 @@ class User extends BaseController
             "skills" => $skills,
         ];
         // on supprime en fonction de l'id utilisateur
-        $user_has_certificate = new UserHasCertificateModel();
-        $user_has_certificate->delete(['id_user', $id]);
+
+        $this->user_has_certificate_model->delete(['id_user', $id]);
 
         return view("User/modif_skill.php", $data);
     }
@@ -731,8 +714,8 @@ class User extends BaseController
     public function add_skill()
     {
         // on récupère les informations utilisateur de la session active        
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $this->user_model->getUserSession();
 
         if ($this->request->getMethod() == 'post') {
 
@@ -746,18 +729,16 @@ class User extends BaseController
                 'cp' => $this->request->getVar('cp'),
                 'country' => $this->request->getVar('country'),
             ];
-            // on ajoute la compétence dans la table certificate
-            $model = new CertificateModel();
-            $model->save($updateData);
+            // on ajoute la compétence dans la table certificate            
+            $this->certificat_model->save($updateData);
 
-            $user_has_certificate = new UserHasCertificateModel();
             // on enrichit la table intermédaire pour faire la jonction
-            $id_certificate = $model->getInsertID();
+            $id_certificate = $this->certificat_model->getInsertID();
             $data2 = [
                 "id_user" => session()->get('id_user'),
                 "id_certificate" => $id_certificate,
             ];
-            $user_has_certificate->save($data2);
+            $this->user_has_certificate_model->save($data2);
             // on informe visuelement de l'ajout     
             session()->setFlashdata('success', 'Compétence ajoutée!');
         }
@@ -775,8 +756,8 @@ class User extends BaseController
     function save_photo()
     {
         helper(['form']);
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $this->user_model->getUserSession();
 
         if ($this->request->getMethod() == 'post') {
             //on récupère le contenu base 64
@@ -787,15 +768,15 @@ class User extends BaseController
             base64_to_jpeg($photo, $url_photo);
             // on déplace le fichier dans le répertoire photos
             //move_uploaded_file('./'.$file, $url_photo);
-            session()->image_url= base_url() . "/assets/photos/" . $file;
+            session()->image_url = base_url() . "/assets/photos/" . $file;
 
-            $model = new UserModel();
+
             $dataUpdate = [
                 "image_url" => base_url() . "/assets/photos/" . $file,
             ];
-            $model->update($user['id_user'], $dataUpdate);
+            $this->user_model->update($user['id_user'], $dataUpdate);
         }
-        $skills = $user_helper->getCertificates($user['id_user']);
+        $skills = $this->user_model->getCertificates($user['id_user']);
 
         $data = [
             "title" => "Ajouter des compétences",
@@ -810,15 +791,16 @@ class User extends BaseController
         return view("User/profile_user.php", $data);
     }
 
-    function parameters(){
+    function parameters()
+    {
         helper(['form']);
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+
+        $user = $$this->user_model->getUserSession();
         $data = [
             "title" => "Paramètres du profil",
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
-            "headerColor" => getTheme($user['type'], "header"),            
+            "headerColor" => getTheme($user['type'], "header"),
         ];
 
         return view("User/parameters.php", $data);

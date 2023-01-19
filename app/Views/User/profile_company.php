@@ -1,4 +1,3 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php/functions/util.php') ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <!-- boite modal snapshot -->

@@ -2,7 +2,9 @@ html {
     box-sizing: border-box
 }
 
-*, :after, :before {
+*,
+:after,
+:before {
     box-sizing: inherit
 }
 
@@ -20,7 +22,9 @@ body {
     min-height: 100%
 }
 
-html code, html pre, html pre code {
+html code,
+html pre,
+html pre code {
     font-size: 1rem;
     font-family: Source Code Pro, monospace
 }
@@ -48,18 +52,27 @@ h4 {
     font-size: 1.125rem
 }
 
-h5, h6 {
+h5,
+h6 {
     font-size: 1rem
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #777777;
     line-height: 1.1;
     margin: 0rem;
     letter-spacing: .5px
 }
 
-.Callout, p, pre, table {
+.Callout,
+p,
+pre,
+table {
     margin: 0 0 1.5rem
 }
 
@@ -76,14 +89,18 @@ kbd {
     user-select: all
 }
 
-html code[class*=language-], html pre, html pre[class*=language-] {
+html code[class*=language-],
+html pre,
+html pre[class*=language-] {
     overflow: auto;
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4
 }
 
-html pre, html pre[class*=language-], html pre code {
+html pre,
+html pre[class*=language-],
+html pre code {
     display: block;
     background: #f7f7f7;
     border: none
@@ -103,9 +120,11 @@ html code {
     word-break: break-word
 }
 
-.Content > :not(.fullwidth):not(.Post), .Footer__container, .Header__container {
+.Content> :not(.fullwidth):not(.Post),
+.Footer__container,
+.Header__container {
     width: 100%;
-    max-width: 100%;    
+    max-width: 100%;
 }
 
 .Header {
@@ -225,12 +244,13 @@ html code {
     margin-right: .65em
 }
 
-.Menu__item > .Menu__submenu {
+.Menu__item>.Menu__submenu {
     display: none;
     z-index: 1000
 }
 
-.Menu__item:focus > .Menu__submenu, .Menu__item:hover > .Menu__submenu {
+.Menu__item:focus>.Menu__submenu,
+.Menu__item:hover>.Menu__submenu {
     display: block
 }
 
@@ -293,7 +313,7 @@ html code {
     padding: 1em
 }
 
-.Content > :first-child {
+.Content> :first-child {
     margin-top: 0
 }
 
@@ -378,7 +398,8 @@ html code {
     display: flex
 }
 
-.Documentation__content > :first-child, .Documentation__sidebar > :first-child {
+.Documentation__content> :first-child,
+.Documentation__sidebar> :first-child {
     margin-top: 0
 }
 
@@ -430,11 +451,11 @@ html code {
     padding: 1rem
 }
 
-.Callout > :first-child {
+.Callout> :first-child {
     margin-top: 0
 }
 
-.Callout > :last-child {
+.Callout> :last-child {
     margin-bottom: 0
 }
 
@@ -526,7 +547,8 @@ html code {
     text-align: center
 }
 
-.Pagnation__item, .Pagnation__link {
+.Pagnation__item,
+.Pagnation__link {
     display: inline-block
 }
 
@@ -567,7 +589,9 @@ html code {
 }
 
 @media only screen and (max-width: 60em) {
-    .Footer, .Header {
+
+    .Footer,
+    .Header {
         padding-left: 1rem;
         padding-right: 1rem
     }
@@ -594,7 +618,9 @@ html code {
 }
 
 @media only screen and (max-width: 840px) {
-    .Header__nav, .Header__title {
+
+    .Header__nav,
+    .Header__title {
         width: 100%;
         text-align: center
     }
@@ -605,7 +631,8 @@ html code {
         display: block
     }
 
-    .Header__nav, .Header__title {
+    .Header__nav,
+    .Header__title {
         display: block;
         text-align: center
     }
@@ -656,7 +683,8 @@ html code {
     }
 }
 
-code[class*=language-], pre[class*=language-] {
+code[class*=language-],
+pre[class*=language-] {
     color: #333;
     background: none;
     font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
@@ -682,14 +710,15 @@ pre[class*=language-] {
     background: #fff
 }
 
-:not(pre) > code[class*=language-] {
+:not(pre)>code[class*=language-] {
     padding: .1em;
     border-radius: .3em;
     white-space: normal;
     background: #f5f5f5
 }
 
-.token.blockquote, .token.comment {
+.token.blockquote,
+.token.comment {
     color: #969896
 }
 
@@ -697,27 +726,55 @@ pre[class*=language-] {
     color: #183691
 }
 
-.token.doctype, .token.macro.property, .token.punctuation, .token.variable {
+.token.doctype,
+.token.macro.property,
+.token.punctuation,
+.token.variable {
     color: #333
 }
 
-.token.builtin, .token.important, .token.keyword, .token.operator, .token.rule {
+.token.builtin,
+.token.important,
+.token.keyword,
+.token.operator,
+.token.rule {
     color: #a71d5d
 }
 
-.token.attr-value, .token.regex, .token.string, .token.url {
+.token.attr-value,
+.token.regex,
+.token.string,
+.token.url {
     color: #183691
 }
 
-.token.atrule, .token.boolean, .token.code, .token.command, .token.constant, .token.entity, .token.number, .token.property, .token.symbol {
+.token.atrule,
+.token.boolean,
+.token.code,
+.token.command,
+.token.constant,
+.token.entity,
+.token.number,
+.token.property,
+.token.symbol {
     color: #0086b3
 }
 
-.token.prolog, .token.selector, .token.tag {
+.token.prolog,
+.token.selector,
+.token.tag {
     color: #63a35c
 }
 
-.token.attr-name, .token.class, .token.class-name, .token.function, .token.id, .token.namespace, .token.pseudo-class, .token.pseudo-element, .token.url-reference .token.variable {
+.token.attr-name,
+.token.class,
+.token.class-name,
+.token.function,
+.token.id,
+.token.namespace,
+.token.pseudo-class,
+.token.pseudo-element,
+.token.url-reference .token.variable {
     color: #795da3
 }
 
@@ -725,7 +782,8 @@ pre[class*=language-] {
     cursor: help
 }
 
-.token.title, .token.title .token.punctuation {
+.token.title,
+.token.title .token.punctuation {
     font-weight: 700;
     color: #1d3e81
 }
@@ -760,7 +818,8 @@ pre[class*=language-] {
     color: #333
 }
 
-.language-css .token.function, code.language-css {
+.language-css .token.function,
+code.language-css {
     color: #0086b3
 }
 
@@ -776,7 +835,8 @@ code.language-yaml {
     color: #333
 }
 
-.language-makefile .token.symbol, .language-markdown .token.url {
+.language-makefile .token.symbol,
+.language-markdown .token.url {
     color: #795da3
 }
 
@@ -784,6 +844,30 @@ code.language-yaml {
     color: #183691
 }
 
-.language-bash .token.keyword, .language-makefile .token.builtin {
+.language-bash .token.keyword,
+.language-makefile .token.builtin {
     color: #0086b3
+}
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 48.5%;
+    }
+}
+
+/* barre verticale avec effet de dégradé*/
+.vr {
+    width: 0.25%;
+    border-left: 0.1px solid rgba(0, 0, 0, 0.214);
+    padding: 0;
+    margin: 0 ;
+    
+    background-image: linear-gradient( #ffffffb6 0%, #a4a3a3 50%, #ffffffb6 100%);
+    background-image: -o-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -moz-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -ms-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-gradient(linear,  color-stop(0.02, white), color-stop(0.5, gray), color-stop(0.98, white));
+    
 }

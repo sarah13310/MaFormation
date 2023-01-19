@@ -29,34 +29,31 @@
     </form>
 </div>
 
-<h1 class="noselect ms-3"><?= $title ?></h1>
-<section class="Content">
+<h1 class="ms-3"><?= $title ?></h1>
+<hr class="mb-2 mt-2">
+<section class="Content ">
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
-    <script src="<?= $base ?>/js/sceditor.min.js"></script>
-    <script src="<?= $base ?>/js/languages/fr.js"></script>
-    <script src="<?= $base ?>/js/bbcode.min.js"></script>
-    <script src="<?= $base ?>/js/monocons.min.js"></script>
     <div class="row">
         <div class="col-12 col-md-6">
-            <form id="form_training" action="" method="POST">
+            <form id="form_training" onsubmit="return save()">
                 <input type="hidden" id="action" name="action" value="create">
                 <input type="hidden" id="data" name="data[]">
                 <div class="row justify-content-between">
-                    <div class="noselect col-12 col-md-5">
+                    <div class="col-12 col-md-5">
                         <select id="type" name="type" class="form-select mb-3">
                             <?php foreach ($types as $type) : ?>
                                 <option value="<?= $type["id"] ?>"><?= $type["name"] ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
-                    <div class=" noselect col-12 col-md-5">
+                    <div class="col-12 col-md-5">
                         <input id="number" type="number" max="12" min="1">
                     </div>
                     <div class="col-12 col-md-2">
                         <a onclick="onResetPage()" class="btn btn-primary"><i class="bi bi-trash"></i></a>
                     </div>
                 </div>
-                <div class="noselect form-group row">
+                <div class="form-group row">
                     <label for="select" class="col-2 col-form-label">Catégorie</label>
                     <div class="col-10">
                         <select id="select" name="select" class="form-select">
@@ -66,22 +63,28 @@
                         </select>
                     </div>
                 </div>
-                <div class="yesselect fullwidth editor mt-2">
-                    <textarea id="content" name="description" style="width:100%; height:400px"></textarea>
+                <div class="col-12  form-floating mb-3">
+                    <input class="form-control" id="image_url" name="iamge_url" type="text" placeholder="Image de la page" value="<?= base_url() . "/assets/article.svg" ?>" />
+                    <label for="image_url">Image de la page</label>
                 </div>
-                <div class="row fullwidth  mt-2">
+                <div class=" fullwidth editor mt-2">
+                    <textarea id="content" class="" name="description" style="width:100%; height:400px">
+                </textarea>
+                </div>
+                <div class="row fullwidth mt-2">
                     <div class="row align-items-center">
-                        <div id="modify" class="noselect hidden col-sm-12 col-md-3"><a onclick="modifyTableau()" class="noselect btn btn-outline-primary">Modifier</a></div>
-                        <div id="add" class="noselect col-sm-12 col-md-3 "><a onclick="addTableau()" class="noselect btn btn-outline-primary">Ajouter</a></div>
-                        <div class="col-sm-12 col-md-3 "><button type="submit" class="noselect btn btn-primary">Sauver</button></div>
+                        <div id="modify" class=" hidden col-sm-12 col-md-3"><a onclick="modifyTableau()" class=" btn btn-outline-primary">Modifier</a></div>
+                        <div id="add" class=" col-sm-12 col-md-3 "><a onclick="addTableau()" class=" btn btn-outline-primary">Ajouter</a></div>
+                        <div class="col-sm-12 col-md-3 "><button type="button" class=" btn btn-primary">Sauver</button></div>
                         <div class="col-sm-12 col-md-6 ">
                             <input type="checkbox" id="publish" name="publish" checked>
-                            <label class="noselect" for="publish">Publier</label>
+                            <label class="" for="publish">Publier</label>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+        <div class="vr"></div>
         <div class="col-12 col-md-6">
             <div class="row mb-2">
                 <div class="col-12 col-md-2">
@@ -94,8 +97,8 @@
                 <div id="lblType" class="col-12 col-md-6">Chapitre...
                 </div>
             </div>
-            <table class="noselect table table-success table-striped table-bordered table-hover" id="table">
-                <thead>
+            <table class=" table table-bordered table-hover" id="table">
+                <thead class=" table <?= $headerColor ?>">
                     <tr>
                         <th scope="col">Chapitre</th>
                         <th scope="col">Catégorie</th>
@@ -110,6 +113,11 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
+<script src="<?= $base ?>/js/sceditor.min.js"></script>
+<script src="<?= $base ?>/js/languages/fr.js"></script>
+<script src="<?= $base ?>/js/bbcode.min.js"></script>
+<script src="<?= $base ?>/js/monocons.min.js"></script>
+
 <script>
     const modalDelete = new bootstrap.Modal('#modalDelete');
     const formDelete = document.getElementById('modalDelete');
@@ -125,7 +133,8 @@
     //
     let select = document.getElementById('select');
     let content = document.getElementById('content');
-    let data = document.getElementById('data');
+    //let dataI = document.getElementById('data');
+   // let pages = [];
     let btnModify = document.getElementById("modify");
     let btnAdd = document.getElementById("add");
     let msg_delete = document.getElementById("msg_delete");
@@ -133,12 +142,20 @@
     let number = document.getElementById("number");
     //
     let str = "";
-    let page_num = 0,
-        annexe_num = 0;
+    let page_num = 0
+    let annexe_num = 0;
     let area = "";
-    let mode = "new",
-        modified = false;
+    let mode = "new";
+    let modified = false;
+    let chapter;
+    let rowSelected;
 
+   /* class Page {
+        constructor(name, content, image_url = "") {
+            this.name = name;
+            this.content = content;
+        }
+    }*/
 
     function initEditor() {
         sceditor.create(content, {
@@ -150,7 +167,7 @@
             locale: 'fr-FR'
         });
     }
-
+    // Gestion des pages avec numérotation intégrée
     function addTableau() {
 
         area = sceditor.instance(content).val();
@@ -167,23 +184,24 @@
                 libelle = libelle + " " + page_num.toString();
             } else {
                 type.value = 3;
+                libelle = "Conclusion";
+                type.selectedIndex = 3;
             }
         } else if (index == 3) {
             type.value = 4;
-            
+            type.selectedIndex = 4;
+
         } else if (index == 4) {
             annexe_num++;
-            if (annexe_num < max_annexe) {
+            if (annexe_num <= max_annexe) {
                 libelle = libelle + " " + annexe_num.toString();
             } else {
-                //on verra plus tard :)
+                type.selectedIndex = 1;
             }
         }
-
         addRow(libelle, select[select.selectedIndex].text, area);
         select.value = 1;
-
-        AddRowSelect();
+        ClickModifiy();
         AddBtnDelete();
         modified = false;
         sceditor.instance(content).val("");
@@ -191,13 +209,13 @@
 
     function modifyTableau() {
         area = sceditor.instance(content).val();
-
         if (rowSelected != null) {
             rowSelected.cells[3].innerHTML = area;
         }
         onNew();
         modified = false;
     }
+
     let tbody = document.createElement('tbody');
 
     function addRow(td_page, td_category, td_content) {
@@ -221,7 +239,7 @@
         //
         btn.innerHTML = "<i class='bi bi-trash3'>";
         td3.appendChild(btn);
-        //td3.innerHTML = "<button data-bs-toggle='modal' data-bs-target='#modalDelete' ><i class='bi bi-trash3'></i></button>";
+        btn.classList.add("btn");
         td4.appendChild(text4);
         //
         tr.appendChild(td1);
@@ -234,20 +252,17 @@
         modified = false;
     }
 
-    function save() {
-        let rows = table.rows;
-        for (let i = 1; i < rows.length; i++) {
-            let col = rows[i].cells;
-            data.push(col[0].innerHTML);
-            data.push(col[1].innerHTML);
-            data.push(col[3].innerHTML);
-        }
-    }
-
-    form_training.onsubmit = () => {
-        save();
-        return false;
-    }
+    // Sauvegarder des données
+    // function save() {
+    //     let rows = table.rows;
+    //     for (let i = 1; i < rows.length; i++) {
+    //         let col = rows[i].cells;
+    //         let page= new Page(col[0].innerHTML,col[1].innerHTML,col[2].innerHTML );
+    //         pages.push(page);
+           
+    //     }
+    //     return false;
+    // }
 
     formDelete.onsubmit = () => {
         if (rowSelected != null) {
@@ -256,10 +271,6 @@
         modalDelete.hide();
         return false;
     }
-
-
-
-
 
     function onResetPage() {
         type.value = 1;
@@ -292,8 +303,8 @@
         function(n) {
             return this.substr(0, n - 1) + (this.length > n ? '...' : '');
         };
-
-    number.onchange = () => {
+        
+        number.onchange = () => {
         if (type.value == 2) {
             localStorage.page_num = number.value;
         }
@@ -301,8 +312,8 @@
             localStorage.annexe_num = number.value;
         }
     }
-
-    function AddRowSelect() {
+    //
+    function ClickModifiy() {
         let rows = table.getElementsByTagName("tr");
         for (let i = 1; i < rows.length; i++) {
             let rowCurrent = rows[i];
@@ -310,7 +321,7 @@
                 rowSelected = rowCurrent; // on récupère en global le row sélectionné
                 sceditor.instance(content).val(rowCurrent.cells[3].innerHTML);
                 btnAdd.classList.add("hidden");
-                btnModify.classList.remove("hidden");
+                btnModify.classList.remove("hidden");// on affiche le bouton modifier
                 lblType.innerHTML = rowCurrent.cells[0].innerHTML
             }
         }
@@ -325,10 +336,7 @@
             }
         }
     }
-
-    let chapter;
-    let rowSelected;
-
+    
     function showModalDelete(row) {
         rowSelected = row;
         chapter = row.cells[0].innerHTML;

@@ -2,23 +2,19 @@
 
 namespace App\Controllers;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
-
-use App\Libraries\UserHelper;
-use App\Libraries\TrainingHelper;
-use App\Libraries\PageHelper;
-
 // Le 12/01/2023
+// Le 20/01/2023 modification avec helper
+
 class Training extends BaseController
 {
-
+    public function __construct(){
+      helper(['util']); // déclaration des fonctions helper
+    }
+    /* liste des formations (profil utilisateur)*/
     public function list()
     {
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
-
-        $training_helper = new TrainingHelper();
-        $trainings = $training_helper->getFilterTrainings();
+        $user = $this->user_model->getUserSession();
+        $trainings= $this->training_model->getFilterTrainings();            
         $list_training = [];
 
         foreach ($trainings as $training) {
@@ -41,11 +37,10 @@ class Training extends BaseController
 
     public function home()
     {
-        //$user_helper= new UserHelper();
-        //$user=$user_helper->getUserSession();
+        helper(['util']);
 
-        $training_helper = new TrainingHelper();
-        $trainings = $training_helper->getFilterTrainings();
+        $trainings = $this->training_model->getFilterTrainings();
+
         $list_training = [];
 
         foreach ($trainings as $training) {
@@ -64,8 +59,8 @@ class Training extends BaseController
         $data = [
             "title" => "Liste des formations",
             "trainings" => $list_training,
-            //"theme_button" => getTheme($user['type'], "button"),
-            //"headerColor" => getTheme($user['type'],"header"),
+            "buttonColor" => getTheme(session()->type, "button"),
+            "headerColor" => getTheme(session()->type,"header"),
         ];
         return view('Training/training_list_home.php', $data);
     }
@@ -78,8 +73,7 @@ class Training extends BaseController
             $id = $this->request->getVar('id_training');
         }
 
-        $training_helper = new TrainingHelper();
-        $training = $training_helper->getTrainingById($id);
+        $training=$this->training_model->getTrainingById($id);
         $training = $training[0];
 
         $image_url = $training['image_url'];
@@ -96,14 +90,14 @@ class Training extends BaseController
         return view('Training/training_details.php', $data);
     }
 
-   
+
 
     public function payment()
-    {
-        $training_helper = new TrainingHelper();
+    {   
+        
         if ($this->request->getMethod() == 'post') {
             $id = $this->request->getVar('id_training');
-            $training = $training_helper->getTrainingById($id);
+            $training=$this->training_model->getTrainingById($id);
             $training = $training[0];
 
             $data = [
@@ -123,17 +117,15 @@ class Training extends BaseController
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier 
-
-        $training_helper = new TrainingHelper();
-        $page_helper = new PageHelper();
+        $user = $user[0]; // juste le premier        
+        
         if ($this->request->getMethod() == 'post') {
             $id = $this->request->getVar('id_training');
-            $training = $training_helper->getTrainingById($id);
+            $training = $this->training_model->getTrainingById($id);
 
             if ($training) {
                 $training = $training[0];
-                $pages = $page_helper->getPageById($training['id_training']);
+                $pages = $this->page_model->getPageById($training['id_training']);
                 $list_description = [];
                 $list_images = [];
 

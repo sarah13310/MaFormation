@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ArticleModel extends Model
+class LogModel extends Model
 {
     protected $table = 'log';
 

@@ -1,4 +1,4 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
+
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('header') ?>
 <link rel="stylesheet" href="<?= base_url() ?>/css/carousel.css">

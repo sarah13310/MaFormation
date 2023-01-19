@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
+
 
 class Admin extends BaseController
 {
@@ -33,7 +33,7 @@ class Admin extends BaseController
 
     public function profileadmin()
     {
-        helper(['form']);
+        helper(['form', "util"]);
 
         $db      = \Config\Database::connect();
         $builder = $db->table('user');

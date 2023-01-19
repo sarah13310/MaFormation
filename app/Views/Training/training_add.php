@@ -9,13 +9,18 @@
 <?= $this->section('content') ?>
 <section>
     <h1 class="noselect ms-3"><?= $title ?></h1>
+    <hr class="mb-2 mt-2">
     <div class="container py-3">
         <form id="trainingForm" method="post" action="/former/training/add">
             <div class="row">
                 <div class="col-12 col-md-6 ">
                     <div class="col-12  form-floating mb-3">
-                        <input class="form-control" id="name" name="title" type="text" placeholder="Nom de la formation" data-sb-validations="required" />
-                        <label for="nomDeLaFormation">Nom de la formation</label>
+                        <input class="form-control" id="name" name="title" type="text" placeholder="Titre de la formation" data-sb-validations="required" />
+                        <label for="nomDeLaFormation">Titre de la formation</label>
+                    </div>
+                    <div class="col-12  form-floating mb-3">
+                        <input class="form-control" id="image_url" name="image_url" type="text" placeholder="Image de couverture" />
+                        <label for="image_url">Image de couverture</label>
                     </div>
                     <div class="col-12  form-floating mb-3">
                         <select class="form-select" id="category" aria-label="Type de prestation">
@@ -29,12 +34,13 @@
                         <textarea class="form-control" name="description" id="description" type="text" placeholder="Description " style="height: 8rem;"></textarea>
                         <label for="description">Description </label>
                     </div>
+
                     <?php if (isset($warning)) : ?>
                         <div id="warning" class="alert alert-warning" role="alert">Ce titre existe déjà !</div>
                     <?php endif; ?>
                     <?php if (isset($validation)) : ?>
                         <div class="col-12 mt-2">
-                            <div class="alert alert-danger" role="alert">
+                            <div id="error" class="alert alert-danger" role="alert">
                                 <?= $validation->listErrors() ?>
                             </div>
                         </div>
@@ -65,7 +71,10 @@
                         <input class="form-control" name="price" id="price" type="numeric" min="10" step="0.1" max="1000" placeholder="Montant de la prestation" />
                         <label for="price">Montant de la prestation</label>
                     </div>
-                    <div class="col-3 col-xl-2 d-grid">
+
+                </div>
+                <div class="col">
+                    <div class="col-1 col-xl-2 d-grid">
                         <button class="btn btn-primary btn-lg" id="btnCreate" type="submit">Créer</button>
                     </div>
                 </div>
@@ -80,11 +89,14 @@
 <script>
     let formAdd = document.getElementById('trainingForm');
     let warning = document.getElementById('warning');
+    let error = document.getElementById('error');
     let date = new Date();
+
     formAdd['dateStart'].value = formatDate(date);
     formAdd['dateEnd'].value = formatDate(date);
     formAdd['timeStart'].value = "08:00";
     formAdd['timeEnd'].value = "09:00";
+    formAdd['image_url'].value = "<?= base_url() . "/assets/training.svg" ?>";
 
     price.value = "10";
     name.value = "";
@@ -105,12 +117,15 @@
         return [
             padTo2Digits(date.getHours() + offset),
             padTo2Digits(date.getMinutes()),
-            //padTo2Digits(date.getSeconds()),
         ].join(':');
     }
 
     setTimeout(() => {
-        warning.remove();
+        if (error)
+            error.remove();
+
+        if (warning)
+            warning.remove();
     }, 2000);
 </script>
 <?= $this->endSection() ?>

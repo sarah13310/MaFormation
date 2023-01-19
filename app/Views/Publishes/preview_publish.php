@@ -1,4 +1,4 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
+
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <div class="mt-1 mb-4 row">

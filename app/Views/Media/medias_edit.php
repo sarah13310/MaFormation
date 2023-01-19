@@ -1,4 +1,3 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 <?php $base = base_url(); ?>
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('header') ?>

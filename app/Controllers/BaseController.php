@@ -2,6 +2,30 @@
 
 namespace App\Controllers;
 
+use App\Models\ArticleHasPublicationModel;
+use App\Models\ArticleModel;
+use App\Models\BillModel;
+use App\Models\CategoryHasMediaModel;
+use App\Models\CategoryModel;
+use App\Models\CertificateModel;
+use App\Models\CompanyModel;
+use App\Models\ContactModel;
+use App\Models\LettersModel;
+use App\Models\LogModel;
+use App\Models\MediaModel;
+use App\Models\PageModel;
+use App\Models\PublicationModel;
+use App\Models\RdvModel;
+use App\Models\StatusModel;
+use App\Models\TagModel;
+use App\Models\TrainingHasPageModel;
+use App\Models\TrainingModel;
+use App\Models\TypeSlideModel;
+use App\Models\UserHasArticleModel;
+use App\Models\UserHasCertificateModel;
+use App\Models\UserHasCompanyModel;
+use App\Models\UserHasTrainingModel;
+use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -35,7 +59,32 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['util'];
+
+    protected $training_model;
+    protected $user_model;
+    protected $page_model;
+    protected $article_has_publication_model;
+    protected $article_model;
+    protected $bill_model;
+    protected $category_model;
+    protected $category_has_media_model;
+    protected $certificat_model;
+    protected $company_model;
+    protected $contact_model;
+    protected $letters_model;
+    protected $log_model;
+    protected $media_model;
+    protected $publication_model;
+    protected $rdv_model;
+    protected $status_model;
+    protected $tag_model;
+    protected $training_has_page_model;
+    protected $typeslide_model;
+    protected $user_has_article_model;
+    protected $user_has_certificate_model;
+    protected $user_has_company_model;
+    protected $user_has_training_model;
 
     /**
      * Constructor.
@@ -46,6 +95,31 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
+        $this->article_has_publication_model = new ArticleHasPublicationModel();
+        
+        $this->article_model = new ArticleModel();
+        $this->bill_model = new BillModel();
+        $this->category_model = new CategoryModel();
+        $this->category_has_media_model = new CategoryHasMediaModel();
+        $this->certificat_model = new CertificateModel();
+        $this->company_model = new CompanyModel();
+        $this->contact_model = new ContactModel();
+        $this->letters_model = new LettersModel();
+        $this->log_model = new LogModel();
+        $this->media_model = new MediaModel();
+        $this->page_model = new PageModel();
+        $this->publication_model = new PublicationModel();
+        $this->rdv_model = new RdvModel();
+        $this->status_model = new StatusModel();
+        $this->tag_model = new TagModel();
+        $this->training_has_page_model = new TrainingHasPageModel();
+        $this->training_model = new TrainingModel();
+        $this->typeslide_model = new TypeSlideModel();
+        $this->user_has_article_model = new UserHasArticleModel();
+        $this->user_has_certificate_model = new UserHasCertificateModel();
+        $this->user_has_company_model = new UserHasCompanyModel();
+        $this->user_has_training_model = new UserHasTrainingModel();
+        $this->user_model = new UserModel();
 
         // E.g.: $this->session = \Config\Services::session();
     }

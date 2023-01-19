@@ -12,7 +12,7 @@ use App\Models\PublicationHasArticleModel;
 use App\Models\TagModel;
 use App\Models\UserHasArticleModel;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php');
+
 
 // le 09/01/2023
 class News extends BaseController
@@ -312,7 +312,6 @@ class News extends BaseController
             return view('Articles/list_article_details.php', $data);
         }
     }
-
 
     public function list_publishes_home()
     {
