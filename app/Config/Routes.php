@@ -2,7 +2,7 @@
 
 namespace Config;
 
-use App\Controllers\Training;
+
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
