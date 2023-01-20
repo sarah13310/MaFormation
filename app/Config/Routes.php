@@ -40,17 +40,16 @@ $routes->get('/', 'Home::index');
 // Résultat des recherches
 $routes->add('/result', 'Search::resultdata');
 
-// admin
-
 $routes->add('/superadmin/add/admin', 'Admin::add_admin'); // Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges'); //dashboard des privileges
 
+// admin
 $routes->group('/admin', static function ($routes) {
+    $routes->get('/', 'Admin::index');
     $routes->add('articles/edit', 'News::articles_edit');
     $routes->add('publishes/edit', 'News::publishes_edit');
     $routes->add('articles/list', 'Dashboard::listarticles');
     $routes->add('publishes/list', 'Dashboard::listpublishes');
-    $routes->get('/', 'Admin::index');
 
     $routes->add('videos/list', 'Dashboard::listmedias/1'); //dashboard des videos de tous les formateurs/admins
     $routes->add('books/list', 'Dashboard::listmedias/2'); //dashboard des livres de tous les formateurs/admins

@@ -2,21 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Libraries\UserHelper;
-use App\Libraries\ArticleHelper;
-use App\Libraries\PublishHelper;
-use App\Libraries\MediaHelper;
+
 
 
 class DashBoard extends BaseController
 {
     public function listformerarticles()
     {
-        $user_helper = new UserHelper();
+        
         // on récupère la sessions associé à cet utilisateur
-        $session = $user_helper->getUserSession();
+        $session = $this->user_model->getUserSession();
         // on récupère la requete pour user
-        $public = $user_helper->getFilterUser();
+        $public = $this->user_model->getFilterUser();
         //
         $title = "Liste des articles";
         $builder = $public['builder'];
@@ -45,9 +42,8 @@ class DashBoard extends BaseController
     }
 
     public function listformerpublishes()
-    {
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+    {        
+        $user = $this->user_model->getUserSession();
         //
         $title = "Liste des publications";
         $db      = \Config\Database::connect();
@@ -177,8 +173,8 @@ class DashBoard extends BaseController
                 "country" => $company['country'],
             ];
         }
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+    
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => $title,
             "listformers" => $listformers,
@@ -192,7 +188,7 @@ class DashBoard extends BaseController
 
     public function privileges()
     {
-        $user_helper = new UserHelper();
+        
         $title = "Liste des privilèges";
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
@@ -263,7 +259,7 @@ class DashBoard extends BaseController
                 "country" => $company['country'],
             ];
         }
-        $user = $user_helper->getUserSession();
+        $user = $this->user_model->getUserSession();
         //
         $data = [
             "title" => $title,
@@ -281,8 +277,8 @@ class DashBoard extends BaseController
     {
         $title = "Liste des articles";
 
-        $article_helper = new ArticleHelper();
-        $public = $article_helper->getArticles();
+        
+        $public = $this->article_model->getArticles();
         $builder = $public['builder'];
         $articles = $public['articles'];
         $listarticles = [];
@@ -315,8 +311,8 @@ class DashBoard extends BaseController
             }
             $listarticles[$i]["user"] = $authors;
         }
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+        
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => $title,
             "listarticles" => $listarticles,
@@ -394,8 +390,8 @@ class DashBoard extends BaseController
 
             $listpublishes[$i]["article"] = $news;
         }
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+        
+        $user = $this->user_model->getUserSession();
 
         $data = [
             "title" => $title,
@@ -423,8 +419,8 @@ class DashBoard extends BaseController
             $article = $query->getResultArray();
             $article = $article[0];
 
-            $user_helper = new UserHelper();
-            $user = $user_helper->getUserSession();
+            
+            $user = $this->user_model->getUserSession();
             if ($article["image_url"] == null) {
                 $article["image_url"] = base_url() . "/assets/article.svg";
             }
@@ -444,12 +440,11 @@ class DashBoard extends BaseController
 
         if ($this->request->getMethod() == 'post') {
 
-            $id = $this->request->getVar('id_publication');
-            $publish_helper = new PublishHelper();
-            $publication = $publish_helper->getPublisheById($id);
+            $id = $this->request->getVar('id_publication');            
+            $publication = $this->publication_model->getPublisheById($id);
 
-            $user_helper = new UserHelper();
-            $user = $user_helper->getUserSession();
+            
+            $user = $this->user_model->getUserSession();
 
             if ($user["image_url"] == null) {
                 $user["image_url"] = base_url() . "/assets/Blank.png";
@@ -473,29 +468,25 @@ class DashBoard extends BaseController
     {
         switch ($type) {
             case VIDEO:
-                $title = "Liste des vidéos";
-                $media_helper = new MediaHelper();
-                $public = $media_helper->getVideos();
+                $title = "Liste des vidéos";                
+                $public = $this->media_model->getVideos();
                 $builder = $public['builder'];
                 $medias = $public['videos'];
                 break;
             case BOOK:
-                $title = "Liste des livres";
-                $media_helper = new MediaHelper();
-                $public = $media_helper->getBooks();
+                $title = "Liste des livres";                
+                $public = $this->media_model->getBooks();
                 $builder = $public['builder'];
                 $medias = $public['books'];
                 break;
         }
 
         $listmedias = [];
+        $listmedias = $this->media_model->returnDataMedias($listmedias,$medias);
 
-        $listmedias = $media_helper->returnDataMedias($listmedias,$medias);
-
-        $listmedias = $media_helper->getAuthorsMedias($listmedias,$builder);
-
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+        $listmedias = $this->media_model->getAuthorsMedias($listmedias,$builder);
+        
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => $title,
             "listmedias" => $listmedias,
@@ -507,13 +498,11 @@ class DashBoard extends BaseController
     
     public function listformermedias($type)
     {
-        $media_helper = new MediaHelper();
-
-        $user_helper = new UserHelper();
+               
         // on récupère la sessions associé à cet utilisateur
-        $session = $user_helper->getUserSession();
+        $session = $this->user_model->getUserSession();
         // on récupère la requete pour user
-        $public = $user_helper->getFilterUser();
+        $public = $this->user_model->getFilterUser();
 
         switch ($type) {
             case VIDEO:
@@ -525,12 +514,9 @@ class DashBoard extends BaseController
         }
 
         $builder = $public['builder'];
-
-        $medias = $media_helper->getAuthorMedias($session,$builder,$type);
-
+        $medias = $this->media_model->getAuthorMedias($session,$builder,$type);
         $listmedias = [];
-
-        $listmedias = $media_helper->returnDataMedias($listmedias,$medias);
+        $listmedias = $this->media_model->returnDataMedias($listmedias,$medias);
 
         $data = [
             "title" => $title,
@@ -545,9 +531,8 @@ class DashBoard extends BaseController
     public function dashboard_article()
     {
         $title = "Tableau des articles";
-
-        $article_helper = new ArticleHelper();
-        $public = $article_helper->getArticles();
+        
+        $public = $this->article_model->getArticles();
         $builder = $public['builder'];
         $articles = $public['articles'];
         $listarticles = [];
@@ -558,7 +543,6 @@ class DashBoard extends BaseController
                 "subject" => $article['subject'],
                 "description" => $article['description'],
                 "datetime" => $article['datetime'],
-
             ];
         }
         /* auteur de l'article*/
@@ -586,8 +570,8 @@ class DashBoard extends BaseController
 
             $listarticles[$i]["author"] = $author;
         }
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+    
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => $title,
             "articles" => $listarticles,
@@ -598,18 +582,15 @@ class DashBoard extends BaseController
         ];
         return view('Admin/dashboard_article_admin.php', $data);
     }
-
+    // tableau de bord des publications
     public function dashboard_publishes()
     {
         $title = "Tableau des publications";
-
-        $listpublishes = [];
-        $publish_helper = new PublishHelper();
-        $publishes = $publish_helper->getFilterPublishes();
-        //print_r($publishes);
+        $listpublishes = [];        
+        $publishes = $this->publication_model->getFilterPublishes();        
 
         foreach ($publishes as $publishe) {
-            $articles = $publish_helper->getFilterArticles($publishe['id_publication']);
+            $articles = $this->publication_model->getFilterArticles($publishe['id_publication']);
             //print_r($articles);
             $listpublishes[] = [
                 "id_publication" => $publishe['id_publication'],
@@ -672,8 +653,8 @@ class DashBoard extends BaseController
             $listpublishes[$i]["article"] = $news;
         }
 */
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+        
+        $user = $this->user_model->getUserSession();
 
         $data = [
             "title" => $title,

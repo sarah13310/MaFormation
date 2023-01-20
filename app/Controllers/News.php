@@ -2,15 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Libraries\ArticleHelper;
-use App\Models\ArticleModel;
-use App\Models\PublicationModel;
-use App\Libraries\UserHelper;
-use App\Libraries\CategoryHelper;
-use App\Libraries\PublishHelper;
-use App\Models\PublicationHasArticleModel;
-use App\Models\TagModel;
-use App\Models\UserHasArticleModel;
 
 
 
@@ -20,16 +11,15 @@ class News extends BaseController
 
     public function articles_edit()
     {
-        $article = new ArticleModel();
+        
         //
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+        
+        $user = $this->user_model->getUserSession();
         //
-        $category_helper = new CategoryHelper();
-        $categories = $category_helper->getCategories();
-        //
-        $publishe_helper = new PublishHelper();
-        $publishes = $publishe_helper->getFilterPublishes(ALL);
+        
+        $categories = $this->category_model->getCategories();
+        //        
+        $publishes = $this->publication_model->getFilterPublishes(ALL);
 
         $data = [
             "title" => "Création Article",
@@ -49,8 +39,8 @@ class News extends BaseController
 
         if ($this->request->getMethod() == 'post') {
 
-            $user_has_article = new UserHasArticleModel();
-            $publication_has_article = new PublicationHasArticleModel();
+            
+            
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             switch (session()->type) {
@@ -83,31 +73,31 @@ class News extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                $article_helper = new ArticleHelper();
-                if ($article_helper->isExist($subject) == true) {
+                
+                if ($this->article_model->isExist($subject) == true) {
                     if (strlen($subject) > 0)
                         $data["warning"] = "Cet Article existe déjà!";
                 } else {
                     // on sauve en premier le tag
-                    $tag_model = new TagModel();
+                    
                     $data_tag["id_category"] = $dataSave['category'];
-                    $id_tag = $tag_model->insert($data_tag);
+                    $id_tag = $this->tag_model->insert($data_tag);
                     $dataSave['id_tag'] = $id_tag;
                     // ensuite la table article
-                    $id_article = $article->insert($dataSave);
+                    $id_article = $this->article_model->insert($dataSave);
                     $datatemp = [
                         'id_user' => session()->id_user,
                         'id_article' => $id_article,
                     ];
                     // en avant-dernier la table intermédiaire user_has_article
-                    $user_has_article->save($datatemp);
+                    $this->user_has_article_model->save($datatemp);
                     // en dernier la table intermédiaire publication_has_article
                     if ($id_publish > 0) {
                         $datatemp2 = [
                             'id_publication' => $id_publish,
                             'id_article' => $id_article,
                         ];
-                        $publication_has_article->save($datatemp2);
+                        $this->article_has_publication_model->save($datatemp2);
                     }
                     session()->setFlashdata('success', 'Article en cours de validation...');
                 }
@@ -117,14 +107,10 @@ class News extends BaseController
     }
 
     public function publishes_edit()
-    {
-        $publish = new PublicationModel();
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
-        $category_helper = new CategoryHelper();
-        $categories = $category_helper->getCategories();
-        $article_helper = new ArticleHelper();
-        $articles = $article_helper->getFilterArticles();
+    {                
+        $user = $this->user_model->getUserSession();        
+        $categories = $this->category_model->getCategories();
+        $articles = $this->article_model->getFilterArticles();
 
         $data = [
             "title" => "Création Publication",
@@ -173,21 +159,21 @@ class News extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                $publishe_helper = new PublishHelper();
-                if ($publishe_helper->isExist($dataSave['subject']) == true) {
+                
+                if ($this->publication_model->isExist($dataSave['subject']) == true) {
                     if (strlen($subject) > 0) {
                         $data["warning"] = "Cette publication existe déjà!";
                     }
                 } else {
                     // on sauve en premier le tag
-                    $tag_model = new TagModel();
+                    
                     $data_tag["id_category"] = $dataSave['category'];
-                    $id_tag = $tag_model->insert($data_tag);
+                    $id_tag = $this->tag_model->insert($data_tag);
                     $dataSave['id_tag'] = $id_tag;
                     // ensuite on enrichit la table publication    
-                    $id_publication = $publish->insert($dataSave);
+                    $id_publication = $this->publication_model->insert($dataSave);
                     // en dernier on fait le lien entre article et publication
-                    $publication_has_article = new PublicationHasArticleModel();
+                    
                     $data_temp = [
                         'id_publication' => $id_publication,
                     ];
@@ -196,7 +182,7 @@ class News extends BaseController
                     if ($list_articles) {
                         foreach ($list_articles as $article) {
                             $data_temp['id_article'] = $article;
-                            $publication_has_article->insert($data_temp);
+                            $this->article_has_publication_model->insert($data_temp);
                         }
                     }
                     //
@@ -452,8 +438,8 @@ class News extends BaseController
     {
         if ($this->request->getMethod() == 'post') {
             $id = $this->request->getVar('id_article');
-            $article_helper = new ArticleHelper();
-            $article_helper->deleteArticle($id);
+            
+            $this->article_model->deleteArticle($id);
         }
         return redirect()->to(previous_url());
     }
@@ -462,9 +448,8 @@ class News extends BaseController
     public function delete_publish()
     {        
         if ($this->request->getMethod() == 'post') {
-            $id = $this->request->getVar('id_publication');
-            $publishe_helper = new PublishHelper();
-            $publishe_helper->deletePublishe($id);
+            $id = $this->request->getVar('id_publication');            
+            $this->publication_model->deletePublishe($id);
         }
         return redirect()->to(previous_url());
     }

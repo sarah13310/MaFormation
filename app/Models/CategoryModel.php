@@ -14,21 +14,13 @@ class CategoryModel extends Model
     protected $allowedFields = ['id_category', 'name', 'id_user', 'id_media'];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
-
-    // mise à jour horodatage
-    protected function beforeInsert(array $data)
-    {
-        $data = $this->passwordHash($data);
-        $data['data']['created_at'] = date('Y-m-d H:i:s');// format américain
-        return $data;
-    }
-
-    // mise à jour horodatage
-    protected function beforeUpdate(array $data)
-    {
-        $data = $this->passwordHash($data);
-        $data['data']['updated_at'] = date('Y-m-d H:i:s');
-        return $data;
+    
+    function getCategories(){  // On récupère toutes les catégories      
+        $db      = \Config\Database::connect();
+        $builder = $db->table('category');     
+                   
+        $query   = $builder->get();
+        return  $query->getResultArray();
     }
     
 }

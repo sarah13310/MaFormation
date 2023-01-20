@@ -24,6 +24,7 @@ use App\Models\TypeSlideModel;
 use App\Models\UserHasArticleModel;
 use App\Models\UserHasCertificateModel;
 use App\Models\UserHasCompanyModel;
+use App\Models\UserHasMediaModel;
 use App\Models\UserHasTrainingModel;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
@@ -85,7 +86,7 @@ abstract class BaseController extends Controller
     protected $user_has_certificate_model;
     protected $user_has_company_model;
     protected $user_has_training_model;
-
+    protected $user_has_media_model;
     /**
      * Constructor.
      */
@@ -95,8 +96,7 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
-        $this->article_has_publication_model = new ArticleHasPublicationModel();
-        
+        $this->article_has_publication_model = new ArticleHasPublicationModel();        
         $this->article_model = new ArticleModel();
         $this->bill_model = new BillModel();
         $this->category_model = new CategoryModel();
@@ -120,6 +120,7 @@ abstract class BaseController extends Controller
         $this->user_has_company_model = new UserHasCompanyModel();
         $this->user_has_training_model = new UserHasTrainingModel();
         $this->user_model = new UserModel();
+        $this->user_has_media_model = new UserHasMediaModel();
 
         // E.g.: $this->session = \Config\Services::session();
     }

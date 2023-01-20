@@ -1,12 +1,6 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\TagModel;
-use App\Libraries\CategoryHelper;
-use App\Libraries\UserHelper;
-use App\Libraries\MediaHelper;
-use App\Models\UserHasMediaModel;
-use App\Models\MediaModel;
 
 class Media extends BaseController
 {
@@ -42,15 +36,11 @@ class Media extends BaseController
                 break;
         }
 
-        $media = new MediaModel();
-        $media_helper = new MediaHelper();
         $na="&nbsp;Nom de l'auteur";
 
-        $user_helper = new UserHelper();
-        $user = $user_helper->getUserSession();
+        $user = $this->user_model->getUserSession();
         //
-        $category_helper = new CategoryHelper();
-        $categories = $category_helper->getCategories();
+        $categories = $this->category_model->getCategories();
 
         $data = [
             "title" => $title,
@@ -72,9 +62,7 @@ class Media extends BaseController
         }
 
         if ($this->request->getMethod() == 'post') {
-
-            
-            $user_has_media = new UserHasMediaModel();
+           
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             $dataSave['name'] = $this->request->getVar('name');
@@ -107,23 +95,23 @@ class Media extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                if ($media_helper->isExist($url) == true) {
+                if ($this->media_model->isExist($url) == true) {
                     if (strlen($url) > 0)
                         $data["warning"] = $existe;
                 } else {
                     // on sauve en premier le tag
-                    $tag_model = new TagModel();
+                    $
                     $data_tag["id_category"] = $dataSave['category'];
-                    $id_tag = $tag_model->insert($data_tag);
+                    $id_tag = $this->tag_model->insert($data_tag);
                     $dataSave['id_tag'] = $id_tag;
                     // ensuite la table media
-                    $id_media = $media->insert($dataSave);
+                    $id_media = $this->media_model->insert($dataSave);
                     $datatemp = [
                         'id_user' => session()->id_user,
                         'id_media' => $id_media,
                     ];
                     // en avant-dernier la table intermédiaire user_has_media
-                    $user_has_media->save($datatemp);
+                    $this->user_has_media_model->save($datatemp);
                     session()->setFlashdata('success', $validation);
                 }
             }
@@ -132,9 +120,7 @@ class Media extends BaseController
     }
 
     public function list_media_home($type)
-    {
-
-        $media_helper = new MediaHelper();
+    {        
 
         switch ($type) {
             case VIDEO:
@@ -149,11 +135,11 @@ class Media extends BaseController
                 break;
         }
 
-        $medias = $media_helper->ValidatedMedias($type);
+        $medias = $this->media_model->ValidatedMedias($type);
 
         $listmedias = [];
 
-        $listmedias = $media_helper->returnDataMedias($listmedias,$medias);
+        $listmedias = $this->media_model->returnDataMedias($listmedias,$medias);
 
         $data = [
             "title" => $title,
