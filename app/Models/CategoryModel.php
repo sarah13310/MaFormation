@@ -21,6 +21,5 @@ class CategoryModel extends Model
                    
         $query   = $builder->get();
         return  $query->getResultArray();
-    }
-    
+    }    
 }
