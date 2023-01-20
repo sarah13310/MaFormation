@@ -3,12 +3,12 @@
 <?= $this->section('header') ?>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="<?= $base ?>/css/stylemain.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700,700i|Source+Code+Pro:400,700&display=swap">
-<?= $this->endSection() ?>
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700,700i|Source+Code+Pro:400,700&display=swap">
+ --><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <h1 class="ms-3"><?= $title ?></h1>
-
+<hr class="hr mt-1 mb-2">
 <section class="Content">
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
     <script src="<?= $base ?>/js/sceditor.min.js"></script>
@@ -39,16 +39,16 @@
             <div class="col-12 col-md-8">
                 <div class="row">
                     <div class='form-floating mb-3 col-12 col-md-6'>
-                        <input class='form-control' id='subject' type='text' name='subject' placeholder="Nom de l'article" />
-                        <label for='subject'>&nbsp;Nom de la publication (*)</label>
+                        <input class='form-control' id='subject' type='text' name='subject' placeholder="Nom de la publication(*)" />
+                        <label for='subject'>&nbsp;Nom de la publication</label>
                     </div>
                     <div class='form-floating mb-3 col-12 col-md-6'>
                         <input class='form-control' id='name' type='text' name='name' placeholder="Nom de l'auteur" readonly value="<?= session()->name . " " . session()->firstname; ?> " />
                         <label for='name'>&nbsp;Nom de l'auteur </label>
                     </div>
                     <div class='form-floating mb-3 col'>
-                        <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de la publication"   />
-                        <label for='name'>&nbsp;Url de la publication</label>
+                        <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de la publication" value="<?=base_url()."/assets/publication.svg" ?>" />
+                        <label for='image_url'>&nbsp;Url de la publication</label>
                     </div>
                 </div>
                 <div class="form-group row">

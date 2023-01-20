@@ -19,42 +19,44 @@ body {
     font-family: Source Sans Pro, sans-serif;
     color: #333;
     margin: 0;
-    min-height: 100%
+    min-height: 100%;
+    font-display: fallback;
 }
 
 html code,
 html pre,
 html pre code {
     font-size: 1rem;
-    font-family: Source Code Pro, monospace
+    font-family: Source Code Pro, monospace;
+    font-display: fallback;
 }
 
 blockquote {
     border-left: .25em solid #aaa;
     margin-left: 0;
     margin-right: 0;
-    padding: 0 0 0 1em
+    padding: 0 0 0 1em;
 }
 
 h1 {
-    font-size: 2.25rem
+    font-size: 2.25rem;
 }
 
 h2 {
-    font-size: 1.9rem
+    font-size: 1.9rem;
 }
 
 h3 {
-    font-size: 1.4rem
+    font-size: 1.4rem;
 }
 
 h4 {
-    font-size: 1.125rem
+    font-size: 1.125rem;
 }
 
 h5,
 h6 {
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 h1,
@@ -66,27 +68,27 @@ h6 {
     color: #777777;
     line-height: 1.1;
     margin: 0rem;
-    letter-spacing: .5px
+    letter-spacing: .5px;
 }
 
 .Callout,
 p,
 pre,
 table {
-    margin: 0 0 1.5rem
+    margin: 0 0 1.5rem;
 }
 
 a {
     color: #57a3e8;
     color: #4796e4;
     cursor: pointer;
-    text-decoration: none
+    text-decoration: none;
 }
 
 kbd {
     -webkit-user-select: all;
     -moz-user-select: all;
-    user-select: all
+    user-select: all;
 }
 
 html code[class*=language-],
@@ -95,7 +97,7 @@ html pre[class*=language-] {
     overflow: auto;
     -moz-tab-size: 4;
     -o-tab-size: 4;
-    tab-size: 4
+    tab-size: 4;
 }
 
 html pre,
@@ -103,7 +105,7 @@ html pre[class*=language-],
 html pre code {
     display: block;
     background: #f7f7f7;
-    border: none
+    border: none;
 }
 
 html code {
@@ -117,7 +119,7 @@ html code {
     word-wrap: break-word;
     -ms-word-break: break-all;
     word-break: break-all;
-    word-break: break-word
+    word-break: break-word;
 }
 
 .Content> :not(.fullwidth):not(.Post),
@@ -130,7 +132,7 @@ html code {
 .Header {
     margin: 0;
     border-bottom: 1px solid #ddd;
-    box-shadow: 0 0 6px 1px rgba(17, 17, 17, .09)
+    box-shadow: 0 0 6px 1px rgba(17, 17, 17, .09);
 }
 
 .Header__container {
@@ -140,7 +142,7 @@ html code {
     font-size: 1.0625rem;
     font-size: 1.125rem;
     line-height: 2rem;
-    color: #333
+    color: #333;
 }
 
 .Header__title {
@@ -149,16 +151,16 @@ html code {
     font-size: 1.75rem;
     margin: 0 .4rem 0 0;
     line-height: inherit;
-    align-self: center
+    align-self: center;
 }
 
 .Header__link {
     text-decoration: none;
-    color: #444
+    color: #444;
 }
 
 .Header__nav {
-    display: inline-block
+    display: inline-block;
 }
 
 .Sidebar__menu {
@@ -166,18 +168,18 @@ html code {
 }
 
 .Sidebar__menu .Menu__link {
-    display: inline-block
+    display: inline-block;
 }
 
 .Menu {
     display: inline-flex;
     padding: 0;
-    margin: 0
+    margin: 0;
 }
 
 .Menu__item {
     display: block;
-    position: relative
+    position: relative;
 }
 
 .Menu__link {
@@ -187,12 +189,12 @@ html code {
     color: inherit;
     margin-left: .65em;
     padding: .125em 0;
-    transition: color .2s ease, box-shadow .3s ease
+    transition: color .2s ease, box-shadow .3s ease;
 }
 
 .Menu__link:hover {
     color: #1e90ff;
-    box-shadow: 0 3px #1e90ff
+    box-shadow: 0 3px #1e90ff;
 }
 
 .Menu__link--download {
@@ -206,7 +208,7 @@ html code {
     font-weight: 700;
     background: #1f8bff;
     background: #4082fc;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .Menu__link--download:hover {
@@ -215,21 +217,21 @@ html code {
     background: #5b7de5;
     background: #3fa0ff;
     background: #1c81e4;
-    background: #3f7be9
+    background: #3f7be9;
 }
 
 .Menu__link--download:active {
     box-shadow: 0 2px 3px #ccc;
-    background: #3a73df
+    background: #3a73df;
 }
 
 .Menu__link--current {
-    color: #1e90ff
+    color: #1e90ff;
 }
 
 .Menu__link--donate {
     color: #228b22;
-    color: tomato
+    color: tomato;
 }
 
 .Menu__submenu {
@@ -237,39 +239,39 @@ html code {
     top: 100%;
     border: 1px solid #eee;
     background: #fff;
-    padding-bottom: 3px
+    padding-bottom: 3px;
 }
 
 .Menu__submenu .Menu__link {
-    margin-right: .65em
+    margin-right: .65em;
 }
 
 .Menu__item>.Menu__submenu {
     display: none;
-    z-index: 1000
+    z-index: 1000;
 }
 
 .Menu__item:focus>.Menu__submenu,
 .Menu__item:hover>.Menu__submenu {
-    display: block
+    display: block;
 }
 
 .Header_search {
     align-self: center;
     background: #fff;
-    display: flex
+    display: flex;
 }
 
 .Header__searchicon {
     height: 24px;
     width: 24px;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .Header__searchlabel {
     cursor: pointer;
     align-self: center;
-    margin: 0 .25em 0 0
+    margin: 0 .25em 0 0;
 }
 
 .Header__searchbox {
@@ -280,41 +282,42 @@ html code {
     padding: .35em 0;
     border: none;
     outline: none;
-    box-shadow: 0 3px #ccc
+    box-shadow: 0 3px #ccc;
+    font-display: fallback;
 }
 
 .Header__searchbox:-moz-placeholder-shown {
-    box-shadow: none
+    box-shadow: none;
 }
 
 .Header__searchbox:-ms-input-placeholder {
-    box-shadow: none
+    box-shadow: none;
 }
 
 .Header__searchbox:placeholder-shown {
-    box-shadow: none
+    box-shadow: none;
 }
 
 .Header__searchbox:focus {
-    box-shadow: 0 3px #1e90ff
+    box-shadow: 0 3px #1e90ff;
 }
 
 .Header_search {
-    margin-left: .65em
+    margin-left: .65em;
 }
 
 #docsearch-hide {
-    display: none
+    display: none;
 }
 
 .Content {
     flex: 1 0 auto;
     font-size: 1.125rem;
-    padding: 1em
+    padding: 1em;
 }
 
 .Content> :first-child {
-    margin-top: 0
+    margin-top: 0;
 }
 
 .Intro {
@@ -324,7 +327,7 @@ html code {
     flex-direction: column;
     background: #f6f6f6;
     padding: 0 1rem 2rem;
-    margin: -1.125rem -1rem 0
+    margin: -1.125rem -1rem 0;
 }
 
 .Button {
@@ -337,43 +340,43 @@ html code {
     padding: 0 2rem;
     font-size: 1.25rem;
     border-radius: .125rem;
-    transition: background-color .1s
+    transition: background-color .1s;
 }
 
 .Button--primary {
     background: #39f;
     background: #1f87ff;
-    color: #fff
+    color: #fff;
 }
 
 .Button:hover {
     background: #1f78ff;
     color: #fff;
-    box-shadow: 0 2px 3px #aaa
+    box-shadow: 0 2px 3px #aaa;
 }
 
 .Columns {
     display: flex;
-    flex-direction: row
+    flex-direction: row;
 }
 
 .Columns__column {
     flex-grow: 1;
     flex-basis: 0;
     min-width: 1rem;
-    padding: 0 .5rem
+    padding: 0 .5rem;
 }
 
 .Columns__column:first-child {
-    padding-left: 0
+    padding-left: 0;
 }
 
 .Columns__column:last-child {
-    padding-right: 0
+    padding-right: 0;
 }
 
 .Archive {
-    padding: 0
+    padding: 0;
 }
 
 .Archive__item {
@@ -381,98 +384,98 @@ html code {
     background: #f6f6f6;
     padding: .75em;
     margin: 1em 0;
-    border-radius: .25em
+    border-radius: .25em;
 }
 
 .Archive__title {
     font-size: 1.25em;
     line-height: 1;
-    margin: 0
+    margin: 0;
 }
 
 .Archive__excerpt {
-    margin: 0
+    margin: 0;
 }
 
 .Documentation {
-    display: flex
+    display: flex;
 }
 
 .Documentation__content> :first-child,
 .Documentation__sidebar> :first-child {
-    margin-top: 0
+    margin-top: 0;
 }
 
 .Documentation__content {
     flex: 1 1 0;
     order: 1;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .Documentation__sidebar {
     margin-right: 1.5rem;
     border-right: 1px solid #ebebeb;
     padding-right: 1.5rem;
-    flex: 0 0 12rem
+    flex: 0 0 12rem;
 }
 
 .Post {
     margin-left: auto;
     margin-right: auto;
-    max-width: 44rem
+    max-width: 44rem;
 }
 
 .Label {
     display: inline-block;
     border-radius: .25em;
     padding: 0 .25rem;
-    font-weight: 700
+    font-weight: 700;
 }
 
 .Label--important {
     color: #fff;
-    background: #d9534f
+    background: #d9534f;
 }
 
 .Label--warning {
     color: #fff;
-    background: #f0ad4e
+    background: #f0ad4e;
 }
 
 .Label--info {
     color: #fff;
-    background: #5bc0de
+    background: #5bc0de;
 }
 
 .Callout {
     border: 1px solid #e8e8e8;
     border-left-width: .25rem;
     border-radius: .25rem;
-    padding: 1rem
+    padding: 1rem;
 }
 
 .Callout> :first-child {
-    margin-top: 0
+    margin-top: 0;
 }
 
 .Callout> :last-child {
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .Callout--warning {
-    border-left-color: #f2af4f
+    border-left-color: #f2af4f;
 }
 
 .Callout--warning .Callout__header {
-    color: #f2af4f
+    color: #f2af4f;
 }
 
 .Callout--important {
-    border-left-color: #d9534f
+    border-left-color: #d9534f;
 }
 
 .Callout--important .Callout__header {
-    color: #d9534f
+    color: #d9534f;
 }
 
 .ApiMethod {
@@ -486,7 +489,7 @@ html code {
     font-size: 1.5rem;
     margin-top: 0;
     padding-bottom: .5em;
-    border-bottom: 1px solid #d9d9d9
+    border-bottom: 1px solid #d9d9d9;
 }
 
 .ApiMethod__since {
@@ -699,7 +702,8 @@ pre[class*=language-] {
     tab-size: 8;
     -webkit-hyphens: none;
     -ms-hyphens: none;
-    hyphens: none
+    hyphens: none;
+    font-display: fallback;
 }
 
 pre[class*=language-] {
@@ -870,4 +874,35 @@ code.language-yaml {
     background-image: -ms-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
     background-image: -webkit-gradient(linear,  color-stop(0.02, white), color-stop(0.5, gray), color-stop(0.98, white));
     
+}
+
+.vr {
+    width: 100%;
+    border-left: 0.1px solid rgba(0, 0, 0, 0.214);
+    padding: 0;
+    margin: 0 ;    
+    background-image: linear-gradient(90deg, #ffffffb6 0%, #a4a3a3 50%, #ffffffb6 100%);
+    background-image: -o-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -moz-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -ms-linear-gradient( white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-gradient(90deg,linear,  color-stop(0.02, white), color-stop(0.5, gray), color-stop(0.98, white));
+    
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #777777;
+	line-height: 1.1;
+	margin: 0 0.5rem;
+	letter-spacing: .5px;
+}
+
+h1, h1 {
+	color: #666666;
+    font-size: 2.15rem;	
 }

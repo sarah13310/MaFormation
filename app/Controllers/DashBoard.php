@@ -105,8 +105,6 @@ class DashBoard extends BaseController
 
     public function listformers()
     {
-
-
         $title = "Liste des formateurs";
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
@@ -114,7 +112,6 @@ class DashBoard extends BaseController
         $builder->where('type', $type);
         $query   = $builder->get();
         $formers = $query->getResultArray();
-
         $listformers = [];
 
         foreach ($formers as $former) {
@@ -215,7 +212,6 @@ class DashBoard extends BaseController
                 "rights" => $former['rights'],
             ];
         }
-
         /* compétences certificats*/
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
         $skills = [];
@@ -276,7 +272,6 @@ class DashBoard extends BaseController
     public function listarticles()
     {
         $title = "Liste des articles";
-
         
         $public = $this->article_model->getArticles();
         $builder = $public['builder'];
@@ -289,7 +284,6 @@ class DashBoard extends BaseController
                 "subject" => $article['subject'],
                 "description" => $article['description'],
                 "datetime" => $article['datetime'],
-
             ];
         }
         /* auteur de l'article*/
@@ -325,9 +319,7 @@ class DashBoard extends BaseController
 
     public function listpublishes()
     {
-
         $title = "Liste des publications";
-
         $db      = \Config\Database::connect();
         $builder = $db->table('publication');
         $query   = $builder->get();
@@ -342,7 +334,6 @@ class DashBoard extends BaseController
                 "datetime" => $publishe['datetime'],
             ];
         }
-
         $builder->select('user.name,user.firstname');
 
         for ($i = 0; $i < count($listpublishes); $i++) {
@@ -353,7 +344,6 @@ class DashBoard extends BaseController
             $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
             $builder->join('user', 'user_has_article.id_user = user.id_user');
             $builder->groupBy('user.id_user');
-
             $query = $builder->get();
             $user = $query->getResultArray();
 
@@ -366,14 +356,10 @@ class DashBoard extends BaseController
                 ];
             }
             $listpublishes[$i]["user"] = $authors;
-
             $builder->select('article.id_article,article.subject,article.description,article.datetime');
-
-
             $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
             $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
             $builder->join('article', 'publication_has_article.id_article = article.id_article');
-
             $query = $builder->get();
             $articles = $query->getResultArray();
 
@@ -387,7 +373,6 @@ class DashBoard extends BaseController
 
                 ];
             }
-
             $listpublishes[$i]["article"] = $news;
         }
         
@@ -399,15 +384,12 @@ class DashBoard extends BaseController
             "user" => $user,
             "headerColor" => getTheme(session()->type, "header"),
         ];
-
-
         return view('Admin/list_publishes_admin.php', $data);
     }
 
     public function previewarticle()
     {
         $title = "Aperçu de l'article";
-
         if ($this->request->getMethod() == 'post') {
 
             $id = $this->request->getVar('id_article');
@@ -495,7 +477,7 @@ class DashBoard extends BaseController
         ];
         return view('Admin/list_medias_admin.php', $data);
     }
-    
+
     public function listformermedias($type)
     {
                
@@ -567,7 +549,6 @@ class DashBoard extends BaseController
                     "firstname" => $user['firstname'],
                 ];
             }
-
             $listarticles[$i]["author"] = $author;
         }
     
@@ -658,11 +639,39 @@ class DashBoard extends BaseController
 
         $data = [
             "title" => $title,
-            "publishes" => $listpublishes,
+            "trainings" => $listpublishes,
             "user" => $user,
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
         ];
         return view('Admin/dashboard_publishes_admin.php', $data);
+    }
+
+    public function training()
+    {
+        $title = "Liste des formations";
+        $user = $this->user_model->getUserSession();
+        $trainings = $this->training_model->getFilterTrainings();
+        $listraining=[];
+        
+        foreach ($trainings as $training) {
+            $pages = [];
+            $listraining[] = [
+                "id_training" => $training['id_training'],
+                "title" => $training['title'],
+                "description" => $training['description'],
+                "image_url" => $training['image_url'],
+                "date" => $training['date'],
+                "pages" => $pages,
+            ];
+        }    
+        $data = [
+            "title" => $title,
+            "trainings" => $listraining,
+            "user" => $user,
+            "buttonColor" => getTheme(session()->type, "button"),
+            "headerColor" => getTheme(session()->type, "header"),
+        ];
+        return view('Admin/dashboard_training_admin.php', $data);
     }
 }

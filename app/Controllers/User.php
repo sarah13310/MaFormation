@@ -542,9 +542,6 @@ class User extends BaseController
 
     public function modif_name()
     {
-
-
-
         if ($this->request->getMethod() == "post") {
             // on met à jour les informations de session
             session()->name = $this->request->getVar('name');
@@ -795,7 +792,7 @@ class User extends BaseController
     {
         helper(['form']);
 
-        $user = $$this->user_model->getUserSession();
+        $user = $this->user_model->getUserSession();
         $data = [
             "title" => "Paramètres du profil",
             "user" => $user,

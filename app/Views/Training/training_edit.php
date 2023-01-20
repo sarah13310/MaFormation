@@ -35,9 +35,10 @@
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
     <div class="row">
         <div class="col-12 col-md-6">
-            <form id="form_training" onsubmit="return save()">
+            <form name="form_training" id="form_training">
                 <input type="hidden" id="action" name="action" value="create">
                 <input type="hidden" id="data" name="data[]">
+                <input type="hidden" id="id_training" name="id_training" value="<?=$id_training ?>">
                 <div class="row justify-content-between">
                     <div class="col-12 col-md-5">
                         <select id="type" name="type" class="form-select mb-3">
@@ -75,7 +76,7 @@
                     <div class="row align-items-center">
                         <div id="modify" class=" hidden col-sm-12 col-md-3"><a onclick="modifyTableau()" class=" btn btn-outline-primary">Modifier</a></div>
                         <div id="add" class=" col-sm-12 col-md-3 "><a onclick="addTableau()" class=" btn btn-outline-primary">Ajouter</a></div>
-                        <div class="col-sm-12 col-md-3 "><button type="button" class=" btn btn-primary">Sauver</button></div>
+                        <div class="col-sm-12 col-md-3 "><a onclick="onSave()" type="button" class=" btn btn-primary">Sauver</button></a></div>
                         <div class="col-sm-12 col-md-6 ">
                             <input type="checkbox" id="publish" name="publish" checked>
                             <label class="" for="publish">Publier</label>
@@ -84,7 +85,7 @@
                 </div>
             </form>
         </div>
-        <div class="vr"></div>
+        <!-- <div class="vr"></div> -->
         <div class="col-12 col-md-6">
             <div class="row mb-2">
                 <div class="col-12 col-md-2">
@@ -134,7 +135,7 @@
     let select = document.getElementById('select');
     let content = document.getElementById('content');
     //let dataI = document.getElementById('data');
-   // let pages = [];
+    let pages = [];
     let btnModify = document.getElementById("modify");
     let btnAdd = document.getElementById("add");
     let msg_delete = document.getElementById("msg_delete");
@@ -149,14 +150,16 @@
     let modified = false;
     let chapter;
     let rowSelected;
-
-   /* class Page {
-        constructor(name, content, image_url = "") {
+    //
+    class Page {
+        constructor(name, category, content, image_url = "") {
             this.name = name;
             this.content = content;
+            this.category = category;
+            this.image_url = image_url;
         }
-    }*/
-
+    }
+    // init  de l'éditeur
     function initEditor() {
         sceditor.create(content, {
             format: 'bbcode',
@@ -175,7 +178,7 @@
         let index = type[type.selectedIndex].value;
         let max_page = parseInt(localStorage.page_num);
         let max_annexe = parseInt(localStorage.annexe_num);
-
+        //
         if (index == 1) {
             type.value = 2;
         } else if (index == 2) {
@@ -253,16 +256,19 @@
     }
 
     // Sauvegarder des données
-    // function save() {
-    //     let rows = table.rows;
-    //     for (let i = 1; i < rows.length; i++) {
-    //         let col = rows[i].cells;
-    //         let page= new Page(col[0].innerHTML,col[1].innerHTML,col[2].innerHTML );
-    //         pages.push(page);
-           
-    //     }
-    //     return false;
-    // }
+    function onSave() {
+        pages=[];
+        let rows = table.rows;
+        for (let i = 1; i < rows.length; i++) {
+            let col = rows[i].cells;
+            let page = new Page(col[0].innerHTML, col[1].innerHTML, col[3].innerHTML);
+            pages.push(page);
+        }
+        form_training.action="/former/training/save";
+        form_training.method="post";        
+        form_training.data.value=JSON.stringify(pages);        
+        form_training.submit();        
+    }
 
     formDelete.onsubmit = () => {
         if (rowSelected != null) {
@@ -303,8 +309,8 @@
         function(n) {
             return this.substr(0, n - 1) + (this.length > n ? '...' : '');
         };
-        
-        number.onchange = () => {
+
+    number.onchange = () => {
         if (type.value == 2) {
             localStorage.page_num = number.value;
         }
@@ -321,7 +327,7 @@
                 rowSelected = rowCurrent; // on récupère en global le row sélectionné
                 sceditor.instance(content).val(rowCurrent.cells[3].innerHTML);
                 btnAdd.classList.add("hidden");
-                btnModify.classList.remove("hidden");// on affiche le bouton modifier
+                btnModify.classList.remove("hidden"); // on affiche le bouton modifier
                 lblType.innerHTML = rowCurrent.cells[0].innerHTML
             }
         }
@@ -336,7 +342,7 @@
             }
         }
     }
-    
+
     function showModalDelete(row) {
         rowSelected = row;
         chapter = row.cells[0].innerHTML;

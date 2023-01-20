@@ -1,6 +1,5 @@
 <?php
 
-
 define("THEME_SUPER_ADMIN", "3");
 define("THEME_ADMIN", "5");
 define("THEME_FORMER", "7");
@@ -212,11 +211,12 @@ function fillMenuDashBoard($type)
         case THEME_FORMER:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
-            $menu .= fillMenu("Edition", "menu2", "Edition", $type);
-            $menu .= fillMenu("Rendez-vous", "menu3", "Agenda", $type);
-            $menu .= fillMenu("Formations", "menu4", "Formations", $type);
-            $menu .= fillMenu("Média", "menu5", "Media", $type);
-            $menu .= fillMenu("Clients", "menu6", "Clients", $type);
+            $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
+            $menu .= fillMenu("Edition", "menu3", "Edition", $type);
+            $menu .= fillMenu("Rendez-vous", "menu4", "Agenda", $type);
+            $menu .= fillMenu("Formations", "menu5", "Formations", $type);
+            $menu .= fillMenu("Média", "menu6", "Media", $type);
+            $menu .= fillMenu("Clients", "menu7", "Clients", $type);
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
@@ -439,7 +439,7 @@ function fillMenuRight($category, $type)
             }
             break;
 
-        case "Privileges": // Droits
+        case "Privileges": // Droits Dashboard
             switch ($type) {
                 case THEME_ADMIN:
                     $items = [
@@ -459,7 +459,7 @@ function fillMenuRight($category, $type)
                 case FORMER:
                     $items = [
                         ["ref" => "/training/dashboard", "name" => "Tableau Formation"],
-                        ["ref" => "/articles/dashboard", "name" => "Tableau Articles"],
+                        ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
 
                     ];

@@ -2,21 +2,15 @@
 
 namespace App\Controllers;
 
-
-
-
-// le 09/01/2023
+// le 20/01/2023
 class News extends BaseController
 {
 
     public function articles_edit()
-    {
-        
-        //
-        
+    {        
+        //        
         $user = $this->user_model->getUserSession();
-        //
-        
+        //        
         $categories = $this->category_model->getCategories();
         //        
         $publishes = $this->publication_model->getFilterPublishes(ALL);
@@ -37,9 +31,7 @@ class News extends BaseController
             session()->remove('succes');
         }
 
-        if ($this->request->getMethod() == 'post') {
-
-            
+        if ($this->request->getMethod() == 'post') {     
             
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;

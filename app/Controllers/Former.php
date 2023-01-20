@@ -2,31 +2,28 @@
 
 namespace App\Controllers;
 
-use App\Models\RdvModel;
-use App\Models\TrainingModel;
-use App\Models\TrainingHasPageModel;
-use App\Models\PageModel;
 
-use App\Libraries\UserHelper;
-use App\Libraries\FormerHelper;
-use App\Libraries\CategoryHelper;
-use App\Libraries\TrainingHelper;
 
 // Date 22-12-2022
 class Former extends BaseController
-{
+{    
+    /**
+     * list_former_home
+     * 
+     * Liste des formateurs page home
+     * @return void
+     */
     public function list_former_home()
     {
-        $title = "Liste des formateurs";
-        $helper = new FormerHelper();
-        $public = $helper->getFormers();
+        $title = "Liste des formateurs";        
+        $public = $this->user_model->getFormers();
         $builder = $public["builder"];
         $formers = $public["formers"];
-        $listformers = [];        
-        
+        $listformers = [];
+
         foreach ($formers as $former) {
-            if ($former['image_url']==null){
-                $former['image_url']=base_url()."/assets/Blank_nogender.svg";
+            if ($former['image_url'] == null) {
+                $former['image_url'] = base_url() . "/assets/Blank_nogender.svg";
             }
             $listformers[] = [
                 "id_user" => $former['id_user'],
@@ -38,7 +35,7 @@ class Former extends BaseController
                 "country" => $former['country'],
                 "mail" => $former['mail'],
                 "phone" => $former['phone'],
-                "image_url"=>$former['image_url'],
+                "image_url" => $former['image_url'],
             ];
         }
         /* compétences certificats*/
@@ -48,7 +45,6 @@ class Former extends BaseController
             $builder->where('user.id_user', $listformers[$i]['id_user']);
             $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
             $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
             $query = $builder->get();
             $certificates = $query->getResultArray();
 
@@ -92,10 +88,16 @@ class Former extends BaseController
 
         return view('Former/list_former.php', $data);
     }
-
+    
+    /**
+     * details_former_home
+     * 
+     * Détails des formateurs
+     * @return void
+     */
     public function details_former_home()
     {
-        
+
         if ($this->request->getMethod() == 'post') {
 
             $mail = $this->request->getVar('mail');
@@ -132,17 +134,20 @@ class Former extends BaseController
             return view('Former/list_former_cv.php', $data);
         }
     }
-
+    
+    /**
+     * rdv
+     * 
+     * Planification des rdv
+     * @return void
+     */
     public function rdv()
-    {
-        $user_info = new UserHelper();
-        $user = $user_info->getUserSession();
-        $rdv = new RdvModel();
-        $query = $rdv->where("id_user", $user['id_user'])->findAll();
+    {        
+        $user = $this->user_model->getUserSession();        
+        $query = $this->rdv_model->where("id_user", $user['id_user'])->findAll();
         $events = [];
-
-        $category_infos = new CategoryHelper();
-        $options = $category_infos->getCategories();
+        
+        $options = $this->category_model->getCategories();
         foreach ($query as $event) {
             $events[] = [
                 "title" => "Infos",
@@ -159,13 +164,17 @@ class Former extends BaseController
         ];
         return view('Former/rdv.php', $data);
     }
-
+    
+    /**
+     * training_add
+     * Création nouvelle formation
+     * 
+     * @return void
+     */
     public function training_add()
     {
-        $user_info = new UserHelper();
-        $user = $user_info->getUserSession();
-        $category_infos = new CategoryHelper();
-        $options = $category_infos->getCategories();
+        $user = $this->user_model->getUserSession();        
+        $options = $this->category_model->getCategories();
 
         $data = [
             "title" => "Création formation",
@@ -173,20 +182,20 @@ class Former extends BaseController
             "user" => $user,
             "options" => $options,
         ];
-        
+
         if ($this->request->getMethod() == 'post') {
-            $training = new TrainingHelper();
+            
             $dateStart = $this->request->getVar('dateStart');
             $dateEnd = $this->request->getVar('dateEnd');
             $timeStart = $this->request->getVar('timeStart');
             $timeEnd = $this->request->getVar('timeEnd');
-            $image_url=$this->request->getVar("image_url");
-            echo($image_url);             
-            if ($image_url==null){
-                $image_url=base_url()."/assets/training.svg";
+            $image_url = $this->request->getVar("image_url");
+            
+            if ($image_url == null) {
+                $image_url = base_url() . "/assets/training.svg";
             }
-            if (!str_contains($image_url,base_url())){
-                $image_url=base_url()."/assets//".$image_url;
+            if (!str_contains($image_url, base_url())) {
+                $image_url = base_url() . "/assets//" . $image_url;
             }
 
             $dateTimeStart = date('Y-m-d H:i:s', strtotime($dateStart . ' ' . $timeStart));
@@ -202,7 +211,7 @@ class Former extends BaseController
                 "id_type_slide" => 0,
                 "status" => 0,
                 "id_tag" => 0,
-                "image_url"=>$image_url,
+                "image_url" => $image_url,
             ];
             $types = [
                 ["id" => 1, "name" => "Introduction"],
@@ -211,6 +220,7 @@ class Former extends BaseController
                 ["id" => 4, "name" => "Annexe"],
             ];
             $data['types'] = $types;
+            
             $rules = [
                 'title' => 'required|min_length[3]|max_length[40]',
             ];
@@ -221,11 +231,11 @@ class Former extends BaseController
                     'max_length' => "Titre trop long",
                 ],
             ];
-    
+
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                if ($training->isExist($title) === true) {
+                if ($this->training_model->isExist($title) === true) {
                     // la formation existe déjà avec ce titre
                     // alors on doit avertir le formateur
                     $session_add = [
@@ -238,16 +248,14 @@ class Former extends BaseController
                     $data["warning"] = "true";
                     session()->set($session_add);
                     return view('Training/training_add.php', $data);
-
                 } else {
+                    
+                    $last_id = $this->training_model->add($data_save);
+                    $this->training_model->setTrainingSession($data_save);
 
-                    $training = new TrainingHelper();
-                    $last_id = $training->add($data_save);
-                    $training->setTrainingSession($data_save);
-                    
-                    $trainings = $training->fillOptionsTraining($last_id);
-                    session()->set("id_training", $last_id);              
-                    
+                    $trainings = $this->training_model->fillOptionsTraining($last_id);
+                    session()->set("id_training", $last_id);
+
                     $data["trainings"] = $trainings;
                     $data['title'] = "Création contenu";
                     return view('Training/training_edit.php', $data);
@@ -256,18 +264,23 @@ class Former extends BaseController
         }
         return view('Training/training_add.php', $data);
     }
-
+    
+    /**
+     * training_edit
+     * Création des pages associées à la formation
+     * @return void
+     */
     public function training_edit()
     {
-        $training = new TrainingHelper();
+        
         $id_training = session()->get("id_training");
-        $trainings = $training->fillOptionsTraining(session()->id_training);
+        $trainings = $this->training_model->fillOptionsTraining(session()->id_training);
         //
-        $user_info = new UserHelper();
-        $user = $user_info->getUserSession();
+        
+        $user = $this->user_model->getUserSession();
         //
-        $category_infos = new CategoryHelper();
-        $options = $category_infos->getCategories();
+        
+        $options = $this->category_model->getCategories();
         //
         $types = [
             ["id" => 1, "name" => "Introduction"],
@@ -284,14 +297,14 @@ class Former extends BaseController
             "types" => $types,
             "id_training" => $id_training,
             "trainings" => $trainings,
-            "headerColor"=>getTheme(session()->type, "header"),
+            "headerColor" => getTheme(session()->type, "header"),
         ];
 
         if ($this->request->getMethod() == 'post') {
+            $this->request->getVar("");
             // on utilise les modèles pour renseigner nos tables de formation, pages ...
-            $training_model = new TrainingModel();
-            $page_model = new PageModel();
-            $training_has_model = new TrainingHasPageModel();
+            //$this->training_model->save($dataSave);
+            
             $action = $this->request->getVar('action');
             if ($action != null) {
                 switch ($action) {
@@ -307,5 +320,33 @@ class Former extends BaseController
             }
         }
         return view('Training/training_edit.php', $data);
+    }
+    
+    /**
+     * training_save
+     * Sauvegarde des pages associées à la formation
+     * @return void
+     */
+    public function training_save()
+    {
+        if ($this->request->getMethod() == 'post') {
+
+            $data = $this->request->getVar("data");
+            $id_training = $this->request->getVar("id_training");
+            $tab = $data[0];
+            // on traduit le contenu (chaine => json)
+            $pages = json_decode($tab, true);
+            // parcours du tableau $pages
+            foreach ($pages as $page) {
+                $dataSave = [
+                    "name" => $page['name'],
+                    "content" => $page['content'],
+                    "id_training" => $id_training,
+                    "image_url" => $page['image_url'],
+                ];
+                // insérer page dans la base de données
+                $this->page_model->save($dataSave);
+            }
+        }
     }
 }
