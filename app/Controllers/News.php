@@ -289,7 +289,6 @@ class News extends BaseController
             "article" => $article,
             "author" => $author,
         ];
-
         return $data;
     }
 
@@ -318,11 +317,9 @@ class News extends BaseController
         $title = "Liste des publications";
         $db      = \Config\Database::connect();
         $builder = $db->table('publication');
-
         $builder->where('status', '1');
         $query   = $builder->get();
         $publishes = $query->getResultArray();
-
         $listpublishes = [];
 
         foreach ($publishes as $publishe) {
@@ -353,7 +350,6 @@ class News extends BaseController
 
             $query = $builder->get();
             $user = $query->getResultArray();
-
             $authors = [];
             foreach ($user as $u) {
                 $authors[] = [
@@ -361,7 +357,6 @@ class News extends BaseController
                     "firstname" => $u['firstname'],
                 ];
             }
-
             $listpublishes[$i]["user"] = $authors;
         }
 
@@ -396,10 +391,8 @@ class News extends BaseController
             $builder->where('publication.id_publication', $id);
             $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
             $builder->join('article', 'publication_has_article.id_article = article.id_article');
-
             $query = $builder->get();
             $articles = $query->getResultArray();
-
             $listarticles = [];
 
             foreach ($articles as $article) {
@@ -421,7 +414,6 @@ class News extends BaseController
             $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
             $builder->join('user', 'user_has_article.id_user = user.id_user');
             $builder->groupBy('user.id_user');
-
             $query = $builder->get();
             $user = $query->getResultArray();
 
@@ -440,8 +432,6 @@ class News extends BaseController
                 "listarticles" => $listarticles,
                 "authors" => $authors,
             ];
-
-
 
             return view('Publishes/list_publishes_details.php', $data);
         }

@@ -74,7 +74,9 @@ $routes->group('/former', static function ($routes) {
     $routes->add('rdv', 'Former::rdv');
     $routes->add('profil/edit', 'Former::profile_view'); // modification du profil
     $routes->add('training/add', 'Former::training_add'); // création de la formation
+    $routes->add('training/save', 'Former::training_save'); // création de la formation
     $routes->add('training/edit', 'Former::training_edit'); // création de la page
+  
     $routes->add('videos/list', 'Dashboard::listformermedias/1'); //dashboard des videos du formateur
     $routes->add('books/list', 'Dashboard::listformermedias/2'); //dashboard des livres du formateur
     $routes->add('videos/edit', 'Media::medias_edit/1');
@@ -114,6 +116,8 @@ $routes->group('/training', static function ($routes) {
     $routes->add('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment'); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
+    $routes->add('dashboard', 'Dashboard::training'); // Contenu de la formation payante
+
 });
 
 // Articles 

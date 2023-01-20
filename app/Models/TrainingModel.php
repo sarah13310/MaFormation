@@ -12,7 +12,6 @@ class TrainingModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-
     protected $allowedFields = [
         'title',
         "description",
@@ -64,7 +63,7 @@ class TrainingModel extends Model
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
-        //$this->select("*");
+        
         $builder->where("id_training", $id);
         $query = $builder->get();
         return $query->getResultArray();
@@ -75,7 +74,7 @@ class TrainingModel extends Model
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
         $builder->select("id_training, title");
-        $query = $$this->get();
+        $query = $builder->get();
         return $query->getResultArray();
     }
 

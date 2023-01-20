@@ -38,9 +38,7 @@ class Training extends BaseController
     public function home()
     {
         helper(['util']);
-
         $trainings = $this->training_model->getFilterTrainings();
-
         $list_training = [];
 
         foreach ($trainings as $training) {
@@ -68,7 +66,6 @@ class Training extends BaseController
 
     public function details($id = 0)
     {
-
         if ($this->request->getMethod() == 'post') {
             $id = $this->request->getVar('id_training');
         }
@@ -102,7 +99,6 @@ class Training extends BaseController
 
             $data = [
                 "title" => $training['title'],
-
             ];
         }
         return view('Payment/paymentcard.php', $data);
