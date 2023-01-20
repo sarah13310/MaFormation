@@ -29,8 +29,8 @@ class TrainingModel extends Model
     function add($post_data)
     {
         $db      = \Config\Database::connect();
-        //$this = $db->table('training');
-        $this->insert($post_data);
+        $builder = $db->table('training');
+        $builder->insert($post_data);
         return $db->insertID();
     }
 
@@ -62,45 +62,44 @@ class TrainingModel extends Model
 
     function getTrainingById($id)
     {
-        //$db      = \Config\Database::connect();
-        //$this = $db->table('training');
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
         //$this->select("*");
-        $this->where("id_training", $id);
-        $query = $this->get();
+        $builder->where("id_training", $id);
+        $query = $builder->get();
         return $query->getResultArray();
     }
 
     function getTrainingsTitle($status = ALL)
     {
-        //$db      = \Config\Database::connect();
-        //$this = $db->table('training');
-
-        $this->select("id_training, title");
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
+        $builder->select("id_training, title");
         $query = $$this->get();
         return $query->getResultArray();
     }
 
     public function getFilterTrainings($status = ALL, $limit = -1)
     {
-       // $db      = \Config\Database::connect();
-        //$this = $db->table('training');
-        $this->select("id_training, title,date, description, image_url");
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
+        $builder->select("id_training, title,date, description, image_url");
         if ($status != ALL) {
-            $this->where("status", $status);
+            $builder->where("status", $status);
         }
         if ($limit != -1) {
-            $this->limit($limit);
+            $builder->limit($limit);
         }
-        $query = $this->get();
+        $query = $builder->get();
         return $query->getResultArray();
     }
 
     function isExist($title)
     {
-        //$db      = \Config\Database::connect();
-        //$this = $db->table('training');
-        $this->where("title", $title);
-        $query = $this->get();
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
+        $builder->where("title", $title);
+        $query = $builder->get();
         return ($query->getResultArray() == null) ? false : true;
     }
 

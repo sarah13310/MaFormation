@@ -9,14 +9,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id_user" id="id_user" value="<?= session()->id_user?>">
+                    <input type="hidden" name="id_user" id="id_user" value="<?= session()->id_user ?>">
                     <div class="form-group">
                         <label for="name">Nom</label>
-                        <input type="text" class="form-control mb-2" name="name" id="name" value="<?=session()->name?>">
+                        <input type="text" class="form-control mb-2" name="name" id="name" value="<?= session()->name ?>">
                     </div>
                     <div class="form-group">
                         <label for="name">Prénom</label>
-                        <input type="text" class="form-control mb-2" name="firstname" id="firstname" value="<?=session()->firstname?>">
+                        <input type="text" class="form-control mb-2" name="firstname" id="firstname" value="<?= session()->firstname ?>">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -36,7 +36,7 @@
                     <h5 class="modal-title">Informations de contact</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body row">                   
+                <div class="modal-body row">
                     <div class="col-md-6">
                         <div class='form-floating mb-3'>
                             <input type="text" class="form-control" name="address" id="address" value="<?= session()->address ?>" placeholder='Adresse'>
@@ -74,9 +74,9 @@
                         </div>
                         <div class="form-floating mb-3">
                             <select class='form-select' id='gender' name="gender" aria-label='Genre'>
-                                <option value='0'<?= (session()->gender==0)?"selected":"" ?> >Madame</option>
-                                <option value='1'<?= (session()->gender==1)?"selected":"" ?>>Monsieur</option>
-                                <option value='Null' <?= (session()->gender=='')?"selected":"" ?>>Non renseigné</option>
+                                <option value='0' <?= (session()->gender == 0) ? "selected" : "" ?>>Madame</option>
+                                <option value='1' <?= (session()->gender == 1) ? "selected" : "" ?>>Monsieur</option>
+                                <option value='Null' <?= (session()->gender == '') ? "selected" : "" ?>>Non renseigné</option>
                             </select>
                             <label for="gender">Genre</label>
                         </div>
@@ -141,7 +141,7 @@
         <div class="col-12 col-md-4 mb-4">
             <div id="frame_snapshot " class="row mb-2">
                 <div id="snapshot" class="frame_snapshot cropped">
-                    <img src='<?= $user['image_url'] ?>' class="snapshot" alt="Photo" />
+                    <img loading="lazy" src='<?= $user['image_url'] ?>' class="snapshot" alt="Photo" />
                 </div>
             </div>
             <div>
@@ -197,55 +197,8 @@
     <?= $this->endSection() ?>
 
     <?= $this->section('js') ?>
-    <script type="text/javascript" src="<?= base_url() ?>/webcamjs/webcam.min.js"></script>
-    <script>
-        let photo_url = document.getElementById("photo");
-
-        const snapshot = document.getElementById('snapshot');
-        // Configure a few settings and attach camera
-        Webcam.set({
-            width: 150,
-            height: 112.5,
-            image_format: 'jpeg',
-            jpeg_quality: 95
-        });
-        Webcam.attach('#my_camera');
-        // preload shutter audio clip
-        var shutter = new Audio();
-        shutter.autoplay = false;
-        shutter.src = "<?= base_url() ?>/webcamjs/shutter.ogg";
-        let img_snap = "<?= $user['image_url'] ?>";
-
-        function take_snapshot() {
-            // play sound effect
-            shutter.play();
-            // take snapshot and get image data
-            Webcam.snap(function(data_uri) {
-                // display results in page
-                //img_snap = data_uri;
-                document.getElementById('results').innerHTML =
-                    '<img style="width:150px" src="' + data_uri + '"/>';
-                img_snap = data_uri;
-            });
-        }
-
-        function save_snapshot() {
-            photo_url.value = img_snap;
-
-            snapshot.innerHTML = '<img style="width:200px" src="' + img_snap + '"/>';
-        }
-
-        var openFile = function(file) {
-            var input = file.target;
-            var reader = new FileReader();
-            reader.onload = function() {
-                var dataURL = reader.result;
-                var output = document.getElementById('output');
-                output.src = dataURL;
-                img_snap = dataURL;
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
+    <script defer type="text/javascript" src="<?= base_url() ?>/webcamjs/webcam.min.js"></script>
+    <script defer type="text/javascript" src="<?= base_url() ?>/js/snapshot.js"></script>
     </script>
 
     <?= $this->endSection() ?>

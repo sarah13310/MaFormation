@@ -89,8 +89,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-<script src="<?= base_url() . '/js/infos.js' ?>" type="module"></script>
-<script src="<?= base_url() . '/js/editor.js' ?>" type="module"></script>
+<script defer src="<?= base_url() . '/js/infos.js' ?>" ></script>
+<script src="<?= base_url() . '/js/editor.js' ?>"></script>
 
 <script>
     let btnLink = document.getElementById("btnlink");

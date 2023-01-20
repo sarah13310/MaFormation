@@ -22,7 +22,7 @@
                 <td class="col" scope="col"><?= $training['title'] ?></td>
                 <td class="col" scope="col"><?= $training['description'] ?></td>
                 <td class="col" scope="col"><?= $training['date'] ?></td>
-                <td class="view col" scope="col"><button class="<?= $theme_button ?>" type="submit" value="<?= $training['id_training'] ?>" name='id_training'><i class="bi bi-eye"></i></button></td>
+                <td class="view col" scope="col"><button class="btn" type="submit" value="<?= $training['id_training'] ?>" name='id_training'><i class="bi bi-eye"></i></button></td>
             </tr>
         </form>
     <?php endforeach ?>
