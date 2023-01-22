@@ -63,7 +63,7 @@ class TrainingModel extends Model
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
-        
+
         $builder->where("id_training", $id);
         $query = $builder->get();
         return $query->getResultArray();
@@ -112,5 +112,21 @@ class TrainingModel extends Model
             $str .= "<option value='" . $training['id_training'] . "' " . $selected . ">" . $training['title'] . "</option>";
         }
         return $str;
+    }
+
+
+    public function getFilterPages($id_training, $limit = -1)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training_has_page');
+        $builder->select("page.id_page, page.title, page.content, page.image_url,page.video_url");
+        $builder->join('page', 'page.id_page=training_has_page.id_page');
+        $builder->where("training_has_page.id_training", $id_training);
+
+        if ($limit != -1) {
+            $builder->limit($limit);
+        }
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 }

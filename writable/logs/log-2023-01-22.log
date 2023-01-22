@@ -1,0 +1,134 @@
+ERROR - 2023-01-22 10:10:46 --> mysqli_sql_exception: Column 'id_training' in where clause is ambiguous in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `page`.`...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `page`.`...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `page`.`...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `page`.`...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\TrainingModel.php(129): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\DashBoard.php(687): App\Models\TrainingModel->getFilterPages('10')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-01-22 10:10:46 --> Column 'id_training' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `id_training` = \'10\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `id_training` = \'10\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `id_training` = \'10\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `id_training` = :id_training:', [...], false)
+ 5 APPPATH\Models\TrainingModel.php(129): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\DashBoard.php(687): App\Models\TrainingModel->getFilterPages('10')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-01-22 10:11:33 --> mysqli_sql_exception: Unknown column 'page.page_id' in 'on clause' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `page`.`...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `page`.`...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `page`.`...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `page`.`...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\TrainingModel.php(129): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\DashBoard.php(687): App\Models\TrainingModel->getFilterPages('10')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-01-22 10:11:33 --> Unknown column 'page.page_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `page`.`id_training` = \'10\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `page`.`id_training` = \'10\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `page`.`id_training` = \'10\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `page`.`id_page`, `page`.`title`, `page`.`content`, `page`.`image_url`, `page`.`video_url`
+FROM `training_has_page`
+JOIN `page` ON `page`.`page_id`=`training_has_page`.`page_id`
+WHERE `page`.`id_training` = :page.id_training:', [...], false)
+ 5 APPPATH\Models\TrainingModel.php(129): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\DashBoard.php(687): App\Models\TrainingModel->getFilterPages('10')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-22 10:18:44 --> Undefined array key "id_training"
+in APPPATH\Controllers\DashBoard.php on line 693.
+ 1 APPPATH\Controllers\DashBoard.php(693): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_training"', 'APPPATH\\Controllers\\DashBoard.php', 693)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-22 10:21:31 --> Undefined variable $category
+in APPPATH\Views\Admin\dashboard_page.php on line 63.
+ 1 APPPATH\Views\Admin\dashboard_page.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $category', 'APPPATH\\Views\\Admin\\dashboard_page.php', 63)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_page.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_page.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(708): view('Admin/dashboard_page.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-22 10:22:12 --> Undefined variable $category
+in APPPATH\Views\Admin\dashboard_page.php on line 63.
+ 1 APPPATH\Views\Admin\dashboard_page.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $category', 'APPPATH\\Views\\Admin\\dashboard_page.php', 63)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_page.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_page.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(708): view('Admin/dashboard_page.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-22 10:22:27 --> Undefined array key "id_category"
+in APPPATH\Views\Admin\dashboard_page.php on line 63.
+ 1 APPPATH\Views\Admin\dashboard_page.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_category"', 'APPPATH\\Views\\Admin\\dashboard_page.php', 63)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_page.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_page.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(708): view('Admin/dashboard_page.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-22 10:22:46 --> Undefined array key "id_page"
+in APPPATH\Views\Admin\dashboard_page.php on line 63.
+ 1 APPPATH\Views\Admin\dashboard_page.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_page"', 'APPPATH\\Views\\Admin\\dashboard_page.php', 63)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_page.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_page.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(708): view('Admin/dashboard_page.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->preview_training()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

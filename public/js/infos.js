@@ -1,5 +1,5 @@
-// Affiche les erreurs, infos, avertissements
- function infosPop(){
+// Affiche temporairement les erreurs, infos, avertissements
+ 
     const warning = document.getElementById('warning');
     const error = document.getElementById("error");
     const success = document.getElementById("success");
@@ -15,7 +15,3 @@
             success.remove();
         }
     }, 1500);
-
-    infosPop();
-
-}

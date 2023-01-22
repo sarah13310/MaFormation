@@ -83,7 +83,6 @@ class User extends BaseController
     {
         helper(['form']);
 
-
         $this->user_model->setUserSession($user);
         $type = $user['type'];
 
@@ -110,10 +109,6 @@ class User extends BaseController
 
     private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
-
-
-
-
         //table utilisateur
         $this->user_model->save($data_user);
 
@@ -132,9 +127,9 @@ class User extends BaseController
         $this->user_has_company_model->save($data_jointure);
     }
 
+
     private function associateCompany($data_user, $id_company, $kbis, $siret)
     {
-
         //table utilisateur
         $this->user_model->save($data_user);
 
@@ -221,7 +216,6 @@ class User extends BaseController
     {
         helper(['form']);
 
-
         if ($this->request->getMethod() == "post") {
             // on met à jour les informations de session           
             session()->mail = $this->request->getVar('mail');
@@ -253,7 +247,6 @@ class User extends BaseController
             $this->user_model->update(session()->id_user, $dataUpdate);
         }
         $user = $this->user_model->getUserSession();
-
 
         $skills = $this->user_model->getCertificates($user['id_user']);
         if ($user['image_url'] == null) {
@@ -802,4 +795,88 @@ class User extends BaseController
 
         return view("User/parameters.php", $data);
     }
+
+    public function add_category()
+    {
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->user_model->getUserSession();
+
+        if ($this->request->getMethod() == 'post') {
+
+            $newData = [
+                'name' => $this->request->getVar('name'),
+            ];
+            // on ajoute la compétence dans la table certificate            
+            $this->category_model->save($newData);
+            // on informe visuelement de l'ajout     
+            session()->setFlashdata('success', 'Catégorie ajoutée!');
+        }
+        // on prépare les données pour la page html
+        $categories = $this->category_model->getCategories();
+        $data = [
+            "title" => "Gestion des catégories",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "categories" => $categories,
+        ];
+        return view("User/add_category.php", $data);
+    }
+
+    public function modify_category()
+    {
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->user_model->getUserSession();
+
+        if ($this->request->getMethod() == 'post') {
+            $newData = [
+                'id_category' => $this->request->getVar('id_category'),
+                'name' => $this->request->getVar('name'),
+            ];
+
+            // on ajoute la compétence dans la table certificate            
+            $this->category_model->save($newData);
+            // on informe visuelement de l'ajout     
+            session()->setFlashdata('success', 'Catégorie modifiée!');
+        }
+        // on prépare les données pour la page html
+        $categories = $this->category_model->getCategories();
+        $data = [
+            "title" => "Gestion des catégories",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "categories" => $categories,
+        ];
+        return view("User/add_category.php", $data);
+    }
+
+    public function delete_category()
+    {
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->user_model->getUserSession();
+        //
+        if ($this->request->getMethod() == 'post') {
+            $id_category = $this->request->getVar('id_category');
+
+            $deleteData = ['id_category' => $id_category];
+            // on supprime la catégorie dans la table            
+            $this->category_model->delete($deleteData);
+            // on informe visuelement de la suppression     
+            session()->setFlashdata('success', 'Catégorie supprimée!');
+        }
+        // on prépare les données pour la page html
+        $categories = $this->category_model->getCategories();
+
+        $data = [
+            "title" => "Gestion des catégories",
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "categories" => $categories,
+        ];
+        return view("User/add_category.php", $data);
+    }
+
+    
 }

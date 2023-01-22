@@ -74,13 +74,13 @@
                 </div>
                 <div class="row fullwidth mt-2">
                     <div class="row align-items-center">
-                        <div id="modify" class=" hidden col-sm-12 col-md-3"><a onclick="modifyTableau()" class=" btn btn-outline-primary">Modifier</a></div>
-                        <div id="add" class=" col-sm-12 col-md-3 "><a onclick="addTableau()" class=" btn btn-outline-primary">Ajouter</a></div>
-                        <div class="col-sm-12 col-md-3 "><a onclick="onSave()" type="button" class=" btn btn-primary">Sauver</button></a></div>
-                        <div class="col-sm-12 col-md-6 ">
+                        <div id="modify" class=" hidden col-6"><a onclick="modifyTableau()" class=" btn btn-outline-primary">Modifier</a></div>
+                        <div id="add" class=" col-6 "><a onclick="addTableau()" class=" btn btn-outline-primary">Ajouter</a></div>
+                        <div class="col">
                             <input type="checkbox" id="publish" name="publish" checked>
-                            <label class="" for="publish">Publier</label>
+                            <label for="publish">Publier</label>
                         </div>
+                        <div class="col"><a onclick="onSave()" type="button" class=" btn btn-primary float-end">Sauver</button></a></div>
                     </div>
                 </div>
             </form>
@@ -88,7 +88,8 @@
         <!-- <div class="vr"></div> -->
         <div class="col-12 col-md-6">
             <div class="row mb-2">
-                <div class="col-12 col-md-2">
+                <div class="col-10">Titre de la formation</div>
+                <div class="col">
                     <a onclick="onNew()" class="btn btn-primary"><i class="bi bi-plus-circle"></i></i></a>
                 </div>
             </div>

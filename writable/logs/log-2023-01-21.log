@@ -1,0 +1,24 @@
+CRITICAL - 2023-01-21 10:07:03 --> Undefined variable $article
+in APPPATH\Views\User\add_category.php on line 47.
+ 1 APPPATH\Views\User\add_category.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $article', 'APPPATH\\Views\\User\\add_category.php', 47)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\add_category.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/add_category.php', [], true)
+ 5 APPPATH\Controllers\User.php(823): view('User/add_category.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->add_category()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-01-21 11:54:36 --> beforeInsert is not a valid Model Event callback.
+in SYSTEMPATH\BaseModel.php on line 1477.
+ 1 SYSTEMPATH\BaseModel.php(1477): CodeIgniter\Database\Exceptions\DataException::forInvalidMethodTriggered('beforeInsert')
+ 2 SYSTEMPATH\BaseModel.php(746): CodeIgniter\BaseModel->trigger('beforeInsert', [...])
+ 3 SYSTEMPATH\Model.php(667): CodeIgniter\BaseModel->insert([...], false)
+ 4 SYSTEMPATH\BaseModel.php(659): CodeIgniter\Model->insert([...], false)
+ 5 APPPATH\Controllers\User.php(810): CodeIgniter\BaseModel->save([...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->add_category()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

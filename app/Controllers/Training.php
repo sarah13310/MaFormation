@@ -7,14 +7,15 @@ namespace App\Controllers;
 
 class Training extends BaseController
 {
-    public function __construct(){
-      helper(['util']); // déclaration des fonctions helper
+    public function __construct()
+    {
+        helper(['util']); // déclaration des fonctions helper
     }
     /* liste des formations (profil utilisateur)*/
     public function list()
     {
-        $user = $this->user_model->getUserSession();
-        $trainings= $this->training_model->getFilterTrainings();            
+        $user = $this->getUserSession();
+        $trainings = $this->training_model->getFilterTrainings();
         $list_training = [];
 
         foreach ($trainings as $training) {
@@ -58,7 +59,7 @@ class Training extends BaseController
             "title" => "Liste des formations",
             "trainings" => $list_training,
             "buttonColor" => getTheme(session()->type, "button"),
-            "headerColor" => getTheme(session()->type,"header"),
+            "headerColor" => getTheme(session()->type, "header"),
         ];
         return view('Training/training_list_home.php', $data);
     }
@@ -66,11 +67,11 @@ class Training extends BaseController
 
     public function details($id = 0)
     {
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             $id = $this->request->getVar('id_training');
         }
 
-        $training=$this->training_model->getTrainingById($id);
+        $training = $this->training_model->getTrainingById($id);
         $training = $training[0];
 
         $image_url = $training['image_url'];
@@ -90,11 +91,11 @@ class Training extends BaseController
 
 
     public function payment()
-    {   
-        
-        if ($this->request->getMethod() == 'post') {
+    {
+
+        if ($this->isPost()) {
             $id = $this->request->getVar('id_training');
-            $training=$this->training_model->getTrainingById($id);
+            $training = $this->training_model->getTrainingById($id);
             $training = $training[0];
 
             $data = [
@@ -114,8 +115,8 @@ class Training extends BaseController
         $query   = $builder->get();
         $user = $query->getResultArray();
         $user = $user[0]; // juste le premier        
-        
-        if ($this->request->getMethod() == 'post') {
+
+        if ($this->isPost()) {
             $id = $this->request->getVar('id_training');
             $training = $this->training_model->getTrainingById($id);
 
@@ -150,6 +151,76 @@ class Training extends BaseController
             } else {
                 return view('errors/html/error_404.php');
             }
+        }
+    }
+
+
+    public function delete_page()
+    {
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->getUserSession();
+        //
+        if ($this->isPost()) {
+            $id_page = $this->request->getVar('id_page');
+            $id_training = $this->request->getVar('id_training');
+            echo ($id_page);
+            echo ($id_training);
+            die();
+            //
+            $deleteData = ['id_page' => $id_page];
+            // on supprime la catégorie dans la table            
+            $this->page_model->delete($deleteData);
+            $deleteData = [
+                'id_page' => $id_page,
+                'id_training' => $id_training,
+            ];
+            $this->training_has_page_model->delete($deleteData);
+            // on informe visuelement de la suppression     
+            session()->setFlashdata('success', 'Page supprimée!');
+            // on prépare les données pour la page html
+            $pages = $this->training_model->getFilerPages($id_training);
+            $data = [
+                "title" => "Gestion des pages",
+                "user" => $user,
+                "buttonColor" => getTheme($user['type'], "button"),
+                "headerColor" => getTheme($user['type'], "header"),
+                "pages" => $pages,
+            ];
+            return view('Admin/dashboard_page.php', $data);
+        }
+    }
+    public function modify_page()
+    {
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->getUserSession();
+        //
+        if ($this->isPost()) {
+            $id_page = $this->request->getVar('id_page');
+            $id_training = $this->request->getVar('id_training');
+            echo ($id_page);
+            echo ($id_training);
+            die();
+            //
+            $deleteData = ['id_page' => $id_page];
+            // on supprime la catégorie dans la table            
+            $this->page_model->delete($deleteData);
+            $deleteData = [
+                'id_page' => $id_page,
+                'id_training' => $id_training,
+            ];
+            $this->training_has_page_model->delete($deleteData);
+            // on informe visuelement de la suppression     
+            session()->setFlashdata('success', 'Page supprimée!');
+            // on prépare les données pour la page html
+            $pages = $this->training_model->getFilerPages($id_training);
+            $data = [
+                "title" => "Gestion des pages",
+                "user" => $user,
+                "buttonColor" => getTheme($user['type'], "button"),
+                "headerColor" => getTheme($user['type'], "header"),
+                "pages" => $pages,
+            ];
+            return view('Admin/dashboard_page.php', $data);
         }
     }
 }

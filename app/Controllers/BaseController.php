@@ -90,6 +90,19 @@ abstract class BaseController extends Controller
     /**
      * Constructor.
      */
+
+     public function isPost(){
+        return ($this->request->getMethod(TRUE)==="POST");
+     }
+
+     public function isGet(){
+        return ($this->request->getMethod(TRUE)==="GET");
+     }
+
+     public function getUserSession(){
+        return $this->user_model->getUserSession();
+     }
+
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
