@@ -209,7 +209,7 @@ class Training extends BaseController
             $training = $this->training_model->getTrainingById($id_training);
             
             $data = [
-                "title" => "Modification de la page <i>'".$page['title']."</i>'",
+                "title" => $page['title'],
                 "user" => $user,
                 "buttonColor" => getTheme($user['type'], "button"),
                 "headerColor" => getTheme($user['type'], "header"),
@@ -218,6 +218,8 @@ class Training extends BaseController
                 "id_training" => $id_training,
                 "categories" => $categories,
                 "types"=>[],
+                "id_page"=>$page['id_page'],
+                "content"=>$page['content'],
             ];
             return view('Training/training_edit.php', $data);
         }

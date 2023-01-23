@@ -8,7 +8,7 @@ $base = base_url(); ?>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="<?= $base ?>/css/stylemain.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700,700i|Source+Code+Pro:400,700&display=swap">
-<?= $this->endSection() ?>
+<?= $this->endSection()  ?>
 
 <?= $this->section('content') ?>
 <div id="modalDelete" class="modal" tabindex="-1">
@@ -40,12 +40,12 @@ $base = base_url(); ?>
     <div class="row">
         <div class="col-12 ">
             <form name="form_training" id="form_training">
-                <input type="hidden" id="id_page" name="id_page" value="<?= $page["id_page"] ?>">
+                <input type="hidden" id="id_page" name="id_page" value="<?= $id_page ?>">
                 <input type="hidden" id="id_training" name="id_training" value="<?= $id_training ?>">
-                <input type="hidden" id="title" name="title" value="<?= $training['title'] ?>">
+                <input type="hidden" id="title" name="title" value="<?= $title ?>">
                 <div class="row justify-content-between">
-                    <div class="col mb-2">
-                        <input readonly class="form-control" id="name" name="name" type="text" placeholder="Nom de la formation" value="<?= $training['title'] ?>" />
+                    <div class="col-12 mb-2">
+                        <input readonly class="form-control" id="name" name="name" type="text" placeholder="Nom de la formation" value="<?= $title ?>" />
                     </div>
                 </div>
                 <div class="form-group mb-2 row">
@@ -93,7 +93,6 @@ $base = base_url(); ?>
     const area = document.getElementById('content');
     const image_url = document.getElementById('image_url');
 
-
     // init  de l'éditeur
     function initEditor() {
         sceditor.create(content, {
@@ -115,7 +114,7 @@ $base = base_url(); ?>
         form_training.image_url.value = image_url.value;
         form_training.submit();
     }    
-    let text=sceditor.instance(content).val('<?= $page['content'] ?>', false);
+    let text=sceditor.instance(content).val('<?= $content ?>', false);
     area.value=text.val();
 </script>
 <?= $this->endSection() ?>

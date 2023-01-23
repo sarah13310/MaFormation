@@ -276,11 +276,10 @@ class Former extends BaseController
         $id_training = session()->get("id_training");
         $trainings = $this->training_model->fillOptionsTraining(session()->id_training);
         //
-
         $user = $this->user_model->getUserSession();
         //
-
-        $options = $this->category_model->getCategories();
+        $categories = $this->category_model->getCategories();
+        $id_page=0;
         //
         $types = [
             ["id" => 1, "name" => "Introduction"],
@@ -293,11 +292,14 @@ class Former extends BaseController
             "title" => "Création contenu de page",
             "id_user" => $user['id_user'],
             "user" => $user,
-            "options" => $options,
+            "categories" => $categories,
             "types" => $types,
             "id_training" => $id_training,
             "trainings" => $trainings,
             "headerColor" => getTheme(session()->type, "header"),
+            "id_page"=>$id_page,
+            "title"=>"",
+            "content"=>"",
         ];
 
         if ($this->request->getMethod() == 'post') {

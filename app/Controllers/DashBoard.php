@@ -639,7 +639,7 @@ class DashBoard extends BaseController
 
         $data = [
             "title" => $title,
-            "trainings" => $listpublishes,
+            "publishes" => $listpublishes,
             "user" => $user,
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
