@@ -13,7 +13,7 @@ class CategoryModel extends Model
     protected $useSoftDeletes = false;
 
     protected $allowedFields = [
-        
+        'id_category',
         'name'
     ];
 

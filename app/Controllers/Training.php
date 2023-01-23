@@ -11,6 +11,7 @@ class Training extends BaseController
     {
         helper(['util']); // déclaration des fonctions helper
     }
+
     /* liste des formations (profil utilisateur)*/
     public function list()
     {
@@ -89,7 +90,6 @@ class Training extends BaseController
     }
 
 
-
     public function payment()
     {
 
@@ -154,6 +154,10 @@ class Training extends BaseController
         }
     }
 
+    public function test_page()
+    {
+    }
+
 
     public function delete_page()
     {
@@ -163,32 +167,32 @@ class Training extends BaseController
         if ($this->isPost()) {
             $id_page = $this->request->getVar('id_page');
             $id_training = $this->request->getVar('id_training');
-            echo ($id_page);
-            echo ($id_training);
-            die();
+
             //
             $deleteData = ['id_page' => $id_page];
             // on supprime la catégorie dans la table            
             $this->page_model->delete($deleteData);
-            $deleteData = [
-                'id_page' => $id_page,
+            $deleteHasData = [
                 'id_training' => $id_training,
+                'id_page' => $id_page,
             ];
-            $this->training_has_page_model->delete($deleteData);
+            $this->training_has_page_model->remove($deleteHasData);
             // on informe visuelement de la suppression     
             session()->setFlashdata('success', 'Page supprimée!');
             // on prépare les données pour la page html
-            $pages = $this->training_model->getFilerPages($id_training);
+            $pages = $this->training_model->getFilterPages($id_training);
             $data = [
                 "title" => "Gestion des pages",
                 "user" => $user,
                 "buttonColor" => getTheme($user['type'], "button"),
                 "headerColor" => getTheme($user['type'], "header"),
                 "pages" => $pages,
+                "id_training" => $id_training,
             ];
             return view('Admin/dashboard_page.php', $data);
         }
     }
+
     public function modify_page()
     {
         // on récupère les informations utilisateur de la session active    
@@ -197,30 +201,25 @@ class Training extends BaseController
         if ($this->isPost()) {
             $id_page = $this->request->getVar('id_page');
             $id_training = $this->request->getVar('id_training');
-            echo ($id_page);
-            echo ($id_training);
-            die();
             //
-            $deleteData = ['id_page' => $id_page];
             // on supprime la catégorie dans la table            
-            $this->page_model->delete($deleteData);
-            $deleteData = [
-                'id_page' => $id_page,
-                'id_training' => $id_training,
-            ];
-            $this->training_has_page_model->delete($deleteData);
-            // on informe visuelement de la suppression     
-            session()->setFlashdata('success', 'Page supprimée!');
+            $page = $this->page_model->getPageById($id_page);
+            $categories = $this->category_model->getCategories();
             // on prépare les données pour la page html
-            $pages = $this->training_model->getFilerPages($id_training);
+            $training = $this->training_model->getTrainingById($id_training);
+            
             $data = [
-                "title" => "Gestion des pages",
+                "title" => "Modification de la page <i>'".$page['title']."</i>'",
                 "user" => $user,
                 "buttonColor" => getTheme($user['type'], "button"),
                 "headerColor" => getTheme($user['type'], "header"),
-                "pages" => $pages,
+                "page" => $page,
+                "training" => $training[0],
+                "id_training" => $id_training,
+                "categories" => $categories,
+                "types"=>[],
             ];
-            return view('Admin/dashboard_page.php', $data);
+            return view('Training/training_edit.php', $data);
         }
     }
 }

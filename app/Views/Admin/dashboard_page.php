@@ -4,9 +4,9 @@
 <?= $this->section('content') ?>
 <div class="modal" tabindex="-1" id="myModalDelete">
     <div class="modal-dialog">
-        <form name="form_delete">
-            <input id="id" name="id_page" type="hidden" value="">
-            <!-- <input id="id_training" name="id_training" type="hidden" value=""> -->
+        <form name="form_page_delete" action="/training/page/delete" method="post">
+            <input id="id_page" name="id_page" type="hidden" />
+            <input id="id_training" name="id_training" type="hidden" value=<?= $id_training ?> />
             <div class="modal-content" style="align-items:center">
                 <div class="modal-header">
                     <h5 class="modal-title">Suppression</h5>
@@ -53,11 +53,11 @@
                         </td>
                         <td>
                             <form name="form_modify">
-                                <input id="id_page" type="hidden" >
-                                <input id="id_training" type="hidden" value="<?= $id_training?>">
+                                <input id="id_page" name='id_page' type="hidden">
+                                <input id="id_training" name="id_training" type="hidden" value="<?= $id_training ?>">
                                 <a type="button" onclick="onModify(this.parentElement.parentElement)" class="col-1 btn mr-2 "><i class="bi bi-pencil"></i></button>
                             </form>
-                        </td>                        
+                        </td>
                         <td class="hidden"><?= $page['id_page'] ?></td>
                     </tr>
                 <?php endforeach ?>
@@ -74,28 +74,25 @@
 <script>
     let myModalDelete = document.getElementById('myModalDelete');
     let modalDelete = bootstrap.Modal.getOrCreateInstance(myModalDelete);
-        
+
     function onDelete(id) {
-        document.form_delete.method = "POST";
-        document.form_delete.action = "/training/page/delete";
-        document.form_delete.id.value = id;
+
+        document.form_page_delete.id_page.value = id;
         modalDelete.show();
         return false;
     }
 
     function onConfirmDelete() {
-        document.form_delete.submit();
+        document.form_page_delete.submit();
     }
 
-    function onModify(elem) {        
+    function onModify(elem) {
         event.stopPropagation();
         document.form_modify.method = "POST";
         document.form_modify.action = "/training/page/modify";
-        document.form_modify.id_page.value = elem.cells[4].innerText;        
-        document.form_modify.submit();        
+        document.form_modify.id_page.value = elem.parentElement.cells[4].innerText;
+        document.form_modify.submit();
     }
-
- 
 </script>
 
 <?= $this->endSection() ?>

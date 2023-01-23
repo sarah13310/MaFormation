@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 // Date 22-12-2022
 class Former extends BaseController
-{    
+{
     /**
      * list_former_home
      * 
@@ -15,7 +15,7 @@ class Former extends BaseController
      */
     public function list_former_home()
     {
-        $title = "Liste des formateurs";        
+        $title = "Liste des formateurs";
         $public = $this->user_model->getFormers();
         $builder = $public["builder"];
         $formers = $public["formers"];
@@ -88,7 +88,7 @@ class Former extends BaseController
 
         return view('Former/list_former.php', $data);
     }
-    
+
     /**
      * details_former_home
      * 
@@ -134,7 +134,7 @@ class Former extends BaseController
             return view('Former/list_former_cv.php', $data);
         }
     }
-    
+
     /**
      * rdv
      * 
@@ -142,11 +142,11 @@ class Former extends BaseController
      * @return void
      */
     public function rdv()
-    {        
-        $user = $this->user_model->getUserSession();        
+    {
+        $user = $this->user_model->getUserSession();
         $query = $this->rdv_model->where("id_user", $user['id_user'])->findAll();
         $events = [];
-        
+
         $options = $this->category_model->getCategories();
         foreach ($query as $event) {
             $events[] = [
@@ -164,7 +164,7 @@ class Former extends BaseController
         ];
         return view('Former/rdv.php', $data);
     }
-    
+
     /**
      * training_add
      * Création nouvelle formation
@@ -173,7 +173,7 @@ class Former extends BaseController
      */
     public function training_add()
     {
-        $user = $this->user_model->getUserSession();        
+        $user = $this->user_model->getUserSession();
         $options = $this->category_model->getCategories();
 
         $data = [
@@ -184,13 +184,13 @@ class Former extends BaseController
         ];
 
         if ($this->request->getMethod() == 'post') {
-            
+
             $dateStart = $this->request->getVar('dateStart');
             $dateEnd = $this->request->getVar('dateEnd');
             $timeStart = $this->request->getVar('timeStart');
             $timeEnd = $this->request->getVar('timeEnd');
             $image_url = $this->request->getVar("image_url");
-            
+
             if ($image_url == null) {
                 $image_url = base_url() . "/assets/training.svg";
             }
@@ -220,7 +220,7 @@ class Former extends BaseController
                 ["id" => 4, "name" => "Annexe"],
             ];
             $data['types'] = $types;
-            
+
             $rules = [
                 'title' => 'required|min_length[3]|max_length[40]',
             ];
@@ -249,7 +249,7 @@ class Former extends BaseController
                     session()->set($session_add);
                     return view('Training/training_add.php', $data);
                 } else {
-                    
+
                     $last_id = $this->training_model->add($data_save);
                     $this->training_model->setTrainingSession($data_save);
 
@@ -264,7 +264,7 @@ class Former extends BaseController
         }
         return view('Training/training_add.php', $data);
     }
-    
+
     /**
      * training_edit
      * Création des pages associées à la formation
@@ -272,14 +272,14 @@ class Former extends BaseController
      */
     public function training_edit()
     {
-        
+
         $id_training = session()->get("id_training");
         $trainings = $this->training_model->fillOptionsTraining(session()->id_training);
         //
-        
+
         $user = $this->user_model->getUserSession();
         //
-        
+
         $options = $this->category_model->getCategories();
         //
         $types = [
@@ -304,7 +304,7 @@ class Former extends BaseController
             $this->request->getVar("");
             // on utilise les modèles pour renseigner nos tables de formation, pages ...
             //$this->training_model->save($dataSave);
-            
+
             $action = $this->request->getVar('action');
             if ($action != null) {
                 switch ($action) {
@@ -321,7 +321,7 @@ class Former extends BaseController
         }
         return view('Training/training_edit.php', $data);
     }
-    
+
     /**
      * training_save
      * Sauvegarde des pages associées à la formation
@@ -329,24 +329,40 @@ class Former extends BaseController
      */
     public function training_save()
     {
-        if ($this->request->getMethod() == 'post') {
-
-            $data = $this->request->getVar("data");
+        if ($this->isPost()) {
             $id_training = $this->request->getVar("id_training");
-            $tab = $data[0];
-            // on traduit le contenu (chaine => json)
-            $pages = json_decode($tab, true);
-            // parcours du tableau $pages
+
+            $dataSave = [
+                "id_page" => $this->request->getVar("id_page"),
+                "id_training" => $this->request->getVar("id_training"),
+                "title" => $this->request->getVar("title"),
+                "content" => $this->request->getVar("content"),
+                "image_url" => $this->request->getVar("image_url"),
+            ];
+            // insérer page dans la base de données
+            $this->page_model->save($dataSave);
+
+            $pages = $this->training_model->getFilterPages($id_training);
+            // map sur le tableau si nécessaire
             foreach ($pages as $page) {
-                $dataSave = [
-                    "name" => $page['name'],
+                $listPages[] = [
+                    "id_page" => $page['id_page'],
+                    "title" => $page['title'],
                     "content" => $page['content'],
-                    "id_training" => $id_training,
                     "image_url" => $page['image_url'],
+                    "video_url" => $page['video_url'],
                 ];
-                // insérer page dans la base de données
-                $this->page_model->save($dataSave);
             }
+
+            $data = [
+                'title'=>"Gestion des pages",
+                'user' => $this->getUserSession(),
+                "id_training" => $id_training,
+                'pages' => $listPages,
+                "buttonColor" => getTheme(session()->type, "button"),
+                "headerColor" => getTheme(session()->type, "header"),
+            ];
+            return view('Admin/dashboard_page.php', $data);
         }
     }
 }

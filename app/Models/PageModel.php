@@ -15,7 +15,9 @@ class PageModel extends Model
     protected $allowedFields = [
         'id_page',
         'title',
-        'content'
+        'content',
+        'image_url',
+        'video_url'
     ];
 
     function add($post_data)
@@ -55,9 +57,9 @@ class PageModel extends Model
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('page');        
-        $builder->where("id_training", $id);
+        $builder->where("id_page", $id);
         $query = $builder->get();
-        return $query->getResultArray();
+        return $query->getResultArray()[0];
     }
 
     function getPageTitle($status = ALL)

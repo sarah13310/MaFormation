@@ -112,16 +112,15 @@ $routes->get('/funding', 'Home::funding');
 
 // Formations
 $routes->group('/training', static function ($routes) {
-    $routes->get('home', 'Training::home'); // Liste des formations visible (page homse)     
-    $routes->get('list', 'Training::list'); // Liste des formations visible suivant le profil utilisateur 
+    $routes->add('home', 'Training::home'); // Liste des formations visible (page homse)     
+    $routes->add('list', 'Training::list'); // Liste des formations visible suivant le profil utilisateur 
     $routes->add('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment'); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
     $routes->add('preview', 'Dashboard::preview_training'); // Contenu des pages 
-    $routes->add('dashboard', 'Dashboard::training'); // Contenu de la formation payante
-    $routes->add('page/modify', 'Training::page_modify'); //modify page (user profil)  
-    $routes->add('page/delete', 'Training::page_delete'); //delete page (user profil)  
-
+    $routes->add('dashboard', 'Dashboard::training'); // liste des formations achetées
+    $routes->add('page/modify', 'Training::modify_page'); //modify page (user profil)  
+    $routes->add('page/delete', 'Training::delete_page'); //delete page (user profil)  
 });
 
 // Articles 
