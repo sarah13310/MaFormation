@@ -16,7 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 1.5;
-    font-family: Source Sans Pro, sans-serif;
+    font-family: system-ui,"Segoe UI","Roboto","Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     color: #333;
     margin: 0;
     min-height: 100%;
@@ -38,7 +38,7 @@ blockquote {
     padding: 0 0 0 1em;
 }
 
-h1 {
+/* h1 {
     font-size: 2.25rem;
 }
 
@@ -57,9 +57,9 @@ h4 {
 h5,
 h6 {
     font-size: 1rem;
-}
+} */
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -69,7 +69,7 @@ h6 {
     line-height: 1.1;
     margin: 0rem;
     letter-spacing: .5px;
-}
+} */
 
 .Callout,
 p,
@@ -890,7 +890,7 @@ code.language-yaml {
     
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -903,6 +903,6 @@ h6 {
 }
 
 h1, h1 {
-	color: #666666;
-    font-size: 2.15rem;	
-}
+	color: #505050;
+    font-size: 2rem;	
+} */

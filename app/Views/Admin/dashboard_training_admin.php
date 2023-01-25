@@ -39,6 +39,7 @@
                 <td>
                     <form action="/training/preview" method="post">
                         <input type="hidden" name="id_training" value="<?= $training['id_training'] ?>">
+                        <input type="hidden" name="title" value="<?= $training['title'] ?>">
                         <button type="submit" class="btn mr-2 "><i class="bi bi-eye"></i></button>
                     </form>
                 </td>
@@ -76,6 +77,7 @@
                                 </td>
                                 <td>
                                     <form action="/page/preview" method="post">
+                                        <input type="hidden" name="title" value="<?= $training['title'] ?>">
                                         <input type="hidden" name="id_page" value="<?= $page['id_page'] ?>">
                                         <input type="hidden" name="image_url" value="<?= $page['image_url'] ?>">
                                         <button type="submit" class="btn mr-2 "><i class="bi bi-eye"></i></button>

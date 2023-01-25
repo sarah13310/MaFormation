@@ -13,7 +13,7 @@ class Home extends BaseController
     {
         helper(['form']);
 
-        $carousel_helper = new CarouselHelper();
+        
        
         try {
             $db      = \Config\Database::connect();
@@ -81,14 +81,12 @@ class Home extends BaseController
             }
         }
 
-        $trainings = $this->training_model->getFilterTrainings();
-        //print_r($trainings);
-        $carousel1 = $carousel_helper->listCardImgCarousel($trainings, "/training/details/");
-
+        $trainings = $this->training_model->getFilterTrainings();        
+        $carousel1 = listCardImgCarousel($trainings, "/training/details/");
         $articles = $this->article_model->getFilterArticles(VALIDE);
-        //print_r($trainings);
+        
 
-        $carousel2 = $carousel_helper->listCardImgCarousel($articles, "/article/list/details/");
+        $carousel2 = listCardImgCarousel($articles, "/article/list/details/");
         $data = [
             "title" => "Accueil",
             //"count_articles" => count($listarticles),

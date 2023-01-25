@@ -274,12 +274,13 @@ class Former extends BaseController
     {
 
         $id_training = session()->get("id_training");
-        $trainings = $this->training_model->fillOptionsTraining(session()->id_training);
+
+        $trainings = $this->training_model->getTrainingsTitle();
         //
         $user = $this->user_model->getUserSession();
         //
         $categories = $this->category_model->getCategories();
-        $id_page=0;
+        $id_page = 0;
         //
         $types = [
             ["id" => 1, "name" => "Introduction"],
@@ -288,6 +289,7 @@ class Former extends BaseController
             ["id" => 4, "name" => "Annexe"],
         ];
         //
+        $title_training="";
         $data = [
             "title" => "Création contenu de page",
             "id_user" => $user['id_user'],
@@ -297,16 +299,16 @@ class Former extends BaseController
             "id_training" => $id_training,
             "trainings" => $trainings,
             "headerColor" => getTheme(session()->type, "header"),
-            "id_page"=>$id_page,
-            "title"=>"",
-            "content"=>"",
+            "id_page" => $id_page,
+            "title" => "",
+            "content" => "",
+            "title_training" => $title_training,
         ];
 
-        if ($this->request->getMethod() == 'post') {
-            $this->request->getVar("");
-            // on utilise les modèles pour renseigner nos tables de formation, pages ...
-            //$this->training_model->save($dataSave);
+        if ($this->isPost()) {
 
+            $title_training = $this->request->getVar("title");
+            // on utilise les modèles pour renseigner nos tables de formation, pages ...  
             $action = $this->request->getVar('action');
             if ($action != null) {
                 switch ($action) {
@@ -336,7 +338,7 @@ class Former extends BaseController
 
             $dataSave = [
                 "id_page" => $this->request->getVar("id_page"),
-                "id_training" => $this->request->getVar("id_training"),
+                "id_training" => $id_training,
                 "title" => $this->request->getVar("title"),
                 "content" => $this->request->getVar("content"),
                 "image_url" => $this->request->getVar("image_url"),
@@ -346,6 +348,7 @@ class Former extends BaseController
 
             $pages = $this->training_model->getFilterPages($id_training);
             // map sur le tableau si nécessaire
+            $listPages=[];
             foreach ($pages as $page) {
                 $listPages[] = [
                     "id_page" => $page['id_page'],
@@ -357,7 +360,7 @@ class Former extends BaseController
             }
 
             $data = [
-                'title'=>"Gestion des pages",
+                'title' => "Gestion des pages",
                 'user' => $this->getUserSession(),
                 "id_training" => $id_training,
                 'pages' => $listPages,

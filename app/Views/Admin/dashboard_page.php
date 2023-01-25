@@ -25,6 +25,7 @@
 </div>
 <h1 class="ms-4 mb-3"><?= $title ?></h1>
 <hr>
+
 <?php if (session()->get('success')) : ?>
     <div id="success" class="alert alert-success" role="alert">
         <?= session()->get('success') ?>
@@ -32,8 +33,8 @@
 <?php endif; ?>
 
 <div class="mt-4 container">
-
-    <div class="mt-4 col">
+    <h5 class="mt-3 "><?= $title_training ?></h5>
+    <div class="mt-2 col">
         <table class="table border table-hover">
             <thead class=<?= $headerColor ?>>
                 <tr>
@@ -54,6 +55,7 @@
                         <td>
                             <form name="form_modify">
                                 <input id="id_page" name='id_page' type="hidden">
+                                <input id="title" name='title' type="hidden" value="<?=$title_training ?>">
                                 <input id="id_training" name="id_training" type="hidden" value="<?= $id_training ?>">
                                 <a type="button" onclick="onModify(this.parentElement.parentElement)" class="col-1 btn mr-2 "><i class="bi bi-pencil"></i></button>
                             </form>

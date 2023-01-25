@@ -15,21 +15,7 @@ class Admin extends BaseController
         return view('Admin/index.php', $data);
     }
 
-    private function getUserSession()
-    {
-        $user = [
-            'id_user' => session()->get('id_user'),
-            'name' => session()->get('name'),
-            'firstname' => session()->get('firstname'),
-            'mail' => session()->get('mail'),
-            'password' => session()->get('password'),
-            'type' => session()->get('type'),
-            'image_url' => session()->get('image_url'),
-            'gender' => session()->get('gender'),
-            'isLoggedIn' => true,
-        ];
-        return $user;
-    }
+    
 
     public function profileadmin()
     {

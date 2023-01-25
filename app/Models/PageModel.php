@@ -52,14 +52,37 @@ class PageModel extends Model
         ];
         session()->set($data);
     }
-
+    
+    /**
+     * getPageById
+     *
+     * @param  int $id
+     * @return array
+     */
     function getPageById($id)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('page');        
         $builder->where("id_page", $id);
         $query = $builder->get();
-        return $query->getResultArray()[0];
+        return $query->getResultArray();
+    }
+    
+    /**
+     * getPages
+     *
+     * @param  int $id
+     * on passe en argument l'id de formation
+     * @return array
+     * on récupère les pages associées à cet id formation
+     */
+    function getPages($id)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('page');        
+        $builder->where("id_training", $id);
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 
     function getPageTitle($status = ALL)

@@ -122,7 +122,7 @@ class Training extends BaseController
 
             if ($training) {
                 $training = $training[0];
-                $pages = $this->page_model->getPageById($training['id_training']);
+                $pages = $this->page_model->getPages($training['id_training']);
                 $list_description = [];
                 $list_images = [];
 
@@ -167,7 +167,7 @@ class Training extends BaseController
         if ($this->isPost()) {
             $id_page = $this->request->getVar('id_page');
             $id_training = $this->request->getVar('id_training');
-
+            
             //
             $deleteData = ['id_page' => $id_page];
             // on supprime la catégorie dans la table            
@@ -201,15 +201,22 @@ class Training extends BaseController
         if ($this->isPost()) {
             $id_page = $this->request->getVar('id_page');
             $id_training = $this->request->getVar('id_training');
+            $title_training = $this->request->getVar('title');
+            
             //
-            // on supprime la catégorie dans la table            
+            // on recupère la page par l'id dans la table            
             $page = $this->page_model->getPageById($id_page);
+            if ($page){
+                $page=$page[0];// on prend just la page désirée
+            }
             $categories = $this->category_model->getCategories();
             // on prépare les données pour la page html
             $training = $this->training_model->getTrainingById($id_training);
             
             $data = [
+
                 "title" => $page['title'],
+                "title_training"=>$title_training,
                 "user" => $user,
                 "buttonColor" => getTheme($user['type'], "button"),
                 "headerColor" => getTheme($user['type'], "header"),

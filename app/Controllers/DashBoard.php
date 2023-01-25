@@ -678,31 +678,33 @@ class DashBoard extends BaseController
     public function preview_training()
     {
         $title = "Gestion des pages";
-        $user = $this->user_model->getUserSession();        
+        $user = $this->user_model->getUserSession();
         $listPages = [];
 
         if ($this->request->getMethod() == 'post') {
+            $title_training = $this->request->getVar('title');
             $id_training = $this->request->getVar('id_training');
             $pages = $this->training_model->getFilterPages($id_training);
             // map sur le tableau si nécessaire
             foreach ($pages as $page) {
-                
+
                 $listPages[] = [
                     "id_page" => $page['id_page'],
                     "title" => $page['title'],
                     "content" => $page['content'],
                     "image_url" => $page['image_url'],
-                    "video_url" => $page['video_url'],                    
+                    "video_url" => $page['video_url'],
                 ];
             }
-        }        
+        }
         $data = [
             "title" => $title,
+            "title_training"=>$title_training,
             "pages" => $listPages,
             "user" => $user,
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
-            "id_training"=>$id_training,
+            "id_training" => $id_training,
         ];
         return view('Admin/dashboard_page.php', $data);
     }

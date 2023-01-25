@@ -32,9 +32,9 @@ $base = base_url(); ?>
         </div>
     </form>
 </div>
-
 <h1 class="ms-3"><?= $title ?></h1>
 <hr class="mb-2 mt-2">
+<h5 class="ms-3"><?= $title_training ?></h5>
 <section class="Content ">
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
     <div class="row">
@@ -45,36 +45,55 @@ $base = base_url(); ?>
                 <input type="hidden" id="title" name="title" value="<?= $title ?>">
                 <div class="row justify-content-between">
                     <div class="col-12 mb-2">
-                        <input readonly class="form-control" id="name" name="name" type="text" placeholder="Nom de la formation" value="<?= $title ?>" />
-                    </div>
-                </div>
-                <div class="form-group mb-2 row">
-                    <label for="select" class="col-2 col-form-label">Catégorie</label>
-                    <div class="col-10">
-                        <select id="select" name="select" class="form-select">
-                            <?php foreach ($categories as $category) : ?>
-                                <option value="<?= $category["id_category"] ?>"><?= $category["name"] ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12  form-floating mb-3">
-                    <input class="form-control" id="image_url" name="image_url" type="text" placeholder="Image de la page" value="<?= base_url() . "/assets/article.svg" ?>" />
-                    <label for="image_url">Image de la page</label>
-                </div>
-                <div class=" fullwidth editor mt-2">
-                    <textarea id="content" name="content" >
+                        <?php if (strlen($title) > 0) : ?>
+                            <input readonly class="form-control" id="name" name="name" type="text" placeholder="Nom de la formation" value="<?= $title ?>" />
+                        <?php else : ?>
+                            <div class="form-group mb-2 row">
+                                <label for="select_training" class="col-2 col-form-label">Formation</label>
+                                <div class="col">
+                                    <select id="select_training" class="form-select">
+                                        <?php foreach ($trainings as $training) : ?>
+                                            <option value="<?= $training['id_training'] ?>"><?= $training['title'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                                <div>
+                                <?php endif ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2 row">
+                                <label for="page_title" class="col-2 col-form-label">Page</label>
+                                <div class="col-10">
+                                    <input class="form-control" id="page_title" name="page_title" type="text" placeholder="Nom de la page" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group mb-2 row">
+                                <label for="select" class="col-2 col-form-label">Catégorie</label>
+                                <div class="col-10">
+                                    <select id="select" name="select" class="form-select">
+                                        <?php foreach ($categories as $category) : ?>
+                                            <option value="<?= $category["id_category"] ?>"><?= $category["name"] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12  form-floating mb-3">
+                                <input class="form-control" id="image_url" name="image_url" type="text" placeholder="Image de la page" value="<?= base_url() . "/assets/article.svg" ?>" />
+                                <label for="image_url">Image de la page</label>
+                            </div>
+                            <div class=" fullwidth editor mt-2">
+                                <textarea id="content" name="content">
                 </textarea>
-                </div>
-                <div class="row fullwidth mt-2">
-                    <div class="row align-items-center">
-                        <div id="add" class=" col-1 "><a onclick="onSave()" class=" btn btn-outline-primary">Sauver</a></div>
-                        <div class="col">
-                            <input type="checkbox" id="publish" name="publish" checked>
-                            <label for="publish">Publier</label>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                            <div class="row fullwidth mt-2">
+                                <div class="row align-items-center">
+                                    <div id="add" class=" col-1 "><a onclick="onSave()" class=" btn btn-outline-primary">Sauver</a></div>
+                                    <div class="col">
+                                        <input type="checkbox" id="publish" name="publish" checked>
+                                        <label for="publish">Publier</label>
+                                    </div>
+                                </div>
+                            </div>
             </form>
         </div>
     </div>
@@ -113,8 +132,8 @@ $base = base_url(); ?>
         form_training.content.value = sceditor.instance(content).val();
         form_training.image_url.value = image_url.value;
         form_training.submit();
-    }    
-    let text=sceditor.instance(content).val('<?= $content ?>', false);
-    area.value=text.val();
+    }
+    let text = sceditor.instance(content).val('<?= $content ?>', false);
+    area.value = text.val();
 </script>
 <?= $this->endSection() ?>

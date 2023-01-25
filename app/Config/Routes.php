@@ -112,7 +112,7 @@ $routes->get('/funding', 'Home::funding');
 
 // Formations
 $routes->group('/training', static function ($routes) {
-    $routes->add('home', 'Training::home'); // Liste des formations visible (page homse)     
+    $routes->add('home', 'Training::home'); // Liste des formations visible (page home)     
     $routes->add('list', 'Training::list'); // Liste des formations visible suivant le profil utilisateur 
     $routes->add('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment'); // paiement
