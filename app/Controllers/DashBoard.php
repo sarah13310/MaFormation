@@ -390,7 +390,7 @@ class DashBoard extends BaseController
     public function previewarticle()
     {
         $title = "Aperçu de l'article";
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $id = $this->request->getVar('id_article');
 
@@ -420,11 +420,10 @@ class DashBoard extends BaseController
     {
         $title = "Aperçu de la publication";
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $id = $this->request->getVar('id_publication');
             $publication = $this->publication_model->getPublisheById($id);
-
 
             $user = $this->user_model->getUserSession();
 
@@ -647,12 +646,19 @@ class DashBoard extends BaseController
         return view('Admin/dashboard_publishes_admin.php', $data);
     }
 
+    /**
+     * training
+     * Tableau des formations (dashboard)
+     * @return void
+     */
     public function training()
     {
         $title = "Tableau des formations";
         $user = $this->user_model->getUserSession();
         $trainings = $this->training_model->getFilterTrainings();
         $listraining = [];
+        session()->title_training = "";
+        session()->id_training = "";
 
         foreach ($trainings as $training) {
             $pages = [];
@@ -675,13 +681,18 @@ class DashBoard extends BaseController
         return view('Admin/dashboard_training_admin.php', $data);
     }
 
+    /**
+     * preview_training
+     *
+     * @return void
+     */
     public function preview_training()
     {
         $title = "Gestion des pages";
         $user = $this->user_model->getUserSession();
         $listPages = [];
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             $title_training = $this->request->getVar('title');
             $id_training = $this->request->getVar('id_training');
             $pages = $this->training_model->getFilterPages($id_training);
@@ -696,10 +707,14 @@ class DashBoard extends BaseController
                     "video_url" => $page['video_url'],
                 ];
             }
+            
+            session()->title_training = $title_training;
+            session()->id_training = $id_training;
         }
+
         $data = [
             "title" => $title,
-            "title_training"=>$title_training,
+            "title_training" => $title_training,
             "pages" => $listPages,
             "user" => $user,
             "buttonColor" => getTheme(session()->type, "button"),

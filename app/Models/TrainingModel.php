@@ -37,7 +37,7 @@ class TrainingModel extends Model
     {
         $data = [
             'id_training' => session()->get('id_training'),
-            'title' => session()->get('title'),
+            'title' => session()->get('title_training'),
             'description' => session()->get('description'),
             'date' => session()->get('date'),
             'duration' => session()->get('duration'),
@@ -50,7 +50,7 @@ class TrainingModel extends Model
     {
         $data = [
             //'id_training' => $training['id_training'],
-            'title' => $training['title'],
+            'title_training' => $training['title'],
             'description' => $training['description'],
             'date' => $training['date'],
             'duration' => $training['duration'],
@@ -128,5 +128,12 @@ class TrainingModel extends Model
         }
         $query = $builder->get();
         return $query->getResultArray();
+    }
+
+    public function deleteTraining($id_training){
+        $db      = \Config\Database::connect();
+        $builder = $db->table('training');
+        $builder->where("id_training", $id_training);
+        $builder->delete();
     }
 }

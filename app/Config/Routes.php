@@ -2,8 +2,6 @@
 
 namespace Config;
 
-
-
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -12,7 +10,6 @@ $routes = Services::routes();
 if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
     require SYSTEMPATH . 'Config/Routes.php';
 }
-
 /*
  * --------------------------------------------------------------------
  * Router Setup
@@ -23,7 +20,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-
+$routes->setAutoRoute(false);// pour utliser les filtres
 /*
  * --------------------------------------------------------------------
  * Route Definitions
@@ -100,8 +97,7 @@ $routes->group('/user', static function ($routes) {
     $routes->add('category/delete', 'User::delete_category'); //add category (user profil)   
     $routes->add('profil/name', 'User::modif_name'); //modif name (user profil)  
     $routes->add('profil/save/photo', 'User::save_photo'); //save the picture (user profil)  
-    $routes->add('parameters', 'User::parameters'); //parameters of user (user profil)  
-    
+    $routes->add('parameters', 'User::parameters'); //parameters of user (user profil)      
 });
 
 //$routes->get('/company/profile', 'User::profilecompany'); //profil company
@@ -118,7 +114,8 @@ $routes->group('/training', static function ($routes) {
     $routes->add('payment', 'Training::payment'); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
     $routes->add('preview', 'Dashboard::preview_training'); // Contenu des pages 
-    $routes->add('dashboard', 'Dashboard::training'); // liste des formations achetées
+    $routes->add('dashboard', 'Dashboard::training'); // liste des formations (user profil)
+    $routes->add('delete', 'Training::delete_training'); //delete training (user profil)  
     $routes->add('page/modify', 'Training::modify_page'); //modify page (user profil)  
     $routes->add('page/delete', 'Training::delete_page'); //delete page (user profil)  
 });

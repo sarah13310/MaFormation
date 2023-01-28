@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="row mb-1">
-                <div id="lblTitle" class="col-12 col-md-5"><?= session()->title ?>
+                <div id="lblTitle" class="col-12 col-md-5"><?= session()->title_training ?>
                 </div>
                 <div id="lblType" class="col-12 col-md-6">Chapitre...
                 </div>
@@ -362,6 +362,6 @@
     sceditor.instance(content).bind('keypress', function(e) {
         modified = true;
     });
-    lblTitle.value = "<?= session()->title; ?>";
+    lblTitle.value = "<?= session()->title_training; ?>";
 </script>
 <?= $this->endSection() ?>

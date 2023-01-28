@@ -6,31 +6,25 @@ use App\Models\UserModel;
 
 
 class Admin extends BaseController
-{
-    public function index()
-    {
-        $data = [
-            "title" => "Administration"
-        ];
-        return view('Admin/index.php', $data);
-    }
-
-    
-
+{      
+    /**
+     * profileadmin
+     *
+     * @return void
+     */
     public function profileadmin()
     {
         helper(['form', "util"]);
+        $id = session()->get('id_user');
 
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
-        $id = session()->get('id_user');
-
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
         $user = $user[0]; // juste le premier 
 
-        /* compétences certificats*/
+        /* compétences certificats */
         $builder->select('certificate.name');
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
         $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
@@ -62,10 +56,16 @@ class Admin extends BaseController
         ];
         return view('Admin/profile_admin.php', $data);
     }
-
+    
+    /**
+     * superprofile
+     *
+     * @return void
+     */
     public function superprofile()
     {
         helper(['form']);
+        
         $db      = \Config\Database::connect();
         $builder = $db->table('user');
         $id = session()->get('id_user');
@@ -112,7 +112,9 @@ class Admin extends BaseController
 
     public function add_admin()
     {
+        $this->verifySession();
         $user = $this->getUserSession();
+        
         $data = [
             "title" => "Profil",
             "subtitle" => "Ajouter un administrateur",

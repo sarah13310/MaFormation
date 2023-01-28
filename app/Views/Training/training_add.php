@@ -24,8 +24,8 @@
                     </div>
                     <div class="col-12  form-floating mb-3">
                         <select class="form-select" id="category" aria-label="Type de prestation">
-                            <?php foreach ($options as $option) : ?>
-                                <option value="<?= $option["id_category"] ?>"><?= $option["name"] ?></option>
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= $category["id_category"] ?>"><?= $category["name"] ?></option>
                             <?php endforeach ?>
                         </select>
                         <label for="category">Catégorie</label>

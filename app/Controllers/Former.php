@@ -174,16 +174,20 @@ class Former extends BaseController
     public function training_add()
     {
         $user = $this->user_model->getUserSession();
-        $options = $this->category_model->getCategories();
+        $categories = $this->category_model->getCategories();
 
         $data = [
             "title" => "Création formation",
             "id_user" => $user['id_user'],
             "user" => $user,
-            "options" => $options,
+            "categories" => $categories,
+            'title_training' => "0",
+            'id_page' => "0",
+            'id_training' => "0",
+            'content' => "",
         ];
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $dateStart = $this->request->getVar('dateStart');
             $dateEnd = $this->request->getVar('dateEnd');
@@ -249,7 +253,6 @@ class Former extends BaseController
                     session()->set($session_add);
                     return view('Training/training_add.php', $data);
                 } else {
-
                     $last_id = $this->training_model->add($data_save);
                     $this->training_model->setTrainingSession($data_save);
 
@@ -258,6 +261,8 @@ class Former extends BaseController
 
                     $data["trainings"] = $trainings;
                     $data['title'] = "Création contenu";
+                    $data['title_training'] = session()->title_training;
+
                     return view('Training/training_edit.php', $data);
                 }
             }
@@ -272,45 +277,36 @@ class Former extends BaseController
      */
     public function training_edit()
     {
-
-        $id_training = session()->get("id_training");
-
+        $id_training = session()->id_training;
+        //
         $trainings = $this->training_model->getTrainingsTitle();
         //
         $user = $this->user_model->getUserSession();
         //
         $categories = $this->category_model->getCategories();
         $id_page = 0;
-        //
-        $types = [
-            ["id" => 1, "name" => "Introduction"],
-            ["id" => 2, "name" => "Chapitre"],
-            ["id" => 3, "name" => "Conclusion"],
-            ["id" => 4, "name" => "Annexe"],
-        ];
-        //
-        $title_training="";
+        //        
         $data = [
             "title" => "Création contenu de page",
             "id_user" => $user['id_user'],
             "user" => $user,
             "categories" => $categories,
-            "types" => $types,
             "id_training" => $id_training,
             "trainings" => $trainings,
             "headerColor" => getTheme(session()->type, "header"),
+            "buttonColor" => getTheme(session()->type, "button"),
             "id_page" => $id_page,
-            "title" => "",
             "content" => "",
-            "title_training" => $title_training,
+            "page_title"=>"",
         ];
 
         if ($this->isPost()) {
-
+            //
             $title_training = $this->request->getVar("title");
             // on utilise les modèles pour renseigner nos tables de formation, pages ...  
             $action = $this->request->getVar('action');
             if ($action != null) {
+
                 switch ($action) {
                     case "create":
                         break;
@@ -333,37 +329,35 @@ class Former extends BaseController
      */
     public function training_save()
     {
-        if ($this->isPost()) {
-            $id_training = $this->request->getVar("id_training");
+        $id_training = session()->id_training;
 
+        if ($this->isPost()) {
+            $action = $this->request->getVar("action");
             $dataSave = [
                 "id_page" => $this->request->getVar("id_page"),
                 "id_training" => $id_training,
-                "title" => $this->request->getVar("title"),
+                //"title" => $this->request->getVar("title"),
+                "title" => $this->request->getVar("page_title"),
                 "content" => $this->request->getVar("content"),
                 "image_url" => $this->request->getVar("image_url"),
             ];
-            // insérer page dans la base de données
-            $this->page_model->save($dataSave);
 
+            // insérer page dans la base de données
+            $last_id = $this->page_model->add($dataSave);
+
+            // table intermédiaire training_has_page
+            $dataInt = [
+                "id_training" => $id_training,
+                "id_page" => $last_id,
+            ];
+            $this->training_has_page_model->save($dataInt);
             $pages = $this->training_model->getFilterPages($id_training);
-            // map sur le tableau si nécessaire
-            $listPages=[];
-            foreach ($pages as $page) {
-                $listPages[] = [
-                    "id_page" => $page['id_page'],
-                    "title" => $page['title'],
-                    "content" => $page['content'],
-                    "image_url" => $page['image_url'],
-                    "video_url" => $page['video_url'],
-                ];
-            }
 
             $data = [
                 'title' => "Gestion des pages",
                 'user' => $this->getUserSession(),
                 "id_training" => $id_training,
-                'pages' => $listPages,
+                'pages' => $pages,
                 "buttonColor" => getTheme(session()->type, "button"),
                 "headerColor" => getTheme(session()->type, "header"),
             ];

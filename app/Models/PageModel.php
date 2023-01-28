@@ -16,6 +16,7 @@ class PageModel extends Model
         'id_page',
         'title',
         'content',
+        'id_training',
         'image_url',
         'video_url'
     ];
@@ -24,7 +25,16 @@ class PageModel extends Model
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('page');
-        $builder->insert($post_data);
+       // var_dump($post_data[$this->primaryKey]);
+        if (($post_data[$this->primaryKey]==='0') || (!isset($post_data[$this->primaryKey]))){
+            //echo("insert");
+            $builder->insert($post_data);            
+        }
+        else{
+           // echo("update");
+            $builder->where($this->primaryKey, $post_data[$this->primaryKey]);
+            $builder->update($post_data);
+        }
         return $db->insertID();
     }
 
@@ -34,7 +44,7 @@ class PageModel extends Model
             'id_training' => session()->get('id_training'),
             'title' => session()->get('title'),
             'description' => session()->get('description'),
-            'date' => session()->get('date'),            
+            'date' => session()->get('date'),
             'rating' => session()->get('rating'),
         ];
         return $data;
@@ -52,7 +62,7 @@ class PageModel extends Model
         ];
         session()->set($data);
     }
-    
+
     /**
      * getPageById
      *
@@ -62,12 +72,12 @@ class PageModel extends Model
     function getPageById($id)
     {
         $db      = \Config\Database::connect();
-        $builder = $db->table('page');        
+        $builder = $db->table('page');
         $builder->where("id_page", $id);
         $query = $builder->get();
         return $query->getResultArray();
     }
-    
+
     /**
      * getPages
      *
@@ -79,7 +89,7 @@ class PageModel extends Model
     function getPages($id)
     {
         $db      = \Config\Database::connect();
-        $builder = $db->table('page');        
+        $builder = $db->table('page');
         $builder->where("id_training", $id);
         $query = $builder->get();
         return $query->getResultArray();
@@ -97,7 +107,7 @@ class PageModel extends Model
     function getFilterPage($status = ALL, $limit = -1)
     {
         $db      = \Config\Database::connect();
-        $builder = $db->table('page');        
+        $builder = $db->table('page');
         if ($status != ALL) {
             $builder->where("status", $status);
         }

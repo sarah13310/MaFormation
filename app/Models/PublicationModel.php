@@ -20,6 +20,7 @@ class PublicationModel extends Model
         'datetime',
         'status',
         'id_tag',
+        'id_user',
     ];
 
     function getPublishes()

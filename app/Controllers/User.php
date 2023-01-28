@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-
 // le 12/01/2023
 class User extends BaseController
 {
@@ -20,7 +19,7 @@ class User extends BaseController
         ];
         helper(['form']);
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             //let's do the validation here
 
             $rules = [
@@ -179,7 +178,7 @@ class User extends BaseController
         ];
 
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $rulesconf = [
                 'c_siret' => 'required|min_length[12]|max_length[14]',
@@ -311,7 +310,7 @@ class User extends BaseController
         $data = ["title" => "Inscription"];
         helper(['form']);
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $index = $this->request->getVar('index');
             $check = $this->request->getVar('newsletters');
@@ -507,6 +506,7 @@ class User extends BaseController
     /* liste des factures suivant profil utilisateur */
     public function bill()
     {
+        $this->verifySession();
         $user = $this->user_model->getUserSession();
 
         $bills = [];
@@ -535,6 +535,7 @@ class User extends BaseController
 
     public function modif_name()
     {
+        $this->verifySession();
         if ($this->request->getMethod() == "post") {
             // on met à jour les informations de session
             session()->name = $this->request->getVar('name');
@@ -566,10 +567,10 @@ class User extends BaseController
     public function modif_contact()
     {
         helper(["form"]);
-
+        $this->verifySession();
         $user = $this->user_model->getUserSession();
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             session()->name = $this->request->getVar('name');
             session()->firstname = $this->request->getVar('firstname');
@@ -608,6 +609,7 @@ class User extends BaseController
 
     public function modif_perso()
     {
+        $this->verifySession();
         helper(["form"]);
 
         $user = $this->user_model->getUserSession();
@@ -616,7 +618,7 @@ class User extends BaseController
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
         ];
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             return view("User/modif_contact.php", $data);
         }
     }
@@ -643,7 +645,7 @@ class User extends BaseController
         $user = $this->user_model->getUserSession();
         $skills = $this->user_model->getCertificates($id);
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $updateData = [
                 'name' => $this->request->getVar('name'),
@@ -707,7 +709,7 @@ class User extends BaseController
 
         $user = $this->user_model->getUserSession();
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $updateData = [
                 'name' => $this->request->getVar('name'),
@@ -749,7 +751,7 @@ class User extends BaseController
 
         $user = $this->user_model->getUserSession();
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             //on récupère le contenu base 64
             $photo = $this->request->getVar('photo');
             $file = "photo_0" . session()->id_user . ".jpeg";
@@ -801,7 +803,7 @@ class User extends BaseController
         // on récupère les informations utilisateur de la session active    
         $user = $this->user_model->getUserSession();
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $newData = [
                 'name' => $this->request->getVar('name'),
@@ -828,7 +830,7 @@ class User extends BaseController
         // on récupère les informations utilisateur de la session active    
         $user = $this->user_model->getUserSession();
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             $newData = [
                 'id_category' => $this->request->getVar('id_category'),
                 'name' => $this->request->getVar('name'),
@@ -856,7 +858,7 @@ class User extends BaseController
         // on récupère les informations utilisateur de la session active    
         $user = $this->user_model->getUserSession();
         //
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             $id_category = $this->request->getVar('id_category');
 
             $deleteData = ['id_category' => $id_category];

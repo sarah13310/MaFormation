@@ -36,7 +36,7 @@ class UserModel extends Model
         "ratings",
         "type",
         "status",
-        
+
     ];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
@@ -54,7 +54,14 @@ class UserModel extends Model
         //$data = $this->passwordHash($data);
         return $data;
     }
-
+    
+    /**
+     * passwordHash
+     * Génère la mot de passe pour l'utilisateur
+     * Retourne un tableau
+     * @param  mixed $data
+     * @return array
+     */
     protected function passwordHash(array $data)
     {
         if (isset($data['data']['password'])) {
@@ -62,7 +69,17 @@ class UserModel extends Model
         }
         return $data;
     }
-
+    
+    /**
+     * getFilterUser
+     * Récupère la liste de tous les utilisateurs par défaut
+     * On peut filter par l'ID pour rechercher un utilisateur en particulier
+     * Retourne un tableau composite
+     * builder retourne un objet builder
+     * user retourne le résultat de la requête: un utilisateur ou plusieurs
+     * @param  int $id_user
+     * @return array
+     */
     function getFilterUser($id_user = ALL)
     {
         $db      = \Config\Database::connect();
@@ -75,7 +92,13 @@ class UserModel extends Model
         return ["builder" => $builder, "user" => $user];
     }
 
-    // Restitue les informations de session
+    
+    /**
+     * getUserSession
+     * Récupère les informations de la session utitisateur en cours
+     * Retourne un tableau
+     * @return array
+     */
     public function getUserSession()
     {
         $user = [
@@ -99,7 +122,14 @@ class UserModel extends Model
         return $user;
     }
 
-    // Associe les données de la base à la session en cours
+     
+    /**
+     * setUserSession
+     * Récupère les données de la base et les transfert à la session utilisateur en cours   
+     * Retourne rien
+     * @param  mixed $user
+     * @return void
+     */
     function setUserSession($user)
     {
         $data = [
@@ -127,7 +157,14 @@ class UserModel extends Model
         return true;
     }
 
-    // récupère les noms des certificats en fonction de l'ID 
+        
+    /**
+     * getInfosCertificates
+     * récupère juste les noms des certificats en fonction de l'ID 
+     * Retourne un tableau
+     * @param  int $id
+     * @return array
+     */
     function getInfosCertificates($id)
     {
         $db      = \Config\Database::connect();
@@ -145,7 +182,14 @@ class UserModel extends Model
         return $skills;
     }
 
-    // récupère les certificats en fonction de l'ID 
+     
+    /**
+     * getCertificates
+     * récupère les certificats en fonction de l'ID    
+     * sous forme de tableau
+     * @param  int $id
+     * @return array
+     */
     function getCertificates($id)
     {
         $db      = \Config\Database::connect();
@@ -159,7 +203,16 @@ class UserModel extends Model
         return $skills;
     }
 
-    // récupère les informations des entreprises en fonction de l'ID 
+
+    /**
+     * getInfosCompany
+     *
+     * récupère les informations des entreprises en fonction de l'ID     
+     * @param  int $id
+     * 
+     * @param  bool $single
+     * @return void
+     */
     function getInfosCompany($id, $single = true)
     {
         $db      = \Config\Database::connect();
@@ -193,6 +246,15 @@ class UserModel extends Model
     }
 
 
+    /**
+     * setCompanySession
+     *
+     * @param  array $user
+     *  argument tableau utitlisateur
+     * @param  mixed $company
+     *  argument tableau entreprise
+     * @return void
+     */
     function setCompanySession($user, $company)
     {
         $data = [
@@ -223,11 +285,18 @@ class UserModel extends Model
         $builder->where('id_certificate', $id);
         $builder->delete();
     }
-    function getFormers(){        
+
+    /**
+     * getFormers
+     * Liste des formateurs
+     * @return void
+     */
+    function getFormers()
+    {
         $db      = \Config\Database::connect();
-        $builder = $db->table('user');        
+        $builder = $db->table('user');
         $builder->where('type', FORMER);
         $query   = $builder->get();
-        return  ["formers"=>$query->getResultArray(), "builder"=>$builder];
-    }  
+        return  ["formers" => $query->getResultArray(), "builder" => $builder];
+    }
 }

@@ -32,6 +32,7 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use DateTime;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -46,95 +47,131 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
-    /**
-     * Instance of the main Request object.
-     *
-     * @var CLIRequest|IncomingRequest
-     */
-    protected $request;
+   /**
+    * Instance of the main Request object.
+    *
+    * @var CLIRequest|IncomingRequest
+    */
+   protected $request;
 
-    /**
-     * An array of helpers to be loaded automatically upon
-     * class instantiation. These helpers will be available
-     * to all other controllers that extend BaseController.
-     *
-     * @var array
-     */
-    protected $helpers = ['util'];
+   /**
+    * An array of helpers to be loaded automatically upon
+    * class instantiation. These helpers will be available
+    * to all other controllers that extend BaseController.
+    *
+    * @var array
+    */
+   protected $helpers = ['util'];
 
-    protected $training_model;
-    protected $user_model;
-    protected $page_model;
-    protected $article_has_publication_model;
-    protected $article_model;
-    protected $bill_model;
-    protected $category_model;
-    protected $category_has_media_model;
-    protected $certificat_model;
-    protected $company_model;
-    protected $contact_model;
-    protected $letters_model;
-    protected $log_model;
-    protected $media_model;
-    protected $publication_model;
-    protected $rdv_model;
-    protected $status_model;
-    protected $tag_model;
-    protected $training_has_page_model;
-    protected $typeslide_model;
-    protected $user_has_article_model;
-    protected $user_has_certificate_model;
-    protected $user_has_company_model;
-    protected $user_has_training_model;
-    protected $user_has_media_model;
-    /**
-     * Constructor.
-     */
+   protected $training_model;
+   protected $user_model;
+   protected $page_model;
+   protected $article_has_publication_model;
+   protected $article_model;
+   protected $bill_model;
+   protected $category_model;
+   protected $category_has_media_model;
+   protected $certificat_model;
+   protected $company_model;
+   protected $contact_model;
+   protected $letters_model;
+   protected $log_model;
+   protected $media_model;
+   protected $publication_model;
+   protected $rdv_model;
+   protected $status_model;
+   protected $tag_model;
+   protected $training_has_page_model;
+   protected $typeslide_model;
+   protected $user_has_article_model;
+   protected $user_has_certificate_model;
+   protected $user_has_company_model;
+   protected $user_has_training_model;
+   protected $user_has_media_model;
+   /**
+    * Constructor.
+    */
 
-     public function isPost(){
-        return ($this->request->getMethod(TRUE)==="POST");
-     }
+   /**
+    * isPost
+    *
+    * @return void
+    */
+   public function isPost()
+   {
+      return ($this->request->getMethod(TRUE) === "POST");
+   }
 
-     public function isGet(){
-        return ($this->request->getMethod(TRUE)==="GET");
-     }
+   /**
+    * isGet
+    *
+    * @return void
+    */
+   public function isGet()
+   {
+      return ($this->request->getMethod(TRUE) === "GET");
+   }
 
-     public function getUserSession(){
-        return $this->user_model->getUserSession();
-     }
+   /**
+    * getUserSession
+    *
+    * @return void
+    */
+   public function getUserSession()
+   {
+      return $this->user_model->getUserSession();
+   }
 
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
-        // Do Not Edit This Line
-        parent::initController($request, $response, $logger);
+   /**
+    * verifySession
+    *
+    * @return void
+    */
+   public function verifySession()
+   {
+      $last = session()->get('__ci_last_regenerate');
+      $date = time();
+      $diff = $date - $last;
+      echo $diff;
+      if ($diff>=30){
+         echo ('fin de session');
+         command('cache:clear');
+         return redirect(base_url().'/user/login', 'refresh');
+      }      
+   }
 
-        // Preload any models, libraries, etc, here.
-        $this->article_has_publication_model = new ArticleHasPublicationModel();        
-        $this->article_model = new ArticleModel();
-        $this->bill_model = new BillModel();
-        $this->category_model = new CategoryModel();
-        $this->category_has_media_model = new CategoryHasMediaModel();
-        $this->certificat_model = new CertificateModel();
-        $this->company_model = new CompanyModel();
-        $this->contact_model = new ContactModel();
-        $this->letters_model = new LettersModel();
-        $this->log_model = new LogModel();
-        $this->media_model = new MediaModel();
-        $this->page_model = new PageModel();
-        $this->publication_model = new PublicationModel();
-        $this->rdv_model = new RdvModel();
-        $this->status_model = new StatusModel();
-        $this->tag_model = new TagModel();
-        $this->training_has_page_model = new TrainingHasPageModel();
-        $this->training_model = new TrainingModel();
-        $this->typeslide_model = new TypeSlideModel();
-        $this->user_has_article_model = new UserHasArticleModel();
-        $this->user_has_certificate_model = new UserHasCertificateModel();
-        $this->user_has_company_model = new UserHasCompanyModel();
-        $this->user_has_training_model = new UserHasTrainingModel();
-        $this->user_model = new UserModel();
-        $this->user_has_media_model = new UserHasMediaModel();
+   public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+   {
+      // Do Not Edit This Line
+      parent::initController($request, $response, $logger);
 
-        // E.g.: $this->session = \Config\Services::session();
-    }
+      // Preload any models, libraries, etc, here.
+      $this->article_has_publication_model = new ArticleHasPublicationModel();
+      $this->article_model = new ArticleModel();
+      $this->bill_model = new BillModel();
+      $this->category_model = new CategoryModel();
+      $this->category_has_media_model = new CategoryHasMediaModel();
+      $this->certificat_model = new CertificateModel();
+      $this->company_model = new CompanyModel();
+      $this->contact_model = new ContactModel();
+      $this->letters_model = new LettersModel();
+      $this->log_model = new LogModel();
+      $this->media_model = new MediaModel();
+      $this->page_model = new PageModel();
+      $this->publication_model = new PublicationModel();
+      $this->rdv_model = new RdvModel();
+      $this->status_model = new StatusModel();
+      $this->tag_model = new TagModel();
+      $this->training_has_page_model = new TrainingHasPageModel();
+      $this->training_model = new TrainingModel();
+      $this->typeslide_model = new TypeSlideModel();
+      $this->user_has_article_model = new UserHasArticleModel();
+      $this->user_has_certificate_model = new UserHasCertificateModel();
+      $this->user_has_company_model = new UserHasCompanyModel();
+      $this->user_has_training_model = new UserHasTrainingModel();
+      $this->user_model = new UserModel();
+      $this->user_has_media_model = new UserHasMediaModel();
+
+      // E.g.: $this->session = \Config\Services::session();
+   }
 }

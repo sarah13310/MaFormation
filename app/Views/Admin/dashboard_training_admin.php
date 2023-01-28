@@ -4,7 +4,7 @@
 <div class="modal" tabindex="-1" id="myModalDelete">
     <div class="modal-dialog">
         <form name="form_delete">
-            <input id="id" name="id_publication" type="hidden" value="">
+            <input id="id" name="id_training" type="hidden" value="">
             <div class="modal-content" style="align-items:center">
                 <div class="modal-header">
                     <h5 class="modal-title">Suppression</h5>
@@ -37,14 +37,14 @@
                 <td><?= $training['title'] ?></td>
                 <td><?= $training['date'] ?></td>
                 <td>
-                    <form action="/training/preview" method="post">
+                    <form name="form_preview" action="/training/preview" method="post">
                         <input type="hidden" name="id_training" value="<?= $training['id_training'] ?>">
                         <input type="hidden" name="title" value="<?= $training['title'] ?>">
                         <button type="submit" class="btn mr-2 "><i class="bi bi-eye"></i></button>
                     </form>
                 </td>
                 <td>
-                    <button onclick="onDelete(<?= $training['id_training'] ?>,'/training/delete')" id="btn_confirm" type="button" class="btn mr-2 "><i class="bi bi-trash"></i></button>
+                    <button onclick="onDelete(<?= $training['id_training'] ?>)" id="btn_confirm" type="button" class="btn mr-2 "><i class="bi bi-trash"></i></button>
                 </td>
                 <td>
                     <select class="modifState" class="mt-2">
@@ -100,18 +100,17 @@
     </tbody>
 </table>
 <?= $this->endSection() ?>
-
-
+<!-- // -->
 <?= $this->section('js') ?>
 <script>
     let myModalDelete = document.getElementById('myModalDelete');
     let modalDelete = bootstrap.Modal.getOrCreateInstance(myModalDelete);
     let states = document.getElementsByClassName("modifState");
 
-    function onDelete(id, action = "") {
+    function onDelete(id) {
         document.form_delete.method = "POST";
+        document.form_delete.action = "/training/delete";
         document.form_delete.id.value = id;
-        document.form_delete.action = action;
         modalDelete.show();
         return false;
     }
@@ -120,6 +119,10 @@
         document.form_delete.submit();
     }
 
+    function onPreview(){
+        sessionStorage.title=document.form_preview.training_title.value;
+        document.form_preview.submit();
+    }
 
     for (let i = 0; i < states.length; i++) {
         states[i].addEventListener("change", (event) => {

@@ -32,9 +32,18 @@ $base = base_url(); ?>
         </div>
     </form>
 </div>
-<h1 class="ms-3"><?= $title ?></h1>
+<div class="row">
+    <h1 class="col ms-3"><?= 'Gestion de la page' ?></h1>
+    <div class="col-2">
+        <form action="/training/preview" method="post">
+            <input type="hidden" id="id_page" name="id_page" value="<?= $id_page ?>">
+            <input type="hidden" id="id_training" name="id_training" value="<?= $id_training ?>">
+            <button type="submit" class="btn <?= $buttonColor ?>">Retour à la liste</button>
+        </form>
+    </div>
+</div>
 <hr class="mb-2 mt-2">
-<h5 class="ms-3"><?= $title_training ?></h5>
+<h5 class="ms-3"><?= session()->title_training ?></h5>
 <section class="Content ">
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />
     <div class="row">
@@ -42,12 +51,23 @@ $base = base_url(); ?>
             <form name="form_training" id="form_training">
                 <input type="hidden" id="id_page" name="id_page" value="<?= $id_page ?>">
                 <input type="hidden" id="id_training" name="id_training" value="<?= $id_training ?>">
-                <input type="hidden" id="title" name="title" value="<?= $title ?>">
+                <input type="hidden" id="title" name="title" value="<?= $page_title ?>">
                 <div class="row justify-content-between">
                     <div class="col-12 mb-2">
-                        <?php if (strlen($title) > 0) : ?>
-                            <input readonly class="form-control" id="name" name="name" type="text" placeholder="Nom de la formation" value="<?= $title ?>" />
+                        <?php if (strlen($page_title) > 0) : ?>
+                            <div class="form-group mb-2 row">
+                                <label for="page_title" class="col-2 col-form-label">Page</label>
+                                <div class="col-10">
+                                    <input class="form-control" id="page_title" name="page_title" type="text" placeholder="Nom de la page" value="<?= $page_title ?>" />
+                                </div>
+                            </div>
                         <?php else : ?>
+                            <div class="form-group mb-2 row">
+                                <label for="page_title" class="col-2 col-form-label">Page</label>
+                                <div class="col-10">
+                                    <input class="form-control" id="page_title" name="page_title" type="text" placeholder="Nom de la page" value="" />
+                                </div>
+                            </div>
                             <div class="form-group mb-2 row">
                                 <label for="select_training" class="col-2 col-form-label">Formation</label>
                                 <div class="col">
@@ -61,12 +81,7 @@ $base = base_url(); ?>
                                 <?php endif ?>
                                 </div>
                             </div>
-                            <div class="form-group mb-2 row">
-                                <label for="page_title" class="col-2 col-form-label">Page</label>
-                                <div class="col-10">
-                                    <input class="form-control" id="page_title" name="page_title" type="text" placeholder="Nom de la page" value="" />
-                                </div>
-                            </div>
+
                             <div class="form-group mb-2 row">
                                 <label for="select" class="col-2 col-form-label">Catégorie</label>
                                 <div class="col-10">
@@ -81,9 +96,8 @@ $base = base_url(); ?>
                                 <input class="form-control" id="image_url" name="image_url" type="text" placeholder="Image de la page" value="<?= base_url() . "/assets/article.svg" ?>" />
                                 <label for="image_url">Image de la page</label>
                             </div>
-                            <div class=" fullwidth editor mt-2">
-                                <textarea id="content" name="content">
-                </textarea>
+                            <div class=" fullwidth editor mt-2 yesselect">
+                                <textarea class="yesselect" id="content" name="content"></textarea>
                             </div>
                             <div class="row fullwidth mt-2">
                                 <div class="row align-items-center">
@@ -131,6 +145,7 @@ $base = base_url(); ?>
         form_training.method = "post";
         form_training.content.value = sceditor.instance(content).val();
         form_training.image_url.value = image_url.value;
+
         form_training.submit();
     }
     let text = sceditor.instance(content).val('<?= $content ?>', false);
