@@ -21,7 +21,7 @@ class PageModel extends Model
         'video_url'
     ];
 
-    function add($post_data)
+    function modify($post_data)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('page');

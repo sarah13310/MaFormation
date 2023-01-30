@@ -318,60 +318,60 @@ in APPPATH\Views\Admin\dashboard_page.php on line 9.
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
 CRITICAL - 2023-01-22 18:04:07 --> Undefined variable $id_training
-in APPPATH\Views\Training\training_edit.php on line 41.
- 1 APPPATH\Views\Training\training_edit.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id_training', 'APPPATH\\Views\\Training\\training_edit.php', 41)
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_edit.php')
+in APPPATH\Views\Training\page_modify.php on line 41.
+ 1 APPPATH\Views\Training\page_modify.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id_training', 'APPPATH\\Views\\Training\\page_modify.php', 41)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\page_modify.php')
  3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_edit.php', [], true)
- 5 APPPATH\Controllers\Training.php(218): view('Training/training_edit.php', [...])
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/page_modify.php', [], true)
+ 5 APPPATH\Controllers\Training.php(218): view('Training/page_modify.php', [...])
  6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->modify_page()
  7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
 CRITICAL - 2023-01-22 18:05:15 --> Undefined variable $types
-in APPPATH\Views\Training\training_edit.php on line 45.
- 1 APPPATH\Views\Training\training_edit.php(45): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $types', 'APPPATH\\Views\\Training\\training_edit.php', 45)
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_edit.php')
+in APPPATH\Views\Training\page_modify.php on line 45.
+ 1 APPPATH\Views\Training\page_modify.php(45): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $types', 'APPPATH\\Views\\Training\\page_modify.php', 45)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\page_modify.php')
  3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_edit.php', [], true)
- 5 APPPATH\Controllers\Training.php(219): view('Training/training_edit.php', [...])
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/page_modify.php', [], true)
+ 5 APPPATH\Controllers\Training.php(219): view('Training/page_modify.php', [...])
  6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->modify_page()
  7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
 CRITICAL - 2023-01-22 18:07:52 --> Undefined variable $types
-in APPPATH\Views\Training\training_edit.php on line 45.
- 1 APPPATH\Views\Training\training_edit.php(45): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $types', 'APPPATH\\Views\\Training\\training_edit.php', 45)
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_edit.php')
+in APPPATH\Views\Training\page_modify.php on line 45.
+ 1 APPPATH\Views\Training\page_modify.php(45): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $types', 'APPPATH\\Views\\Training\\page_modify.php', 45)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\page_modify.php')
  3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_edit.php', [], true)
- 5 APPPATH\Controllers\Training.php(220): view('Training/training_edit.php', [...])
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/page_modify.php', [], true)
+ 5 APPPATH\Controllers\Training.php(220): view('Training/page_modify.php', [...])
  6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->modify_page()
  7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
 CRITICAL - 2023-01-22 18:11:25 --> Undefined array key "title"
-in APPPATH\Views\Training\training_edit.php on line 44.
- 1 APPPATH\Views\Training\training_edit.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Views\\Training\\training_edit.php', 44)
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_edit.php')
+in APPPATH\Views\Training\page_modify.php on line 44.
+ 1 APPPATH\Views\Training\page_modify.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Views\\Training\\page_modify.php', 44)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\page_modify.php')
  3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_edit.php', [], true)
- 5 APPPATH\Controllers\Training.php(221): view('Training/training_edit.php', [...])
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/page_modify.php', [], true)
+ 5 APPPATH\Controllers\Training.php(221): view('Training/page_modify.php', [...])
  6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->modify_page()
  7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
 CRITICAL - 2023-01-22 18:12:30 --> Undefined array key "title"
-in APPPATH\Views\Training\training_edit.php on line 44.
- 1 APPPATH\Views\Training\training_edit.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Views\\Training\\training_edit.php', 44)
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_edit.php')
+in APPPATH\Views\Training\page_modify.php on line 44.
+ 1 APPPATH\Views\Training\page_modify.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "title"', 'APPPATH\\Views\\Training\\page_modify.php', 44)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\page_modify.php')
  3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_edit.php', [], true)
- 5 APPPATH\Controllers\Training.php(221): view('Training/training_edit.php', [...])
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/page_modify.php', [], true)
+ 5 APPPATH\Controllers\Training.php(221): view('Training/page_modify.php', [...])
  6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->modify_page()
  7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
@@ -402,12 +402,12 @@ in APPPATH\Controllers\Training.php on line 212.
  5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
 CRITICAL - 2023-01-22 20:35:24 --> Undefined variable $id_page
-in APPPATH\Views\Training\training_edit.php on line 43.
- 1 APPPATH\Views\Training\training_edit.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id_page', 'APPPATH\\Views\\Training\\training_edit.php', 43)
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\training_edit.php')
+in APPPATH\Views\Training\page_modify.php on line 43.
+ 1 APPPATH\Views\Training\page_modify.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id_page', 'APPPATH\\Views\\Training\\page_modify.php', 43)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Training\\page_modify.php')
  3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/training_edit.php', [], true)
- 5 APPPATH\Controllers\Training.php(222): view('Training/training_edit.php', [...])
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Training/page_modify.php', [], true)
+ 5 APPPATH\Controllers\Training.php(222): view('Training/page_modify.php', [...])
  6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->modify_page()
  7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
  8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)

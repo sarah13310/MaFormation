@@ -706,8 +706,7 @@ class DashBoard extends BaseController
                     "image_url" => $page['image_url'],
                     "video_url" => $page['video_url'],
                 ];
-            }
-            
+            }            
             session()->title_training = $title_training;
             session()->id_training = $id_training;
         }
@@ -720,6 +719,7 @@ class DashBoard extends BaseController
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
             "id_training" => $id_training,
+            "modalDelete" => modalDelete(),
         ];
         return view('Admin/dashboard_page.php', $data);
     }

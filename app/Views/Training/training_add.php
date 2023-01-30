@@ -11,7 +11,7 @@
     <h1 class="noselect ms-3"><?= $title ?></h1>
     <hr class="mb-2 mt-2">
     <div class="container py-3">
-        <form id="trainingForm" method="post" action="/former/training/add">
+        <form id="trainingForm" method="post" action="/training/add">
             <div class="row">
                 <div class="col-12 col-md-6 ">
                     <div class="col-12  form-floating mb-3">

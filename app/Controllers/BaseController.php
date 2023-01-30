@@ -122,23 +122,7 @@ abstract class BaseController extends Controller
       return $this->user_model->getUserSession();
    }
 
-   /**
-    * verifySession
-    *
-    * @return void
-    */
-   public function verifySession()
-   {
-      $last = session()->get('__ci_last_regenerate');
-      $date = time();
-      $diff = $date - $last;
-      echo $diff;
-      if ($diff>=30){
-         echo ('fin de session');
-         command('cache:clear');
-         return redirect(base_url().'/user/login', 'refresh');
-      }      
-   }
+   
 
    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
    {

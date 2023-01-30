@@ -112,7 +112,6 @@ class Admin extends BaseController
 
     public function add_admin()
     {
-        $this->verifySession();
         $user = $this->getUserSession();
         
         $data = [

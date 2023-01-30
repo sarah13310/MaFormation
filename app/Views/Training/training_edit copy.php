@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 <div id="modalDelete" class="modal" tabindex="-1">
-    <form action="/former/training/edit" method="POST">
+    <form action="/training/edit" method="POST">
         <input type="hidden" id="action" name="action" value="delete">
         <input type="hidden" id="id_page" name="id_page">
         <div class="modal-dialog">

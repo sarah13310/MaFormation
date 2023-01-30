@@ -506,7 +506,7 @@ class User extends BaseController
     /* liste des factures suivant profil utilisateur */
     public function bill()
     {
-        $this->verifySession();
+        
         $user = $this->user_model->getUserSession();
 
         $bills = [];
@@ -535,7 +535,7 @@ class User extends BaseController
 
     public function modif_name()
     {
-        $this->verifySession();
+        
         if ($this->request->getMethod() == "post") {
             // on met à jour les informations de session
             session()->name = $this->request->getVar('name');
@@ -567,7 +567,7 @@ class User extends BaseController
     public function modif_contact()
     {
         helper(["form"]);
-        $this->verifySession();
+        
         $user = $this->user_model->getUserSession();
 
         if ($this->isPost()) {
@@ -609,7 +609,7 @@ class User extends BaseController
 
     public function modif_perso()
     {
-        $this->verifySession();
+    
         helper(["form"]);
 
         $user = $this->user_model->getUserSession();

@@ -63,7 +63,6 @@ class TrainingModel extends Model
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('training');
-
         $builder->where("id_training", $id);
         $query = $builder->get();
         return $query->getResultArray();

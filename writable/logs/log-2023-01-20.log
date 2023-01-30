@@ -247,7 +247,7 @@ CRITICAL - 2023-01-20 19:33:44 --> Object of class App\Models\TrainingModel coul
 in APPPATH\Models\TrainingModel.php on line 78.
  1 APPPATH\Models\TrainingModel.php(108): App\Models\TrainingModel->getTrainingsTitle()
  2 APPPATH\Controllers\Former.php(279): App\Models\TrainingModel->fillOptionsTraining(null)
- 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Former->training_edit()
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Former->page_modify()
  4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Former))
  5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()

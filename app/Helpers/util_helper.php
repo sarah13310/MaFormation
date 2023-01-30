@@ -1,12 +1,34 @@
 <?php
 
-define("THEME_SUPER_ADMIN", "3");
-define("THEME_ADMIN", "5");
-define("THEME_FORMER", "7");
-define("THEME_USER",     "9");
-define("THEME_COMPANY",   "11");
 
 /*********************ACCUEIL*****************/
+
+// fenêtre modal
+// action='/former/training/edit'
+function modalDelete(){
+    return "
+    <div  id='modalDelete' class='modal' tabindex='-1'>
+    <form name='modalDelete' method='POST'>
+        <input type='hidden' id='action' name='action' value='delete'>
+        <input type='hidden' id='id' name='id'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h5 class='modal-title'>Suppression</h5>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+                <div class='modal-body'>
+                    <p id='msg_delete'>Voulez-vous supprimer cette page?</p>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Non</button>
+                    <button type='submit' class='btn btn-primary'>Oui</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>";
+}
 
 // indicateur carousel
 function indicatorCarousel($index, $count)
@@ -143,8 +165,6 @@ function textEllipsis($string, $max = 50)
 
 // éléments du carousel
 
-
-
 /*********************************************/
 // Les profils utilisateur
 function createOptionType($select = 0)
@@ -267,6 +287,7 @@ function getMonth($month)
     }
     return $strMonth;
 }
+
 // Le genre de l'utilisateur
 function getGender($gender)
 {
@@ -277,25 +298,31 @@ function getGender($gender)
 }
 
 // Menu 
+/**
+ * fillMenuDashBoard
+ * Menu Gauche paramétrable suivant le profil utilisateur
+ * @param  int $type
+ * @return void
+ */
 function fillMenuDashBoard($type)
 {
     $menu = "";
     switch ($type) {
-        case THEME_USER:
+        case USER:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Formations", "menu2", "Formations", $type);
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
-        case THEME_COMPANY:
+        case COMPANY:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Formations", "menu2", "Formations", $type);
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
-        case THEME_FORMER:
+        case FORMER:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
@@ -307,7 +334,7 @@ function fillMenuDashBoard($type)
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
-        case THEME_ADMIN:
+        case ADMIN:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
@@ -319,7 +346,7 @@ function fillMenuDashBoard($type)
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
-        case THEME_SUPER_ADMIN:
+        case SUPER_ADMIN:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
@@ -333,6 +360,7 @@ function fillMenuDashBoard($type)
     }
     return $menu;
 }
+
 // Icones en fonction des catégories
 function getIcon($category)
 {
@@ -375,16 +403,24 @@ function getIcon($category)
 
 
 /* remplit les categories du menu latéral gauche */
+/**
+ * fillMenuRight
+ * Menu associé aux actions utlisateur
+ * Renvoie le contenu du tableau
+ * @param  string $category
+ * @param  int $type
+ * @return string
+ */
 function fillMenuRight($category, $type)
 {
     $items = [];
     switch ($category) {
         case "Edition":
             switch ($type) {
-                case THEME_FORMER: // Edition Articles , Publications ..
+                case FORMER: // Edition Articles , Publications ..
                     $items = [
-                        ["ref" => "/former/training/add", "name" => "Création Formation"],
-                        ["ref" => "/former/training/edit", "name" => "Création Page"],
+                        ["ref" => "/training/add", "name" => "Création Formation"],
+                        ["ref" => "/training/edit", "name" => "Création Page"],
                         ["ref" => "/former/videos/edit", "name" => "Création Vidéo"],
                         ["ref" => "/user/skill/add", "name" => "Ajouter Compétence"],
                         ["ref" => "/former/books/edit", "name" => "Ajouter Livre"],
@@ -394,8 +430,8 @@ function fillMenuRight($category, $type)
                         ["ref" => "/user/category/add", "name" => "Création Catégorie"],
                     ];
                     break;
-                case THEME_ADMIN:
-                case THEME_SUPER_ADMIN:
+                case ADMIN:
+                case SUPER_ADMIN:
                     $items = [
                         ["ref" => "/admin/articles/edit", "name" => "Création Article"],
                         ["ref" => "/admin/publishes/edit", "name" => "Création Publication"],
@@ -476,15 +512,15 @@ function fillMenuRight($category, $type)
 
         case "Formations":
             switch ($type) {
-                case THEME_ADMIN:
-                case THEME_FORMER:
-                case THEME_SUPER_ADMIN:
+                case ADMIN:
+                case FORMER:
+                case SUPER_ADMIN:
                     $items = [
                         ["ref" => "/training/list", "name" => "Liste"],
                     ];
                     break;
-                case THEME_USER:
-                case THEME_COMPANY:
+                case USER:
+                case COMPANY:
                     $items = [
                         ["ref" => "/training/list", "name" => "Liste"],
                         ["ref" => "/training/filter", "name" => "Filtre"],
@@ -510,14 +546,14 @@ function fillMenuRight($category, $type)
 
         case "Agenda": // Gestion des rendez-vous
             switch ($type) {
-                case THEME_ADMIN:
-                case THEME_SUPER_ADMIN:
+                case ADMIN:
+                case SUPER_ADMIN:
                     $items = [
                         ["ref" => "/admin/rdv/list", "name" => "Liste"],
                         ["ref" => "/admin/rdv", "name" => "Modification"],
                     ];
                     break;
-                case THEME_FORMER:
+                case FORMER:
                     $items = [
                         ["ref" => "/former/rdv/list", "name" => "Liste"],
                         ["ref" => "/former/rdv", "name" => "Modification"],
@@ -528,14 +564,14 @@ function fillMenuRight($category, $type)
 
         case "Privileges": // Droits Dashboard
             switch ($type) {
-                case THEME_ADMIN:
+                case ADMIN:
                     $items = [
                         ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
                         ["ref" => "/superadmin/privileges", "name" => "Permissions"],
                     ];
                     break;
-                case THEME_SUPER_ADMIN:
+                case SUPER_ADMIN:
                     $items = [
                         ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
@@ -657,23 +693,23 @@ function getTextColor($type)
     $theme = "";
 
     switch ($type) {
-        case THEME_USER: // Particulier
+        case USER: // Particulier
             $theme = "text-white";
             break;
 
-        case THEME_COMPANY: // Entreprise
+        case COMPANY: // Entreprise
             $theme = "text-white";
             break;
 
-        case THEME_ADMIN: //Administrateur
+        case ADMIN: //Administrateur
             $theme = "text-white";
             break;
 
-        case THEME_SUPER_ADMIN: // Super Administrateur
+        case SUPER_ADMIN: // Super Administrateur
             $theme = "text-white";
             break;
 
-        case THEME_FORMER: // Formateur
+        case FORMER: // Formateur
             $theme = "text-white";
             break;
 
@@ -689,23 +725,23 @@ function getMenuButtonColor($type)
     $theme = "";
 
     switch ($type) {
-        case THEME_USER: // Particulier
+        case USER: // Particulier
             $theme = "btn-menu-outline-1";
             break;
 
-        case THEME_COMPANY: // Entreprise
+        case COMPANY: // Entreprise
             $theme = "btn-menu-outline-1";
             break;
 
-        case THEME_ADMIN: //Administrateur
+        case ADMIN: //Administrateur
             $theme = "btn-menu-outline-1";
             break;
 
-        case THEME_SUPER_ADMIN: // Super Administrateur
+        case SUPER_ADMIN: // Super Administrateur
             $theme = "btn-menu-outline-3";
             break;
 
-        case THEME_FORMER: // Formateur
+        case FORMER: // Formateur
             $theme = "btn-menu-outline-2";
             break;
 
@@ -721,23 +757,23 @@ function getButtonColor($type)
     $theme = "";
 
     switch ($type) {
-        case THEME_USER: // Particulier
+        case USER: // Particulier
             $theme = "btn-outline-primary-1";
             break;
 
-        case THEME_COMPANY: // Entreprise
+        case COMPANY: // Entreprise
             $theme = "btn-outline-primary-1";
             break;
 
-        case THEME_ADMIN: //Administrateur
+        case ADMIN: //Administrateur
             $theme = "btn-outline-primary-1";
             break;
 
-        case THEME_SUPER_ADMIN: // Super Administrateur
+        case SUPER_ADMIN: // Super Administrateur
             $theme = "btn-outline-primary-3";
             break;
 
-        case THEME_FORMER: // Formateur
+        case FORMER: // Formateur
             $theme = "btn-outline-primary-2";
             break;
 
@@ -753,23 +789,23 @@ function getLogoColor($type)
     $theme = "";
 
     switch ($type) {
-        case THEME_USER: // Particulier
+        case USER: // Particulier
             $theme .= "logo3.png";
             break;
 
-        case THEME_COMPANY: // Entreprise
+        case COMPANY: // Entreprise
             $theme .= "logo3.png";
             break;
 
-        case THEME_ADMIN: //Administrateur
+        case ADMIN: //Administrateur
             $theme .= "logo2.png";
             break;
 
-        case THEME_SUPER_ADMIN: // Super Administrateur
+        case SUPER_ADMIN: // Super Administrateur
             $theme .= "logo2.png";
             break;
 
-        case THEME_FORMER: // Formateur
+        case FORMER: // Formateur
             $theme = "logo2.png";
             break;
 
@@ -926,12 +962,3 @@ function image_crop($filename)
     imagedestroy($im);
 }
 
-function getLastUrl($parent)
-{
-    $refer = null;
-    $parent->load->library('user_agent');
-    if ($parent->agent->is_referral()) {
-        $refer =  $parent->agent->referrer();
-    }
-    return $refer;
-}

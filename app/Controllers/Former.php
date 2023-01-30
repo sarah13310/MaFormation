@@ -165,117 +165,13 @@ class Former extends BaseController
         return view('Former/rdv.php', $data);
     }
 
+   
     /**
-     * training_add
-     * Création nouvelle formation
-     * 
-     * @return void
-     */
-    public function training_add()
-    {
-        $user = $this->user_model->getUserSession();
-        $categories = $this->category_model->getCategories();
-
-        $data = [
-            "title" => "Création formation",
-            "id_user" => $user['id_user'],
-            "user" => $user,
-            "categories" => $categories,
-            'title_training' => "0",
-            'id_page' => "0",
-            'id_training' => "0",
-            'content' => "",
-        ];
-
-        if ($this->isPost()) {
-
-            $dateStart = $this->request->getVar('dateStart');
-            $dateEnd = $this->request->getVar('dateEnd');
-            $timeStart = $this->request->getVar('timeStart');
-            $timeEnd = $this->request->getVar('timeEnd');
-            $image_url = $this->request->getVar("image_url");
-
-            if ($image_url == null) {
-                $image_url = base_url() . "/assets/training.svg";
-            }
-            if (!str_contains($image_url, base_url())) {
-                $image_url = base_url() . "/assets//" . $image_url;
-            }
-
-            $dateTimeStart = date('Y-m-d H:i:s', strtotime($dateStart . ' ' . $timeStart));
-            $dateTimeEnd = date('Y-m-d H:i:s', strtotime($dateEnd . ' ' . $timeEnd));
-            $title = $this->request->getVar('title');
-            $data_save = [
-                "title" => $title,
-                "description" => $this->request->getVar('description'),
-                "date" => $dateTimeStart,
-                "duration" => $dateTimeEnd,
-                "rating" => 0,
-                "id_bill" => 0,
-                "id_type_slide" => 0,
-                "status" => 0,
-                "id_tag" => 0,
-                "image_url" => $image_url,
-            ];
-            $types = [
-                ["id" => 1, "name" => "Introduction"],
-                ["id" => 2, "name" => "Chapitre"],
-                ["id" => 3, "name" => "Conclusion"],
-                ["id" => 4, "name" => "Annexe"],
-            ];
-            $data['types'] = $types;
-
-            $rules = [
-                'title' => 'required|min_length[3]|max_length[40]',
-            ];
-            $error = [
-                'title' => [
-                    'required' => "Titre vide!",
-                    'min_length' => "Titre trop court",
-                    'max_length' => "Titre trop long",
-                ],
-            ];
-
-            if (!$this->validate($rules, $error)) {
-                $data['validation'] = $this->validator;
-            } else {
-                if ($this->training_model->isExist($title) === true) {
-                    // la formation existe déjà avec ce titre
-                    // alors on doit avertir le formateur
-                    $session_add = [
-                        "description" => $this->request->getVar('description'),
-                        "dateStart" => $dateStart,
-                        "dateEnd" => $dateEnd,
-                        "timeStart" => $timeStart,
-                        "timeEnd" => $timeEnd,
-                    ];
-                    $data["warning"] = "true";
-                    session()->set($session_add);
-                    return view('Training/training_add.php', $data);
-                } else {
-                    $last_id = $this->training_model->add($data_save);
-                    $this->training_model->setTrainingSession($data_save);
-
-                    $trainings = $this->training_model->fillOptionsTraining($last_id);
-                    session()->set("id_training", $last_id);
-
-                    $data["trainings"] = $trainings;
-                    $data['title'] = "Création contenu";
-                    $data['title_training'] = session()->title_training;
-
-                    return view('Training/training_edit.php', $data);
-                }
-            }
-        }
-        return view('Training/training_add.php', $data);
-    }
-
-    /**
-     * training_edit
+     * page_modify
      * Création des pages associées à la formation
      * @return void
      */
-    public function training_edit()
+    public function page_modify()
     {
         $id_training = session()->id_training;
         //
@@ -298,6 +194,8 @@ class Former extends BaseController
             "id_page" => $id_page,
             "content" => "",
             "page_title"=>"",
+            "modalDelete" => modalDelete(),
+            "action"=>"",
         ];
 
         if ($this->isPost()) {
@@ -319,49 +217,8 @@ class Former extends BaseController
                 }
             }
         }
-        return view('Training/training_edit.php', $data);
+        return view('Training/page_modify.php', $data);
     }
 
-    /**
-     * training_save
-     * Sauvegarde des pages associées à la formation
-     * @return void
-     */
-    public function training_save()
-    {
-        $id_training = session()->id_training;
-
-        if ($this->isPost()) {
-            $action = $this->request->getVar("action");
-            $dataSave = [
-                "id_page" => $this->request->getVar("id_page"),
-                "id_training" => $id_training,
-                //"title" => $this->request->getVar("title"),
-                "title" => $this->request->getVar("page_title"),
-                "content" => $this->request->getVar("content"),
-                "image_url" => $this->request->getVar("image_url"),
-            ];
-
-            // insérer page dans la base de données
-            $last_id = $this->page_model->add($dataSave);
-
-            // table intermédiaire training_has_page
-            $dataInt = [
-                "id_training" => $id_training,
-                "id_page" => $last_id,
-            ];
-            $this->training_has_page_model->save($dataInt);
-            $pages = $this->training_model->getFilterPages($id_training);
-
-            $data = [
-                'title' => "Gestion des pages",
-                'user' => $this->getUserSession(),
-                "id_training" => $id_training,
-                'pages' => $pages,
-                "buttonColor" => getTheme(session()->type, "button"),
-                "headerColor" => getTheme(session()->type, "header"),
-            ];
-            return view('Admin/dashboard_page.php', $data);
-        }
-    }
+    
 }

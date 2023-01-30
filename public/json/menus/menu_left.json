@@ -190,11 +190,11 @@
         ],
         "edition": [
             {
-                "ref": "/former/training/add",
+                "ref": "/training/add",
                 "name": "Création Formation"
             },
             {
-                "ref": "/former/training/edit",
+                "ref": "/training/edit",
                 "name": "Création Page"
             },
             {
