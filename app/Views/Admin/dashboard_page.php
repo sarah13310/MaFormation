@@ -41,11 +41,12 @@
                         <td><?= $page['title'] ?></td>
                         <td><?= $page['image_url'] ?></td>
                         <td>
-                            <a type="button" onclick="onDelete(<?= $page['id_page'] ?>)" class="col-1 btn mr-2 "><i class="bi bi-trash"></i></button>
+                            <a type="button" onclick="onDelete(<?= $page['id_page']?>, <?= session()->id_training ?>)" class="col-1 btn mr-2 "><i class="bi bi-trash"></i></button>
                         </td>
                         <td>
                             <form name="form_modify" method="POST" action="/training/page/modify">
                                 <input id="id_page" name='id_page' type="hidden" value='<?= $page['id_page'] ?>'>
+                                <input id="title_page" name='title_page' type="hidden" value='<?= $page['title'] ?>'>
                                 <input id="title" name='title' type="hidden" value="<?= session()->title_training ?>">
                                 <input id="id_training" name="id_training" type="hidden" value="<?= session()->id_training ?>">
                                 <button type="submit" class="col-1 btn mr-2 "><i class="bi bi-pencil"></i></button>
@@ -67,9 +68,11 @@
     let myModalDelete = document.getElementById('modalDelete');
     let modalDelete = bootstrap.Modal.getOrCreateInstance(myModalDelete);
 
-    function onDelete(id) {
-        document.modalDelete.id.value = id;
+    function onDelete(id_page, id_training) {
+        document.modalDelete.id.value = id_page;
+        document.modalDelete.id2.value = id_training;
         modalDelete.show();
+        document.modalDelete.action="/training/page/delete";
         return false;
     }
 

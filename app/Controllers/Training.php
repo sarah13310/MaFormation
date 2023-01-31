@@ -122,16 +122,47 @@ class Training extends BaseController
         return view('Payment/paymentcard.php', $data);
     }
 
+
+    /**
+     * training
+     * Tableau des formations (dashboard)
+     * @return void
+     */
+    public function dashboard_training()
+    {
+        $title = "Tableau des formations";
+        $user = $this->user_model->getUserSession();
+        $trainings = $this->training_model->getFilterTrainings();
+        $listraining = [];
+        session()->title_training = "";
+        session()->id_training = "";
+
+        foreach ($trainings as $training) {
+            $pages = [];
+            $listraining[] = [
+                "id_training" => $training['id_training'],
+                "title" => $training['title'],
+                "description" => $training['description'],
+                "image_url" => $training['image_url'],
+                "date" => dateFormat($training['date']),
+                "pages" => $pages,
+            ];
+        }
+        $data = [
+            "title" => $title,
+            "trainings" => $listraining,
+            "user" => $user,
+            "buttonColor" => getTheme(session()->type, "button"),
+            "headerColor" => getTheme(session()->type, "header"),
+        ];
+        return view('Admin/dashboard_training_admin.php', $data);
+    }
+
+
     public function view()
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $id = session()->get('id_user');
-
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier        
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->getUserSession();
 
         if ($this->isPost()) {
             $id = $this->request->getVar('id_training');
@@ -244,7 +275,7 @@ class Training extends BaseController
 
     /**
      * modify_page
-     * Modifie une page
+     * Affiche les données une page à modifier
      * @return void
      */
     public function modify_page()
@@ -252,6 +283,7 @@ class Training extends BaseController
         // on récupère les informations utilisateur de la session active    
         $user = $this->getUserSession();
         //
+        
         if ($this->isPost()) {
             $id_page = $this->request->getVar('id_page');
             $id_training = $this->request->getVar('id_training');
@@ -259,17 +291,24 @@ class Training extends BaseController
             $content = $this->request->getVar('content');
             $image_url = $this->request->getVar('image_url');
             $title_page = $this->request->getVar('title_page');
+            if ($title_page == null)
+                $title_page = "";
+
+
             //
             // on recupère la page par l'id dans la table            
-            $page = $this->page_model->getPageById($id_page);
-            $page_title = "";
+            $page=$this->page_model->getPageById($id_page);
+            $page=$page[0];
+            if (!$content){
+                $content=$page['content'];
+            }
 
-            if ($page) {
+            /*if ($page) {
                 $page = $page[0]; // on prend juste la page désirée
                 $title_page = $page['title'];
                 $content = $page['content'];
                 $image_url = $page['image_url'];
-            }
+            }*/
             $categories = $this->category_model->getCategories();
             // on prépare les données pour la page html
             $training = $this->training_model->getTrainingById($id_training);
@@ -297,6 +336,46 @@ class Training extends BaseController
         }
     }
 
+    public function save_page()
+    {
+        // on récupère les informations utilisateur de la session active    
+        $user = $this->getUserSession();
+        //
+        if ($this->isPost()) {
+            $id_page = $this->request->getVar('id_page');
+            $id_training = $this->request->getVar('id_training');
+            $title_training = $this->request->getVar('title');
+            $content = $this->request->getVar('content');
+            $image_url = $this->request->getVar('image_url');
+            $title_page = $this->request->getVar('title_page');
+            //
+            $dataSave = [
+                'id_page' => $id_page,
+                'title' => $title_page,
+                'id_training' => $id_training,
+                'content' => $content,
+                'image_url' => $image_url,
+            ];
+            // on modifie la page dans la table            
+            $this->page_model->save($dataSave);
+            // on refait la liste des pages
+            $pages = $this->training_model->getFilterPages($id_training);
+            $title = "Gestion des pages";
+            //
+            $data = [
+                "title" => $title,
+                "title_training" => $title_training,
+                "user" => $user,
+                "buttonColor" => getTheme($user['type'], "button"),
+                "headerColor" => getTheme($user['type'], "header"),
+                "pages" => $pages,
+                "modalDelete" => modalDelete(),
+                "action" => "",
+            ];
+            return view('Admin/dashboard_page.php', $data);
+        }
+    }
+
     /**
      * delete_page
      * Supprime une page
@@ -308,9 +387,8 @@ class Training extends BaseController
         $user = $this->getUserSession();
         //
         if ($this->isPost()) {
-            $id_page = $this->request->getVar('id_page');
-            $id_training = $this->request->getVar('id_training');
-
+            $id_page = $this->request->getVar('id');
+            $id_training = $this->request->getVar('id2');
             //
             $deleteData = ['id_page' => $id_page];
             // on supprime la catégorie dans la table            
@@ -331,6 +409,7 @@ class Training extends BaseController
                 "headerColor" => getTheme($user['type'], "header"),
                 "pages" => $pages,
                 "id_training" => $id_training,
+                "modalDelete" => modalDelete(),
             ];
             return view('Admin/dashboard_page.php', $data);
         }
@@ -457,14 +536,13 @@ class Training extends BaseController
             $dataSave = [
                 "id_page" => $this->request->getVar("id_page"),
                 "id_training" => $id_training,
-                //"title" => $this->request->getVar("title"),
                 "title" => $this->request->getVar("page_title"),
                 "content" => $this->request->getVar("content"),
                 "image_url" => $this->request->getVar("image_url"),
             ];
 
             // insérer page dans la base de données
-            $last_id = $this->page_model->add($dataSave);
+            $last_id = $this->page_model->save($dataSave);
 
             // table intermédiaire training_has_page
             $dataInt = [

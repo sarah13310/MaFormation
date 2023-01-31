@@ -646,41 +646,7 @@ class DashBoard extends BaseController
         return view('Admin/dashboard_publishes_admin.php', $data);
     }
 
-    /**
-     * training
-     * Tableau des formations (dashboard)
-     * @return void
-     */
-    public function training()
-    {
-        $title = "Tableau des formations";
-        $user = $this->user_model->getUserSession();
-        $trainings = $this->training_model->getFilterTrainings();
-        $listraining = [];
-        session()->title_training = "";
-        session()->id_training = "";
-
-        foreach ($trainings as $training) {
-            $pages = [];
-            $listraining[] = [
-                "id_training" => $training['id_training'],
-                "title" => $training['title'],
-                "description" => $training['description'],
-                "image_url" => $training['image_url'],
-                "date" => $training['date'],
-                "pages" => $pages,
-            ];
-        }
-        $data = [
-            "title" => $title,
-            "trainings" => $listraining,
-            "user" => $user,
-            "buttonColor" => getTheme(session()->type, "button"),
-            "headerColor" => getTheme(session()->type, "header"),
-        ];
-        return view('Admin/dashboard_training_admin.php', $data);
-    }
-
+  
     /**
      * preview_training
      *

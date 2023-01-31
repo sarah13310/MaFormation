@@ -11,6 +11,7 @@ function modalDelete(){
     <form name='modalDelete' method='POST'>
         <input type='hidden' id='action' name='action' value='delete'>
         <input type='hidden' id='id' name='id'>
+        <input type='hidden' id='id2' name='id2'>
         <div class='modal-dialog'>
             <div class='modal-content'>
                 <div class='modal-header'>
@@ -238,7 +239,7 @@ function dateTimeFormat($date)
     } else {
         $data = explode(' ', $date);
         $date = explode('-', $data[0]);
-        $strDate = $date[2] . " " . getMonth($date[1]) . " " . $date[0];
+        $strDate = "Le".$date[2] . " " . getMonth($date[1]) . " " . $date[0]." à ".$data[0]."h".$data[1];
     }
     return $strDate;
 }
@@ -420,7 +421,7 @@ function fillMenuRight($category, $type)
                 case FORMER: // Edition Articles , Publications ..
                     $items = [
                         ["ref" => "/training/add", "name" => "Création Formation"],
-                        ["ref" => "/training/edit", "name" => "Création Page"],
+                        ["ref" => "/training/page/add", "name" => "Création Page"],
                         ["ref" => "/former/videos/edit", "name" => "Création Vidéo"],
                         ["ref" => "/user/skill/add", "name" => "Ajouter Compétence"],
                         ["ref" => "/former/books/edit", "name" => "Ajouter Livre"],
@@ -566,17 +567,19 @@ function fillMenuRight($category, $type)
             switch ($type) {
                 case ADMIN:
                     $items = [
+                        ["ref" => "/superadmin/privileges", "name" => "Permissions"],
                         ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
-                        ["ref" => "/superadmin/privileges", "name" => "Permissions"],
+                        ["ref" => "/training/dashboard", "name" => "Tableau Formations"],
                     ];
                     break;
                 case SUPER_ADMIN:
                     $items = [
+                        ["ref" => "/superadmin/add/admin", "name" => "+ Administrateur"],
+                        ["ref" => "/superadmin/privileges", "name" => "Permissions"],
                         ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
-                        ["ref" => "/superadmin/privileges", "name" => "Permissions"],
-                        ["ref" => "/superadmin/add/admin", "name" => "+ Administrateur"],
+                        ["ref" => "/training/dashboard", "name" => "Tableau Formations"],
                     ];
                     break;
                 case FORMER:

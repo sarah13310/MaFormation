@@ -35,7 +35,7 @@
         foreach ($trainings as $training) : ?>
             <tr class="mt-4" style="border-top:2px solid; <?= (count($training['pages']) > 0) ? 'border-bottom:hidden' : '' ?>">
                 <td><?= $training['title'] ?></td>
-                <td><?= $training['date'] ?></td>
+                <td><?= ($training['date']) ?></td>
                 <td>
                     <form name="form_preview" action="/training/preview" method="post">
                         <input type="hidden" name="id_training" value="<?= $training['id_training'] ?>">
