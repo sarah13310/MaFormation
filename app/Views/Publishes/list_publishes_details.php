@@ -22,9 +22,9 @@
             <hr class="hr" />
             <p class="card-subtitle mb-3 mt-3 text-center">
                 <?php $k = 0;
-                foreach ($authors as $author) : ?>
-                    <img src=<?php if (!isset($author['image_url'])) : ?> <?= "/assets/img/avatar.png" ?> <?php else : ?> <?= $author['image_url'] ?> <?php endif ?> class="rounded-circle me-2" style="width:8rem;">
-                    <?= "Ecrit par " .  $author['name'] . " " . $author['firstname'] ?>
+                foreach ($author as $a) : ?>
+                    <img src=<?php if (!isset($a['image_url'])) : ?> <?= "/assets/img/avatar.png" ?> <?php else : ?> <?= $a['image_url'] ?> <?php endif ?> class="rounded-circle me-2" style="width:8rem;">
+                    <?= "Ecrit par " .  $a['name'] . " " . $a['firstname'] ?>
                 <?php $k++;
                 endforeach ?>
             </p>

@@ -13,7 +13,7 @@
                         <h5 class="card-title"><?= $articles['subject'] ?></h5>
                         <?php $j = 0;
                             foreach ($articles['user'] as $user) : ?>
-                                <small><?= $user['name'] . " " . $user['firstname'] ." le " . dateFormat($articles['datetime'])?></small>
+                                <small><?= $user['name'] . " " . $user['firstname'] ." le " . dateTimeFormat($articles['datetime'])?></small>
                             <?php $j++;
                             endforeach ?>
                         <div  class="mt-3">

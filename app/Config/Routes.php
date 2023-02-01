@@ -62,8 +62,8 @@ $routes->group('/former', static function ($routes) {
     $routes->add('list/cv', 'Former::details_former_home'); // details former (page home)
     $routes->add('articles/edit', 'News::articles_edit');
     $routes->add('publishes/edit', 'News::publishes_edit');
-    $routes->add('articles/list', 'Dashboard::listformerarticles');
-    $routes->add('publishes/list', 'Dashboard::listformerpublishes');
+    $routes->add('articles/list', 'Dashboard::listarticles');
+    $routes->add('publishes/list', 'Dashboard::listpublishes');
     $routes->get('view', 'Former::former_view');
     $routes->get('profil', 'Former::profile_view'); // view profil
     $routes->add('rdv', 'Former::rdv'); //planning
@@ -72,8 +72,8 @@ $routes->group('/former', static function ($routes) {
     $routes->add('training/save', 'Training::training_save'); // create training
     $routes->add('training/edit', 'Former::page_modify'); // create page
   
-    $routes->add('videos/list', 'Dashboard::listformermedias/1'); //dashboard videos in former's profil
-    $routes->add('books/list', 'Dashboard::listformermedias/2'); //dashboard books in former's profil
+    $routes->add('videos/list', 'Dashboard::listmedias/1'); //dashboard videos in former's profil
+    $routes->add('books/list', 'Dashboard::listmedias/2'); //dashboard books in former's profil
     $routes->add('videos/edit', 'Media::medias_edit/1');
     $routes->add('books/edit', 'Media::medias_edit/2'); 
 });

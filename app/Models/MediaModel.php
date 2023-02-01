@@ -23,11 +23,20 @@ class MediaModel extends Model
         'id_tag'
     ];
 
+    /**
+     * getVideos
+     * 
+     * Retourne indirectement toutes les vidéos disponibles
+     *
+     * @return un tableau associatif à deux éléments
+     * clef builder  =>permet d'utiliser en dehors le résultat de la requête
+     * clef books =>retourne les vidéos
+     */
     function getVideos()
     {
         $db = \Config\Database::connect();
         $builder = $db->table('media');
-        $builder->where('type', '1');
+        $builder->where('type', VIDEO);
         $query   = $builder->get();
         $videos = $query->getResultArray();
         return [
@@ -36,21 +45,37 @@ class MediaModel extends Model
         ];
     }
 
+    /**
+     * getTitleAllVideos
+     * 
+     * Retourne indirectement toutes les vidéos disponibles
+     *
+     * @return un tableau de vidéos
+     */
     function getTitleAllVideos()
     {
         $db = \Config\Database::connect();
         $builder = $db->table('media');
-        $builder->where('type', '1');
+        $builder->where('type', VIDEO);
         $query   = $builder->get();
         $videos = $query->getResultArray();
         return $videos;
     }
 
+    /**
+     * getBooks
+     * 
+     * Retourne indirectement tous les livres disponibles
+     *
+     * @return un tableau associatif à deux éléments
+     * clef builder  =>permet d'utiliser en dehors le résultat de la requête
+     * clef books =>retourne les livres
+     */
     function getBooks()
     {
         $db = \Config\Database::connect();
         $builder = $db->table('media');
-        $builder->where('type', '2');
+        $builder->where('type', BOOK);
         $query   = $builder->get();
         $books = $query->getResultArray();
         return [
@@ -59,16 +84,31 @@ class MediaModel extends Model
         ];
     }
 
+    /**
+     * getTitleAllBooks
+     * 
+     * Retourne indirectement tous les livres disponibles
+     *
+     * @return un tableau de livres
+     */
     function getTitleAllBooks()
     {
         $db = \Config\Database::connect();
         $builder = $db->table('media');
-        $builder->where('type', '2');
+        $builder->where('type', BOOK);
         $query   = $builder->get();
         $books = $query->getResultArray();
         return $books;
     }
 
+    /**
+     * returnDataMedias
+     *
+     * Retourne les données médias dans une liste
+     * @param  array $list
+     * @param  array $data
+     * @return un tableau d'une liste de médias 
+     */
     function returnDataMedias($list,$data)
     {
         foreach ($data as $d) {
@@ -84,6 +124,14 @@ class MediaModel extends Model
         return $list;
     }
 
+    /**
+     * getAuthorsMedias
+     *
+     * Récupère les noms des auteurs de tout les médias dans une liste
+     * @param  array $list
+     * @param  $builder
+     * @return un tableau des noms des auteurs
+     */
     function getAuthorsMedias($list,$builder)
     {
         $builder->select('user.name,user.firstname');
@@ -107,6 +155,15 @@ class MediaModel extends Model
         return $list;
     }    
 
+    /**
+     * getAuthorMedias
+     *
+     * Récupère le nom de l'auteur de ce média
+     * @param  int $session (utilisateur connecté)
+     * @param  $builder
+     * @param  int $type (type du média)
+     * @return le nom de l'auteur
+     */
     function getAuthorMedias($session,$builder,$type)
     {
         $builder->where("user.id_user", $session['id_user']);
@@ -118,18 +175,33 @@ class MediaModel extends Model
         return $medias;
     }       
 
+    /**
+     * ValidatedMedias
+     *
+     * Récupère les médias validés
+     * @param  int $type (type du média)
+     * @return un tableau de médias
+     */
     function ValidatedMedias($type)
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('media');
-        $builder->where('status', '1');
+        $builder->where('status', VALIDE);
         $builder->where('type', $type);
         $query   = $builder->get();
         $medias = $query->getResultArray();
         return $medias;
     }
 
-
+    /**
+     * isExist
+     *
+     * Vérifie l'existence du média
+     * @param  string $url (url du média)
+     * @return bool 
+     * vrai => le média existe déjà 
+     * faux => le média n'est pas présent dans la table
+     */
     function isExist($url)
     {
         $db = \Config\Database::connect();

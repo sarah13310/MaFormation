@@ -39,8 +39,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <form action="#" class="d-flex search me-4">
-                    <input class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
+                <form action="/result" class="d-flex search me-4" method="POST">
+                    <input id="research" name="research" class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
                     <button class="noselect btn <?= getTheme($user['type'], "button") ?>" type="submit">Chercher</button>
                 </form>
 
@@ -62,7 +62,7 @@
                             <?= fillMenuNav("News") ?>
                         </li>
                         <li class="nav-item">
-                            <a class="noselect nav-link" href="contact">Contact</a>
+                            <a class="noselect nav-link" href="/contact">Contact</a>
                         </li>
                     </ul>
                     <?php if (!session()->get('isLoggedIn')) : ?>

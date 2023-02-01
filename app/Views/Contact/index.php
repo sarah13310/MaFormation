@@ -1,12 +1,14 @@
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
-<h1><?= $title ?></h1>
+<div>
+<h1 class="ms-6"><?= $title ?></h1>
+<hr class="mt-1 fade-2">
+</div>
 <div class="row p-3 align-items-center justify-content-center">
     <div class="col-lg-5 col-md-8 my-2">
         <div class="f_contact text-center p-2">
             <h4>Notre formulaire :</h4>
-            <form class="row"  action=/contact" method="post">
+            <form class="row"  action="/contact" method="post">
                 <div class="col-12 mt-2">
                     <div>
                         <input class="form-control mb-2" type="text" name="name" id="name" placeholder="Votre Nom" value="<?= set_value('name') ?>">

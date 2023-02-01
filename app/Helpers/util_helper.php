@@ -73,9 +73,6 @@ function listCarousel($list, $index = 0)
 {
     $str = "";
     $i = 0;
-    // if ($showIndicator) {
-    //     $str = indicatorCarousel($index, count($list));
-    // }
     $str .= "<div class='carousel-inner'>";
     foreach ($list as $item) {
         $active = ($i == $index) ? "active" : "";
@@ -325,8 +322,7 @@ function fillMenuDashBoard($type)
 
         case FORMER:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
-            $menu .= fillMenu("Profil", "menu1", "Profil", $type);
-            $menu .= fillMenu("Tableau de bord", "menu2", "Privileges", $type);
+            $menu .= fillMenu("Profil", "menu1", "Profil", $type);            
             $menu .= fillMenu("Edition", "menu3", "Edition", $type);
             $menu .= fillMenu("Rendez-vous", "menu4", "Agenda", $type);
             $menu .= fillMenu("Formations", "menu5", "Formations", $type);

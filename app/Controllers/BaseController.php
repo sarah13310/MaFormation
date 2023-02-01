@@ -88,6 +88,7 @@ abstract class BaseController extends Controller
    protected $user_has_company_model;
    protected $user_has_training_model;
    protected $user_has_media_model;
+   protected $db;
    /**
     * Constructor.
     */
@@ -121,7 +122,14 @@ abstract class BaseController extends Controller
    {
       return $this->user_model->getUserSession();
    }
+   
 
+   public function getLastRoute(){
+      $url=previous_url();
+      $url= str_replace("index.php","",$url);
+      $url=str_replace(base_url(),"",$url);
+      return $url;
+   }
    
 
    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -155,7 +163,6 @@ abstract class BaseController extends Controller
       $this->user_has_training_model = new UserHasTrainingModel();
       $this->user_model = new UserModel();
       $this->user_has_media_model = new UserHasMediaModel();
-
       // E.g.: $this->session = \Config\Services::session();
    }
 }

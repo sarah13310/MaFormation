@@ -7,102 +7,14 @@ namespace App\Controllers;
 
 class DashBoard extends BaseController
 {
-    public function listformerarticles()
-    {
-
-        // on récupère la sessions associé à cet utilisateur
-        $session = $this->user_model->getUserSession();
-        // on récupère la requete pour user
-        $public = $this->user_model->getFilterUser();
-        //
-        $title = "Liste des articles";
-        $builder = $public['builder'];
-        $builder->where("user.id_user", $session['id_user']);
-        $builder->join('user_has_article', 'user_has_article.id_user = user.id_user');
-        $builder->join('article', 'user_has_article.id_article = article.id_article');
-        $query   = $builder->get();
-        $articles = $query->getResultArray();
-        $listarticles = [];
-        //
-        foreach ($articles as $article) {
-            $listarticles[] = [
-                "id_article" => $article['id_article'],
-                "subject" => $article['subject'],
-                "description" => $article['description'],
-                "datetime" => $article['datetime'],
-            ];
-        }
-        //
-        $data = [
-            "title" => $title,
-            "listarticles" => $listarticles,
-            "user" => $session,
-        ];
-        return view('Former/list_article_former.php', $data);
-    }
-
-    public function listformerpublishes()
-    {
-        $user = $this->user_model->getUserSession();
-        //
-        $title = "Liste des publications";
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $builder->select('publication.id_publication,publication.subject,publication.description,publication.datetime');
-        $builder->where('user.id_user', $user['id_user']);
-        $builder->join('user_has_article', 'user_has_article.id_user = user.id_user');
-        $builder->join('article', 'user_has_article.id_article = article.id_article');
-        $builder->join('publication_has_article', 'publication_has_article.id_article = article.id_article');
-        $builder->join('publication', 'publication_has_article.id_publication = publication.id_publication');
-        $builder->groupBy('publication.id_publication');
-        $query   = $builder->get();
-        $publishes = $query->getResultArray();
-
-        $listpublishes = [];
-
-        foreach ($publishes as $publishe) {
-            $listpublishes[] = [
-                "id_publication" => $publishe['id_publication'],
-                "subject" => $publishe['subject'],
-                "description" => $publishe['description'],
-                "datetime" => $publishe['datetime'],
-            ];
-        }
-
-        for ($i = 0; $i < count($listpublishes); $i++) {
-
-            $builder->select('article.id_article,article.subject,article.description,article.datetime');
-            $builder->where('user.id_user',  $user['id_user']);
-            $builder->join('user_has_article', 'user_has_article.id_user = user.id_user');
-            $builder->join('article', 'user_has_article.id_article = article.id_article');
-            $builder->join('publication_has_article', 'publication_has_article.id_article = article.id_article');
-            $builder->join('publication', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
-            $query = $builder->get();
-            $articles = $query->getResultArray();
-
-            $news = [];
-            foreach ($articles as $article) {
-                $news[] = [
-                    "id_article" => $article['id_article'],
-                    "subject" => $article['subject'],
-                    "description" => $article['description'],
-                    "datetime" => $article['datetime'],
-                ];
-            }
-            $listpublishes[$i]["article"] = $news;
-        }
 
 
-        $data = [
-            "title" => $title,
-            "listpublishes" => $listpublishes,
-            "user" => $user,
-        ];
 
-        return view('Former/list_publishes_former.php', $data);
-    }
-
+    /**
+     * listformers
+     * Liste des formateurs (profil)
+     * @return void
+     */
     public function listformers()
     {
         $title = "Liste des formateurs";
@@ -183,6 +95,11 @@ class DashBoard extends BaseController
         return view('Admin/list_former_admin.php', $data);
     }
 
+    /**
+     * privileges
+     * Gestions des droits (profil)
+     * @return void
+     */
     public function privileges()
     {
 
@@ -269,44 +186,30 @@ class DashBoard extends BaseController
     }
 
 
+    /**
+     * listarticles
+     * Liste des articles de l'utilisateur (profil admin et former)
+     * @return void
+     */
     public function listarticles()
     {
         $title = "Liste des articles";
 
-        $public = $this->article_model->getArticles();
+        $user = $this->user_model->getUserSession();
+
+        $public = $this->user_model->getFilterUser();
+
+        $title = "Liste des articles";
+
         $builder = $public['builder'];
-        $articles = $public['articles'];
+
+        $articles = $this->article_model->getArticlesbyAuthor($builder, $user['id_user']);
+
         $listarticles = [];
 
-        foreach ($articles as $article) {
-            $listarticles[] = [
-                "id_article" => $article['id_article'],
-                "subject" => $article['subject'],
-                "description" => $article['description'],
-                "datetime" => $article['datetime'],
-            ];
-        }
-        /* auteur de l'article*/
-        $builder->select('user.name,user.firstname');
+        $listarticles = $this->article_model->returnDataArticles($listarticles, $articles);
 
-        for ($i = 0; $i < count($listarticles); $i++) {
-            $builder->where('article.id_article', $listarticles[$i]['id_article']);
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $query = $builder->get();
-            $user = $query->getResultArray();
 
-            $authors = [];
-            foreach ($user as $u) {
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                ];
-            }
-            $listarticles[$i]["user"] = $authors;
-        }
-
-        $user = $this->user_model->getUserSession();
         $data = [
             "title" => $title,
             "listarticles" => $listarticles,
@@ -314,67 +217,31 @@ class DashBoard extends BaseController
             "type" => session()->type,
             "headerColor" => getTheme(session()->type, "header"),
         ];
-        return view('Admin/list_article_admin.php', $data);
+
+        return view('Articles/list_article_user.php', $data);
     }
 
+
+    /**
+     * listpublishes
+     * Liste des publications de l'utilisateur (profil admin et former)
+     * @return void
+     */
     public function listpublishes()
     {
+
+        $user = $this->user_model->getUserSession();
+
         $title = "Liste des publications";
-        $db      = \Config\Database::connect();
-        $builder = $db->table('publication');
-        $query   = $builder->get();
-        $publishes = $query->getResultArray();
-        //
+
+        $publishes = $this->publication_model->getPublishesbyAuthor($user['id_user']);
+
         $listpublishes = [];
-        foreach ($publishes as $publishe) {
-            $listpublishes[] = [
-                "id_publication" => $publishe['id_publication'],
-                "subject" => $publishe['subject'],
-                "description" => $publishe['description'],
-                "datetime" => $publishe['datetime'],
-            ];
-        }
-        $builder->select('user.name,user.firstname');
 
-        for ($i = 0; $i < count($listpublishes); $i++) {
+        $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
 
-            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $builder->groupBy('user.id_user');
-            $query = $builder->get();
-            $user = $query->getResultArray();
 
-            /* auteur de l'article*/
-            $authors = [];
-            foreach ($user as $u) {
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                ];
-            }
-            $listpublishes[$i]["user"] = $authors;
-            $builder->select('article.id_article,article.subject,article.description,article.datetime');
-            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-            $query = $builder->get();
-            $articles = $query->getResultArray();
-
-            $news = [];
-            foreach ($articles as $article) {
-                $news[] = [
-                    "id_article" => $article['id_article'],
-                    "subject" => $article['subject'],
-                    "description" => $article['description'],
-                    "datetime" => $article['datetime'],
-
-                ];
-            }
-            $listpublishes[$i]["article"] = $news;
-        }
+        $listpublishes = $this->publication_model->getFilterPublishesArticles($listpublishes, $user['id_user']);
 
         $user = $this->user_model->getUserSession();
 
@@ -384,28 +251,97 @@ class DashBoard extends BaseController
             "user" => $user,
             "headerColor" => getTheme(session()->type, "header"),
         ];
-        return view('Admin/list_publishes_admin.php', $data);
+        return view('Publishes/list_publishes_user.php', $data);
     }
 
+    /**
+     * dashboard_article
+     * Tableau de bord des articles (profil admin)
+     * @return void
+     */
+    public function dashboard_article()
+    {
+        $title = "Tableau des articles";
+
+        $public = $this->article_model->getArticles();
+
+        $builder = $public['builder'];
+
+        $articles = $public['articles'];
+
+        $listarticles = [];
+
+        $listarticles = $this->article_model->returnDataArticles($listarticles, $articles);
+
+        $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
+
+        $user = $this->user_model->getUserSession();
+
+        $data = [
+            "title" => $title,
+            "articles" => $listarticles,
+            "user" => $user,
+            "type" => session()->type,
+            "headerColor" => getTheme(session()->type, "header"),
+            "buttonColor" => getTheme(session()->type, "button"),
+        ];
+        return view('Admin/dashboard_article_admin.php', $data);
+    }
+
+    /**
+     * dashboard_publishes
+     * Tableau de bord des publications (profil admin)
+     * @return void
+     */
+    public function dashboard_publishes()
+    {
+        $user = $this->user_model->getUserSession();
+
+        $title = "Tableau des publications";
+
+        $publishes = $this->publication_model->getFilterPublishes();
+
+        $listpublishes = [];
+
+        $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
+
+        $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
+
+        $listpublishes = $this->publication_model->getFilterPublishesArticles($listpublishes, 0);
+
+        $data = [
+            "title" => $title,
+            "publishes" => $listpublishes,
+            "user" => $user,
+            "buttonColor" => getTheme(session()->type, "button"),
+            "headerColor" => getTheme(session()->type, "header"),
+        ];
+        return view('Admin/dashboard_publishes_admin.php', $data);
+    }
+
+
+    /**
+     * previewarticle
+     * Aperçu des articles (profil admin et former)
+     * @return void
+     */
     public function previewarticle()
     {
         $title = "Aperçu de l'article";
-        if ($this->isPost()) {
+        if ($this->request->getMethod() == 'post') {
 
             $id = $this->request->getVar('id_article');
 
-            $db      = \Config\Database::connect();
-            $builder = $db->table('article');
-            $builder->where('id_article', $id);
-            $query   = $builder->get();
-            $article = $query->getResultArray();
-            $article = $article[0];
+            $public = $this->article_model->getArticlesbyId($id);
 
+            $article = $public['article'];
 
             $user = $this->user_model->getUserSession();
+
             if ($article["image_url"] == null) {
                 $article["image_url"] = base_url() . "/assets/article.svg";
             }
+
             $data = [
                 "title" => $title,
                 "article" => $article,
@@ -416,13 +352,20 @@ class DashBoard extends BaseController
         }
     }
 
+
+    /**
+     * previewpublish
+     * Aperçu des publications (profil admin et former)
+     * @return void
+     */
     public function previewpublish()
     {
         $title = "Aperçu de la publication";
 
-        if ($this->isPost()) {
+        if ($this->request->getMethod() == 'post') {
 
             $id = $this->request->getVar('id_publication');
+
             $publication = $this->publication_model->getPublisheById($id);
 
             $user = $this->user_model->getUserSession();
@@ -445,7 +388,13 @@ class DashBoard extends BaseController
         }
     }
 
-    public function listmedias($type)
+    /**
+     * dashboard_media
+     * Tableau de bord média livres et vidéos (profil admin)
+     * @param  mixed $type
+     * @return void
+     */
+    public function dashboard_media($type)
     {
         switch ($type) {
             case VIDEO:
@@ -474,10 +423,17 @@ class DashBoard extends BaseController
             "user" => $user,
             "type" => session()->type,
         ];
-        return view('Admin/list_medias_admin.php', $data);
+        return view('Admin/dashboard_medias_admin.php', $data);
     }
 
-    public function listformermedias($type)
+    /**
+     * listmedias
+     * Liste de tous les médias livres et vidéos associé au profil 
+     * (profil admin et former)
+     * @param  mixed $type
+     * @return void
+     */
+    public function listmedias($type)
     {
 
         // on récupère la sessions associé à cet utilisateur
@@ -505,151 +461,12 @@ class DashBoard extends BaseController
             "user" => $session,
             "type" => session()->type,
         ];
-        return view('Former/list_medias_former.php', $data);
+        return view('Media/list_medias_user.php', $data);
     }
 
-
-    public function dashboard_article()
-    {
-        $title = "Tableau des articles";
-
-        $public = $this->article_model->getArticles();
-        $builder = $public['builder'];
-        $articles = $public['articles'];
-        $listarticles = [];
-
-        foreach ($articles as $article) {
-            $listarticles[] = [
-                "id_article" => $article['id_article'],
-                "subject" => $article['subject'],
-                "description" => $article['description'],
-                "datetime" => $article['datetime'],
-            ];
-        }
-        /* auteur de l'article*/
-        $builder->select('user.name,user.firstname');
-
-        for ($i = 0; $i < count($listarticles); $i++) {
-            $builder->where('article.id_article', $listarticles[$i]['id_article']);
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $query = $builder->get();
-            $user = $query->getResultArray();
-            $author = [];
-            if ($user == null) {
-                $author = [
-                    "name" => "Inconnu",
-                    "firstname" => "",
-                ];
-            } else {
-                $user = $user[0];
-                $author = [
-                    "name" => $user['name'],
-                    "firstname" => $user['firstname'],
-                ];
-            }
-            $listarticles[$i]["author"] = $author;
-        }
-
-        $user = $this->user_model->getUserSession();
-        $data = [
-            "title" => $title,
-            "articles" => $listarticles,
-            "user" => $user,
-            "type" => session()->type,
-            "headerColor" => getTheme(session()->type, "header"),
-            "buttonColor" => getTheme(session()->type, "button"),
-        ];
-        return view('Admin/dashboard_article_admin.php', $data);
-    }
-    // tableau de bord des publications
-    public function dashboard_publishes()
-    {
-        $title = "Tableau des publications";
-        $listpublishes = [];
-        $publishes = $this->publication_model->getFilterPublishes();
-
-        foreach ($publishes as $publishe) {
-            $articles = $this->publication_model->getFilterArticles($publishe['id_publication']);
-            //print_r($articles);
-            $listpublishes[] = [
-                "id_publication" => $publishe['id_publication'],
-                "subject" => $publishe['subject'],
-                "description" => $publishe['description'],
-                "datetime" => $publishe['datetime'],
-                "articles" => $articles,
-                "user" => [],
-            ];
-        }
-        //die();
-
-        /* $builder->select('user.name,user.firstname');
-
-        for ($i = 0; $i < count($listpublishes); $i++) {
-
-            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $builder->groupBy('user.id_user');
-
-            $query = $builder->get();
-            $user = $query->getResultArray();
-*/
-        /* auteur de l'article*/
-        $authors = [];
-        /*foreach ($user as $u) {
-
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                ];
-            }
-            if (count($authors)==0){
-                $authors[]="Inconnu";
-            }*/
-
-        /*$listpublishes[$i]["user"] = $authors;
-
-            $builder->select('article.id_article,article.subject,article.description,article.datetime');
-            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-
-            $query = $builder->get();
-            $articles = $query->getResultArray();
-
-            $news = [];
-            foreach ($articles as $article) {
-                $news[] = [
-                    "id_article" => $article['id_article'],
-                    "subject" => $article['subject'],
-                    "description" => $article['description'],
-                    "datetime" => $article['datetime'],                    
-                ];
-            }
-
-            $listpublishes[$i]["article"] = $news;
-        }
-*/
-
-        $user = $this->user_model->getUserSession();
-
-        $data = [
-            "title" => $title,
-            "publishes" => $listpublishes,
-            "user" => $user,
-            "buttonColor" => getTheme(session()->type, "button"),
-            "headerColor" => getTheme(session()->type, "header"),
-        ];
-        return view('Admin/dashboard_publishes_admin.php', $data);
-    }
-
-  
     /**
      * preview_training
-     *
+     * Aperçu des formations (profil admin et former)
      * @return void
      */
     public function preview_training()
@@ -659,7 +476,6 @@ class DashBoard extends BaseController
         $listPages = [];
 
         if ($this->isPost()) {
-            $title_training = $this->request->getVar('title');
             $id_training = $this->request->getVar('id_training');
             $pages = $this->training_model->getFilterPages($id_training);
             // map sur le tableau si nécessaire
@@ -672,20 +488,15 @@ class DashBoard extends BaseController
                     "image_url" => $page['image_url'],
                     "video_url" => $page['video_url'],
                 ];
-            }            
-            session()->title_training = $title_training;
-            session()->id_training = $id_training;
+            }
         }
-
         $data = [
             "title" => $title,
-            "title_training" => $title_training,
             "pages" => $listPages,
             "user" => $user,
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
             "id_training" => $id_training,
-            "modalDelete" => modalDelete(),
         ];
         return view('Admin/dashboard_page.php', $data);
     }

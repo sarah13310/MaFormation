@@ -25,23 +25,25 @@
 <table class="table border">
     <thead class="<?= $headerColor ?>">
         <tr>
+            <th scope="col">Aperçu</th>
             <th scope="col">Sujet</th>
-            <th scope="col">Date et heure</th>
-            <th colspan="3" scope="col">Actions</th>
+            <th scope="col">Créé le</th>
+            <th colspan="2" scope="col">Actions</th>
+            <th scope="col">Voir les articles</th>
         </tr>
     </thead>
     <tbody>
         <?php $i = 0;
         foreach ($publishes as $publishe) : ?>
-            <tr class="mt-4" style="border-top:2px solid; <?= (count($publishe['articles']) > 0) ? 'border-bottom:hidden' : '' ?>">
-                <td><?= $publishe['subject'] ?></td>
-                <td><?= $publishe['datetime'] ?></td>
+            <tr>
                 <td>
                     <form action="/publishes/preview" method="post">
                         <input type="hidden" name="id_publication" value="<?= $publishe['id_publication'] ?>">
                         <button type="submit" class="btn mr-2 "><i class="bi bi-eye"></i></button>
                     </form>
                 </td>
+                <td><?= $publishe['subject'] ?></td>
+                <td><?= dateTimeFormat($publishe['datetime']) ?></td>
                 <td>
                     <button onclick="onDelete(<?= $publishe['id_publication'] ?>,'/publishes/delete')" id="btn_confirm" type="button" class="btn mr-2 "><i class="bi bi-trash"></i></button>
                 </td>
@@ -53,51 +55,52 @@
                         <option value="4">Déclassé</option>
                     </select>
                 </td>
+                <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $i ?>" aria-expanded="false" aria-controls="collapse<?= $i ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </td>
             </tr>
-            <?php if (count($publishe['articles']) > 0) : ?>
-                <tr class="mt-3" style="border-style:none;">
-                    <td colspan="4">
-                        <div class="mx-auto row <?= $headerColor ?>">
-                            <a class="col btn btn-collapse" style="border:0px solid black;" data-bs-toggle="collapse" href="#collapse<?= $i ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <i class="bi bi-caret-down noselect"></i>&nbsp;&nbsp;&nbsp;&nbsp;Articles
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr style="border-style:hidden;border-bottom:2px solid;">
-
-                    <div class="collapse" id="collapse<?= $i ?>">
-                        <div class="card card-body w-100">
-                            <?php foreach ($publishe['articles'] as $article) : ?>
-
-                                <td>
-                                    <?= $article['subject'] ?>
-                                </td>
-                                <td>
-                                    <?= $article['datetime'] ?>
-                                </td>
-                                <td>
-                                    <form action="/article/preview" method="post">
-                                        <input type="hidden" name="id_article" value="<?= $article['id_article'] ?>">
-                                        <button type="submit" class="btn mr-2 "><i class="bi bi-eye"></i></button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="/article/delete" method="post">
-                                        <input type="hidden" name="id_article" value="<?= $article['id_article'] ?>">
-                                        <button type="submit" class="btn mr-2 "><i class="bi bi-trash"></i></button>
-                                    </form>
-                                </td>
-                            <?php endforeach ?>
-                        </div>
-                    </div>
-
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td colspan=4>
+                    <table class="table collapse" id="collapse<?= $i ?>">
+                        <thead class="<?= $headerColor ?>">
+                            <tr>
+                                <th scope="col">Aperçu</th>
+                                <th scope="col">Sujet</th>
+                                <th scope="col">Créé le</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $j = 0;
+                            foreach ($publishe['article'] as $article) : ?>
+                                <tr>
+                                    <td>
+                                        <form action="/article/preview" method="post">
+                                            <input type="hidden" name="id_article" value="<?= $article['id_article'] ?>">
+                                            <button type="submit" class="btn mr-2 float-end"><i class="bi bi-eye"></i></button>
+                                        </form>
+                                    </td>
+                                    <td><?= $article['subject'] ?></td>
+                                    <td><?= dateTimeFormat($article['datetime']) ?></td>
+                                    <td>
+                                        <form action="/article/delete" method="post">
+                                            <input type="hidden" name="id_article" value="<?= $article['id_article'] ?>">
+                                            <button type="submit" class="btn mr-2 "><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php $j++;
+                            endforeach ?>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
         <?php $i++;
         endforeach ?>
     </tbody>
 </table>
+
 <?= $this->endSection() ?>
 
 

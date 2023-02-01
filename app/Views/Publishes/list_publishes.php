@@ -13,7 +13,7 @@
                         <h5 class="card-title"><?= $publishe['subject'] ?></h5>
                         <?php $j = 0;
                         foreach ($publishe['user'] as $user) : ?>
-                            <small><?= "Ecrit par " . $user['name'] . " " . $user['firstname'] . " le " . dateFormat($publishe['datetime']) ?></small>
+                            <small><?= "Ecrit par " . $user['name'] . " " . $user['firstname'] . " le " . dateTimeFormat($publishe['datetime']) ?></small>
                         <?php $j++;
                         endforeach ?>
                         <div class="mt-3">

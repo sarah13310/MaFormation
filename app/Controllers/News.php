@@ -5,15 +5,22 @@ namespace App\Controllers;
 // le 20/01/2023
 class News extends BaseController
 {
-
+    
+    /**
+     * articles_edit
+     * Edition de l'article
+     * @return void
+     */
     public function articles_edit()
-    {        
+    {
         //        
         $user = $this->user_model->getUserSession();
         //        
         $categories = $this->category_model->getCategories();
         //        
         $publishes = $this->publication_model->getFilterPublishes(ALL);
+
+        $publishes = $this->publication_model->getPublishesbyAuthor($user['id_user']);
 
         $data = [
             "title" => "Création Article",
@@ -31,8 +38,7 @@ class News extends BaseController
             session()->remove('succes');
         }
 
-        if ($this->request->getMethod() == 'post') {     
-            
+        if ($this->isPost()) {
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             switch (session()->type) {
@@ -65,13 +71,13 @@ class News extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                
+
                 if ($this->article_model->isExist($subject) == true) {
                     if (strlen($subject) > 0)
                         $data["warning"] = "Cet Article existe déjà!";
                 } else {
                     // on sauve en premier le tag
-                    
+
                     $data_tag["id_category"] = $dataSave['category'];
                     $id_tag = $this->tag_model->insert($data_tag);
                     $dataSave['id_tag'] = $id_tag;
@@ -97,12 +103,21 @@ class News extends BaseController
         }
         return view('Articles/articles_edit.php', $data);
     }
-
+    
+    /**
+     * publishes_edit
+     * Edition de la publication
+     * @return void
+     */
     public function publishes_edit()
-    {                
-        $user = $this->user_model->getUserSession();        
+    {
+        $user = $this->user_model->getUserSession();
+        //
         $categories = $this->category_model->getCategories();
+        //
         $articles = $this->article_model->getFilterArticles();
+        //
+        $articles = $this->article_model->getArticlesbyAuthor(0, $user['id_user']);
 
         $data = [
             "title" => "Création Publication",
@@ -151,21 +166,21 @@ class News extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                
+
                 if ($this->publication_model->isExist($dataSave['subject']) == true) {
                     if (strlen($subject) > 0) {
                         $data["warning"] = "Cette publication existe déjà!";
                     }
                 } else {
                     // on sauve en premier le tag
-                    
+
                     $data_tag["id_category"] = $dataSave['category'];
                     $id_tag = $this->tag_model->insert($data_tag);
                     $dataSave['id_tag'] = $id_tag;
                     // ensuite on enrichit la table publication    
                     $id_publication = $this->publication_model->insert($dataSave);
                     // en dernier on fait le lien entre article et publication
-                    
+
                     $data_temp = [
                         'id_publication' => $id_publication,
                     ];
@@ -184,62 +199,50 @@ class News extends BaseController
         }
         return view('Publishes/publishes_edit.php', $data);
     }
-
+    
+    /**
+     * list_articles_home
+     * Menu Articles => affiche de tous les articles validés
+     * @return void
+     */
     public function list_articles_home()
     {
         $title = "Liste des articles";
-        $db      = \Config\Database::connect();
-        $builder = $db->table('article');
-        $builder->where('status', '1');
-        $query   = $builder->get();
-        $articles = $query->getResultArray();
+
+        $public = $this->article_model->getArticles();
+
+        $builder = $public['builder'];
+
+        $articles = $this->article_model->getFilterArticles(VALIDE);
+
         $listarticles = [];
 
-        foreach ($articles as $article) {
-            if ($article['image_url'] == null) {
-                $article['image_url'] = base_url() . "/assets/article.svg";
-            }
-            $listarticles[] = [
-                "id_article" => $article['id_article'],
-                "subject" => $article['subject'],
-                "description" => $article['description'],
-                "datetime" => $article['datetime'],
-                "image_url" => $article['image_url'],
-            ];
-        }
-        /* auteur de l'article*/
-        $builder->select('user.name,user.firstname');
+        $listarticles = $this->article_model->returnDataArticles($listarticles, $articles);
 
-        for ($i = 0; $i < count($listarticles); $i++) {
-            $builder->where('article.id_article', $listarticles[$i]['id_article']);
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $query = $builder->get();
-            $user = $query->getResultArray();
-            $authors = [];
-            foreach ($user as $u) {
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                ];
-            }
-            $listarticles[$i]["user"] = $authors;
-        }
+        $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
+
         $data = [
             "title" => $title,
             "listarticles" => $listarticles,
         ];
         return view('Articles/list_article.php', $data);
     }
-
+        
+    /**
+     * home_article_details
+     * fonction commune pour articles validés
+     * @param  mixed $title
+     * @param  mixed $id
+     * @return array
+     */
     private function home_article_details($title, $id = 0)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('article');
-        $builder->where('id_article', $id);
-        $query   = $builder->get();
-        $article = $query->getResultArray();
-        $article = $article[0];
+
+        $public = $this->article_model->getArticlesbyId($id);
+
+        $builder = $public['builder'];
+
+        $article = $public['article'];
 
         $image_url = $article['image_url'];
 
@@ -247,21 +250,8 @@ class News extends BaseController
             $article['image_url'] = base_url() . "/assets/article.svg";
         }
 
-        $builder->where('article.id_article', $id);
-        $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-        $builder->join('user', 'user_has_article.id_user = user.id_user');
-        $query = $builder->get();
-        $user = $query->getResultArray();
+        $author = $this->article_model->getAuthorArticles($builder, $id);
 
-        $author = [];
-        foreach ($user as $u) {
-
-            $author[] = [
-                "name" => $u['name'],
-                "firstname" => $u['firstname'],
-                "image_url" => $u['image_url'],
-            ];
-        }
         $data = [
             "title" => $title,
             "article" => $article,
@@ -270,7 +260,13 @@ class News extends BaseController
 
         return $data;
     }
-
+        
+    /**
+     * get_details_article_home
+     * Carousel des articles validés (page home)
+     * @param  mixed $id
+     * @return array
+     */
     public function get_details_article_home($id)
     {
         $title = "Détails de l'article";
@@ -279,69 +275,41 @@ class News extends BaseController
         }
         return view('Articles/list_article_details.php', $data);
     }
-
+    
+    /**
+     * details_article_home
+     * Détail de la liste article (page home)
+     * @return array
+     */
     public function details_article_home()
     {
         $title = "Détails de l'article";
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost() == 'post') {
             $id = $this->request->getVar('id_article');
-            $data = $this->home_article_details($title, $id);
+            $data = $this->home_article_details($title, $id);            
             return view('Articles/list_article_details.php', $data);
         }
     }
-
+    
+    /**
+     * list_publishes_home
+     * Menu publication =>La liste des publication 
+     * @return void
+     */
     public function list_publishes_home()
     {
         $title = "Liste des publications";
-        $db      = \Config\Database::connect();
-        $builder = $db->table('publication');
 
-        $builder->where('status', '1');
-        $query   = $builder->get();
-        $publishes = $query->getResultArray();
+        $public = $this->publication_model->getPublishes();
+
+        $publishes = $this->publication_model->getFilterPublishes(VALIDE);
 
         $listpublishes = [];
 
-        foreach ($publishes as $publishe) {
-            $image_url = $publishe['image_url'];
+        $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
 
-            if ($image_url == null or $image_url === "") {
-                $publishe['image_url'] = base_url() . "/assets/publication.svg";
-            }
-            $listpublishes[] = [
-                "id_publication" => $publishe['id_publication'],
-                "subject" => $publishe['subject'],
-                "description" => $publishe['description'],
-                "datetime" => $publishe['datetime'],
-                "image_url" => $publishe['image_url'],
-            ];
-        }
-        /* auteur de l'article*/
-        $builder->select('user.name,user.firstname');
-
-        for ($i = 0; $i < count($listpublishes); $i++) {
-
-            $builder->where('publication.id_publication', $listpublishes[$i]['id_publication']);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $builder->groupBy('user.id_user');
-
-            $query = $builder->get();
-            $user = $query->getResultArray();
-
-            $authors = [];
-            foreach ($user as $u) {
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                ];
-            }
-
-            $listpublishes[$i]["user"] = $authors;
-        }
+        $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
 
         $data = [
             "title" => $title,
@@ -350,99 +318,75 @@ class News extends BaseController
 
         return view('Publishes/list_publishes.php', $data);
     }
-
-
+    
+    /**
+     * details_publishes_home
+     * Détails des publications
+     * @return void
+     */
     public function details_publishes_home()
     {
         $title = "Détails de la publication";
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost() == 'post') {
 
             $id = $this->request->getVar('id_publication');
-            $db      = \Config\Database::connect();
-            $builder = $db->table('publication');
-            $builder->where('id_publication', $id);
-            $query   = $builder->get();
-            $publication = $query->getResultArray();
-            $publication = $publication[0];
+
+            $publication = $this->publication_model->getPublisheById($id);
+
             $image_url = $publication['image_url'];
             if ($image_url == null or $image_url === "") {
                 $publication['image_url'] = base_url() . "/assets/publication.svg";
             }
 
-            $builder->select('article.id_article,article.subject,article.description,article.datetime,article.image_url');
-            $builder->where('publication.id_publication', $id);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-
-            $query = $builder->get();
-            $articles = $query->getResultArray();
+            $articles =  $this->publication_model->getFilterArticles($id);
 
             $listarticles = [];
 
-            foreach ($articles as $article) {
-                $image_url = $article['image_url'];
-                if ($image_url == null or $image_url === "") {
-                    $article['image_url'] = base_url() . "/assets/article.svg";
-                }
-                $listarticles[] = [
-                    "id_article" => $article['id_article'],
-                    "subject" => $article['subject'],
-                    "description" => $article['description'],
-                    "datetime" => $article['datetime'],
-                    "image_url" => $article['image_url'],
-                ];
-            }
-            $builder->where('publication.id_publication', $id);
-            $builder->join('publication_has_article', 'publication_has_article.id_publication = publication.id_publication');
-            $builder->join('article', 'publication_has_article.id_article = article.id_article');
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $builder->groupBy('user.id_user');
+            $listarticles= $this->article_model->returnDataArticles($listarticles,$articles);
 
-            $query = $builder->get();
-            $user = $query->getResultArray();
+            $id_user = $publication['id_user'];
 
-            $authors = [];
-            foreach ($user as $u) {
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                    "image_url" => $u['image_url'],
-                ];
-            }
+            $author = $this->publication_model->getAuthorPublishes($id_user);
 
             $data = [
                 "title" => $title,
                 "publication" => $publication,
                 "listarticles" => $listarticles,
-                "authors" => $authors,
+                "author" => $author,
             ];
-
-
 
             return view('Publishes/list_publishes_details.php', $data);
         }
     }
-
-    // suppression de l'article en fonction de son Id
+    
+    /**
+     * delete_article
+     * suppression de l'article en fonction de son Id 
+     * @return void
+     */
     public function delete_article()
     {
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost() == 'post') {
             $id = $this->request->getVar('id_article');
-            
+
             $this->article_model->deleteArticle($id);
         }
         return redirect()->to(previous_url());
     }
-
-    // suppression de la publication en fonction de son Id
+     
+    /**
+     * delete_publish
+     * suppression de la publication en fonction de son Id    
+     * @return void
+     */
     public function delete_publish()
-    {        
-        if ($this->request->getMethod() == 'post') {
-            $id = $this->request->getVar('id_publication');            
+    {
+        if ($this->isPost() == 'post') {
+            $id = $this->request->getVar('id_publication');
             $this->publication_model->deletePublishe($id);
         }
         return redirect()->to(previous_url());
     }
+
 }

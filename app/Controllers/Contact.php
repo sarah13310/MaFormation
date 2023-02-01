@@ -25,7 +25,7 @@ class Contact extends BaseController
     
     public function index()
     {
-        $data = ["title" => "Contact"];
+        $data = ["title" => "Nous contacter"];
         helper(['form']);
         $options=$this->createOptionobject();
         $data['options']=$options;

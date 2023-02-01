@@ -886,17 +886,23 @@ tr {
 }
 
 /* barre verticale avec effet de dégradé*/
-.hr {
+hr {
 	width: 100%;
-	border-top: 0.1px solid rgba(0, 0, 0, 0.214);
+	/*border-top: 0.1px solid rgba(0, 0, 0, 0.2);*/
 	padding: 0;
 	margin: 0;
+	margin-left:2px;
+	margin-right:2px;
 
-	background: linear-gradient(90deg, #ffffffb6 0%, #a4a3a3 50%, #ffffffb6 100%);
-	background-image: -o-linear-gradient(white 2%, #E6E6E6 50%, white 98%);
-	background-image: -moz-linear-gradient(white 2%, #E6E6E6 50%, white 98%);
-	background-image: -webkit-linear-gradient(white 2%, #E6E6E6 50%, white 98%);
-	background-image: -ms-linear-gradient(white 2%, #E6E6E6 50%, white 98%);
-	background: -webkit-gradient(top, linear, color-stop(0.02, white), color-stop(0.5, gray), color-stop(0.98, white));
+	background: linear-gradient(90deg, #ffffffb6 0%, #7d7d7d 50%, #ffffffb6 100%)!important;
+	background-image: -o-linear-gradient(white 2%, #7d7d7d 50%, white 98%)!important;
+	background-image: -moz-linear-gradient(white 2%, #7d7d7d 50%, white 98%)!important;
+	background-image: -webkit-linear-gradient(white 2%, #7d7d7d 50%, white 98%)!important;
+	background-image: -ms-linear-gradient(white 2%, #7d7d7d 50%, white 98%)!important;
+	background: -webkit-gradient(top, linear, color-stop(0.02, white), color-stop(0.5, #7d7d7d), color-stop(0.98, white))!important;
 
+}
+
+.ms-6{
+	margin-left: 100px;
 }

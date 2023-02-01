@@ -39,7 +39,9 @@
             <!-- <td><?= $article['description'] ?></td> -->
             <td><?= $article['datetime'] ?></td>
 
-            <td><?= $article['author']['name'] . " " . $article['author']['firstname'] ?></td>
+            <?php foreach ($article['user'] as $user) : ?>
+                <td><?= $user['name'] . " " . $user['firstname'] ?></td>
+            <?php endforeach ?>
 
             <td>
                 <form action="/article/preview" method="post">

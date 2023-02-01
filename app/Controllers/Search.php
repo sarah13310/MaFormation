@@ -9,7 +9,7 @@ class Search extends BaseController
     {
         helper(['form']);
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
             $research = $this->request->getVar('research');
             $db = \Config\Database::connect();
@@ -35,7 +35,7 @@ class Search extends BaseController
             $builder->where('type', FORMER);
             $builder->where('status', VALIDE);
             $builder->like('name', $research);
-            $builder->like('firstname', $research); 
+            $builder->like('firstname', $research);
             $query   = $builder->get();
             $formers = $query->getResultArray();
 
@@ -79,16 +79,43 @@ class Search extends BaseController
                     "image_url" => $publication['image_url'],
                 ];
             }
+
+            $builder = $db->table('training');
+            $builder->like('title', $research);
+            $builder->where('status', VALIDE);
+            $query   = $builder->get();
+            $trainings = $query->getResultArray();
+
+            $listtrainings = [];
+            foreach ($trainings as $training) {
+                $listtrainings[] = [
+                    "id_training" => $training['id_training'],
+                    "title" => $training['title'],
+                ];
+            }
+        }
+
+        if (count($listtrainings)==0 && count($listpublications)==0 && count($listarticles)==0 && count($listformers)==0 && count($listmedias)==0) {
+
+            $title = "Aucun Résultat Trouvé";
+        } else {
+            $title = "Résultat";
         }
 
         $data = [
-            "title" => "Résultat",
+            "title" => $title,
             "listmedias" => $listmedias,
             "listformers" => $listformers,
             "listarticles" => $listarticles,
-            "listpublications" => $listpublications, 
+            "listpublications" => $listpublications,
+            "listtrainings" => $listtrainings,
         ];
 
         return view('Home/result.php', $data);
+    }
+
+    public function tridata()
+    {
+
     }
 }

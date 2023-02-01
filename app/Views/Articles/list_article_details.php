@@ -7,7 +7,7 @@
             <h1 class="col mt-2 mb-2"><?= $title ?></h1>
         </div>
         <div class="d-flex col-3 align-self-center justify-content-end">
-            <a class="col-8 btn btn-outline-primary" href="/article/list">Retour</a>
+            <a class="col-8 btn btn-outline-primary" href="javascript:window.history.go(-1);">Retour</a>
         </div>
     </div>
 
