@@ -35,7 +35,10 @@ $routes->setAutoRoute(false);// pour utliser les filtres
 $routes->get('/', 'Home::index');
 
 // Résultat des recherches
-$routes->add('/result', 'Search::resultdata');
+$routes->add('/result', 'Search::resultdata',['filter'=>'cache']);
+
+//$routemap['find-by']='Search::resultdata';
+//$routes->map($routemap);
 
 $routes->add('/superadmin/add/admin', 'Admin::add_admin', ['filter'=>'auth']); // Ajout administrateur
 $routes->get('/superadmin/privileges', 'Dashboard::privileges',['filter'=>'auth']); //dashboard des privileges

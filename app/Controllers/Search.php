@@ -4,12 +4,10 @@ namespace App\Controllers;
 
 class Search extends BaseController
 {
-
     public function resultdata()
     {
-        helper(['form']);
-
-        if ($this->isPost()) {
+        helper(['form', 'url']);
+        if ($this->isGet()) {
 
             $research = $this->request->getVar('research');
             $db = \Config\Database::connect();
@@ -79,7 +77,6 @@ class Search extends BaseController
                     "image_url" => $publication['image_url'],
                 ];
             }
-
             $builder = $db->table('training');
             $builder->like('title', $research);
             $builder->where('status', VALIDE);
@@ -95,7 +92,7 @@ class Search extends BaseController
             }
         }
 
-        if (count($listtrainings)==0 && count($listpublications)==0 && count($listarticles)==0 && count($listformers)==0 && count($listmedias)==0) {
+        if (count($listtrainings) == 0 && count($listpublications) == 0 && count($listarticles) == 0 && count($listformers) == 0 && count($listmedias) == 0) {
 
             $title = "Aucun Résultat Trouvé";
         } else {
@@ -110,12 +107,11 @@ class Search extends BaseController
             "listpublications" => $listpublications,
             "listtrainings" => $listtrainings,
         ];
-
+        
         return view('Home/result.php', $data);
     }
 
     public function tridata()
     {
-
     }
 }

@@ -2,7 +2,7 @@
 
 ## Qu'est-ce que MaFormation?
 
-C'est un site basic pour gérer les formations écrit en PHP full-stack web dans un framework clair, rapide, flexible et sécurisé.
+C'est un site de formation pour gérer les formations écrit en PHP full-stack web dans un framework clair, rapide, flexible et sécurisé.
 Plus plus d'informations sur le framework utilisé, vous pouvre trouver des informations à [site officiel](http://codeigniter.com).
 
 Ce répositoire maintient une version distributabledu site de formation,
