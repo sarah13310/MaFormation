@@ -1,10 +1,9 @@
 
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') ?>
 
 <div class="container d-flex align-items-center justify-content-center">
-    <form class="" action="/signin" method="post">
+    <form class="" action="/user/signin" method="post">
         <h3><?= $title ?></h3>
         <hr>
         <div class="row">

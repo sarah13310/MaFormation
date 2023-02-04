@@ -4,112 +4,10 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 
+// le 03/02/2023
 
 class Admin extends BaseController
 {      
-    /**
-     * profileadmin
-     *
-     * @return void
-     */
-    public function profileadmin()
-    {
-        helper(['form', "util"]);
-        $id = session()->get('id_user');
-
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier 
-
-        /* compétences certificats */
-        $builder->select('certificate.name');
-        $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-        $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
-        $query = $builder->get();
-        $certificates = $query->getResultArray();
-        $skills = [];
-        foreach ($certificates as $certificate) {
-            $skills[] = $certificate['name'];
-        }
-
-        $builder->select('company.name, company.address,company.city ,company.cp');
-        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
-        $builder->join('company', 'user_has_company.id_company=company.id_company');
-        $query = $builder->get();
-        $companies = $query->getResultArray();
-        $jobs = [];
-        foreach ($companies as $company) {
-            $jobs[] = [
-                "name" => $company['name'],
-                "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
-            ];
-        }
-        $data = [
-            "title" => "Mode Administrateur",
-            "user" => $user,
-            "jobs" => $jobs,
-            "skills" => $skills,
-        ];
-        return view('Admin/profile_admin.php', $data);
-    }
-    
-    /**
-     * superprofile
-     *
-     * @return void
-     */
-    public function superprofile()
-    {
-        helper(['form']);
-        
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
-        $id = session()->get('id_user');
-
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier 
-
-        /* compétences certificats*/
-        $builder->select('certificate.name');
-        $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-        $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-
-        $query = $builder->get();
-        $certificates = $query->getResultArray();
-        $skills = [];
-        foreach ($certificates as $certificate) {
-            $skills[] = $certificate['name'];
-        }
-
-        $builder->select('company.name, company.address,company.city ,company.cp');
-        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
-        $builder->join('company', 'user_has_company.id_company=company.id_company');
-        $query = $builder->get();
-        $companies = $query->getResultArray();
-
-        $jobs = [];
-        foreach ($companies as $company) {
-            $jobs[] = [
-                "name" => $company['name'],
-                "address" => $company['address'] . "<br>" . $company['city'] . ", " . $company['cp']
-            ];
-        }
-        $data = [
-            "title" => "Profil",
-            "user" => $user,
-            "jobs" => $jobs,
-            "skills" => $skills,
-        ];
-        return view('Admin/super_profile.php', $data);
-    }
-
-
     public function add_admin()
     {
         $user = $this->getUserSession();
@@ -121,7 +19,7 @@ class Admin extends BaseController
             "buttonColor" => getTheme(session()->type, "button"),
         ];
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             //faisons la validation ici
             $rules = [
                 'mail' => 'required|min_length[6]|max_length[50]|valid_email',

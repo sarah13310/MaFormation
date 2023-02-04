@@ -4,11 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-define("TYPE_SUPER_ADMIN", "3");
-define("TYPE_ADMIN", "5");
-define("TYPE_FORMER", "7");
-define("TYPE_USER",     "9");
-define("TYPE_COMPANY",   "11");
+// le 03/02/2023
 
 class UserModel extends Model
 {
@@ -54,7 +50,7 @@ class UserModel extends Model
         //$data = $this->passwordHash($data);
         return $data;
     }
-    
+
     /**
      * passwordHash
      * Génère la mot de passe pour l'utilisateur
@@ -69,7 +65,7 @@ class UserModel extends Model
         }
         return $data;
     }
-    
+
     /**
      * getFilterUser
      * Récupère la liste de tous les utilisateurs par défaut
@@ -82,8 +78,7 @@ class UserModel extends Model
      */
     function getFilterUser($id_user = ALL)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         if ($id_user != ALL) {
             $builder->where('id_user', $id_user);
         }
@@ -91,8 +86,22 @@ class UserModel extends Model
         $user = $query->getResultArray();
         return ["builder" => $builder, "user" => $user];
     }
-
     
+    /**
+     * getUserById
+     *
+     * @param  int $id_user
+     * @return array
+     */
+    function getUserById($id_user)
+    {
+        $builder = $this->db->table('user');
+        $builder->where('id_user', $id_user);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+
     /**
      * getUserSession
      * Récupère les informations de la session utitisateur en cours
@@ -122,7 +131,7 @@ class UserModel extends Model
         return $user;
     }
 
-     
+
     /**
      * setUserSession
      * Récupère les données de la base et les transfert à la session utilisateur en cours   
@@ -157,7 +166,7 @@ class UserModel extends Model
         return true;
     }
 
-        
+
     /**
      * getInfosCertificates
      * récupère juste les noms des certificats en fonction de l'ID 
@@ -167,8 +176,7 @@ class UserModel extends Model
      */
     function getInfosCertificates($id)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         $builder->select('certificate.name');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
@@ -182,7 +190,7 @@ class UserModel extends Model
         return $skills;
     }
 
-     
+
     /**
      * getCertificates
      * récupère les certificats en fonction de l'ID    
@@ -192,8 +200,7 @@ class UserModel extends Model
      */
     function getCertificates($id)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         $builder->select('certificate.*');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
@@ -202,7 +209,6 @@ class UserModel extends Model
         $skills = $query->getResultArray();
         return $skills;
     }
-
 
     /**
      * getInfosCompany
@@ -215,8 +221,7 @@ class UserModel extends Model
      */
     function getInfosCompany($id, $single = true)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         $builder->select('company.name, company.address,company.city ,company.cp');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
@@ -280,8 +285,7 @@ class UserModel extends Model
     // Suppression d'un certificat en fonction de son id
     function removeCertificate($id)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('certificate');
+        $builder = $this->db->table('certificate');
         $builder->where('id_certificate', $id);
         $builder->delete();
     }
@@ -293,10 +297,41 @@ class UserModel extends Model
      */
     function getFormers()
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         $builder->where('type', FORMER);
         $query   = $builder->get();
         return  ["formers" => $query->getResultArray(), "builder" => $builder];
+    }
+    
+    /**
+     * getUserbyType
+     * La liste des utilisateurs suivant le profil avec un id ou tous
+     * @param  int $type
+     * @param  int $id
+     * @return array
+     */
+    function getUserbyType($type, $id=ALL){
+        $builder = $this->db->table('user');
+        if ($id!==ALL){
+            $builder->where('id', $id);
+        }
+        $builder->where('type', $type);
+        $query   = $builder->get();
+        return $query->getResultArray();
+    }
+
+
+    /**
+     * getUserByMail
+     *
+     * @param  string $mail
+     * @return array
+     */
+    function getUserByMail($mail)
+    {
+        $builder = $this->db->table('user');
+        $builder->where('mail', $mail);
+        $query   = $builder->get();
+        return $query->getResultArray();
     }
 }

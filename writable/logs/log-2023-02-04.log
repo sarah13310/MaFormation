@@ -1,0 +1,37 @@
+CRITICAL - 2023-02-04 14:57:54 --> Undefined variable $user
+in APPPATH\Views\layouts\profil.php on line 36.
+ 1 APPPATH\Views\layouts\profil.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'APPPATH\\Views\\layouts\\profil.php', 36)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\layouts\\profil.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->render('layouts/profil', [], true)
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/list_client.php', [], true)
+ 6 APPPATH\Controllers\User.php(921): view('User/list_client.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-04 15:09:12 --> Undefined array key "id_name"
+in APPPATH\Views\User\list_client.php on line 21.
+ 1 APPPATH\Views\User\list_client.php(21): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_name"', 'APPPATH\\Views\\User\\list_client.php', 21)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\list_client.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/list_client.php', [], true)
+ 5 APPPATH\Controllers\User.php(922): view('User/list_client.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-04 15:23:01 --> Undefined variable $title
+in APPPATH\Views\User\list_client.php on line 3.
+ 1 APPPATH\Views\User\list_client.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'APPPATH\\Views\\User\\list_client.php', 3)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\list_client.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/list_client.php', [], true)
+ 5 APPPATH\Controllers\User.php(938): view('User/list_client.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

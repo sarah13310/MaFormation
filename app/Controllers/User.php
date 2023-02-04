@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 // le 12/01/2023
+// le 03/02/2023
+
 class User extends BaseController
 {
     public function __construct()
@@ -40,20 +42,21 @@ class User extends BaseController
                     'max_length' => 'Mot de passe trop long',
                 ],
             ];
-            // on restitue les informations
+            // on stock les informations dans la session
             $mail = $this->request->getVar('mail');
-            session()->set('mail', $mail);
             $password = $this->request->getVar('password');
+            session()->set('mail', $mail);
             session()->set('password', $password);
-
 
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-
                 $user = null;
                 try {
-                    $user = $this->user_model->where('mail', $mail)->first();
+                    $user = $this->user_model->getUserByMail($mail);
+                    if ($user) {
+                        $user = $user[0];
+                    }
                 } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {
                     session()->setFlashdata('infos', 'Connexion impossible!');
                     return view('/Login/login', $data);
@@ -83,6 +86,7 @@ class User extends BaseController
         helper(['form']);
 
         $this->user_model->setUserSession($user);
+
         $type = $user['type'];
 
         if ($user['image_url'] == null)
@@ -215,7 +219,7 @@ class User extends BaseController
     {
         helper(['form']);
 
-        if ($this->request->getMethod() == "post") {
+        if ($this->isPost()) {
             // on met à jour les informations de session           
             session()->mail = $this->request->getVar('mail');
             session()->address = $this->request->getVar('address');
@@ -227,7 +231,7 @@ class User extends BaseController
             session()->birthday = $this->request->getVar('birthday');
             session()->site = $this->request->getVar('site');
 
-            // On met à jour les informations utilisateur
+            // On met à jour les informations de session utilisateur
             $dataUpdate = [
                 //'id_user' => session()->id_user,
                 'mail' => session()->mail,
@@ -246,8 +250,8 @@ class User extends BaseController
             $this->user_model->update(session()->id_user, $dataUpdate);
         }
         $user = $this->user_model->getUserSession();
-
         $skills = $this->user_model->getCertificates($user['id_user']);
+
         if ($user['image_url'] == null) {
             $user['image_url'] = base_url() . "/assets/blank.png";
         }
@@ -263,11 +267,15 @@ class User extends BaseController
     }
 
     /* profil entreprise */
+    /**
+     * profilecompany
+     *
+     * @return void
+     */
     public function profilecompany()
     {
         $id =  session()->get('id_user');
-        $db      = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         $builder->where('id_user', $id);
         $query   = $builder->get();
         $user = $query->getResultArray();
@@ -289,6 +297,11 @@ class User extends BaseController
     }
 
     /* mot de passe oublié */
+    /**
+     * forgetpassword
+     * Mot de passe oublié
+     * @return void
+     */
     public function forgetpassword()
     {
         $data = [
@@ -297,14 +310,24 @@ class User extends BaseController
         return view('Login/forgetpassword.php', $data);
     }
 
-    /* Deconnexion utilisateur */
+
+    /**
+     * logout
+     * Deconnexion utilisateur 
+     * @return void
+     */
     public function logout()
     {
         session()->destroy();
         return redirect()->to('/');
     }
 
-    /* Inscription utilisateur*/
+
+    /**
+     * signin
+     * Inscription utilisateur
+     * @return void
+     */
     public function signin()
     {
         $data = ["title" => "Inscription"];
@@ -433,13 +456,13 @@ class User extends BaseController
                 ];
 
                 if ($index == 4) { //Particulier
-                    $newData['type'] = TYPE_USER;
+                    $newData['type'] = USER;
                     $newData['status'] = 1;
                     $this->user_model->save($newData);
                 }
 
                 if ($index == 2) { // Formateur
-                    $newData['type'] = TYPE_FORMER;
+                    $newData['type'] = FORMER;
                     $newData['status'] = 1;
                     $this->user_model->save($newData);
                     $id_user = $this->user_model->getInsertID();
@@ -462,11 +485,10 @@ class User extends BaseController
                         'id_user' => $id_user,
                         'id_certificate' => $id_certificate,
                     ];
-
                     $this->user_has_company_model->save($newDatace);
                 }
                 if ($index == 3) { //Entreprise
-                    $newData['type'] = TYPE_COMPANY;
+                    $newData['type'] = COMPANY;
                     $newData['status'] = 1;
 
                     $kbis = $this->request->getVar('c_kbis');
@@ -503,12 +525,15 @@ class User extends BaseController
         return view('Login/signin', $data);
     }
 
-    /* liste des factures suivant profil utilisateur */
+
+    /**
+     * bill
+     * liste des factures suivant profil utilisateur
+     * @return void
+     */
     public function bill()
     {
-        
         $user = $this->user_model->getUserSession();
-
         $bills = [];
         switch (session()->type) {
             case USER:
@@ -529,14 +554,18 @@ class User extends BaseController
             "buttonColor" => getTheme($user['type'], "button"),
             "headerColor" => getTheme($user['type'], "header"),
         ];
-
         return view("Payment/bill.php", $data);
     }
 
+    /**
+     * modif_name
+     * Modification du nom
+     * @return void
+     */
     public function modif_name()
     {
-        
-        if ($this->request->getMethod() == "post") {
+
+        if ($this->isPost()) {
             // on met à jour les informations de session
             session()->name = $this->request->getVar('name');
             session()->firstname = $this->request->getVar('firstname');
@@ -567,7 +596,7 @@ class User extends BaseController
     public function modif_contact()
     {
         helper(["form"]);
-        
+
         $user = $this->user_model->getUserSession();
 
         if ($this->isPost()) {
@@ -609,7 +638,7 @@ class User extends BaseController
 
     public function modif_perso()
     {
-    
+
         helper(["form"]);
 
         $user = $this->user_model->getUserSession();
@@ -880,5 +909,42 @@ class User extends BaseController
         return view("User/add_category.php", $data);
     }
 
-    
+    public function list_user($profil)
+    {
+        $users = [];
+        $title = "";
+        switch ($profil) {
+            case "user":
+                $title = "Liste des particuliers";
+                if (session()->type == ADMIN || session()->type == SUPER_ADMIN) {
+                    $filter = ALL;
+                }
+                if (session()->type == FORMER) {
+                    $filter = session()->id_user;
+                }
+                $users = $this->user_model->getUserbyType(USER, $filter);
+                break;
+
+            case "company":
+                $title = "Liste des entreprises";
+                if (session()->type == ADMIN || session()->type == SUPER_ADMIN) {
+                    $filter = ALL;
+                }
+                if (session()->type == FORMER) {
+                    $filter = session()->id_user;
+                }
+                $users = $this->user_model->getUserbyType(COMPANY, $filter);
+                break;
+        }
+        $user = $this->user_model->getUserSession();
+        //
+        $data = [
+            "title" => $title,
+            "user" => $user, // le profil 
+            "users" => $users, //la liste
+            "buttonColor" => getTheme(session()->type, "button"),
+            "headerColor" => getTheme(session()->type, "header"),
+        ];
+        return view("User/list_client.php", $data);
+    }
 }

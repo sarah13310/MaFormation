@@ -20,7 +20,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(false);// pour utliser les filtres
+$routes->setAutoRoute(false); // pour utliser les filtres
 /*
  * --------------------------------------------------------------------
  * Route Definitions
@@ -35,20 +35,20 @@ $routes->setAutoRoute(false);// pour utliser les filtres
 $routes->get('/', 'Home::index');
 
 // Résultat des recherches
-$routes->add('/result', 'Search::resultdata',['filter'=>'cache']);
+$routes->add('/result', 'Search::resultdata', ['filter' => 'cache']);
 
 //$routemap['find-by']='Search::resultdata';
 //$routes->map($routemap);
 
-$routes->add('/superadmin/add/admin', 'Admin::add_admin', ['filter'=>'auth']); // Ajout administrateur
-$routes->get('/superadmin/privileges', 'Dashboard::privileges',['filter'=>'auth']); //dashboard des privileges
+$routes->add('/superadmin/add/admin', 'Admin::add_admin', ['filter' => 'auth']); // Ajout administrateur
+$routes->get('/superadmin/privileges', 'Dashboard::privileges', ['filter' => 'auth']); //dashboard des privileges
 
 // admin
 $routes->group('/admin', static function ($routes) {
     $routes->get('/', 'Admin::index');
-    $routes->add('articles/edit', 'News::articles_edit',['filter'=>'auth']);
-    $routes->add('publishes/edit', 'News::publishes_edit',['filter'=>'auth']);
-    $routes->add('articles/list', 'Dashboard::listarticles',['filter'=>'auth']);
+    $routes->add('articles/edit', 'News::articles_edit', ['filter' => 'auth']);
+    $routes->add('publishes/edit', 'News::publishes_edit', ['filter' => 'auth']);
+    $routes->add('articles/list', 'Dashboard::listarticles', ['filter' => 'auth']);
     $routes->add('publishes/list', 'Dashboard::listpublishes');
     $routes->add('videos/list', 'Dashboard::listmedias/1'); //dashboard des videos de tous les formateurs/admins
     $routes->add('books/list', 'Dashboard::listmedias/2'); //dashboard des livres de tous les formateurs/admins
@@ -71,16 +71,16 @@ $routes->group('/former', static function ($routes) {
     $routes->get('profil', 'Former::profile_view'); // view profil
     $routes->add('rdv', 'Former::rdv'); //planning
     $routes->add('profil/edit', 'Former::profile_view'); // modify profil
-    
+
     $routes->add('training/save', 'Training::training_save'); // create training
     $routes->add('training/edit', 'Former::page_modify'); // create page
-  
+
     $routes->add('videos/list', 'Dashboard::listmedias/1'); //dashboard videos in former's profil
     $routes->add('books/list', 'Dashboard::listmedias/2'); //dashboard books in former's profil
     $routes->add('videos/edit', 'Media::medias_edit/1');
-    $routes->add('books/edit', 'Media::medias_edit/2'); 
+    $routes->add('books/edit', 'Media::medias_edit/2');
 });
-   
+
 // user (profils communs)
 $routes->group('/user', static function ($routes) {
     $routes->add('login', 'User::login'); //login user
@@ -88,19 +88,21 @@ $routes->group('/user', static function ($routes) {
     $routes->add('forgetpassword', 'User::forgetpassword'); //login connection to user
     $routes->add('signin', 'User::signin'); //signin create user profil
     $routes->add('company', 'User::confirmation'); //signin create user profil
-    $routes->add('profil', 'User::profileuser',['filter'=>'auth']); //profil (user profil)    
-    $routes->add('bill', 'User::bill',['filter'=>'auth']); //bill (user profil)   
-    $routes->add('profil/contact', 'User::modif_contact',['filter'=>'auth']); //modif contact (user profil) 
-    $routes->add('profil/password', 'User::modif_password',['filter'=>'auth']); //modif password (user profil)   
-    $routes->add('profil/skill', 'User::modif_skill',['filter'=>'auth']); //modif skills (user profil)   
-    $routes->add('profil/skill/delete/(:num)', 'User::delete_skill/$1',['filter'=>'auth']); //delete skills (user profil)   
-    $routes->add('skill/add', 'User::add_skill',['filter'=>'auth']); //delete skills (user profil)   
-    $routes->add('category/add', 'User::add_category',['filter'=>'auth']); //add category (user profil)   
-    $routes->add('category/modify', 'User::modify_category',['filter'=>'auth']); //modify category (user profil)   
-    $routes->add('category/delete', 'User::delete_category',['filter'=>'auth']); //add category (user profil)   
-    $routes->add('profil/name', 'User::modif_name',['filter'=>'auth']); //modif name (user profil)  
-    $routes->add('profil/save/photo', 'User::save_photo',['filter'=>'auth']); //save the picture (user profil)  
-    $routes->add('parameters', 'User::parameters',['filter'=>'auth']); //parameters of user (user profil)      
+    $routes->add('profil', 'User::profileuser', ['filter' => 'auth']); //profil (user profil)    
+    $routes->add('bill', 'User::bill', ['filter' => 'auth']); //bill (user profil)   
+    $routes->add('profil/contact', 'User::modif_contact', ['filter' => 'auth']); //modif contact (user profil) 
+    $routes->add('profil/password', 'User::modif_password', ['filter' => 'auth']); //modif password (user profil)   
+    $routes->add('profil/skill', 'User::modif_skill', ['filter' => 'auth']); //modif skills (user profil)   
+    $routes->add('profil/skill/delete/(:num)', 'User::delete_skill/$1', ['filter' => 'auth']); //delete skills (user profil)   
+    $routes->add('skill/add', 'User::add_skill', ['filter' => 'auth']); //delete skills (user profil)   
+    $routes->add('category/add', 'User::add_category', ['filter' => 'auth']); //add category (user profil)   
+    $routes->add('category/modify', 'User::modify_category', ['filter' => 'auth']); //modify category (user profil)   
+    $routes->add('category/delete', 'User::delete_category', ['filter' => 'auth']); //add category (user profil)   
+    $routes->add('profil/name', 'User::modif_name', ['filter' => 'auth']); //modif name (user profil)  
+    $routes->add('profil/save/photo', 'User::save_photo', ['filter' => 'auth']); //save the picture (user profil)  
+    $routes->add('parameters', 'User::parameters', ['filter' => 'auth']); //parameters of user (user profil)      
+    $routes->add('list/(:segment)', "User::list_user/$1", ['filter' => 'auth']);
+    
 });
 
 
@@ -113,16 +115,16 @@ $routes->group('/training', static function ($routes) {
     $routes->add('home', 'Training::home'); // Liste des formations visible (page home)     
     $routes->add('list', 'Training::list'); // Liste des formations visible suivant le profil utilisateur 
     $routes->add('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
-    $routes->add('payment', 'Training::payment',['filter'=>'auth']); // paiement
+    $routes->add('payment', 'Training::payment', ['filter' => 'auth']); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
-    $routes->add('preview', 'Dashboard::preview_training',['filter'=>'auth']); // Contenu des pages 
-    $routes->add('dashboard', 'Training::dashboard_training',['filter'=>'auth']); // liste des formations (user profil)
-    $routes->add('add', 'Training::training_add',['filter'=>'auth']); // add training
-    $routes->add('delete', 'Training::delete_training',['filter'=>'auth']); //delete training (user profil)  
-    $routes->add('page/add', 'Training::add_page',['filter'=>'auth']); //add page (user profil)  
-    $routes->add('page/modify', 'Training::modify_page',['filter'=>'auth']); //modify page (user profil)
-    $routes->add('page/save', 'Training::save_page',['filter'=>'auth']); //modify page (user profil)  
-    $routes->add('page/delete', 'Training::delete_page',['filter'=>'auth']); //delete page (user profil)  
+    $routes->add('preview', 'Dashboard::preview_training', ['filter' => 'auth']); // Contenu des pages 
+    $routes->add('dashboard', 'Training::dashboard_training', ['filter' => 'auth']); // liste des formations (user profil)
+    $routes->add('add', 'Training::training_add', ['filter' => 'auth']); // add training
+    $routes->add('delete', 'Training::delete_training', ['filter' => 'auth']); //delete training (user profil)  
+    $routes->add('page/add', 'Training::add_page', ['filter' => 'auth']); //add page (user profil)  
+    $routes->add('page/modify', 'Training::modify_page', ['filter' => 'auth']); //modify page (user profil)
+    $routes->add('page/save', 'Training::save_page', ['filter' => 'auth']); //modify page (user profil)  
+    $routes->add('page/delete', 'Training::delete_page', ['filter' => 'auth']); //delete page (user profil)  
 });
 
 // Articles 
@@ -131,8 +133,8 @@ $routes->group('/article', static function ($routes) {
     $routes->get('list/details/(:num)', 'News::get_details_article_home/$1'); // détails de l'article page home
     $routes->post('list/details', 'News::details_article_home'); // détails de l'article page home
     $routes->add('preview', 'Dashboard::previewarticle'); //aperçu d'un article
-    $routes->add('dashboard', 'Dashboard::dashboard_article',['filter'=>'auth']); //tableau de bord des articles (page profil)   
-    $routes->add('delete', 'News::delete_article',['filter'=>'auth']); //delete article (page profil)  
+    $routes->add('dashboard', 'Dashboard::dashboard_article', ['filter' => 'auth']); //tableau de bord des articles (page profil)   
+    $routes->add('delete', 'News::delete_article', ['filter' => 'auth']); //delete article (page profil)  
 });
 
 // Publications
@@ -140,8 +142,8 @@ $routes->group('/publishes', static function ($routes) {
     $routes->add('list', 'News::list_publishes_home'); // liste des publications (page home)
     $routes->add('list/details', 'News::details_publishes_home'); // détails de la publication page home
     $routes->add('preview', 'Dashboard::previewpublish'); //aperçu d'une publication
-    $routes->add('dashboard', 'Dashboard::dashboard_publishes',['filter'=>'auth']); //tableau de bord des publications (page profil)  
-    $routes->add('delete', 'News::delete_publish',['filter'=>'auth']); //delete publishe (page profil)   
+    $routes->add('dashboard', 'Dashboard::dashboard_publishes', ['filter' => 'auth']); //tableau de bord des publications (page profil)  
+    $routes->add('delete', 'News::delete_publish', ['filter' => 'auth']); //delete publishe (page profil)   
 });
 
 //Medias

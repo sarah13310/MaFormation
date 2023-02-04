@@ -34,14 +34,14 @@
                         </div>
                     <?php endif; ?>
                     <div class="align-self-center col-12 col-sm-8 text-right mt-2">
-                        <a href="/forgetpassword">Mot de passe oublié?</a>
+                        <a href="/user/forgetpassword">Mot de passe oublié?</a>
                     </div>
                     <div class="row mt-3 mb-3 me-0 ms-0">
                         <div class="col-12 col-sm-4 v-center">
                             <button type="submit" class="btn btn-primary ">Connecter</button>
                         </div>
                         <div class="align-self-center col-12 col-sm-8 text-right v-center">
-                            <a href="/signin">Inscrivez-vous!</a>
+                            <a href="/user/signin">Inscrivez-vous!</a>
                         </div>
                     </div>
                 </form>

@@ -502,8 +502,8 @@ function fillMenuRight($category, $type)
 
         case "Clients": // Liste Type d'ahérents
             $items = [
-                ["ref" => "/user/list", "name" => "Particulier"],
-                ["ref" => "/user/list", "name" => "Entreprise"],
+                ["ref" => "/user/list/user", "name" => "Particulier"],
+                ["ref" => "/user/list/company", "name" => "Entreprise"],
             ];
             break;
 

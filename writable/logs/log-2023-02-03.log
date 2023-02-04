@@ -1,0 +1,73 @@
+ERROR - 2023-02-03 09:04:51 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\Home.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MaFormation\app\Controllers\Home.php(25): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#5 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#9 {main}
+CRITICAL - 2023-02-03 13:11:11 --> require_once(D:\MaFormation\public/php/functions/util.php): Failed to open stream: No such file or directory
+in APPPATH\Views\Login\signin.php on line 4.
+ 1 APPPATH\Views\Login\signin.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(D:\\MaFormation\\public/php/functions/util.php): Failed to open stream: No such file or directory', 'APPPATH\\Views\\Login\\signin.php', 4)
+ 2 APPPATH\Views\Login\signin.php(4): require_once()
+ 3 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Login\\signin.php')
+ 4 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Login/signin', [], true)
+ 6 APPPATH\Controllers\User.php(503): view('Login/signin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->signin()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-03 13:56:06 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\Home.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MaFormation\app\Controllers\Home.php(25): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#5 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#9 {main}
+CRITICAL - 2023-02-03 15:41:49 --> Call to undefined method App\Models\BillModel::getFilterBill
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\User.php(520): CodeIgniter\Model->__call('getFilterBill', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
