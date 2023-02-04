@@ -913,6 +913,9 @@ class User extends BaseController
     {
         $users = [];
         $title = "";
+        $listuser = [];
+        $company = [];
+
         switch ($profil) {
             case "user":
                 $title = "Liste des particuliers";
@@ -923,6 +926,12 @@ class User extends BaseController
                     $filter = session()->id_user;
                 }
                 $users = $this->user_model->getUserbyType(USER, $filter);
+                for ($i = 0; $i < count($users); $i++) {
+                    $listuser[] = [
+                        'user' => $users[$i],
+                        'company' => [],
+                    ];
+                }
                 break;
 
             case "company":
@@ -934,6 +943,16 @@ class User extends BaseController
                     $filter = session()->id_user;
                 }
                 $users = $this->user_model->getUserbyType(COMPANY, $filter);
+
+                for ($i = 0; $i < count($users); $i++) {
+                    $company = $this->user_model->getCompanyById($users[$i]['id_user']);
+                   // print_r($company);
+                   // die();
+                    $listuser[] = [
+                        'user' => $users[$i],
+                        'company' => $company[0],
+                    ];
+                }
                 break;
         }
         $user = $this->user_model->getUserSession();
@@ -941,9 +960,11 @@ class User extends BaseController
         $data = [
             "title" => $title,
             "user" => $user, // le profil 
-            "users" => $users, //la liste
+            "users" => $listuser, //la liste
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
+            "showDetails" => ($profil == "company" ? "" : "hidden"),
+            "count" => count($company), // 
         ];
         return view("User/list_client.php", $data);
     }

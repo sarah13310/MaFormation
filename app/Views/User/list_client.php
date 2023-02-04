@@ -4,27 +4,47 @@
 <hr class="mb-3">
 <div class="row">
     <div class="col-12 col-md-8">
-        <table class="table table-hover border">
+        <table class="table border">
             <thead class="<?= $headerColor ?>">
                 <tr>
-                    <th class="hidden" scope="col">Id</th>
+                    <th class="<?= $showDetails ?>" scope="col"></th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Adresse</th>
                     <th scope="col">Localité</th>
-                    <th class="hidden"></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($users as $user) : ?>
+                <?php foreach ($users as $item) : ?>
                     <tr>
-                        <td class="hidden"><?= $user['id_user'] ?></td>
-                        <td><?= $user['name'] ?></td>
-                        <td><?= $user['firstname'] ?></td>
-                        <td><?= $user['address'] ?></td>
-                        <td><?= $user['city'] . " <i>" . $user['cp'] . "</i>" ?></td>
-                        <td class="hidden"></td>
+                        <td class="<?= $showDetails ?>"><button onclick="expand(this)" class="btn bi-plus <?= $buttonColor ?>"></button></td>
+                        <td><?= $item['user']['name'] ?></td>
+                        <td><?= $item['user']['firstname'] ?></td>
+                        <td><?= $item['user']['address'] ?></td>
+                        <td><?= $item['user']['city'] . " <i>" . $item['user']['cp'] . "</i>" ?></td>
                     </tr>
+                    <?php if ($count > 0) : ?>
+                        <tr class="collapse">
+                            <td colspan=4>
+                                <table class="table border">
+                                    <thead class="<?= $headerColor ?>">
+                                        <tr>
+                                            <th scope="col">Société</th>
+                                            <th scope="col">Adresse</th>
+                                            <th scope="col">Localité</th>
+                                            <th scope="col">CP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td><?= $item['company']['name'] ?></td>
+                                        <td><?= $item['company']['address'] ?></td>
+                                        <td><?= $item['company']['city']  ?></td>
+                                        <td><?= "<i>" . $item['company']['cp'] . "</i>" ?></td>
+                                    </tbody>
+                                </table>
+                            <td>
+                        </tr>
+                    <?php endif; ?>
                 <?php endforeach ?>
             </tbody>
         </table>
@@ -36,5 +56,22 @@
 
 
     <?= $this->section('js') ?>
+    <script>
+        /* <i class="bi bi-dash"></i>*/
+        function expand(item) {
+            const tr = item.parentElement.parentElement;
+            let collapse = tr.nextElementSibling.classList.toggle("collapse");
+            if (collapse){
+                item.classList.remove("bi-dash");
+                item.classList.add("bi-plus");
 
+            }
+            else{
+                
+                item.classList.remove("bi-plus");
+                item.classList.add("bi-dash");
+            }            
+            
+        }
+    </script>
     <?= $this->endSection() ?>

@@ -210,6 +210,15 @@ class UserModel extends Model
         return $skills;
     }
 
+    function getCompanyById($id){
+        $builder = $this->db->table('user');
+        $builder->select('company.name, company.address, company.city ,company.cp');
+        $builder->where('user.id_user', $id);
+        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
+        $builder->join('company', 'user_has_company.id_company=company.id_company');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
     /**
      * getInfosCompany
      *
@@ -222,7 +231,7 @@ class UserModel extends Model
     function getInfosCompany($id, $single = true)
     {
         $builder = $this->db->table('user');
-        $builder->select('company.name, company.address,company.city ,company.cp');
+        $builder->select('company.name, company.address, company.city ,company.cp');
         $builder->where('user.id_user', $id);
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
         $builder->join('company', 'user_has_company.id_company=company.id_company');
