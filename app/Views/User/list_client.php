@@ -3,8 +3,8 @@
 <h1 class="mb-1"><?= $title ?></h1>
 <hr class="mb-3">
 <div class="row">
-    <div class="col-12 col-md-8">
-        <table class="table border">
+    <div class="col-12 col-md-8 table-responsive">
+        <table class="table border ">
             <thead class="<?= $headerColor ?>">
                 <tr>
                     <th class="<?= $showDetails ?>" scope="col"></th>
@@ -26,9 +26,9 @@
                     <?php if ($count > 0) : ?>
                         <tr class="collapse">
                             <td colspan=4>
-                                <table class="table border">
-                                    <thead class="<?= $headerColor ?>">
-                                        <tr>
+                                <table class="table border " style="width:120%; ">
+                                    <thead class="<?= $buttonColor ?>" >
+                                        <tr >
                                             <th scope="col">Société</th>
                                             <th scope="col">Adresse</th>
                                             <th scope="col">Localité</th>
@@ -64,10 +64,8 @@
             if (collapse){
                 item.classList.remove("bi-dash");
                 item.classList.add("bi-plus");
-
             }
-            else{
-                
+            else{                
                 item.classList.remove("bi-plus");
                 item.classList.add("bi-dash");
             }            
