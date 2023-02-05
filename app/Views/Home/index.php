@@ -86,11 +86,11 @@
       <!--Grid column-->
       <div class="col-auto">
         <!-- Submit button -->
-        <button onclick="onValidate()" type="button" class="btn btn-outline-dark mb-4">
+        <button onclick="onValidateMail(form_newsletters, 'error');" type="button" class="btn btn-outline-dark mb-4">
           Souscrire
         </button>
       </div>
-      <div id='error' class="collapse col-6 alert alert-danger" role="alert"></div>
+      <div id='error' class="collapse col-8 alert alert-danger" role="alert"></div>
       <!--Grid column-->
     </div>
     <!--Grid row-->
@@ -101,54 +101,12 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-
+<script src="<?= base_url() ?>/js/validator.js"></script>
 <script src="<?= base_url() ?>/js/carousel.js"></script>
 <script>
+  
   new MultiCarousel(".carousel .carousel-item", "#carouselTraining", 3);
   new MultiCarousel(".carousel .carousel-item", "#carouselArticles", 3);
-  let error_msg = document.getElementById("error");
   
-  /**
-   * onValidate
-   *
-   * @return void
-   */
-  function onValidate() {
-    let mail = form_newsletters.mail.value;
-    let err = isValide(mail);
-    if (err == "") {
-      form_newsletters.submit();
-    } else {
-      error_msg.innerText = err;
-      error_msg.classList.toggle("collapse");
-      setTimeout( ()=>{
-        error_msg.classList.toggle("collapse");
-      },2000);
-    }
-  }
-  
-  /**
-   * isValide
-   *
-   * @return void
-   */
-  function isValide(mail) {
-    let msg = "";
-    let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (!mail.match(validRegex)) {
-      msg = ("Format mail invalide!");
-    }
-    if (mail.length <= 6) {
-      msg = "Mail trop court!";
-    }
-    if (mail.length >= 32) {
-      msg = "Mail trop long!";
-    }
-    if (mail.length == 0) {
-      msg = "Mail vide!";
-    }
-    return msg;
-  }
 </script>
 <?= $this->endSection() ?>

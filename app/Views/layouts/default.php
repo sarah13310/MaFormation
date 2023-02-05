@@ -221,9 +221,9 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div id="tc" class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             <p><a class="text-white" href="https://maformation.com/">Termes et conditions générales</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a class="text-white" href="https://maformation.com/">Mentions légales</a></p>
+                &nbsp;<a class="text-white" href="https://maformation.com/">-&nbsp;&nbsp;Mentions légales</a></p>
         </div>
         <!-- Copyright -->
     </footer>
@@ -232,14 +232,9 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-    <script>
-        /*  document.getElementById("btn_search").addEventListener("click", () => {
-            document.getElementById("research").value;
-            window.location.href = "\result";
-        });*/
-    </script>
+   
     <?= $this->renderSection("js") ?>
-
+    <script src="<?= base_url() ?>/js/copyright.js"></script>
 </body>
 
 </html>

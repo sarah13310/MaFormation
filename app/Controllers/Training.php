@@ -14,7 +14,7 @@ class Training extends BaseController
      */
     public function __construct()
     {
-       // helper(['util']); // déclaration des fonctions helper
+       helper(['util']); // déclaration des fonctions helper
     }
 
     /**
@@ -221,7 +221,6 @@ class Training extends BaseController
             $content = $this->request->getVar('content');
             $image_url = $this->request->getVar('image_url');
 
-
             $dataNew = [
 
                 'id_training' => $id_training,
@@ -282,8 +281,7 @@ class Training extends BaseController
     {
         // on récupère les informations utilisateur de la session active    
         $user = $this->getUserSession();
-        //
-        
+        //        
         if ($this->isPost()) {
             $id_page = $this->request->getVar('id_page');
             $id_training = $this->request->getVar('id_training');
@@ -294,7 +292,6 @@ class Training extends BaseController
             if ($title_page == null)
                 $title_page = "";
 
-
             //
             // on recupère la page par l'id dans la table            
             $page=$this->page_model->getPageById($id_page);
@@ -302,7 +299,6 @@ class Training extends BaseController
             if (!$content){
                 $content=$page['content'];
             }
-
             /*if ($page) {
                 $page = $page[0]; // on prend juste la page désirée
                 $title_page = $page['title'];
@@ -521,7 +517,6 @@ class Training extends BaseController
         return view('Training/training_add.php', $data);
     }
 
-
     /**
      * training_save
      * Sauvegarde des pages associées à la formation
@@ -540,7 +535,6 @@ class Training extends BaseController
                 "content" => $this->request->getVar("content"),
                 "image_url" => $this->request->getVar("image_url"),
             ];
-
             // insérer page dans la base de données
             $last_id = $this->page_model->save($dataSave);
 

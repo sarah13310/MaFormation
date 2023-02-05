@@ -285,9 +285,9 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div id="tc" class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             <p><a class="text-white" href="https://maformation.com/">Termes et conditions générales</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a class="text-white" href="https://maformation.com/">Mentions légales</a></p>
+                &nbsp;<a class="text-white" href="https://maformation.com/">-&nbsp;&nbsp;Mentions légales</a></p>
         </div>
         <!-- Copyright -->
     </footer>
@@ -320,6 +320,7 @@
         }
     </script>
     <?= $this->renderSection("js") ?>
+    <script src="<?= base_url() ?>/js/copyright.js"></script>
 
 </body>
 

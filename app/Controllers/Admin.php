@@ -84,7 +84,7 @@ class Admin extends BaseController
                     $data['buttonColor'] = getTheme(session()->type, "button");
                     $model->save($newData);
                     session()->setFlashdata('succes', "Création réussie de l'administrateur");
-                    return  redirect()->to(base_url('//superadmin/privileges'));
+                    return  redirect()->to(base_url('/superadmin/privileges'));
                 }
             }
         }

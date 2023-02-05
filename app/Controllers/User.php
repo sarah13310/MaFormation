@@ -15,12 +15,12 @@ class User extends BaseController
     /* connexion utlitisateur */
     public function login()
     {
+        helper(['form']);
         $data = [
             "title" => "Connexion",
             'isLoggedIn' => false,
         ];
-        helper(['form']);
-
+        
         if ($this->isPost()) {
             //let's do the validation here
 
@@ -80,7 +80,13 @@ class User extends BaseController
         return view('Login/login', $data);
     }
 
-    /* fonction de redirection suivant profil utilisateur */
+    
+    /**
+     * dispatch
+     * fonction de redirection suivant profil utilisateur 
+     * @param  mixed $user
+     * @return array
+     */
     private function dispatch($user)
     {
         helper(['form','util']);
@@ -109,7 +115,16 @@ class User extends BaseController
         ];
         return $data;
     }
-
+    
+    /**
+     * saveCompany
+     *
+     * @param  mixed $data_user
+     * @param  mixed $data_company
+     * @param  mixed $kbis
+     * @param  mixed $siret
+     * @return void
+     */
     private function saveCompany($data_user, $data_company, $kbis, $siret)
     {
         //table utilisateur
@@ -130,7 +145,16 @@ class User extends BaseController
         $this->user_has_company_model->save($data_jointure);
     }
 
-
+    
+    /**
+     * associateCompany
+     *
+     * @param  mixed $data_user
+     * @param  mixed $id_company
+     * @param  mixed $kbis
+     * @param  mixed $siret
+     * @return void
+     */
     private function associateCompany($data_user, $id_company, $kbis, $siret)
     {
         //table utilisateur
@@ -145,7 +169,13 @@ class User extends BaseController
         ];
         $this->user_has_company_model->save($data_jointure);
     }
-
+    
+    /**
+     * ifNotExistCompany
+     *
+     * @param  mixed $data_company
+     * @return void
+     */
     private function ifNotExistCompany($data_company)
     {
         // on part du principe une seule société par ville
@@ -267,7 +297,7 @@ class User extends BaseController
     }
 
    
-    /* mot de passe oublié */
+    
     /**
      * forgetpassword
      * Mot de passe oublié
@@ -566,7 +596,7 @@ class User extends BaseController
     
     /**
      * modif_contact
-     *
+     * modifier les informations de contact
      * @return void
      */
     public function modif_contact()
@@ -614,7 +644,7 @@ class User extends BaseController
     
     /**
      * modif_perso
-     *
+     * modifier les informations personnelles
      * @return void
      */
     public function modif_perso()
@@ -635,7 +665,7 @@ class User extends BaseController
     
     /**
      * modif_password
-     *
+     * modifier le mot de passe
      * @return void
      */
     public function modif_password()
@@ -653,7 +683,7 @@ class User extends BaseController
     
     /**
      * modif_skill
-     *
+     * modifier une compétence 
      * @return void
      */
     public function modif_skill()
@@ -700,8 +730,8 @@ class User extends BaseController
     
     /**
      * delete_skill
-     *
-     * @param  mixed $id_skill
+     * supprimer une compétence par son id
+     * @param  int $id_skill
      * @return void
      */
     public function delete_skill($id_skill)
@@ -728,7 +758,12 @@ class User extends BaseController
 
         return view("User/modif_skill.php", $data);
     }
-
+    
+    /**
+     * add_skill
+     * ajouter une compétence
+     * @return void
+     */
     public function add_skill()
     {
         // on récupère les informations utilisateur de la session active        
@@ -770,7 +805,12 @@ class User extends BaseController
         return view("User/add_skill.php", $data);
     }
 
-
+    
+    /**
+     * save_photo
+     * sauver une photo
+     * @return void
+     */
     function save_photo()
     {
         helper(['form']);
@@ -808,7 +848,12 @@ class User extends BaseController
 
         return view("User/profile_user.php", $data);
     }
-
+    
+    /**
+     * parameters
+     * page des paramètres (version beta)
+     * @return void
+     */
     function parameters()
     {
         helper(['form']);
@@ -823,7 +868,12 @@ class User extends BaseController
 
         return view("User/parameters.php", $data);
     }
-
+    
+    /**
+     * add_category
+     * ajouter une catégorie
+     * @return void
+     */
     public function add_category()
     {
         // on récupère les informations utilisateur de la session active    
@@ -850,7 +900,12 @@ class User extends BaseController
         ];
         return view("User/add_category.php", $data);
     }
-
+    
+    /**
+     * modify_category
+     * modifier une catégorie
+     * @return void
+     */
     public function modify_category()
     {
         // on récupère les informations utilisateur de la session active    
@@ -878,7 +933,12 @@ class User extends BaseController
         ];
         return view("User/add_category.php", $data);
     }
-
+    
+    /**
+     * delete_category
+     * suppression de la catégorie
+     * @return void
+     */
     public function delete_category()
     {
         // on récupère les informations utilisateur de la session active    
@@ -905,7 +965,13 @@ class User extends BaseController
         ];
         return view("User/add_category.php", $data);
     }
-
+    
+    /**
+     * list_user
+     * Liste des utilisateurs (particuliers ou entreprises)
+     * @param  string $profil
+     * @return void
+     */
     public function list_user($profil)
     {
         $users = [];

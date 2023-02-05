@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+/* 01/02/2023 */
 
 class Media extends BaseController
 {
@@ -61,8 +62,7 @@ class Media extends BaseController
             session()->remove('succes');
         }
 
-        if ($this->isPost()) {
-           
+        if ($this->isPost()) {           
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             $dataSave['name'] = $this->request->getVar('name');
