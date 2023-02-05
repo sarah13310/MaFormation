@@ -29,7 +29,7 @@ class Contact extends BaseController
         helper(['form']);
         $options=$this->createOptionobject();
         $data['options']=$options;
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
 
         $rules = [
             'name' => 'required|min_length[3]|max_length[20]',

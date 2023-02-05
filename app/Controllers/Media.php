@@ -61,7 +61,7 @@ class Media extends BaseController
             session()->remove('succes');
         }
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
            
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;

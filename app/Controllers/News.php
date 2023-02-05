@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 // le 20/01/2023
+// le 05/02/2023
 class News extends BaseController
 {
     
@@ -134,7 +135,7 @@ class News extends BaseController
             session()->remove('success');
         }
 
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
 
             switch (session()->type) {
@@ -247,7 +248,7 @@ class News extends BaseController
         $image_url = $article['image_url'];
 
         if ($image_url == null or $image_url === "") {
-            $article['image_url'] = base_url() . "/assets/article.svg";
+            $article['image_url'] = constant('DEFAULT_IMG_ARTICLES');
         }
 
         $author = $this->article_model->getAuthorArticles($builder, $id);
@@ -285,7 +286,7 @@ class News extends BaseController
     {
         $title = "Détails de l'article";
 
-        if ($this->isPost() == 'post') {
+        if ($this->isPost() ) {
             $id = $this->request->getVar('id_article');
             $data = $this->home_article_details($title, $id);            
             return view('Articles/list_article_details.php', $data);
@@ -328,7 +329,7 @@ class News extends BaseController
     {
         $title = "Détails de la publication";
 
-        if ($this->isPost() == 'post') {
+        if ($this->isPost() ) {
 
             $id = $this->request->getVar('id_publication');
 
@@ -367,7 +368,7 @@ class News extends BaseController
      */
     public function delete_article()
     {
-        if ($this->isPost() == 'post') {
+        if ($this->isPost() ) {
             $id = $this->request->getVar('id_article');
 
             $this->article_model->deleteArticle($id);
@@ -382,7 +383,7 @@ class News extends BaseController
      */
     public function delete_publish()
     {
-        if ($this->isPost() == 'post') {
+        if ($this->isPost() ) {
             $id = $this->request->getVar('id_publication');
             $this->publication_model->deletePublishe($id);
         }

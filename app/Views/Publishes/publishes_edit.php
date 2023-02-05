@@ -47,7 +47,7 @@
                         <label for='name'>&nbsp;Nom de l'auteur </label>
                     </div>
                     <div class='form-floating mb-3 col'>
-                        <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de la publication" value="<?=base_url()."/assets/publication.svg" ?>" />
+                        <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de la publication" value="<?=DEFAULT_IMG_PUBLISHES ?>" />
                         <label for='image_url'>&nbsp;Url de la publication</label>
                     </div>
                 </div>

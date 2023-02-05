@@ -2,9 +2,8 @@
 
 namespace App\Controllers;
 
-
-
 // Date 22-12-2022
+// le 05-02-2023
 class Former extends BaseController
 {
     /**
@@ -97,22 +96,11 @@ class Former extends BaseController
      */
     public function details_former_home()
     {
+        if ($this->isPost()) {
 
-        if ($this->request->getMethod() == 'post') {
-
-            $mail = $this->request->getVar('mail');
-            $db      = \Config\Database::connect();
-            $builder = $db->table('user');
-            $builder->where('mail', $mail);
-            $query   = $builder->get();
-            $former = $query->getResultArray();
-            $id = $former[0]['id_user'];
-
-            $builder->where('user.id_user', $id);
-            $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-            $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-            $query = $builder->get();
-            $certificates = $query->getResultArray();
+            $id = $this->request->getVar('id_user');         
+            $user= $this->user_model->getUserById($id);
+            $certificates=$this->user_model->getCertificates($id);
             $skills = [];
             foreach ($certificates as $certificate) {
                 $skills[] = [
@@ -128,7 +116,7 @@ class Former extends BaseController
             }
             $data = [
                 "title" => "C.V. du formateur",
-                "former" => $former,
+                "former" => $user,
                 "skills" => $skills,
             ];
             return view('Former/list_former_cv.php', $data);
@@ -138,7 +126,7 @@ class Former extends BaseController
     /**
      * rdv
      * 
-     * Planification des rdv
+     * Création Modification des rdv
      * @return void
      */
     public function rdv()

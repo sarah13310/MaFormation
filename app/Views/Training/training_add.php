@@ -96,7 +96,7 @@
     formAdd['dateEnd'].value = formatDate(date);
     formAdd['timeStart'].value = "08:00";
     formAdd['timeEnd'].value = "09:00";
-    formAdd['image_url'].value = "<?= base_url() . "/assets/training.svg" ?>";
+    formAdd['image_url'].value = "<?= constant('DEFAULT_IMG_TRAINING') ?>";
 
     price.value = "10";
     name.value = "";

@@ -2,28 +2,29 @@
 
 namespace App\Controllers;
 
-
 use App\Libraries\CarouselHelper;
 
-
 // Le 10/01/2023
+// Le 05/02/2023
 class Home extends BaseController
 {
-    public function index()
+    /**
+     * index
+     * page Acceuil
+     * @return void
+     */
+    private function home($err = null)
     {
-        helper(['form']);
-
-        
-       
         try {
+
             $db      = \Config\Database::connect();
             $builder = $db->table('article');
-
-            $builder->where('status', '1');
+            $builder->where('status', VALIDE);
             $builder->orderBy('datetime', 'DESC');
             $builder->limit(6);
             $query   = $builder->get();
             $articles = $query->getResultArray();
+            //$articles=$this->article_model->getFilterArticles(VALIDE,6,'DESC');
 
         } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {
             session()->setFlashdata('infos', 'Connexion impossible!');
@@ -42,26 +43,9 @@ class Home extends BaseController
         }
 
         /* auteur de l'article*/
-        $builder->select('user.name,user.firstname');
+        $this->article_model->getAuthorsArticles($listarticles, $builder);
 
-        for ($i = 0; $i < count($listarticles); $i++) {
-            $builder->where('article.id_article', $listarticles[$i]['id_article']);
-            $builder->join('user_has_article', 'user_has_article.id_article = article.id_article');
-            $builder->join('user', 'user_has_article.id_user = user.id_user');
-            $query = $builder->get();
-            $user = $query->getResultArray();
-            $authors = [];
-            foreach ($user as $u) {
-                $authors[] = [
-                    "name" => $u['name'],
-                    "firstname" => $u['firstname'],
-                ];
-            }
-            $listarticles[$i]["user"] = $authors;
-        }
-
-
-        if ($this->request->getMethod() == 'post') {
+        if ($this->isPost()) {
             $rules = [
                 'mail' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[user.mail]',
             ];
@@ -72,7 +56,6 @@ class Home extends BaseController
             if (!$this->validate($rules, $error)) {
                 $data['validation'] = $this->validator;
             } else {
-                
 
                 $newData = [
                     'mail' => $this->request->getVar('mail'),
@@ -81,22 +64,32 @@ class Home extends BaseController
             }
         }
 
-        $trainings = $this->training_model->getFilterTrainings();        
+        $trainings = $this->training_model->getFilterTrainings();
         $carousel1 = listCardImgCarousel($trainings, "/training/details/");
         $articles = $this->article_model->getFilterArticles(VALIDE);
-        
-
+        //
         $carousel2 = listCardImgCarousel($articles, "/article/list/details/");
+        // var_dump($err);
         $data = [
             "title" => "Accueil",
-            //"count_articles" => count($listarticles),
-            //"count_training"=>count($trainings),
             "trainings" => $carousel1,
             "articles" => $carousel2,
+            "validation" => $err,
         ];
+
         return view('Home/index.php', $data);
     }
 
+    public function index()
+    {
+        return $this->home();
+    }
+
+    /**
+     * faq
+     * Page des questions posées fréquemment 
+     * @return void
+     */
     public function faq()
     {
         $data = [
@@ -105,6 +98,11 @@ class Home extends BaseController
         return view('FAQ/index.php', $data);
     }
 
+    /**
+     * funding
+     * page de financement
+     * @return void
+     */
     public function funding()
     {
         $data = [
@@ -112,4 +110,23 @@ class Home extends BaseController
         ];
         return view('Funding/index.php', $data);
     }
+
+    /**
+     * newsletters
+     * Page de confirmation d'abonnement à la lettre d'informations
+     * @return void
+     */
+    public function newsletters()
+    {
+        if ($this->isPost()) {
+            $mail = $this->request->getVar('mail');            
+            
+                $data = [
+                    "title" => "Lettre d'informations",
+                    "mail" => $mail,
+                ];
+                return view('Home/newsletters.php', $data);
+            }
+        }
+    
 }

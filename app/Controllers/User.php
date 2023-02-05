@@ -83,14 +83,14 @@ class User extends BaseController
     /* fonction de redirection suivant profil utilisateur */
     private function dispatch($user)
     {
-        helper(['form']);
+        helper(['form','util']);
 
         $this->user_model->setUserSession($user);
 
         $type = $user['type'];
 
         if ($user['image_url'] == null)
-            $user['image_url'] = base_url() . "/assets/blank.png";
+            $user['image_url'] = constant('DEFAULT_IMG_BLANK');
 
         $jobs = $this->user_model->getInfosCompany($user['id_user']);
         $skills = $this->user_model->getInfosCertificates($user['id_user']);
@@ -253,7 +253,7 @@ class User extends BaseController
         $skills = $this->user_model->getCertificates($user['id_user']);
 
         if ($user['image_url'] == null) {
-            $user['image_url'] = base_url() . "/assets/blank.png";
+            $user['image_url'] = constant('DEFAULT_IMG_BLANK');
         }
         $data = [
             "title" => getTypeName($user['type']),
@@ -266,36 +266,7 @@ class User extends BaseController
         return view('User/profile_user.php', $data);
     }
 
-    /* profil entreprise */
-    /**
-     * profilecompany
-     *
-     * @return void
-     */
-    public function profilecompany()
-    {
-        $id =  session()->get('id_user');
-        $builder = $this->db->table('user');
-        $builder->where('id_user', $id);
-        $query   = $builder->get();
-        $user = $query->getResultArray();
-        $user = $user[0]; // juste le premier 
-
-        $builder->select('company.name, company.address,company.city ,company.cp');
-        $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
-        $builder->join('company', 'user_has_company.id_company=company.id_company');
-        $query = $builder->get();
-        $infos = $query->getResultArray();
-        $infos = $infos[0];
-
-        $company = [
-            "name" => $infos['name'],
-            "address" => $infos['address'] . " " . $infos['city'] . ", " . $infos['cp']
-        ];
-
-        return $company;
-    }
-
+   
     /* mot de passe oublié */
     /**
      * forgetpassword
@@ -580,7 +551,7 @@ class User extends BaseController
         $user = $this->user_model->getUserSession();
         $skills = $this->user_model->getCertificates($user['id_user']);
         if ($user['image_url'] == null) {
-            $user['image_url'] = base_url() . "/assets/blank.png";
+            $user['image_url'] = constant('DEFAULT_IMG_BLANK');
         }
         $data = [
             "title" => getTypeName($user['type']),
@@ -592,7 +563,12 @@ class User extends BaseController
         ];
         return view('User/profile_user.php', $data);
     }
-
+    
+    /**
+     * modif_contact
+     *
+     * @return void
+     */
     public function modif_contact()
     {
         helper(["form"]);
@@ -635,7 +611,12 @@ class User extends BaseController
         ];
         return view("User/modif_contact.php", $data);
     }
-
+    
+    /**
+     * modif_perso
+     *
+     * @return void
+     */
     public function modif_perso()
     {
 
@@ -651,7 +632,12 @@ class User extends BaseController
             return view("User/modif_contact.php", $data);
         }
     }
-
+    
+    /**
+     * modif_password
+     *
+     * @return void
+     */
     public function modif_password()
     {
         helper(["form"]);
@@ -664,7 +650,12 @@ class User extends BaseController
         ];
         return view("User/modif_password.php", $data);
     }
-
+    
+    /**
+     * modif_skill
+     *
+     * @return void
+     */
     public function modif_skill()
     {
         helper(["form"]);
@@ -706,7 +697,13 @@ class User extends BaseController
 
         return view("User/modif_skill.php", $data);
     }
-
+    
+    /**
+     * delete_skill
+     *
+     * @param  mixed $id_skill
+     * @return void
+     */
     public function delete_skill($id_skill)
     {
         // on récupère l'id de la session active

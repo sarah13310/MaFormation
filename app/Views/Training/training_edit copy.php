@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col-12  form-floating mb-3">
-                    <input class="form-control" id="image_url" name="iamge_url" type="text" placeholder="Image de la page" value="<?= base_url() . "/assets/article.svg" ?>" />
+                    <input class="form-control" id="image_url" name="iamge_url" type="text" placeholder="Image de la page" value="<?= constant('DEFAULT_IMG_TRAINING') ?>" />
                     <label for="image_url">Image de la page</label>
                 </div>
                 <div class=" fullwidth editor mt-2">

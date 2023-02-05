@@ -5,7 +5,8 @@
 
 // fenêtre modal
 // action='/former/training/edit'
-function modalDelete(){
+function modalDelete()
+{
     return "
     <div  id='modalDelete' class='modal' tabindex='-1'>
     <form name='modalDelete' method='POST'>
@@ -122,14 +123,14 @@ function listCardImgCarousel($list,  $target = "#")
     foreach ($list as $item) {
         if (isset($item['title'])) {
             $title = $item['title'];
-            $id=$item['id_training'];
+            $id = $item['id_training'];
         }
         if (isset($item['subject'])) {
             $title = $item['subject'];
-            $id=$item['id_article'];
+            $id = $item['id_article'];
         }
-        if ($item['image_url']==null){
-            $item['image_url']=base_url()."/assets/placeholder.svg";
+        if ($item['image_url'] == null) {
+            $item['image_url'] = base_url() . "/assets/placeholder.svg";
         }
         //
         $active = ($i == 0) ? " active" : "";
@@ -140,7 +141,7 @@ function listCardImgCarousel($list,  $target = "#")
         //
         $str .= "<div class='card-img' ><img src='" . $item['image_url'] . "' class='img-fluid' alt='...'></div>\n";
         $str .= "<div class='card-caption'>" . $title . "</div>\n";
-        $str .= "<a href='".$target . $id . "' class='btn btn-primary mt-1'>En savoir plus</a>\n";
+        $str .= "<a href='" . $target . $id . "' class='btn btn-primary mt-1'>En savoir plus</a>\n";
         $str .= "</div>\n"; //img-overlay                   
         $str .= "</div>\n"; // img
         $str .= "</div>\n"; // img    
@@ -231,12 +232,14 @@ function dateFormat($date)
 
 function dateTimeFormat($date)
 {
+   
     $strDate = "Aucune date renseignée";
     if ($date == null) {
     } else {
         $data = explode(' ', $date);
+        $hm=explode(':', $data[1]);
         $date = explode('-', $data[0]);
-        $strDate = "Le".$date[2] . " " . getMonth($date[1]) . " " . $date[0]." à ".$data[0]."h".$data[1];
+        $strDate = "Le " . $date[2] . " " . getMonth($date[1]) . " " . $date[0]. " à ".$hm[0]."h".$hm[1] ;
     }
     return $strDate;
 }
@@ -322,7 +325,7 @@ function fillMenuDashBoard($type)
 
         case FORMER:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
-            $menu .= fillMenu("Profil", "menu1", "Profil", $type);            
+            $menu .= fillMenu("Profil", "menu1", "Profil", $type);
             $menu .= fillMenu("Edition", "menu3", "Edition", $type);
             $menu .= fillMenu("Rendez-vous", "menu4", "Agenda", $type);
             $menu .= fillMenu("Formations", "menu5", "Formations", $type);
@@ -488,7 +491,7 @@ function fillMenuRight($category, $type)
                         ["ref" => "/user/profil/work", "name" => "Travail"],
                     ];
                     break;
-                    
+
                 case ADMIN:
                 case SUPER_ADMIN:
                     $items = [
@@ -960,4 +963,3 @@ function image_crop($filename)
     }
     imagedestroy($im);
 }
-

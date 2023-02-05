@@ -183,7 +183,7 @@ class PublicationModel extends Model
             $image_url = $d['image_url'];
 
             if ($image_url == null or $image_url === "") {
-                $d['image_url'] = base_url() . "/assets/publication.svg";
+                $d['image_url'] = constant('DEFAULT_IMG_PUBLISHES');
             }
             $list[] = [
                 "id_publication" => $d['id_publication'],

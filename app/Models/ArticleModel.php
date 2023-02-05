@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+// le 05/02/2023
 
 class ArticleModel extends Model
 {
@@ -83,14 +84,21 @@ class ArticleModel extends Model
      *
      * Récupère les articles en fonction du filtre 
      * @param  int $filter (valeur par défault VALIDE)
-     * @return un tableau d'articles avec une gestion de filtre
+     * @return un tableau d'articles avec une gestion de filtres multiples
      */
-    function getFilterArticles($filter = VALIDE)
+    function getFilterArticles($filter = VALIDE,  $limit = ALL, $orderby = NONE)
     {
         $builder = $this->db->table('article');
-        if ($filter != ALL) {
+        if ($filter !== ALL) {
             $builder->where('status', $filter);
         }
+        if ($limit !== ALL) {
+            $builder->limit($limit);
+        }
+        if ($orderby !== NONE) {
+            $builder->orderBy('datetime', $orderby);
+        }
+
         $query   = $builder->get();
         $articles = $query->getResultArray();
         return $articles;
@@ -140,7 +148,7 @@ class ArticleModel extends Model
     {
         foreach ($data as $d) {
             if ($d['image_url'] == null) {
-                $d['image_url'] = base_url() . "/assets/article.svg";
+                $d['image_url'] = constant('DEFAULT_IMG_TRAINING');
             }
             $list[] = [
                 "id_article" => $d['id_article'],
@@ -171,8 +179,17 @@ class ArticleModel extends Model
             $builder->join('user', 'user_has_article.id_user = user.id_user');
             $query = $builder->get();
             $user = $query->getResultArray();
+            
             $authors = [];
-            foreach ($user as $u) {
+            if (count($user)==0){
+                $authors[] = [
+                    "name" => "non défini",
+                    "firstname" => "",
+                    "image_url" => constant('DEFAULT_IMG_TRAINING'),
+                ];
+            }
+            
+            foreach ($user as $u) {                
                 $authors[] = [
                     "name" => $u['name'],
                     "firstname" => $u['firstname'],
@@ -187,9 +204,9 @@ class ArticleModel extends Model
     /**
      * getAuthorArticles
      *
-     * Récupère le nom de l'auteur de cet article
+     * Récupère le nom de l'auteur de cet article en fonction de l'id de l'article
      * @param  $builder
-     * @param  int $id
+     * @param  int $id 
      * @return le nom de l'auteur
      */
     function getAuthorArticles($builder, $id)
@@ -199,10 +216,20 @@ class ArticleModel extends Model
         $builder->join('user', 'user_has_article.id_user = user.id_user');
         $query = $builder->get();
         $user = $query->getResultArray();
-
+        
+        if (count($user)==0){
+            $author[] = [
+                "name" => "non défini",
+                "firstname" => "",
+                "image_url" => constant('DEFAULT_IMG_TRAINING'),
+            ];
+        }
         $author = [];
         foreach ($user as $u) {
-
+            if ($u['name']==null || strlen($u['name']<2)){
+                $u['name']="non défini";
+                $u['firstname']="";
+            }
             $author[] = [
                 "name" => $u['name'],
                 "firstname" => $u['firstname'],
@@ -222,7 +249,7 @@ class ArticleModel extends Model
      * @return la liste des articles
      */
     function getArticlesbyAuthor($builder, $id)
-    {        
+    {
         $builder = $this->db->table('user');
         $builder->where("user.id_user", $id);
         $builder->join('user_has_article', 'user_has_article.id_user = user.id_user');

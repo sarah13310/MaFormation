@@ -18,6 +18,7 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?= $former['name'] . " " . $former['firstname'] ?></h5>
                             <input type="hidden" name="mail" value="<?= $former['mail'] ?>">
+                            <input type="hidden" name="id_user" value="<?= $former['id_user'] ?>">
                             <h6 class="card-subtitle mb-2 text-muted" style="height:3rem">
                                 <?php $j = 0;
                                 foreach ($former['skills'] as $skill) : ?>

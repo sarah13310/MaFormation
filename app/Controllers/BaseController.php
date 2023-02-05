@@ -164,5 +164,6 @@ abstract class BaseController extends Controller
       $this->user_model = new UserModel();
       $this->user_has_media_model = new UserHasMediaModel();
       // E.g.: $this->session = \Config\Services::session();
+      
    }
 }

@@ -140,22 +140,21 @@
                 <div class="row">
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">A propos</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">Nos formateurs</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Nos formations</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">F.A.Q.</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="btn btn-outline-light mb-4">Me Financer</a>
-                            </li>
-                        </ul>
+                        <div>
+                            <h5 class="text-uppercase">A propos</h5>
+                        </div>
+                        <div>
+                            <a href="#!" class="text-white">Nos formateurs</a>
+                        </div>
+                        <div>
+                            <a href="#!" class="text-white">Nos formations</a>
+                        </div>
+                        <div>
+                            <a href="#!" class="text-white">F.A.Q.</a>
+                        </div>
+                        <div class="mt-4">
+                            <a href="#!" class="btn btn-outline-light mb-4">Me Financer</a>
+                        </div>
                     </div>
                     <!--Grid column-->
 
@@ -234,7 +233,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script>
-      /*  document.getElementById("btn_search").addEventListener("click", () => {
+        /*  document.getElementById("btn_search").addEventListener("click", () => {
             document.getElementById("research").value;
             window.location.href = "\result";
         });*/

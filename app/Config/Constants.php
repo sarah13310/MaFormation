@@ -1,4 +1,5 @@
 <?php
+// le 05/02/2023
 
 /*
  | --------------------------------------------------------------------
@@ -94,6 +95,7 @@ define('EVENT_PRIORITY_NORMAL', 100);
 define('EVENT_PRIORITY_HIGH', 10);
 
 define ('ALL', -1);
+define ('NONE',0);
 define ('VALIDE', 1);
 define ('EN_COURS', 2);
 define ('REFUSE', 3);
@@ -113,6 +115,12 @@ define ("FORMER", 7);
 define ("USER", 9);
 define ("COMPANY", 11);
 
-
 define("VIDEO", 1);
 define("BOOK", 2);
+
+define ("BASE_URL", "localhost:8080");// à modifier en fonction de l'url
+
+define ("DEFAULT_IMG_ARTICLES", BASE_URL."/assets/article.svg");
+define ("DEFAULT_IMG_PUBLISHES", BASE_URL."/assets/publication.svg");
+define ("DEFAULT_IMG_TRAINING", BASE_URL."/assets/training.svg");
+define ("DEFAULT_IMG_BLANK", BASE_URL."/assets/blank.png");

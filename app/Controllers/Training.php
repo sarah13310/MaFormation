@@ -14,7 +14,7 @@ class Training extends BaseController
      */
     public function __construct()
     {
-        helper(['util']); // déclaration des fonctions helper
+       // helper(['util']); // déclaration des fonctions helper
     }
 
     /**
@@ -58,7 +58,7 @@ class Training extends BaseController
 
         foreach ($trainings as $training) {
             if ($training['image_url'] == null) {
-                $training['image_url'] = base_url() . "/assets/training.svg";
+                $training['image_url'] = constant('DEFAULT_IMG_TRAINING');
             }
             $list_training[] = [
                 "id_training" => $training['id_training'],
@@ -89,7 +89,7 @@ class Training extends BaseController
 
         $image_url = $training['image_url'];
         if ($image_url == null) {
-            $training['image_url'] = base_url() . "/assets/training.svg";
+            $training['image_url'] = constant('DEFAULT_IMG_TRAINING');
         }
 
         $data = [
@@ -144,7 +144,7 @@ class Training extends BaseController
                 "title" => $training['title'],
                 "description" => $training['description'],
                 "image_url" => $training['image_url'],
-                "date" => dateFormat($training['date']),
+                "date" => dateTimeFormat($training['date']),
                 "pages" => $pages,
             ];
         }
@@ -447,7 +447,7 @@ class Training extends BaseController
             $image_url = $this->request->getVar("image_url");
 
             if ($image_url == null) {
-                $image_url = base_url() . "/assets/training.svg";
+                $image_url = constant('DEFAULT_IMG_TRAINING');
             }
             if (!str_contains($image_url, base_url())) {
                 $image_url = base_url() . "/assets//" . $image_url;

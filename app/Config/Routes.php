@@ -1,4 +1,5 @@
 <?php
+// le 04/02/2023
 
 namespace Config;
 
@@ -33,6 +34,9 @@ $routes->setAutoRoute(false); // pour utliser les filtres
 
 // Page d'acceuil
 $routes->get('/', 'Home::index');
+
+//newsletter envoie
+$routes->add('/newsletters', 'Home::newsletters');
 
 // Résultat des recherches
 $routes->add('/result', 'Search::resultdata', ['filter' => 'cache']);
@@ -69,7 +73,7 @@ $routes->group('/former', static function ($routes) {
     $routes->add('publishes/list', 'Dashboard::listpublishes');
     $routes->get('view', 'Former::former_view');
     $routes->get('profil', 'Former::profile_view'); // view profil
-    $routes->add('rdv', 'Former::rdv'); //planning
+    $routes->add('rdv', 'Former::rdv'); //edit planning
     $routes->add('profil/edit', 'Former::profile_view'); // modify profil
 
     $routes->add('training/save', 'Training::training_save'); // create training
@@ -101,7 +105,7 @@ $routes->group('/user', static function ($routes) {
     $routes->add('profil/name', 'User::modif_name', ['filter' => 'auth']); //modif name (user profil)  
     $routes->add('profil/save/photo', 'User::save_photo', ['filter' => 'auth']); //save the picture (user profil)  
     $routes->add('parameters', 'User::parameters', ['filter' => 'auth']); //parameters of user (user profil)      
-    $routes->add('list/(:segment)', "User::list_user/$1", ['filter' => 'auth']);
+    $routes->add('list/(:segment)', "User::list_user/$1", ['filter' => 'auth']);// list user (company or ordinary customer)
     
 });
 
