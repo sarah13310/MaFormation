@@ -39,7 +39,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <form action="/result" class="d-flex search me-4" method="POST">
+                <form action="/result" class="d-flex search me-4" method="get">
                     <input id="research" name="research" class="noselect form-control me-2" type="search" placeholder="Chercher" aria-label="Search">
                     <button class="noselect btn <?= getTheme($user['type'], "button") ?>" type="submit">Chercher</button>
                 </form>

@@ -1,0 +1,55 @@
+CRITICAL - 2023-02-06 07:43:51 --> Call to a member function table() on null
+in APPPATH\Controllers\Search.php on line 13.
+ 1 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 2 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 3 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-06 07:48:49 --> Undefined variable $listtrainings
+in APPPATH\Controllers\Search.php on line 95.
+ 1 APPPATH\Controllers\Search.php(95): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $listtrainings', 'APPPATH\\Controllers\\Search.php', 95)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-06 07:50:29 --> Undefined variable $listtrainings
+in APPPATH\Controllers\Search.php on line 96.
+ 1 APPPATH\Controllers\Search.php(96): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $listtrainings', 'APPPATH\\Controllers\\Search.php', 96)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-06 07:50:39 --> Undefined variable $listtrainings
+in APPPATH\Controllers\Search.php on line 96.
+ 1 APPPATH\Controllers\Search.php(96): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $listtrainings', 'APPPATH\\Controllers\\Search.php', 96)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-06 07:51:59 --> Undefined variable $listtrainings
+in APPPATH\Controllers\Search.php on line 96.
+ 1 APPPATH\Controllers\Search.php(96): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $listtrainings', 'APPPATH\\Controllers\\Search.php', 96)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-06 08:27:26 --> Undefined constant "http://localhost:8080/assets/video.svg"
+in APPPATH\Controllers\Search.php on line 32.
+ 1 APPPATH\Controllers\Search.php(32): constant('http://localhost:8080/assets/video.svg')
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-06 08:29:56 --> Undefined constant "http://localhost:8080/assets/video.svg"
+in APPPATH\Controllers\Search.php on line 32.
+ 1 APPPATH\Controllers\Search.php(32): constant('http://localhost:8080/assets/video.svg')
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Search->resultdata()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

@@ -18,6 +18,7 @@ class MediaModel extends Model
         'description',
         'author',
         'url',
+        'image_url',
         'type',
         'status',
         'id_tag'
@@ -34,8 +35,7 @@ class MediaModel extends Model
      */
     function getVideos()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('media');
+        $builder = $this->db->table('media');
         $builder->where('type', VIDEO);
         $query   = $builder->get();
         $videos = $query->getResultArray();
@@ -54,8 +54,7 @@ class MediaModel extends Model
      */
     function getTitleAllVideos()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('media');
+        $builder = $this->db->table('media');
         $builder->where('type', VIDEO);
         $query   = $builder->get();
         $videos = $query->getResultArray();
@@ -73,8 +72,7 @@ class MediaModel extends Model
      */
     function getBooks()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('media');
+        $builder = $this->db->table('media');
         $builder->where('type', BOOK);
         $query   = $builder->get();
         $books = $query->getResultArray();
@@ -93,8 +91,7 @@ class MediaModel extends Model
      */
     function getTitleAllBooks()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('media');
+        $builder = $this->db->table('media');
         $builder->where('type', BOOK);
         $query   = $builder->get();
         $books = $query->getResultArray();
@@ -112,6 +109,14 @@ class MediaModel extends Model
     function returnDataMedias($list,$data)
     {
         foreach ($data as $d) {
+            if($d['image_url']==null || $d['image_url']=""){
+                if ($d['type']==BOOK){
+                    $d['image_url']=constant('DEFAULT_IMG_BOOK');
+                }
+                if ($d['type']==VIDEO){
+                    $d['image_url']=constant('DEFAULT_IMG_VIDEO');
+                }
+            }
             $list[] = [
                 "id_media" => $d['id_media'],
                 "name" => $d['name'],
@@ -204,8 +209,7 @@ class MediaModel extends Model
      */
     function isExist($url)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('media');
+        $builder = $this->db->table('media');
         $builder->where('url', $url);
         $query   = $builder->get();
         $items = $query->getResultArray();

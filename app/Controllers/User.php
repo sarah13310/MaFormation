@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 // le 12/01/2023
 // le 03/02/2023
-
+// le 05/02/2023
 class User extends BaseController
 {
     public function __construct()
@@ -79,7 +79,6 @@ class User extends BaseController
         }
         return view('Login/login', $data);
     }
-
     
     /**
      * dispatch
@@ -144,7 +143,6 @@ class User extends BaseController
         ];
         $this->user_has_company_model->save($data_jointure);
     }
-
     
     /**
      * associateCompany
@@ -294,9 +292,7 @@ class User extends BaseController
             "skills" => $skills,
         ];
         return view('User/profile_user.php', $data);
-    }
-
-   
+    }   
     
     /**
      * forgetpassword
@@ -311,7 +307,6 @@ class User extends BaseController
         return view('Login/forgetpassword.php', $data);
     }
 
-
     /**
      * logout
      * Deconnexion utilisateur 
@@ -322,7 +317,6 @@ class User extends BaseController
         session()->destroy();
         return redirect()->to('/');
     }
-
 
     /**
      * signin
@@ -525,7 +519,6 @@ class User extends BaseController
         }
         return view('Login/signin', $data);
     }
-
 
     /**
      * bill
@@ -804,7 +797,6 @@ class User extends BaseController
         ];
         return view("User/add_skill.php", $data);
     }
-
     
     /**
      * save_photo

@@ -6,7 +6,12 @@ class Search extends BaseController
 {
     public function resultdata()
     {
-        helper(['form', 'url']);
+        helper(['form', 'url','help']);
+        $listmedias = [];
+        $listformers = [];
+        $listarticles = [];
+        $listpublications = [];
+        $listtrainings = [];
         if ($this->isGet()) {
 
             $research = $this->request->getVar('research');
@@ -17,9 +22,16 @@ class Search extends BaseController
             $builder->where('status', VALIDE);
             $query   = $builder->get();
             $medias = $query->getResultArray();
-
-            $listmedias = [];
+            
             foreach ($medias as $media) {
+                if ($media['image_url']==null){
+                    if ($media['type']==BOOK){
+                        $media['image_url']=constant('DEFAULT_IMG_BOOK');
+                    }
+                    if ($media['type']==VIDEO){
+                        $media['image_url']=constant('DEFAULT_IMG_VIDEO');
+                    }
+                }
                 $listmedias[] = [
                     "id_media" => $media['id_media'],
                     "name" => $media['name'],
@@ -37,7 +49,6 @@ class Search extends BaseController
             $query   = $builder->get();
             $formers = $query->getResultArray();
 
-            $listformers = [];
             foreach ($formers as $former) {
                 $listformers[] = [
                     "id_user" => $former['id_user'],
@@ -54,7 +65,6 @@ class Search extends BaseController
             $query   = $builder->get();
             $articles = $query->getResultArray();
 
-            $listarticles = [];
             foreach ($articles as $article) {
                 $listarticles[] = [
                     "id_article" => $article['id_article'],
@@ -69,7 +79,6 @@ class Search extends BaseController
             $query   = $builder->get();
             $publications = $query->getResultArray();
 
-            $listpublications = [];
             foreach ($publications as $publication) {
                 $listpublications[] = [
                     "id_publication" => $publication['id_publication'],

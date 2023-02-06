@@ -33,8 +33,7 @@ class PublicationModel extends Model
      */
     function getPublishes()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication');
+        $builder = $this->db->table('publication');
         $query   = $builder->get();
         $publishes = $query->getResultArray();
         return [
@@ -52,9 +51,8 @@ class PublicationModel extends Model
      * clef publishes =>retourne les publications
      */
     function getPublisheById($id)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication');
+    {        
+        $builder = $this->db->table('publication');
         $builder->where("id_publication", $id);
         $query   = $builder->get();
         $publishes = $query->getResultArray();
@@ -69,8 +67,7 @@ class PublicationModel extends Model
      */
     function getFilterPublishes($filter = ALL)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication');
+        $builder = $this->db->table('publication');
         if ($filter != ALL) {
             $builder->where('status', $filter);
         }
@@ -87,8 +84,7 @@ class PublicationModel extends Model
      */
     function getFilterArticles($id_publication)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication_has_article');
+        $builder = $this->db->table('publication_has_article');
         $builder->select("article.* ");
         $builder->where('id_publication', $id_publication);
         $builder->join("article", "article.id_article=publication_has_article.id_article");
@@ -106,8 +102,7 @@ class PublicationModel extends Model
      */
     function getFilterPublishesArticles($listpublishes, $id = 0)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication');
+        $builder = $this->db->table('publication');
 
         for ($i = 0; $i < count($listpublishes); $i++) {
 
@@ -148,8 +143,7 @@ class PublicationModel extends Model
      */
     function isExist($subject)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication');
+        $builder = $this->db->table('publication');
         $builder->where('subject', $subject);
         $query   = $builder->get();
         $items = $query->getResultArray();
@@ -164,8 +158,7 @@ class PublicationModel extends Model
      */
     function deletePublishe($id)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('publication');
+        $builder = $this->db->table('publication');
         $builder->where("id_publication", $id);
         $builder->delete();
     }
@@ -182,7 +175,7 @@ class PublicationModel extends Model
         foreach ($data as $d) {
             $image_url = $d['image_url'];
 
-            if ($image_url == null or $image_url === "") {
+            if ($image_url == null ) {
                 $d['image_url'] = constant('DEFAULT_IMG_PUBLISHES');
             }
             $list[] = [
@@ -206,10 +199,7 @@ class PublicationModel extends Model
      */
     function getAuthorsPublishes($list)
     {
-
-        $db = \Config\Database::connect();
-        $builder = $db->table('user');
-
+        $builder = $this->db->table('user');
         $builder->select('user.name,user.firstname');
 
         for ($i = 0; $i < count($list); $i++) {
@@ -243,8 +233,7 @@ class PublicationModel extends Model
      */
     function getAuthorPublishes($id)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('user');
+        $builder = $this->db->table('user');
         $builder->where('user.id_user', $id);
         $builder->groupBy('user.id_user');
 
@@ -272,8 +261,7 @@ class PublicationModel extends Model
      */
     function getPublishesbyAuthor($id)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('publication');
+        $builder = $this->db->table('publication');
         $builder->where('publication.id_user', $id);
         $builder->groupBy('publication.id_publication');
         $query   = $builder->get();
@@ -281,4 +269,5 @@ class PublicationModel extends Model
 
         return $publishes;
     }
+
 }

@@ -135,12 +135,10 @@ class Media extends BaseController
                 break;
         }
 
-        $medias = $this->media_model->ValidatedMedias($type);
-
         $listmedias = [];
-
+        $medias = $this->media_model->ValidatedMedias($type);
         $listmedias = $this->media_model->returnDataMedias($listmedias,$medias);
-
+       
         $data = [
             "title" => $title,
             "listmedias" => $listmedias,

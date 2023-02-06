@@ -118,9 +118,11 @@ define ("COMPANY", 11);
 define("VIDEO", 1);
 define("BOOK", 2);
 
-define ("BASE_URL", "localhost:8080");// à modifier en fonction de l'url
+define ("BASE_URL", "http://localhost:8080");// à modifier en fonction de l'url
 
 define ("DEFAULT_IMG_ARTICLES", BASE_URL."/assets/article.svg");
 define ("DEFAULT_IMG_PUBLISHES", BASE_URL."/assets/publication.svg");
 define ("DEFAULT_IMG_TRAINING", BASE_URL."/assets/training.svg");
 define ("DEFAULT_IMG_BLANK", BASE_URL."/assets/blank.png");
+define ("DEFAULT_IMG_VIDEO", BASE_URL."/assets/video2.svg");
+define ("DEFAULT_IMG_BOOK", BASE_URL."/assets/book2.svg");

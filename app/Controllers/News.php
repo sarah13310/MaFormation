@@ -300,13 +300,12 @@ class News extends BaseController
      */
     public function list_publishes_home()
     {
+        $listpublishes = [];
         $title = "Liste des publications";
 
-        $public = $this->publication_model->getPublishes();
+        //$public = $this->publication_model->getPublishes();
 
         $publishes = $this->publication_model->getFilterPublishes(VALIDE);
-
-        $listpublishes = [];
 
         $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
 
