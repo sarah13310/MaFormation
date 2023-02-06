@@ -51,15 +51,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Actualités
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/article/list">Articles</a></li>
-                                <li><a class="dropdown-item" href="/publishes/list">Publications</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="/media/videos/list">Vidéos</a></li>
-                                <li><a class="dropdown-item" href="/media/books/list">Livres</a></li>
-                            </ul>
+                            <?= fillMenuNav("News") ?>
                         </li>
 
                         <li class="nav-item">

@@ -56,20 +56,20 @@
 
 
     <?= $this->section('js') ?>
-    <script>
-        /* <i class="bi bi-dash"></i>*/
+    <script>        
         function expand(item) {
             const tr = item.parentElement.parentElement;
             let collapse = tr.nextElementSibling.classList.toggle("collapse");
             if (collapse){
+                tr.style.borderBottom="1px solid lightgray";
                 item.classList.remove("bi-dash");
                 item.classList.add("bi-plus");
             }
-            else{                
+            else{          
+                tr.style.borderBottom="1px solid transparent";      
                 item.classList.remove("bi-plus");
                 item.classList.add("bi-dash");
-            }            
-            
+            }                
         }
     </script>
     <?= $this->endSection() ?>

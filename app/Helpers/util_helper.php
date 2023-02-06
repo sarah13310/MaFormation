@@ -629,11 +629,11 @@ function fillMenuNav($category = "News")
 
         case "News":
             $items = [
-                ["ref" => "", "name" => "Articles"],
-                ["ref" => "", "name" => "Publications"],
+                ["ref" => "/article/list", "name" => "Articles"],
+                ["ref" => "/publishes/list", "name" => "Publications"],
                 ["ref" => "", "name" => "-"],
-                ["ref" => "", "name" => "Vidéos"],
-                ["ref" => "", "name" => "Livres"],
+                ["ref" => "/media/videos/list", "name" => "Vidéos"],
+                ["ref" => "/media/books/list", "name" => "Livres"],
             ];
             break;
 
@@ -642,6 +642,7 @@ function fillMenuNav($category = "News")
                 ["ref" => "/former/list", "name" => "Nos formateurs"],
                 ["ref" => "/training/list", "name" => "Nos formations"],
                 ["ref" => "/funding", "name" => "Mon financement"],
+                ["ref" => "/faq", "name" => "F.A.Q."],
             ];
             break;
     }
