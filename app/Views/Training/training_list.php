@@ -5,13 +5,13 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<h1 class="mb-3"><?= $title ?></h1>
+<h1 class=""><?= $title ?></h1>
+<hr class="mt-1 mb-2 ">
 
-<table class="table table-hover">
+<table class="table table-hover w-75">
     <thead class="<?=$headerColor?>">
         <tr>
-            <th class="col" scope="col">Titre</th>
-            <th class="col" scope="col">Description</th>
+            <th class="col" scope="col">Titre</th>            
             <th class="col" scope="col">Date et heure</th>
             <th class="col" scope="col">Voir</th>
         </tr>
@@ -20,7 +20,6 @@
         <form action="\training\view" method="POST">
             <tr>
                 <td class="col" scope="col"><?= $training['title'] ?></td>
-                <td class="col" scope="col"><?= $training['description'] ?></td>
                 <td class="col" scope="col"><?= $training['date'] ?></td>
                 <td class="view col" scope="col"><button class="btn" type="submit" value="<?= $training['id_training'] ?>" name='id_training'><i class="bi bi-eye"></i></button></td>
             </tr>

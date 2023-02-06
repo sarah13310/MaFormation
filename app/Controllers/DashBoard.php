@@ -86,6 +86,8 @@ class DashBoard extends BaseController
             "jobs" => $jobs,
             "user" => $user,
             "headerColor" => getTheme($user['type'], "header"),
+            "headerExtraColor" => getTheme($user['type'], "header_extra"),
+            "buttonColor" => getTheme($user['type'], "button"),
         ];
 
         return view('Admin/list_former_admin.php', $data);
