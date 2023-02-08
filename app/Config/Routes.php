@@ -107,6 +107,7 @@ $routes->group('/user', static function ($routes) {
     $routes->add('parameters', 'User::parameters', ['filter' => 'auth']); //parameters of user (user profil)      
     $routes->add('list/(:segment)', "User::list_user/$1", ['filter' => 'auth']); // list user (company or ordinary customer)
     $routes->add('rdv/add', 'User::edit_rdv', ['filter' => 'auth']); //add rdv 
+    $routes->add('rdv/save', 'User::save_rdv', ['filter' => 'auth']); //save rdv 
     $routes->add('rdv/list', 'User::list_rdv', ['filter' => 'auth']); //list rdv 
 });
 

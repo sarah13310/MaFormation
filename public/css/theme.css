@@ -200,3 +200,20 @@
 .navbar-nav .nav-link {
     color: white;
 }
+
+.nav_former {
+    background: linear-gradient(#0e5592, #75d5f0, #0e5592);
+}
+
+.nav_left_former {
+    background: linear-gradient(#1e629a, #5cb2ca, #3775a6);
+}
+
+.button_former {
+    background: #1e6eba;
+    color: white;
+}
+
+.footer_former {
+    background: linear-gradient(#3b78a8, #7dabc7, #265071);
+}

@@ -36,11 +36,12 @@
         </div>
         <div id="column_form" class="col col-md-6 ">
             <fieldset>
-            <legend><i class="bi bi-calendar2-check"></i>&nbsp;&nbsp;Prenez votre rendez-vous</legend>
-                <div>
-                    <!-- <fieldset class="form-group border p-3"> -->
-                    <p class="medium text-muted"> <?= $legend ?></p>
-                    <form id="rdvForm" name="rdvForm">
+                <form id="rdvForm" name="rdvForm" action="/user/rdv/save" method="post">
+                    <legend><i class="bi bi-calendar2-check"></i>&nbsp;&nbsp;Prenez votre rendez-vous</legend>
+                    <div>
+                        <!-- <fieldset class="form-group border p-3"> -->
+                        <p class="medium text-muted"> <?= $legend ?></p>
+
                         <!-- liste des formations -->
                         <div class="form-group row align-items-center mb-3">
                             <label for="select" class="col-12 col-md-3 col-form-label">Formations</label>
@@ -84,13 +85,12 @@
                             </div>
                         </div>
                         <div class="d-grid col-5 ">
-                            <button type="submit" class="btn <?= $buttonColor ?> " id="btnAjouter">Ajouter
+                            <button type="submit" class="btn btn-primary " id="btnAjouter">Ajouter
                             </button>
                         </div>
-                    </form>
-                    <!-- </fieldset> -->
-
-                </div>
+                        <!-- </fieldset> -->
+                    </div>
+                </form>
             </fieldset>
         </div>
 
@@ -191,14 +191,21 @@
     initCalendar();
     showCalendar();
 
-    myForm.onsubmit = () => {
-        dateStartSelected = new Date(myForm["dateStart"].value);
-        dateEndSelected = new Date(myForm["dateEnd"].value);
-        OnAddEvent();
-        myForm.action = "/user/rdv/add";
-        myForm.method = "POST";
-        myForm.submit();
-        /*  return false; */
+    /*myForm.onsubmit = () => {
+        //dateStartSelected = new Date(myForm["dateStart"].value);
+        //dateEndSelected = new Date(myForm["dateEnd"].value);
+        //OnAddEvent();
+        this.action = "/user/rdv/add";
+        this.method = "POST";
+        this.submit();
+       
+    }*/
+
+    let buttons = document.querySelectorAll('button');
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].matches(".btn-primary")) {
+            buttons[i].classList.replace("btn-primary", "<?= $buttonColor ?>");
+        }
     }
 </script>
 <?= $this->endSection() ?>

@@ -821,7 +821,7 @@ function getLogoColor($type)
             break;
 
         case FORMER: // Formateur
-            $theme = "logo2.png";
+            $theme = "logo3.png";
             break;
 
         default: // par défaut

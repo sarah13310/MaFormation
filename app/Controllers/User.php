@@ -1096,7 +1096,11 @@ class User extends BaseController
         return view('User/rdv.php', $data);
     }
 
-    public function add_rdv()
+    public function list_rdv(){
+
+    }
+
+    public function save_rdv()
     {
         if ($this->isPost()) {
             $dateStart = $this->request->getVar('dateStart');
@@ -1104,6 +1108,7 @@ class User extends BaseController
             $timeStart = $this->request->getVar('timeStart');
             $timeEnd = $this->request->getVar('timeEnd');
             $id_training = $this->request->getVar('id_training');
+            $id_former = $this->request->getVar('id_former');
             $id_user = session()->id_user;
 
             $dataRdv = [
@@ -1112,18 +1117,14 @@ class User extends BaseController
                 'id_training' => $id_training,
                 'id_user' => $id_user,
             ];
-            print_r($dataRdv);
-            die();
-           
+            
             $id_rdv=$this->rdv_model->insert($dataRdv);
             //
-            $id_former = $this->user_has_training_model->getFormer($id_training);
+            //$id_former = $this->user_has_training_model->getFormer($id_training);
             $dataInt = [
                 'id_former' => $id_former,
                 'id_user' => $id_user,
             ];
-            print_r($dataInt);
-            die();
             $this->user_has_user_model->save($dataInt);
 
             //il faut user_has_rdv
@@ -1131,9 +1132,8 @@ class User extends BaseController
                 'id_user' => $id_former,
                 'id_rdv' => $id_rdv,
             ];
-            print_r($dataIntRdv);
-            die();
             $this->user_has_rdv_model->save($dataIntRdv);
+            //return view('User/rdv.php', $data);
         }
     }
 }

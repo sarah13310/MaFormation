@@ -50,7 +50,7 @@ html body {
 	color: rgb(149, 148, 148);
 	text-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 	border: solid 2px rgb(53, 53, 53);
-	background-color: var(--bg-color);
+	background-color: #f2fcfff5/*var(--bg-color)*/;
 	border-radius: 10px;
 	padding: 7px;
 	margin-left: 2px;

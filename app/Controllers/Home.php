@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Libraries\CarouselHelper;
 
+use function PHPUnit\Framework\isEmpty;
+
 // Le 10/01/2023
 // Le 05/02/2023
 class Home extends BaseController
@@ -67,8 +69,26 @@ class Home extends BaseController
         $trainings = $this->training_model->getFilterTrainings();
         $carousel1 = listCardImgCarousel($trainings, "/training/details/");
         $articles = $this->article_model->getFilterArticles(VALIDE);
+        $listarticles = [];
+        foreach ($articles as $article) {
+            
+            if ($article['image_url'] == null) {
+                $article['image_url'] = constant('DEFAULT_IMG_ARTICLES');
+            }
+
+            if (strlen($article['image_url'])<20) {
+                $article['image_url'] = constant('DEFAULT_IMG_ARTICLES');
+            }
+
+            $listarticles[] = [
+                "id_article" => $article['id_article'],
+                "subject" => $article['subject'],
+                "image_url" => $article['image_url'],
+            ];
+        }
+
         //
-        $carousel2 = listCardImgCarousel($articles, "/article/list/details/");
+        $carousel2 = listCardImgCarousel($listarticles, "/article/list/details/");
         // var_dump($err);
         $data = [
             "title" => "Accueil",
@@ -119,14 +139,13 @@ class Home extends BaseController
     public function newsletters()
     {
         if ($this->isPost()) {
-            $mail = $this->request->getVar('mail');            
-            
-                $data = [
-                    "title" => "Lettre d'informations",
-                    "mail" => $mail,
-                ];
-                return view('Home/newsletters.php', $data);
-            }
+            $mail = $this->request->getVar('mail');
+
+            $data = [
+                "title" => "Lettre d'informations",
+                "mail" => $mail,
+            ];
+            return view('Home/newsletters.php', $data);
         }
-    
+    }
 }
