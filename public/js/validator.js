@@ -44,3 +44,33 @@ function onValidateMail(form, id) {
 		}, 2000);
 	}
 }
+
+
+/**
+     * isValidPassword
+     *
+     * @return void
+     */
+let elemsel=null;
+function isValidPassword(elem) {
+	elemsel=elem;
+	let err="";
+	let password = elem.value;
+	password = password.trim();
+	if (password.length < 8) {
+		err = 'mot de passe trop court!';
+		elem.focus();
+		elemsel.classList.toggle("err");
+	}
+	if (password.length > 12) {
+		err = 'mot de passe trop long!';
+		elem.focus();
+		elemsel.classList.toggle("err");
+	}
+	if (password === "") {
+		err = 'mot de passe vide!';
+		elem.focus();
+		elemsel.classList.toggle("err");
+	}
+	return err;
+}

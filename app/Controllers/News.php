@@ -302,9 +302,7 @@ class News extends BaseController
     {
         $listpublishes = [];
         $title = "Liste des publications";
-
-        //$public = $this->publication_model->getPublishes();
-
+        
         $publishes = $this->publication_model->getFilterPublishes(VALIDE);
 
         $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);

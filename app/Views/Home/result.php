@@ -1,3 +1,4 @@
+<?php /* require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') */ ?>
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('header') ?>
 <?= $this->endSection() ?>
@@ -21,42 +22,56 @@
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listformers as $former) : ?>
             <form action="/former/list/cv" method="post">
-            <div class="card mb-2 flex-row w-75">
-                <img src="<?= $former['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
-                <div class="card-body">
-                    <h5><?= $former['name'] ." " . $former['firstname'] ?></h5>
-                    <input type="hidden" name="mail" value="<?= $former['mail'] ?>">
+                <div class="card mb-2 flex-row w-75">
+                    <img src="<?= $former['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
+                    <div class="card-body">
+                        <h5><?= $former['name'] . " " . $former['firstname'] ?></h5>
+                        <input type="hidden" name="mail" value="<?= $former['mail'] ?>">
+                    </div>
+                    <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
                 </div>
-                <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
-            </div>
             </form>
         <?php endforeach ?>
     </div>
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listarticles as $articles) : ?>
             <form action="/article/list/details" method="post">
-            <div class="card mb-2 flex-row w-75">
-                <img src="<?= $articles['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
-                <div class="card-body">
-                    <h5><?= $articles['subject'] ?></h5>
-                    <input type="hidden" name="id_article" value="<?= $articles['id_article'] ?>">
+                <div class="card mb-2 flex-row w-75">
+                    <img src="<?= $articles['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
+                    <div class="card-body">
+                        <h5><?= $articles['subject'] ?></h5>
+                        <input type="hidden" name="id_article" value="<?= $articles['id_article'] ?>">
+                    </div>
+                    <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
                 </div>
-                <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
-            </div>
             </form>
         <?php endforeach ?>
     </div>
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listpublications as $publication) : ?>
             <form action="/publishes/list/details" method="post">
-            <div class="card mb-2 flex-row w-75">
-                <img src="<?= $publication['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
-                <div class="card-body">
-                    <h5><?= $publication['subject'] ?></h5>
-                    <input type="hidden" name="id_publication" value="<?= $publication['id_publication'] ?>">
+                <div class="card mb-2 flex-row w-75">
+                    <img src="<?= $publication['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
+                    <div class="card-body">
+                        <h5><?= $publication['subject'] ?></h5>
+                        <input type="hidden" name="id_publication" value="<?= $publication['id_publication'] ?>">
+                    </div>
+                    <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
                 </div>
-            </div>
-            <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
+            </form>
+        <?php endforeach ?>
+    </div>
+    <div class="row align-items-center justify-content-center">
+        <?php foreach ($listtrainings as $training) : ?>
+            <form action="/trainig/details" method="post">
+                <div class="card mb-2 flex-row w-75">
+                    <img src="<?= $training['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
+                    <div class="card-body">
+                        <h5><?= $training['title'] ?></h5>
+                        <input type="hidden" name="id_publication" value="<?= $training['id_training'] ?>">
+                    </div>
+                    <button type="submit" class="mt-auto btn align-self-end mr-2">Voir Plus</button>
+                </div>
             </form>
         <?php endforeach ?>
     </div>

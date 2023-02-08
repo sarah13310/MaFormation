@@ -36,7 +36,7 @@
         </div>
     <?php endif ?>
 
-    <form action="/admin/books/edit" method="post">
+    <form action="/admin/<?= $troute ?>/edit" method="post">
         <div class="row">
             <div class='form-floating mb-3 col-12 col-md-4'>
                 <input class='form-control' id='name' type='text' name='name' placeholder="Nom du livre" />
@@ -52,7 +52,7 @@
             </div>
             <div class='form-floating mb-3 col-12 col-md-4'>
                 <input class='form-control' id='image_url' type='text' name='image_url' placeholder="Url de la couverture du livre"  />
-                <label for='url'><?= $ucm ?></label>
+                <label for='image_url'><?= $ucm ?></label>
             </div>
         </div>
         <div class="form-group row align-items-center">

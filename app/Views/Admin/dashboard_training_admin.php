@@ -25,6 +25,7 @@
 <table class="table border">
     <thead class="<?= $headerColor ?>">
         <tr>
+            <th class="hidden"></th>
             <th scope="col">Sujet</th>
             <th scope="col">Date et heure</th>
             <th colspan="3" scope="col">Actions</th>
@@ -34,6 +35,7 @@
         <?php $i = 0;
         foreach ($trainings as $training) : ?>
             <tr class="mt-4" style="border-top:2px solid; <?= (count($training['pages']) > 0) ? 'border-bottom:hidden' : '' ?>">
+                <td class="hidden"><?= $training['id_training'] ?></td>
                 <td><?= $training['title'] ?></td>
                 <td><?= ($training['date']) ?></td>
                 <td>
@@ -119,14 +121,15 @@
         document.form_delete.submit();
     }
 
-    function onPreview(){
-        sessionStorage.title=document.form_preview.training_title.value;
+    function onPreview() {
+        sessionStorage.title = document.form_preview.training_title.value;
         document.form_preview.submit();
     }
 
     for (let i = 0; i < states.length; i++) {
         states[i].addEventListener("change", (event) => {
             const selection = event.target.value.substring(event.target.selectionStart, event.target.selectionEnd);
+            let tr=event.target.parentElement.parentElement;
             console.log(selection);
         });
     };

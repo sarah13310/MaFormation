@@ -197,7 +197,7 @@ class DashBoard extends BaseController
         $articles = $this->article_model->getArticlesbyAuthor($builder, $user['id_user']);
 
         $listarticles = [];
-        $listarticles = $this->article_model->returnDataArticles($listarticles, $articles);
+        $listarticles = $this->article_model->MapArticles($listarticles, $articles);
 
         $data = [
             "title" => $title,
@@ -223,7 +223,7 @@ class DashBoard extends BaseController
         $user = $this->user_model->getUserSession();
         $publishes = $this->publication_model->getPublishesbyAuthor($user['id_user']);
         //
-        $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
+        $listpublishes = $this->publication_model->MapPublishes($listpublishes, $publishes);
         //
         $listpublishes = $this->publication_model->getFilterPublishesArticles($listpublishes, $user['id_user']);
         //
@@ -251,7 +251,7 @@ class DashBoard extends BaseController
         $builder = $public['builder'];
         $articles = $public['articles'];
         //
-        $listarticles = $this->article_model->returnDataArticles($listarticles, $articles);
+        $listarticles = $this->article_model->MapArticles($listarticles, $articles);
         //
         $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
 
@@ -279,7 +279,7 @@ class DashBoard extends BaseController
         //
         $publishes = $this->publication_model->getFilterPublishes();
         //
-        $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
+        $listpublishes = $this->publication_model->MapPublishes($listpublishes, $publishes);
         //
         $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
         //
@@ -383,7 +383,7 @@ class DashBoard extends BaseController
         }
 
         $listmedias = [];
-        $listmedias = $this->media_model->returnDataMedias($listmedias, $medias);
+        $listmedias = $this->media_model->MapMedias($listmedias, $medias);
         $listmedias = $this->media_model->getAuthorsMedias($listmedias, $builder);
 
         $user = $this->user_model->getUserSession();
@@ -392,8 +392,11 @@ class DashBoard extends BaseController
             "listmedias" => $listmedias,
             "user" => $user,
             "type" => session()->type,
+            "typeofmedia"=>$type,
+            "headerColor" => getTheme(session()->type, "header"),
+            "buttonColor" => getTheme(session()->type, "button"),
         ];
-        return view('Admin/dashboard_medias_admin.php', $data);
+        return view('Admin/dashboard_media_admin.php', $data);
     }
 
     /**
@@ -422,7 +425,7 @@ class DashBoard extends BaseController
         $builder = $public['builder'];
         $medias = $this->media_model->getAuthorMedias($session, $builder, $type);
         $listmedias = [];
-        $listmedias = $this->media_model->returnDataMedias($listmedias, $medias);
+        $listmedias = $this->media_model->MapMedias($listmedias, $medias);
 
         $data = [
             "title" => $title,

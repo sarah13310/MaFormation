@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+use function PHPUnit\Framework\isEmpty;
+
 class MediaModel extends Model
 {
     protected $table = 'media';
@@ -99,14 +101,28 @@ class MediaModel extends Model
     }
 
     /**
-     * returnDataMedias
+     * deleteMedia
+     *
+     * Suppression du média
+     * @param  int $id (identifiant du média)
+     * @return void
+     */
+    function deleteMedia($id)
+    {
+        $builder = $this->db->table('media');
+        $builder->where("id_media", $id);
+        $builder->delete();
+    }
+
+    /**
+     * MapMedias
      *
      * Retourne les données médias dans une liste
      * @param  array $list
      * @param  array $data
      * @return un tableau d'une liste de médias 
      */
-    function returnDataMedias($list,$data)
+    function MapMedias($list,$data)
     {
         foreach ($data as $d) {
             if($d['image_url']==null || $d['image_url']=""){
@@ -116,7 +132,7 @@ class MediaModel extends Model
                 if ($d['type']==VIDEO){
                     $d['image_url']=constant('DEFAULT_IMG_VIDEO');
                 }
-            }
+            }            
             $list[] = [
                 "id_media" => $d['id_media'],
                 "name" => $d['name'],

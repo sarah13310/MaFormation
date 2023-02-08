@@ -10,6 +10,8 @@ use App\Models\CategoryModel;
 use App\Models\CertificateModel;
 use App\Models\CompanyModel;
 use App\Models\ContactModel;
+use App\Models\UserHasUserModel;
+use App\Models\UserHasRdvModel;
 use App\Models\LettersModel;
 use App\Models\LogModel;
 use App\Models\MediaModel;
@@ -88,6 +90,9 @@ abstract class BaseController extends Controller
    protected $user_has_company_model;
    protected $user_has_training_model;
    protected $user_has_media_model;
+   protected $user_has_user_model;
+   protected $user_has_rdv_model;
+   
    protected $db;
    /**
     * Constructor.
@@ -163,6 +168,8 @@ abstract class BaseController extends Controller
       $this->user_has_training_model = new UserHasTrainingModel();
       $this->user_model = new UserModel();
       $this->user_has_media_model = new UserHasMediaModel();
+      $this->user_has_user_model=new UserHasUserModel();
+      $this->user_has_rdv_model=new UserHasRdvModel();
       // E.g.: $this->session = \Config\Services::session();
       
    }

@@ -8,7 +8,8 @@ class Media extends BaseController
     // Gestion des diapos
     public function slides()
     {
-        $data=["title"=>"Diapos"      
+        $data = [
+            "title" => "Diapos"
         ];
         return view('/Media/slides.php', $data);
     }
@@ -19,25 +20,27 @@ class Media extends BaseController
         switch ($type) {
             case VIDEO:
                 $title = "Poster une vidéo";
-                $subtitle="Mise en ligne sur le site d'une vidéo.";
-                $existe="Cette vidéo existe déjà!";
-                $validation='Vidéo en cours de validation...';
-                $n="&nbsp;Nom de la vidéo (*)";
-                $u="&nbsp;Url de la vidéo (*)";
-                $ucm="&nbsp;Url de la miniature de la vidéo (*)";
+                $subtitle = "Mise en ligne sur le site d'une vidéo.";
+                $existe = "Cette vidéo existe déjà!";
+                $validation = 'Vidéo en cours de validation...';
+                $n = "&nbsp;Nom de la vidéo (*)";
+                $u = "&nbsp;Url de la vidéo (*)";
+                $ucm = "&nbsp;Url de la miniature de la vidéo (*)";
+                $troute= "videos";
                 break;
             case BOOK:
                 $title = "Poster un livre";
-                $subtitle="Mise en ligne sur le site d'un livre.";
-                $existe="Ce livre existe déjà!";
-                $validation='Livre en cours de validation...';
-                $n="&nbsp;Nom du livre (*)";
-                $u="&nbsp;Url du livre (*)";
-                $ucm="&nbsp;Url de la couverture du livre (*)";
+                $subtitle = "Mise en ligne sur le site d'un livre.";
+                $existe = "Ce livre existe déjà!";
+                $validation = 'Livre en cours de validation...';
+                $n = "&nbsp;Nom du livre (*)";
+                $u = "&nbsp;Url du livre (*)";
+                $ucm = "&nbsp;Url de la couverture du livre (*)";
+                $troute= "books";
                 break;
         }
 
-        $na="&nbsp;Nom de l'auteur";
+        $na = "&nbsp;Nom de l'auteur";
 
         $user = $this->user_model->getUserSession();
         //
@@ -48,10 +51,11 @@ class Media extends BaseController
             "subtitle" => $subtitle,
             "user" => $user,
             "categories" => $categories,
-            "n" =>$n,
-            "na" =>$na,
-            "u" =>$u,
-            "ucm" =>$ucm,
+            "n" => $n,
+            "na" => $na,
+            "u" => $u,
+            "ucm" => $ucm,
+            "troute"=>$troute,            
         ];
 
         if (isset($data['warning'])) {
@@ -62,15 +66,15 @@ class Media extends BaseController
             session()->remove('succes');
         }
 
-        if ($this->isPost()) {           
+        if ($this->isPost()) {
 
             $ispublished = ($this->request->getVar('publish') == true) ? EN_COURS : BROUILLON;
             $dataSave['name'] = $this->request->getVar('name');
             $dataSave['description'] = $this->request->getVar('description');
             $dataSave['author'] = $this->request->getVar('author');
             $dataSave['category'] = $this->request->getVar('category'); // on la categorise
-            $dataSave['url'] = $this->request->getVar('url'); 
-            $dataSave['image_url'] = $this->request->getVar('image_url'); 
+            $dataSave['url'] = $this->request->getVar('url');
+            $dataSave['image_url'] = $this->request->getVar('image_url');
             $dataSave['type'] = $type;
             $dataSave['status'] = $ispublished; // status de la publication
             $url =  $dataSave['url'];
@@ -100,7 +104,6 @@ class Media extends BaseController
                         $data["warning"] = $existe;
                 } else {
                     // on sauve en premier le tag
-                    $
                     $data_tag["id_category"] = $dataSave['category'];
                     $id_tag = $this->tag_model->insert($data_tag);
                     $dataSave['id_tag'] = $id_tag;
@@ -120,25 +123,25 @@ class Media extends BaseController
     }
 
     public function list_media_home($type)
-    {        
+    {
 
         switch ($type) {
             case VIDEO:
                 $title = "Liste des vidéos";
-                $p="Fait par";
-                $b="Regarder la vidéo";
+                $p = "Fait par";
+                $b = "Regarder la vidéo";
                 break;
             case BOOK:
                 $title = "Liste des livres";
-                $p="Ecrit par";
-                $b="Acheter le livre";
+                $p = "Ecrit par";
+                $b = "Acheter le livre";
                 break;
         }
 
         $listmedias = [];
         $medias = $this->media_model->ValidatedMedias($type);
-        $listmedias = $this->media_model->returnDataMedias($listmedias,$medias);
-       
+        $listmedias = $this->media_model->MapMedias($listmedias, $medias);
+
         $data = [
             "title" => $title,
             "listmedias" => $listmedias,
@@ -147,5 +150,18 @@ class Media extends BaseController
         ];
         return view('/Media/list_medias.php', $data);
     }
+    /**
+     * delete_media
+     * suppression du media en fonction de son Id 
+     * @return void
+     */
+    public function delete_media()
+    {
+        if ($this->isPost() == 'post') {
+            $id = $this->request->getVar('id_media');
 
+            $this->media_model->deleteMedia($id);
+        }
+        return redirect()->to(previous_url());
+    }
 }

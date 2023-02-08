@@ -232,14 +232,14 @@ function dateFormat($date)
 
 function dateTimeFormat($date)
 {
-   
+
     $strDate = "Aucune date renseignée";
     if ($date == null) {
     } else {
         $data = explode(' ', $date);
-        $hm=explode(':', $data[1]);
+        $hm = explode(':', $data[1]);
         $date = explode('-', $data[0]);
-        $strDate = "Le " . $date[2] . " " . getMonth($date[1]) . " " . $date[0]. " à ".$hm[0]."h".$hm[1] ;
+        $strDate = "Le " . $date[2] . " " . getMonth($date[1]) . " " . $date[0] . " à " . $hm[0] . "h" . $hm[1];
     }
     return $strDate;
 }
@@ -312,14 +312,16 @@ function fillMenuDashBoard($type)
         case USER:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
-            $menu .= fillMenu("Formations", "menu2", "Formations", $type);
+            $menu .= fillMenu("Rendez-vous", "menu2", "Agenda", $type);
+            $menu .= fillMenu("Formations", "menu3", "Formations", $type);
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
         case COMPANY:
             $menu .= fillMenu2("Accueil", "/user/profil", "Accueil", $type);
             $menu .= fillMenu("Profil", "menu1", "Profil", $type);
-            $menu .= fillMenu("Formations", "menu2", "Formations", $type);
+            $menu .= fillMenu("Rendez-vous", "menu2", "Agenda", $type);
+            $menu .= fillMenu("Formations", "menu3", "Formations", $type);
             $menu .= fillMenu2("Factures", "/user/bill", "Factures", $type);
             break;
 
@@ -549,14 +551,20 @@ function fillMenuRight($category, $type)
                 case ADMIN:
                 case SUPER_ADMIN:
                     $items = [
-                        ["ref" => "/admin/rdv/list", "name" => "Liste"],
-                        ["ref" => "/admin/rdv", "name" => "Modification"],
+                        ["ref" => "/user/rdv/list", "name" => "Liste"],
                     ];
                     break;
                 case FORMER:
                     $items = [
-                        ["ref" => "/former/rdv/list", "name" => "Liste"],
-                        ["ref" => "/former/rdv", "name" => "Modification"],
+                        ["ref" => "/user/rdv/list", "name" => "Liste"],
+                        ["ref" => "/user/rdv/add", "name" => "Modification"],
+                    ];
+                    break;
+                case USER:
+                case COMPANY:
+                    $items = [
+                        ["ref" => "/user/rdv/list", "name" => "Liste"],
+                        ["ref" => "/user/rdv/add", "name" => "Demande de R.D.V"],
                     ];
                     break;
             }
@@ -570,6 +578,8 @@ function fillMenuRight($category, $type)
                         ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
                         ["ref" => "/training/dashboard", "name" => "Tableau Formations"],
+                        ["ref" => "/media/dashboard/videos", "name" => "Tableau Vidéos"],
+                        ["ref" => "/media/dashboard/books", "name" => "Tableau Livres"],
                     ];
                     break;
                 case SUPER_ADMIN:
@@ -579,6 +589,8 @@ function fillMenuRight($category, $type)
                         ["ref" => "/article/dashboard", "name" => "Tableau Articles"],
                         ["ref" => "/publishes/dashboard", "name" => "Tableau Publications"],
                         ["ref" => "/training/dashboard", "name" => "Tableau Formations"],
+                        ["ref" => "/media/dashboard/videos", "name" => "Tableau Vidéos"],
+                        ["ref" => "/media/dashboard/books", "name" => "Tableau Livres"],
                     ];
                     break;
                 case FORMER:

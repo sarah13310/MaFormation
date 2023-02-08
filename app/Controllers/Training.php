@@ -597,4 +597,6 @@ class Training extends BaseController
         ];
         return view('Admin/dashboard_training_admin.php', $data);
     }
+
+    
 }

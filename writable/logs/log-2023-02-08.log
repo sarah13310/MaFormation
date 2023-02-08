@@ -1,0 +1,60 @@
+CRITICAL - 2023-02-08 10:19:17 --> Call to undefined method App\Models\TrainingModel::getTrainningTitle
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\User.php(1069): CodeIgniter\Model->__call('getTrainningTitle', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-08 10:19:40 --> Call to undefined method App\Models\TrainingModel::getTrainingTitle
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\User.php(1069): CodeIgniter\Model->__call('getTrainingTitle', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-08 10:19:43 --> Call to undefined method App\Models\TrainingModel::getTrainingTitle
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\User.php(1069): CodeIgniter\Model->__call('getTrainingTitle', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-08 10:25:12 --> Undefined array key "id_user"
+in APPPATH\Views\User\rdv.php on line 59.
+ 1 APPPATH\Views\User\rdv.php(59): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_user"', 'APPPATH\\Views\\User\\rdv.php', 59)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\rdv.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv.php', [], true)
+ 5 APPPATH\Controllers\User.php(1084): view('User/rdv.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-08 10:30:42 --> Undefined array key "id_user"
+in APPPATH\Controllers\User.php on line 1076.
+ 1 APPPATH\Controllers\User.php(1076): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_user"', 'APPPATH\\Controllers\\User.php', 1076)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-08 10:31:57 --> Undefined array key "id_user"
+in APPPATH\Controllers\User.php on line 1076.
+ 1 APPPATH\Controllers\User.php(1076): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_user"', 'APPPATH\\Controllers\\User.php', 1076)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-08 10:32:11 --> Undefined array key "id_user"
+in APPPATH\Controllers\User.php on line 1076.
+ 1 APPPATH\Controllers\User.php(1076): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_user"', 'APPPATH\\Controllers\\User.php', 1076)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

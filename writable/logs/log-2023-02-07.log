@@ -1,0 +1,123 @@
+ERROR - 2023-02-07 14:02:06 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MaFormation\app\Controllers\Home.php(25): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MaFormation\app\Controllers\Home.php(85): App\Controllers\Home->home()
+#6 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#7 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in D:\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 D:\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MaFormation\app\Controllers\Home.php(25): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MaFormation\app\Controllers\Home.php(85): App\Controllers\Home->home()
+#5 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#10 {main}
+ERROR - 2023-02-07 15:20:12 --> mysqli_sql_exception: Operand should contain 1 column(s) in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `user` S...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `user` S...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `user` S...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(2079): CodeIgniter\Database\BaseConnection->query('UPDATE `user` S...', Array, false)
+#4 D:\MaFormation\app\Models\UserModel.php(359): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 D:\MaFormation\app\Controllers\User.php(678): App\Models\UserModel->modifyPassword('64', 'garcia22')
+#6 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->modif_password()
+#7 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#11 {main}
+CRITICAL - 2023-02-07 15:20:12 --> Operand should contain 1 column(s)
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `user` SET `password` = (\'password\',\'garcia22\')
+WHERE `id_user` = \'64\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `user` SET `password` = (\'password\',\'garcia22\')
+WHERE `id_user` = \'64\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `user` SET `password` = (\'password\',\'garcia22\')
+WHERE `id_user` = \'64\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2079): CodeIgniter\Database\BaseConnection->query('UPDATE `user` SET `password` = :password:
+WHERE `id_user` = :id_user:', [...], false)
+ 5 APPPATH\Models\UserModel.php(359): CodeIgniter\Database\BaseBuilder->update([...])
+ 6 APPPATH\Controllers\User.php(678): App\Models\UserModel->modifyPassword('64', 'garcia22')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_password()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-07 15:24:37 --> App\Models\UserModel::passwordHash(): Argument #1 ($data) must be of type array, string given, called in D:\MaFormation\app\Models\UserModel.php on line 356
+in APPPATH\Models\UserModel.php on line 62.
+ 1 APPPATH\Models\UserModel.php(356): App\Models\UserModel->passwordHash('garcia22')
+ 2 APPPATH\Controllers\User.php(682): App\Models\UserModel->modifyPassword([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_password()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-07 15:25:20 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '64 = :64:
+WHERE `id_user` = '64'
+AND `password` = ('64')' at line 1 in D:\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 D:\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `user` S...', 0)
+#1 D:\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `user` S...')
+#2 D:\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `user` S...')
+#3 D:\MaFormation\system\Database\BaseBuilder.php(2079): CodeIgniter\Database\BaseConnection->query('UPDATE `user` S...', Array, false)
+#4 D:\MaFormation\app\Models\UserModel.php(360): CodeIgniter\Database\BaseBuilder->update('64', Array)
+#5 D:\MaFormation\app\Controllers\User.php(682): App\Models\UserModel->modifyPassword(Array)
+#6 D:\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->modif_password()
+#7 D:\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 D:\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 D:\MaFormation\system\Commands\Server\rewrite.php(46): require_once('D:\\MaFormation\\...')
+#11 {main}
+CRITICAL - 2023-02-07 15:25:20 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '64 = :64:
+WHERE `id_user` = '64'
+AND `password` = ('64')' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `user` SET 64 = :64:
+WHERE `id_user` = \'64\'
+AND `password` = (\'64\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `user` SET 64 = :64:
+WHERE `id_user` = \'64\'
+AND `password` = (\'64\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `user` SET 64 = :64:
+WHERE `id_user` = \'64\'
+AND `password` = (\'64\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2079): CodeIgniter\Database\BaseConnection->query('UPDATE `user` SET 64 = :64:
+WHERE `id_user` = :id_user:
+AND `password` = :password:', [...], false)
+ 5 APPPATH\Models\UserModel.php(360): CodeIgniter\Database\BaseBuilder->update('64', [...])
+ 6 APPPATH\Controllers\User.php(682): App\Models\UserModel->modifyPassword([...])
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->modif_password()
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-07 16:35:09 --> Undefined variable $legend
+in APPPATH\Controllers\User.php on line 1070.
+ 1 APPPATH\Controllers\User.php(1070): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $legend', 'APPPATH\\Controllers\\User.php', 1070)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-07 16:35:21 --> Undefined variable $legend
+in APPPATH\Controllers\User.php on line 1070.
+ 1 APPPATH\Controllers\User.php(1070): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $legend', 'APPPATH\\Controllers\\User.php', 1070)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->rdv()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

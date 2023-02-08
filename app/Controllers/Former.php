@@ -129,30 +129,7 @@ class Former extends BaseController
      * Création Modification des rdv
      * @return void
      */
-    public function rdv()
-    {
-        $user = $this->user_model->getUserSession();
-        $query = $this->rdv_model->where("id_user", $user['id_user'])->findAll();
-        $events = [];
-
-        $options = $this->category_model->getCategories();
-        foreach ($query as $event) {
-            $events[] = [
-                "title" => "Infos",
-                "dateStart" => $event['dateStart'],
-                "dateEnd" =>  $event['dateEnd'],
-            ];
-        }
-        $data = [
-            "title" => "Planning des Rendez-vous",
-            "id_user" => $user['id_user'],
-            "events" => $events,
-            "user" => $user,
-            "options" => $options,
-        ];
-        return view('Former/rdv.php', $data);
-    }
-
+    
    
     /**
      * page_modify

@@ -16,6 +16,7 @@ class UserModel extends Model
     protected $useSoftDeletes = false;
 
     protected $allowedFields = [
+        'id_user',
         'name',
         'firstname',
         'address',
@@ -343,5 +344,21 @@ class UserModel extends Model
         $builder->where('mail', $mail);
         $query   = $builder->get();
         return $query->getResultArray();
+    }
+    
+    /**
+     * modifyPassword
+     *
+     * @param  int $id
+     * @param  int $password
+     * @return bool
+     */
+    function modifyPassword($data ){
+               
+        $builder = $this->db->table('user');
+        $builder->set('password', $data['password']);
+        $builder->where('id_user', $data['id_user']);
+        $builder->update();        
+        
     }
 }

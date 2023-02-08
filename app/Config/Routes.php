@@ -73,7 +73,7 @@ $routes->group('/former', static function ($routes) {
     $routes->add('publishes/list', 'Dashboard::listpublishes');
     $routes->get('view', 'Former::former_view');
     $routes->get('profil', 'Former::profile_view'); // view profil
-    $routes->add('rdv', 'Former::rdv'); //edit planning
+
     $routes->add('profil/edit', 'Former::profile_view'); // modify profil
 
     $routes->add('training/save', 'Training::training_save'); // create training
@@ -105,10 +105,10 @@ $routes->group('/user', static function ($routes) {
     $routes->add('profil/name', 'User::modif_name', ['filter' => 'auth']); //modif name (user profil)  
     $routes->add('profil/save/photo', 'User::save_photo', ['filter' => 'auth']); //save the picture (user profil)  
     $routes->add('parameters', 'User::parameters', ['filter' => 'auth']); //parameters of user (user profil)      
-    $routes->add('list/(:segment)', "User::list_user/$1", ['filter' => 'auth']);// list user (company or ordinary customer)
-    
+    $routes->add('list/(:segment)', "User::list_user/$1", ['filter' => 'auth']); // list user (company or ordinary customer)
+    $routes->add('rdv/add', 'User::edit_rdv', ['filter' => 'auth']); //add rdv 
+    $routes->add('rdv/list', 'User::list_rdv', ['filter' => 'auth']); //list rdv 
 });
-
 
 // menu à propos
 $routes->get('/faq', 'FAQ::index');
@@ -155,6 +155,9 @@ $routes->group('/media', static function ($routes) {
     $routes->get('slides', 'Media::slides');
     $routes->add('videos/list', 'Media::list_media_home/1'); // liste des vidéos (page home)
     $routes->add('books/list', 'Media::list_media_home/2'); // liste des livres (page home)
+    $routes->add('dashboard/videos', 'Dashboard::dashboard_media/1', ['filter' => 'auth']); // tableau de bord des vidéos (page profil)
+    $routes->add('dashboard/books', 'Dashboard::dashboard_media/2', ['filter' => 'auth']); // tableau de bord des livres (page profil)
+    $routes->add('delete', 'Media::delete_media', ['filter' => 'auth']); //delete vidéo/livre (page profil)
 });
 
 /*

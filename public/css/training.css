@@ -105,7 +105,7 @@
 
 .list-item.focus {
 	font-weight: 700;
-	color:#1b3497!important;
+	color:#1b3497!important;/*#1b3497*/
 }
 
 .list-item a {

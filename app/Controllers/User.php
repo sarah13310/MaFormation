@@ -20,7 +20,7 @@ class User extends BaseController
             "title" => "Connexion",
             'isLoggedIn' => false,
         ];
-        
+
         if ($this->isPost()) {
             //let's do the validation here
 
@@ -79,7 +79,7 @@ class User extends BaseController
         }
         return view('Login/login', $data);
     }
-    
+
     /**
      * dispatch
      * fonction de redirection suivant profil utilisateur 
@@ -88,7 +88,7 @@ class User extends BaseController
      */
     private function dispatch($user)
     {
-        helper(['form','util']);
+        helper(['form', 'util']);
 
         $this->user_model->setUserSession($user);
 
@@ -114,7 +114,7 @@ class User extends BaseController
         ];
         return $data;
     }
-    
+
     /**
      * saveCompany
      *
@@ -143,7 +143,7 @@ class User extends BaseController
         ];
         $this->user_has_company_model->save($data_jointure);
     }
-    
+
     /**
      * associateCompany
      *
@@ -167,7 +167,7 @@ class User extends BaseController
         ];
         $this->user_has_company_model->save($data_jointure);
     }
-    
+
     /**
      * ifNotExistCompany
      *
@@ -292,8 +292,8 @@ class User extends BaseController
             "skills" => $skills,
         ];
         return view('User/profile_user.php', $data);
-    }   
-    
+    }
+
     /**
      * forgetpassword
      * Mot de passe oublié
@@ -434,7 +434,6 @@ class User extends BaseController
 
             if ($main && $sub) {
 
-
                 $newData = [
                     'name' => $this->request->getVar('name'),
                     'firstname' => $this->request->getVar('firstname'),
@@ -461,7 +460,6 @@ class User extends BaseController
                     $newData['status'] = 1;
                     $this->user_model->save($newData);
                     $id_user = $this->user_model->getInsertID();
-
 
                     $newDataf = [
                         'name' => $this->request->getVar('f_name'),
@@ -586,7 +584,7 @@ class User extends BaseController
         ];
         return view('User/profile_user.php', $data);
     }
-    
+
     /**
      * modif_contact
      * modifier les informations de contact
@@ -634,7 +632,7 @@ class User extends BaseController
         ];
         return view("User/modif_contact.php", $data);
     }
-    
+
     /**
      * modif_perso
      * modifier les informations personnelles
@@ -655,7 +653,7 @@ class User extends BaseController
             return view("User/modif_contact.php", $data);
         }
     }
-    
+
     /**
      * modif_password
      * modifier le mot de passe
@@ -664,16 +662,32 @@ class User extends BaseController
     public function modif_password()
     {
         helper(["form"]);
-
         $user = $this->user_model->getUserSession();
         $data = [
             "title" => "Modification mot de passe",
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
+            "error" => "",
         ];
+        // 
+        if ($this->isPost()) {
+            $oldpassword = $this->request->getVar('password');
+            $newpassword = $this->request->getVar('newpassword');
+            //
+            if (password_verify($oldpassword, session()->password)) { // vérifie si password ok 
+                $pwd = password_hash($newpassword, PASSWORD_DEFAULT);
+                $dataSave = [
+                    'id_user' => $user['id_user'],
+                    'password' => $pwd,
+                ];
+                $this->user_model->modifyPassword($dataSave);
+            } else {
+                $data['error'] = "mot de passe invalide!";
+            }
+        }
         return view("User/modif_password.php", $data);
     }
-    
+
     /**
      * modif_skill
      * modifier une compétence 
@@ -720,7 +734,7 @@ class User extends BaseController
 
         return view("User/modif_skill.php", $data);
     }
-    
+
     /**
      * delete_skill
      * supprimer une compétence par son id
@@ -751,7 +765,7 @@ class User extends BaseController
 
         return view("User/modif_skill.php", $data);
     }
-    
+
     /**
      * add_skill
      * ajouter une compétence
@@ -797,7 +811,7 @@ class User extends BaseController
         ];
         return view("User/add_skill.php", $data);
     }
-    
+
     /**
      * save_photo
      * sauver une photo
@@ -840,7 +854,7 @@ class User extends BaseController
 
         return view("User/profile_user.php", $data);
     }
-    
+
     /**
      * parameters
      * page des paramètres (version beta)
@@ -860,7 +874,7 @@ class User extends BaseController
 
         return view("User/parameters.php", $data);
     }
-    
+
     /**
      * add_category
      * ajouter une catégorie
@@ -892,7 +906,7 @@ class User extends BaseController
         ];
         return view("User/add_category.php", $data);
     }
-    
+
     /**
      * modify_category
      * modifier une catégorie
@@ -925,7 +939,7 @@ class User extends BaseController
         ];
         return view("User/add_category.php", $data);
     }
-    
+
     /**
      * delete_category
      * suppression de la catégorie
@@ -957,7 +971,7 @@ class User extends BaseController
         ];
         return view("User/add_category.php", $data);
     }
-    
+
     /**
      * list_user
      * Liste des utilisateurs (particuliers ou entreprises)
@@ -1001,8 +1015,8 @@ class User extends BaseController
 
                 for ($i = 0; $i < count($users); $i++) {
                     $company = $this->user_model->getCompanyById($users[$i]['id_user']);
-                   // print_r($company);
-                   // die();
+                    // print_r($company);
+                    // die();
                     $listuser[] = [
                         'user' => $users[$i],
                         'company' => $company[0],
@@ -1022,5 +1036,104 @@ class User extends BaseController
             "count" => count($company), // 
         ];
         return view("User/list_client.php", $data);
+    }
+
+    public function edit_rdv()
+    {
+        $user = $this->user_model->getUserSession();
+        $query = $this->rdv_model->where("id_user", $user['id_user'])->findAll();
+        $events = [];
+
+        $options = $this->category_model->getCategories();
+        foreach ($query as $event) {
+            $events[] = [
+                "title" => "Infos",
+                "dateStart" => $event['dateStart'],
+                "dateEnd" =>  $event['dateEnd'],
+            ];
+        }
+        $legend = "";
+
+        if (session()->type == USER) {
+
+            $legend = "Sélectionner votre créneau horaire avec les disponiblités du formateur.";
+        }
+        if (session()->type == COMPANY) {
+
+            $legend = "Sélectionner votre créneau horaire avec les disponiblités du formateur.";
+        }
+        if (session()->type == FORMER) {
+            $legend = "Définissez votre créneau horaire.";
+        }
+        // Liste des formations disponibles
+        $trainings=$this->training_model->getTrainingsTitle(VALIDE);
+        //print_r($trainings);
+        // Liste des formateurs
+        $public=$this->user_model->getFormers();
+        $formers=$public['formers'];
+        $listformers=[];
+        foreach ($formers as $former){
+            $listformers[]=[
+                "id_user"=>$former['id_user'],
+                "name"=>$former['name'],
+                "firstname"=>$former['firstname'],
+            ];
+        }
+        //print_r($listformers);
+        //die();
+        $data = [
+            "title" => "Gestion des rendez-vous",
+            "id_user" => $user['id_user'],
+            "events" => $events,
+            "user" => $user,
+            "options" => $options,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+            "legend" => $legend,
+            "trainings"=>$trainings,
+            "formers"=>$listformers,
+        ];
+        return view('User/rdv.php', $data);
+    }
+
+    public function add_rdv()
+    {
+        if ($this->isPost()) {
+            $dateStart = $this->request->getVar('dateStart');
+            $dateEnd = $this->request->getVar('dateEnd');
+            $timeStart = $this->request->getVar('timeStart');
+            $timeEnd = $this->request->getVar('timeEnd');
+            $id_training = $this->request->getVar('id_training');
+            $id_user = session()->id_user;
+
+            $dataRdv = [
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+                'id_training' => $id_training,
+                'id_user' => $id_user,
+            ];
+            print_r($dataRdv);
+            die();
+           
+            $id_rdv=$this->rdv_model->insert($dataRdv);
+            //
+            $id_former = $this->user_has_training_model->getFormer($id_training);
+            $dataInt = [
+                'id_former' => $id_former,
+                'id_user' => $id_user,
+            ];
+            print_r($dataInt);
+            die();
+            $this->user_has_user_model->save($dataInt);
+
+            //il faut user_has_rdv
+            $dataIntRdv = [
+                'id_user' => $id_former,
+                'id_rdv' => $id_rdv,
+            ];
+            print_r($dataIntRdv);
+            die();
+            $this->user_has_rdv_model->save($dataIntRdv);
+        }
     }
 }

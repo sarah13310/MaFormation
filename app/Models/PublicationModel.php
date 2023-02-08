@@ -76,13 +76,13 @@ class PublicationModel extends Model
         return $publishes;
     }
     /**
-     * getFilterArticles
+     * getArticlesByIdPublish
      *
      * Récupère les articles d'une publication
      * @param  int $id_publication (id de la publication)
      * @return un tableau d'articles
      */
-    function getFilterArticles($id_publication)
+    function getArticlesByIdPublish($id_publication)
     {
         $builder = $this->db->table('publication_has_article');
         $builder->select("article.* ");
@@ -92,6 +92,7 @@ class PublicationModel extends Model
         $articles = $query->getResultArray();
         return $articles;
     }
+    
     /**
      * getFilterPublishesArticles
      *
@@ -170,7 +171,7 @@ class PublicationModel extends Model
      * @param  array $data
      * @return un tableau d'une liste de publicatons 
      */
-    function returnDataPublishes($list, $data)
+    function MapPublishes($list, $data)
     {
         foreach ($data as $d) {
             $image_url = $d['image_url'];

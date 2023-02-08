@@ -144,7 +144,7 @@ class ArticleModel extends Model
      * @param  array $data
      * @return un tableau d'une liste d'articles 
      */
-    function returnDataArticles($list, $data)
+    function MapArticles($list, $data)
     {
         foreach ($data as $d) {
             if ($d['image_url'] == null) {

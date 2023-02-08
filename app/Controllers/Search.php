@@ -6,101 +6,109 @@ class Search extends BaseController
 {
     public function resultdata()
     {
-        helper(['form', 'url','help']);
+        helper(['form', 'url', 'help']);
         $listmedias = [];
         $listformers = [];
         $listarticles = [];
         $listpublications = [];
         $listtrainings = [];
         if ($this->isGet()) {
-
-            $research = $this->request->getVar('research');
-            $db = \Config\Database::connect();
-            $builder = $db->table('media');
-            $builder->like('name', $research);
-            $builder->orLike('author', $research);
-            $builder->where('status', VALIDE);
-            $query   = $builder->get();
-            $medias = $query->getResultArray();
             
-            foreach ($medias as $media) {
-                if ($media['image_url']==null){
-                    if ($media['type']==BOOK){
-                        $media['image_url']=constant('DEFAULT_IMG_BOOK');
+            $research = $this->request->getVar('research');
+            if ($research == "") {
+                $listmedias = [];
+                $listformers = [];
+                $listarticles = [];
+                $listpublications = [];
+                $listtrainings = [];
+            } else {
+
+                $db = \Config\Database::connect();
+                $builder = $db->table('media');
+                $builder->like('name', $research);
+                $builder->orLike('author', $research);
+                $builder->where('status', VALIDE);
+                $query   = $builder->get();
+                $medias = $query->getResultArray();
+
+                foreach ($medias as $media) {
+                    if ($media['image_url'] == null) {
+                        if ($media['type'] == BOOK) {
+                            $media['image_url'] = constant('DEFAULT_IMG_BOOK');
+                        }
+                        if ($media['type'] == VIDEO) {
+                            $media['image_url'] = constant('DEFAULT_IMG_VIDEO');
+                        }
                     }
-                    if ($media['type']==VIDEO){
-                        $media['image_url']=constant('DEFAULT_IMG_VIDEO');
-                    }
+                    $listmedias[] = [
+                        "id_media" => $media['id_media'],
+                        "name" => $media['name'],
+                        "author" => $media['author'],
+                        "url" => $media['url'],
+                        "image_url" => $media['image_url'],
+                    ];
                 }
-                $listmedias[] = [
-                    "id_media" => $media['id_media'],
-                    "name" => $media['name'],
-                    "author" => $media['author'],
-                    "url" => $media['url'],
-                    "image_url" => $media['image_url'],
-                ];
-            }
 
-            $builder = $db->table('user');
-            $builder->where('type', FORMER);
-            $builder->where('status', VALIDE);
-            $builder->like('name', $research);
-            $builder->like('firstname', $research);
-            $query   = $builder->get();
-            $formers = $query->getResultArray();
+                $builder = $db->table('user');
+                $builder->where('type', FORMER);
+                $builder->where('status', VALIDE);
+                $builder->like('name', $research);
+                $builder->like('firstname', $research);
+                $query   = $builder->get();
+                $formers = $query->getResultArray();
 
-            foreach ($formers as $former) {
-                $listformers[] = [
-                    "id_user" => $former['id_user'],
-                    "name" => $former['name'],
-                    "firstname" => $former['firstname'],
-                    "mail" => $former['mail'],
-                    "image_url" => $former['image_url'],
-                ];
-            }
+                foreach ($formers as $former) {
+                    $listformers[] = [
+                        "id_user" => $former['id_user'],
+                        "name" => $former['name'],
+                        "firstname" => $former['firstname'],
+                        "mail" => $former['mail'],
+                        "image_url" => $former['image_url'],
+                    ];
+                }
 
-            $builder = $db->table('article');
-            $builder->like('subject', $research);
-            $builder->where('status', VALIDE);
-            $query   = $builder->get();
-            $articles = $query->getResultArray();
+                $builder = $db->table('article');
+                $builder->like('subject', $research);
+                $builder->where('status', VALIDE);
+                $query   = $builder->get();
+                $articles = $query->getResultArray();
 
-            foreach ($articles as $article) {
-                $listarticles[] = [
-                    "id_article" => $article['id_article'],
-                    "subject" => $article['subject'],
-                    "image_url" => $article['image_url'],
-                ];
-            }
+                foreach ($articles as $article) {
+                    $listarticles[] = [
+                        "id_article" => $article['id_article'],
+                        "subject" => $article['subject'],
+                        "image_url" => $article['image_url'],
+                    ];
+                }
 
-            $builder = $db->table('publication');
-            $builder->like('subject', $research);
-            $builder->where('status', VALIDE);
-            $query   = $builder->get();
-            $publications = $query->getResultArray();
+                $builder = $db->table('publication');
+                $builder->like('subject', $research);
+                $builder->where('status', VALIDE);
+                $query   = $builder->get();
+                $publications = $query->getResultArray();
 
-            foreach ($publications as $publication) {
-                $listpublications[] = [
-                    "id_publication" => $publication['id_publication'],
-                    "subject" => $publication['subject'],
-                    "image_url" => $publication['image_url'],
-                ];
-            }
-            $builder = $db->table('training');
-            $builder->like('title', $research);
-            $builder->where('status', VALIDE);
-            $query   = $builder->get();
-            $trainings = $query->getResultArray();
+                foreach ($publications as $publication) {
+                    $listpublications[] = [
+                        "id_publication" => $publication['id_publication'],
+                        "subject" => $publication['subject'],
+                        "image_url" => $publication['image_url'],
+                    ];
+                }
+                $builder = $db->table('training');
+                $builder->like('title', $research);
+                $builder->where('status', VALIDE);
+                $query   = $builder->get();
+                $trainings = $query->getResultArray();
 
-            $listtrainings = [];
-            foreach ($trainings as $training) {
-                $listtrainings[] = [
-                    "id_training" => $training['id_training'],
-                    "title" => $training['title'],
-                ];
+                $listtrainings = [];
+                foreach ($trainings as $training) {
+                    $listtrainings[] = [
+                        "id_training" => $training['id_training'],
+                        "title" => $training['title'],
+                    ];
+                }
             }
         }
-
         if (count($listtrainings) == 0 && count($listpublications) == 0 && count($listarticles) == 0 && count($listformers) == 0 && count($listmedias) == 0) {
 
             $title = "Aucun Résultat Trouvé";
@@ -116,7 +124,7 @@ class Search extends BaseController
             "listpublications" => $listpublications,
             "listtrainings" => $listtrainings,
         ];
-        
+
         return view('Home/result.php', $data);
     }
 
