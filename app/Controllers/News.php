@@ -5,8 +5,7 @@ namespace App\Controllers;
 // le 20/01/2023
 // le 05/02/2023
 class News extends BaseController
-{
-    
+{    
     /**
      * articles_edit
      * Edition de l'article
@@ -116,7 +115,7 @@ class News extends BaseController
         //
         $categories = $this->category_model->getCategories();
         //
-        $articles = $this->article_model->getFilterArticles();
+        $articles = $this->article_model->getArticlesByIdPublish();
         //
         $articles = $this->article_model->getArticlesbyAuthor(0, $user['id_user']);
 
@@ -218,7 +217,7 @@ class News extends BaseController
 
         $listarticles = [];
 
-        $listarticles = $this->article_model->returnDataArticles($listarticles, $articles);
+        $listarticles = $this->article_model->MapArticles($listarticles, $articles);
 
         $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
 
@@ -305,7 +304,7 @@ class News extends BaseController
         
         $publishes = $this->publication_model->getFilterPublishes(VALIDE);
 
-        $listpublishes = $this->publication_model->returnDataPublishes($listpublishes, $publishes);
+        $listpublishes = $this->publication_model->MapPublishes($listpublishes, $publishes);
 
         $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
 
@@ -337,11 +336,11 @@ class News extends BaseController
                 $publication['image_url'] = base_url() . "/assets/publication.svg";
             }
 
-            $articles =  $this->publication_model->getFilterArticles($id);
+            $articles =  $this->publication_model->getArticlesByIdPublish($id);
 
             $listarticles = [];
 
-            $listarticles= $this->article_model->returnDataArticles($listarticles,$articles);
+            $listarticles= $this->article_model->MapArticles($listarticles,$articles);
 
             $id_user = $publication['id_user'];
 

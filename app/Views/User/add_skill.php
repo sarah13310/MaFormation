@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<h1 class="ms-4 mb-3"><?= $title ?></h1>
+<h1 class="ms-4 mb-3"><i class="fs-4 bi-magic"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <hr>
 <?php if (session()->get('success')) : ?>
     <div id="success" class="alert alert-success" role="alert">

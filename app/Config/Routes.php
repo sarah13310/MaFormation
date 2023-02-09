@@ -109,6 +109,7 @@ $routes->group('/user', static function ($routes) {
     $routes->add('rdv/add', 'User::edit_rdv', ['filter' => 'auth']); //add rdv 
     $routes->add('rdv/save', 'User::save_rdv', ['filter' => 'auth']); //save rdv 
     $routes->add('rdv/list', 'User::list_rdv', ['filter' => 'auth']); //list rdv 
+    $routes->add('rdv/delete', 'User::delete_rdv', ['filter' => 'auth']); //delete rdv 
 });
 
 // menu à propos

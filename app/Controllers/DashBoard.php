@@ -310,10 +310,8 @@ class DashBoard extends BaseController
             $article = $public['article'];
 
             $user = $this->user_model->getUserSession();
-
-            if ($article["image_url"] == null) {
-                $article["image_url"] = constant('DEFAULT_IMG_ARTICLES');
-            }
+          
+            $article['image_url'] = defaultImage($article, 'DEFAULT_IMG_ARTICLES');
 
             $data = [
                 "title" => $title,
@@ -340,14 +338,9 @@ class DashBoard extends BaseController
             $id = $this->request->getVar('id_publication');
             $publication = $this->publication_model->getPublisheById($id);
             $user = $this->user_model->getUserSession();
-
-            if ($user["image_url"] == null) {
-                $user["image_url"] = constant('DEFAULT_IMG_BLANK');
-            }
-
-            if ($publication["image_url"] == null) {
-                $publication["image_url"] = constant('DEFAULT_IMG_PUBLISHES');
-            }
+                        
+            $user['image_url'] = defaultImage($user, 'DEFAULT_IMG_BLANK');
+            $publication['image_url'] = defaultImage($publication, 'DEFAULT_IMG_PUBLISHES');
 
             $data = [
                 "title" => $title,
@@ -432,6 +425,7 @@ class DashBoard extends BaseController
             "listmedias" => $listmedias,
             "user" => $session,
             "type" => session()->type,
+            "headerColor"=>getTheme(session()->type, "header"),
         ];
         return view('Media/list_medias_user.php', $data);
     }

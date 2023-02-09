@@ -10,7 +10,7 @@ $base = base_url(); ?>
 <?= $this->section('content') ?>
 <?= $modalDelete ?>
 <div class="row">
-    <h1 class="col ms-3"><?= $title ?></h1>
+    <h1 class="col ms-3"><i class="fs-4 bi-magic"></i>&nbsp;&nbsp;<?= $title ?></h1>
     <div class="col-2">
         <form action="/training/preview" method="post">
             <input type="hidden" id="id_page" name="id_page" value="<?= $id_page ?>">

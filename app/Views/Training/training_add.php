@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 <section>
-    <h1 class="noselect ms-3"><?= $title ?></h1>
+    <h1 class="noselect ms-3"><i class="fs-4 bi-magic"></i>&nbsp;&nbsp;<?= $title ?></h1>
     <hr class="mb-2 mt-2">
     <div class="container py-3">
         <form id="trainingForm" method="post" action="/training/add">

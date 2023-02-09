@@ -7,7 +7,7 @@
  --><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<h1 class="ms-3"><?= $title ?></h1>
+<h1 class="ms-3"><i class="fs-4 bi-magic"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <hr class="hr mt-1 mb-2">
 <section class="Content">
     <link rel="stylesheet" href="<?= $base ?>/css/default.min.css" />

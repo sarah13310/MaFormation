@@ -26,7 +26,7 @@ class Home extends BaseController
             $builder->limit(6);
             $query   = $builder->get();
             $articles = $query->getResultArray();
-            //$articles=$this->article_model->getFilterArticles(VALIDE,6,'DESC');
+           
 
         } catch (\CodeIgniter\Database\Exceptions\DatabaseException $ex) {
             session()->setFlashdata('infos', 'Connexion impossible!');
@@ -70,15 +70,9 @@ class Home extends BaseController
         $carousel1 = listCardImgCarousel($trainings, "/training/details/");
         $articles = $this->article_model->getFilterArticles(VALIDE);
         $listarticles = [];
-        foreach ($articles as $article) {
-            
-            if ($article['image_url'] == null) {
-                $article['image_url'] = constant('DEFAULT_IMG_ARTICLES');
-            }
-
-            if (strlen($article['image_url'])<20) {
-                $article['image_url'] = constant('DEFAULT_IMG_ARTICLES');
-            }
+        foreach ($articles as $article) {            
+          
+            $article['image_url'] = defaultImage($article, 'DEFAULT_IMG_ARTICLES');
 
             $listarticles[] = [
                 "id_article" => $article['id_article'],
@@ -89,7 +83,7 @@ class Home extends BaseController
 
         //
         $carousel2 = listCardImgCarousel($listarticles, "/article/list/details/");
-        // var_dump($err);
+        
         $data = [
             "title" => "Accueil",
             "trainings" => $carousel1,

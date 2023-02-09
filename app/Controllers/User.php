@@ -91,11 +91,9 @@ class User extends BaseController
         helper(['form', 'util']);
 
         $this->user_model->setUserSession($user);
-
         $type = $user['type'];
 
-        if ($user['image_url'] == null)
-            $user['image_url'] = constant('DEFAULT_IMG_BLANK');
+        $user['image_url'] = defaultImage($user, 'DEFAULT_IMG_BLANK');
 
         $jobs = $this->user_model->getInfosCompany($user['id_user']);
         $skills = $this->user_model->getInfosCertificates($user['id_user']);
@@ -274,6 +272,9 @@ class User extends BaseController
                 'birthday' => session()->birthday,
                 'site' => session()->site,
             ];
+
+            print_r($dataUpdate);
+            die();
 
             $this->user_model->update(session()->id_user, $dataUpdate);
         }
@@ -1040,43 +1041,36 @@ class User extends BaseController
 
     public function edit_rdv()
     {
-        $user = $this->user_model->getUserSession();
-        $query = $this->rdv_model->where("id_user", $user['id_user'])->findAll();
-        $events = [];
+        $data = $this->refill_rdv();
+        return view('User/rdv.php', $data);
+    }
 
-        $options = $this->category_model->getCategories();
-        foreach ($query as $event) {
-            $events[] = [
-                "title" => "Infos",
-                "dateStart" => $event['dateStart'],
-                "dateEnd" =>  $event['dateEnd'],
-            ];
-        }
+    private function refill_rdv()
+    {
+        $user = $this->user_model->getUserSession();
+        $events = $this->event_rdv($user['id_user']);
         $legend = "";
 
         if (session()->type == USER) {
-
             $legend = "Sélectionner votre créneau horaire avec les disponiblités du formateur.";
         }
         if (session()->type == COMPANY) {
-
             $legend = "Sélectionner votre créneau horaire avec les disponiblités du formateur.";
         }
         if (session()->type == FORMER) {
             $legend = "Définissez votre créneau horaire.";
         }
         // Liste des formations disponibles
-        $trainings=$this->training_model->getTrainingsTitle(VALIDE);
-        //print_r($trainings);
+        $trainings = $this->training_model->getTrainingsTitle(VALIDE);
         // Liste des formateurs
-        $public=$this->user_model->getFormers();
-        $formers=$public['formers'];
-        $listformers=[];
-        foreach ($formers as $former){
-            $listformers[]=[
-                "id_user"=>$former['id_user'],
-                "name"=>$former['name'],
-                "firstname"=>$former['firstname'],
+        $public = $this->user_model->getFormers();
+        $formers = $public['formers'];
+        $listformers = [];
+        foreach ($formers as $former) {
+            $listformers[] = [
+                "id_user" => $former['id_user'],
+                "name" => $former['name'],
+                "firstname" => $former['firstname'],
             ];
         }
         //print_r($listformers);
@@ -1084,22 +1078,70 @@ class User extends BaseController
         $data = [
             "title" => "Gestion des rendez-vous",
             "id_user" => $user['id_user'],
-            "events" => $events,
+            "events" => $events, // tableau des évènments
             "user" => $user,
-            "options" => $options,
             "buttonColor" => getTheme($user['type'], "button"),
             "headerColor" => getTheme($user['type'], "header"),
             "legend" => $legend,
-            "trainings"=>$trainings,
-            "formers"=>$listformers,
+            "trainings" => $trainings,
+            "formers" => $listformers,
         ];
-        return view('User/rdv.php', $data);
+        return $data;
     }
 
-    public function list_rdv(){
-
+    public function list_rdv()
+    {
+        $user = $this->user_model->getUserSession();
+        $events = $this->event_rdv($user['id_user']);
+        $data = [
+            "title" => "Planning des rendez-vous",
+            "id_user" => $user['id_user'],
+            "events" => $events, // tableau des évènments
+            "user" => $user,
+            "buttonColor" => getTheme($user['type'], "button"),
+            "headerColor" => getTheme($user['type'], "header"),
+        ];
+        return view('User/list_rdv.php', $data);
     }
 
+    private function event_rdv($id)
+    {
+        $rdvs = $this->rdv_model->where("id_user", $id)->findAll();
+        $events = [];
+        $id = 0;
+
+        foreach ($rdvs as $rdv) {
+            $training = $this->training_model->getTrainingById($rdv['id_training']);
+            if ($training) {
+                $training = $training[0];
+            }
+            $id++;
+            $datetimeS = date("Y-m-d\TH:i:s", strtotime($rdv['dateStart']));
+            $datetimeE = date("Y-m-d\TH:i:s", strtotime($rdv['dateEnd']));
+            //
+            $events[] = [
+                "id" => $rdv['id_rdv'],
+                "title" => $training['title'],
+                "start" => $datetimeS,
+                "end" =>  $datetimeE,
+            ];
+            $events = json_encode($events);
+            $events = str_replace('"', '\'', $events);
+            $events = str_replace("'title'", 'title', $events);
+            $events = str_replace("'end'", 'end', $events);
+            $events = str_replace("'start'", 'start', $events);
+
+            // print_r($events);
+
+        }
+        return $events;
+    }
+
+    /**
+     * save_rdv
+     *
+     * @return void
+     */
     public function save_rdv()
     {
         if ($this->isPost()) {
@@ -1117,23 +1159,42 @@ class User extends BaseController
                 'id_training' => $id_training,
                 'id_user' => $id_user,
             ];
-            
-            $id_rdv=$this->rdv_model->insert($dataRdv);
-            //
-            //$id_former = $this->user_has_training_model->getFormer($id_training);
+
+            $id_rdv = $this->rdv_model->insert($dataRdv);
+            //            
             $dataInt = [
                 'id_former' => $id_former,
                 'id_user' => $id_user,
             ];
             $this->user_has_user_model->save($dataInt);
 
-            //il faut user_has_rdv
+            //user_has_rdv
             $dataIntRdv = [
                 'id_user' => $id_former,
                 'id_rdv' => $id_rdv,
             ];
             $this->user_has_rdv_model->save($dataIntRdv);
-            //return view('User/rdv.php', $data);
+            // on récupère les informations nécessaires
+            $data = $this->refill_rdv();
+
+            return view('User/rdv.php', $data);
+        }
+    }
+
+    /**
+     * delete_rdv
+     *
+     * @return void
+     */
+    public function delete_rdv()
+    {
+
+        if ($this->isPost()) {
+            $id_rdv = $this->request->getVar('id_rdv');
+            $this->rdv_model->delete($id_rdv);
+            $data = $this->refill_rdv();
+
+            return view('User/rdv.php', $data);
         }
     }
 }

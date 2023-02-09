@@ -1,8 +1,8 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<h1 class="mb-1"><?= $title ?></h1>
+<h1 class="mb-1"><i class="bi bi-grid"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <table class="table" id="mytable">
-    <thead class="t_former">
+    <thead class="<?= $headerColor?>">
         <tr>
             <th scope="col">Nom</th>
             <th scope="col">Auteur</th>

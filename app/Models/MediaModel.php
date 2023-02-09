@@ -232,5 +232,12 @@ class MediaModel extends Model
         return (count($items) == 0) ? false : true;
     }
 
-
+    function triAuthorMedia($data){
+        foreach($data as $d){
+            $list[]=[
+                "author"=>$d['author'],
+            ];
+        }
+        return $list;
+    }
 }

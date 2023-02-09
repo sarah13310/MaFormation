@@ -181,7 +181,6 @@
 }
 
 
-
 .btn-collapse {
     text-align: left;
     color: #fff;    
@@ -192,7 +191,6 @@
     background-color: #4714e1;
     border-color: #1e0666;
 }
-
 
 
 /* coouleurs des fonts*/
@@ -216,4 +214,9 @@
 
 .footer_former {
     background: linear-gradient(#3b78a8, #7dabc7, #265071);
+}
+
+.header_former {
+    background: #3585b6;
+    color: white;
 }

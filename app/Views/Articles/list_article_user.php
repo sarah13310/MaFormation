@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<h1 class="mb-2"><?= $title ?></h1>
+<h1 class="mb-2"><i class="bi bi-grid"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <table class="table">
     <thead class="<?= $headerColor ?>">
         <tr>

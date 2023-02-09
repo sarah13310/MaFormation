@@ -1,6 +1,16 @@
 <?php
 
 
+function defaultImage($data, $img='DEFAULT_IMG_BLANK', $url='image_url'){
+    if ($data[$url] == null) {
+        $data[$url] = constant($img);
+    }
+    if (strlen($data[$url]) <MIN_LENGTH_URL) {
+        $data[$url] = constant($img);
+    }
+    return $data[$url];
+}
+
 /*********************ACCUEIL*****************/
 
 // fenêtre modal
@@ -222,8 +232,8 @@ function ratings($number, $max = 10)
 function dateFormat($date)
 {
     $strDate = "Aucune date renseignée";
-    if ($date == null) {
-    } else {
+    if ($date !== null) {
+    
         $data = explode('-', $date);
         $strDate = $data[2] . " " . getMonth($data[1]) . " " . $data[0];
     }
@@ -232,10 +242,9 @@ function dateFormat($date)
 
 function dateTimeFormat($date)
 {
-
     $strDate = "Aucune date renseignée";
-    if ($date == null) {
-    } else {
+    if ($date != null) {
+    
         $data = explode(' ', $date);
         $hm = explode(':', $data[1]);
         $date = explode('-', $data[0]);
@@ -607,7 +616,7 @@ function fillMenuRight($category, $type)
     $str = "";
     foreach ($items as $item) {
         $str .= "<li class='noselect w-100 '>\n";
-        $str .= "<a href='" . $item['ref'] . "' class='nav-link " . getTextColor($type) . " px-0'>" . $item['name'] . "</a>\n";
+        $str .= "<a href='" . $item['ref'] . "' class='nav-link text-white px-0'>" . $item['name'] . "</a>\n";
         $str .= "</li>\n";
     }
     return $str;
@@ -616,7 +625,7 @@ function fillMenuRight($category, $type)
 function fillMenu($title, $id, $category, $type)
 {
     $str = "<li>";
-    $str .= "<a href='#" . $id . "' data-bs-toggle='collapse' class='noselect nav-link px-0 align-middle " . getTextColor($type) . " '>";
+    $str .= "<a href='#" . $id . "' data-bs-toggle='collapse' class='noselect nav-link px-0 align-middle text-white '>";
     $str .=  "<i class='fs-4 " . getIcon($category) . " '></i> <span class='ms-1 d-none d-sm-inline'>" . $title . "</span></a>";
     $str .= "<ul class='collapse  nav flex-column ms-1' id='" . $id . "' data-bs-parent='#menu'>";
     $str .= fillMenuRight($category, $type);
@@ -628,7 +637,7 @@ function fillMenu($title, $id, $category, $type)
 function fillMenu2($title, $action, $category, $type)
 {
     $str = "<li>
-    <a href='" . $action . "' class='noselect nav-link px-0 align-middle " . getTextColor($type) . "'>
+    <a href='" . $action . "' class='noselect nav-link px-0 align-middle text-white'>
         <i class='fs-4 " . getIcon($category) . "'></i> <span class='ms-1 d-none d-sm-inline'>" . $title . "</span></a>
     </li>";
     return $str;
@@ -703,37 +712,6 @@ function getTypeName($type)
 }
 
 
-function getTextColor($type)
-{
-    $theme = "";
-
-    switch ($type) {
-        case USER: // Particulier
-            $theme = "text-white";
-            break;
-
-        case COMPANY: // Entreprise
-            $theme = "text-white";
-            break;
-
-        case ADMIN: //Administrateur
-            $theme = "text-white";
-            break;
-
-        case SUPER_ADMIN: // Super Administrateur
-            $theme = "text-white";
-            break;
-
-        case FORMER: // Formateur
-            $theme = "text-white";
-            break;
-
-        default: // par défaut
-            $theme = "text-white";
-            break;
-    }
-    return $theme;
-}
 
 function getMenuButtonColor($type)
 {
@@ -767,37 +745,7 @@ function getMenuButtonColor($type)
     return $theme;
 }
 
-function getButtonColor($type)
-{
-    $theme = "";
 
-    switch ($type) {
-        case USER: // Particulier
-            $theme = "btn-outline-primary-1";
-            break;
-
-        case COMPANY: // Entreprise
-            $theme = "btn-outline-primary-1";
-            break;
-
-        case ADMIN: //Administrateur
-            $theme = "btn-outline-primary-1";
-            break;
-
-        case SUPER_ADMIN: // Super Administrateur
-            $theme = "btn-outline-primary-3";
-            break;
-
-        case FORMER: // Formateur
-            $theme = "btn-outline-primary-2";
-            break;
-
-        default: // par défaut
-            $theme = "btn-outline-primary";
-            break;
-    }
-    return $theme;
-}
 
 function getLogoColor($type)
 {

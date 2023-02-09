@@ -88,7 +88,7 @@ class UserModel extends Model
         $user = $query->getResultArray();
         return ["builder" => $builder, "user" => $user];
     }
-    
+
     /**
      * getUserById
      *
@@ -129,6 +129,7 @@ class UserModel extends Model
             'birthday' => session()->birthday,
             'site' => session()->site,
             'isLoggedIn' => true,
+
         ];
         return $user;
     }
@@ -143,6 +144,8 @@ class UserModel extends Model
      */
     function setUserSession($user)
     {
+        $user['image_url'] = defaultImage($user, 'DEFAULT_IMG_BLANK');
+
         $data = [
             'type' => $user['type'],
             'id_user' => $user['id_user'],
@@ -212,7 +215,8 @@ class UserModel extends Model
         return $skills;
     }
 
-    function getCompanyById($id){
+    function getCompanyById($id)
+    {
         $builder = $this->db->table('user');
         $builder->select('company.name, company.address, company.city ,company.cp');
         $builder->where('user.id_user', $id);
@@ -313,7 +317,7 @@ class UserModel extends Model
         $query   = $builder->get();
         return  ["formers" => $query->getResultArray(), "builder" => $builder];
     }
-    
+
     /**
      * getUserbyType
      * La liste des utilisateurs suivant le profil avec un id ou tous
@@ -321,9 +325,10 @@ class UserModel extends Model
      * @param  int $id
      * @return array
      */
-    function getUserbyType($type, $id=ALL){
+    function getUserbyType($type, $id = ALL)
+    {
         $builder = $this->db->table('user');
-        if ($id!==ALL){
+        if ($id !== ALL) {
             $builder->where('id', $id);
         }
         $builder->where('type', $type);
@@ -345,7 +350,7 @@ class UserModel extends Model
         $query   = $builder->get();
         return $query->getResultArray();
     }
-    
+
     /**
      * modifyPassword
      *
@@ -353,12 +358,12 @@ class UserModel extends Model
      * @param  int $password
      * @return bool
      */
-    function modifyPassword($data ){
-               
+    function modifyPassword($data)
+    {
+
         $builder = $this->db->table('user');
         $builder->set('password', $data['password']);
         $builder->where('id_user', $data['id_user']);
-        $builder->update();        
-        
+        $builder->update();
     }
 }

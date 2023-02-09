@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-<h1 class="mb-3"><?= $title ?></h1>
+<h1 class="mb-3"><i class="bi bi-euro"></i>&nbsp;&nbsp;<?= $title ?></h1>
 
 <div class="row">
     <div class="col-12 col-md-8">

@@ -22,7 +22,7 @@
         </form>
     </div>
 </div>
-<h1 class="ms-4 mb-3"><?= $title ?></h1>
+<h1 class="ms-4 mb-2"><i class="fs-4 bi-magic"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <hr>
 <?php if (session()->get('success')) : ?>
     <div id="success" class="alert alert-success" role="alert">
@@ -31,16 +31,17 @@
 <?php endif; ?>
 
 <div class="mt-4 container">
-
-    <div class="col-12 col-md-6">
+    <div class="col col-md-8">
         <form name="form_add">
-            <input type="hidden" id="id_category" name="id_category">
-            <div class='col form-floating mb-3'>
-                <input type="text" class="form-control mb-2" name="name" id="input_name" placeholder='Nom de la catégorie'>
-                <label for="name">Nom de la catégorie</label>
-            </div>
-            <div>
-                <button onclick="onAdd()" id="btnAdd" type="button" class="btn <?= $buttonColor ?>">Ajouter</button>
+            <div class="row align-items-center mb-3">
+                <input type="hidden" id="id_category" name="id_category">
+                <div class='col-6 form-floating '>
+                    <input type="text" class="form-control mb-2" name="name" id="input_name" placeholder='Nom de la catégorie'>
+                    <label for="name">&nbsp;&nbsp;Nom de la catégorie</label>
+                </div>
+                <div class="col-2">
+                    <button onclick="onAdd()" id="btnAdd" type="button" class="btn <?= $buttonColor ?>">Ajouter</button>
+                </div>
             </div>
         </form>
     </div>

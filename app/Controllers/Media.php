@@ -142,11 +142,15 @@ class Media extends BaseController
         $medias = $this->media_model->ValidatedMedias($type);
         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
 
+        $authors=$this->media_model->triAuthorMedia($medias);
+
         $data = [
             "title" => $title,
             "listmedias" => $listmedias,
             "p" => $p,
             "b" => $b,
+            "authors"=>$authors,
+
         ];
         return view('/Media/list_medias.php', $data);
     }

@@ -62,7 +62,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
-                    <button type="submit" class="btn <?= getButtonColor($user['type'])?>">Modifier</button>
+                    <button type="submit" class="btn <?= $buttonColor($user['type'])?>">Modifier</button>
                 </div>
             </div>
         </form>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
-                    <button type="submit" class="btn <?= getButtonColor($user['type'])?>">Modifier</button>
+                    <button type="submit" class="btn <?= $buttonColor($user['type'])?>">Modifier</button>
                 </div>
             </div>
         </form>

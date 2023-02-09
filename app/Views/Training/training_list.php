@@ -5,7 +5,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<h1 class=""><?= $title ?></h1>
+<h1 class=""><i class="bi bi-book"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <hr class="mt-1 mb-2 ">
 
 <table class="table table-hover w-75">

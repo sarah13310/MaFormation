@@ -25,73 +25,79 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<h1 class="ms-4 mb-1"><?= $title ?></h1>
+<h1 class="ms-4 mb-1"><i class="bi bi-calendar2-date"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <hr class="mt-1">
 <div class='container-fluid'>
-    <div class="row">
-        <div class="col col-md-6">
+    <div class="col">
+        <div class="col">
             <div id="column_calendar" class="container-fluid">
                 <div class="mb-3" id='calendar'></div>
             </div>
         </div>
-        <div id="column_form" class="col col-md-6 ">
-            <fieldset>
-                <form id="rdvForm" name="rdvForm" action="/user/rdv/save" method="post">
-                    <legend><i class="bi bi-calendar2-check"></i>&nbsp;&nbsp;Prenez votre rendez-vous</legend>
-                    <div>
-                        <!-- <fieldset class="form-group border p-3"> -->
-                        <p class="medium text-muted"> <?= $legend ?></p>
+        <div class="row">
+            <div id="column_form" class="col col-md-8 ">
 
-                        <!-- liste des formations -->
-                        <div class="form-group row align-items-center mb-3">
-                            <label for="select" class="col-12 col-md-3 col-form-label">Formations</label>
-                            <div class="col col-md-9 ">
-                                <select id="id_training" name="id_training" class="form-select">
-                                    <?php foreach ($trainings as $training) : ?>
-                                        <option value="<?= $training['id_training'] ?>"><?= $training['title'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                <fieldset>
+                    <form id="rdvForm" name="rdvForm" action="/user/rdv/save" method="post">
+                        <input type="hidden" name="id_rdv">
+                        <legend><i class="bi bi-calendar2-check"></i>&nbsp;&nbsp;Prenez votre rendez-vous</legend>
+                        <div>
+                            <!-- <fieldset class="form-group border p-3"> -->
+                            <p class="medium text-muted"> <?= $legend ?></p>
+
+                            <!-- liste des formations -->
+                            <div class="form-group row align-items-center mb-3">
+                                <label for="select" class="col-12 col-md-3 col-form-label">Formations</label>
+                                <div class="col col-md-9 ">
+                                    <select id="id_training" name="id_training" class="form-select">
+                                        <?php foreach ($trainings as $training) : ?>
+                                            <option value="<?= $training['id_training'] ?>"><?= $training['title'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
                             </div>
+                            <!-- liste des formateurs -->
+                            <div class="form-group row align-items-center mb-3">
+                                <label for="select" class="col-12 col-md-3 col-form-label">Formateurs</label>
+                                <div class="col col-md-9 ">
+                                    <select id="id_former" name="id_former" class="form-select">
+                                        <?php foreach ($formers as $former) : ?>
+                                            <option value="<?= $former['id_user'] ?>"><?= $former['name'] . " " . $former['firstname'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-floating mb-3 col ">
+                                    <input class="form-control" id="dateStart" name="dateStart" type="date" placeholder="&nbsp;Date de départ" />
+                                    <label for="date">&nbsp;Date de départ</label>
+                                </div>
+                                <div class="form-floating mb-3 col ">
+                                    <input class="form-control" id="timeStart" name="timeStart" type="time" placeholder="&nbsp;Heure de départ" />
+                                    <label for="heure">&nbsp;Heure de départ</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-floating mb-3  col ">
+                                    <input class="form-control" id="dateEnd" name="dateEnd" type="date" placeholder="&nbsp;Date de fin" />
+                                    <label for="date">&nbsp;Date de fin</label>
+                                </div>
+                                <div class="form-floating mb-3 col ">
+                                    <input class="form-control" id="timeEnd" name="timeEnd" type="time" placeholder="&nbsp;Heure de fin" />
+                                    <label for="heure">&nbsp;Heure de fin</label>
+                                </div>
+                            </div>
+                            <div class="d-grid col-5 ">
+                                <button type="submit" class="btn btn-primary " id="btnAjouter">Ajouter
+                                </button>
+                            </div>
+                            <!-- </fieldset> -->
                         </div>
-                        <!-- liste des formateurs -->
-                        <div class="form-group row align-items-center mb-3">
-                            <label for="select" class="col-12 col-md-3 col-form-label">Formateurs</label>
-                            <div class="col col-md-9 ">
-                                <select id="id_former" name="id_former" class="form-select">
-                                    <?php foreach ($formers as $former) : ?>
-                                        <option value="<?= $former['id_user'] ?>"><?= $former['name'] . " " . $former['firstname'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-floating mb-3 col ">
-                                <input class="form-control" id="dateStart" name="dateStart" type="date" placeholder="&nbsp;Date de départ" />
-                                <label for="date">&nbsp;Date de départ</label>
-                            </div>
-                            <div class="form-floating mb-3 col ">
-                                <input class="form-control" id="timeStart" name="timeStart" type="time" placeholder="&nbsp;Heure de départ" />
-                                <label for="heure">&nbsp;Heure de départ</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-floating mb-3  col ">
-                                <input class="form-control" id="dateEnd" name="dateEnd" type="date" placeholder="&nbsp;Date de fin" />
-                                <label for="date">&nbsp;Date de fin</label>
-                            </div>
-                            <div class="form-floating mb-3 col ">
-                                <input class="form-control" id="timeEnd" name="timeEnd" type="time" placeholder="&nbsp;Heure de fin" />
-                                <label for="heure">&nbsp;Heure de fin</label>
-                            </div>
-                        </div>
-                        <div class="d-grid col-5 ">
-                            <button type="submit" class="btn btn-primary " id="btnAjouter">Ajouter
-                            </button>
-                        </div>
-                        <!-- </fieldset> -->
-                    </div>
-                </form>
-            </fieldset>
+                    </form>
+
+                </fieldset>
+            </div>
+            <div class="col-4"><img src="<?= base_url() . '/assets/img/reunion2.jpg' ?>"></div>
         </div>
 
     </div>
@@ -106,6 +112,14 @@
     let selectType = document.getElementById("selectType");
     let btnAjouter = document.getElementById('btnAjouter');
     let date = new Date();
+    let test = [{
+        title: 'BCH237',
+        start: '2023-02-08T10:30:00',
+        end: '2023-02-08T11:30:00',
+    }]; //"";
+    let rdvs = <?= $events ?>; //"";
+
+
 
     function padTo2Digits(num) {
         return num.toString().padStart(2, '0');
@@ -157,11 +171,15 @@
             },
             eventClick: function(arg) {
                 if (confirm('Êtes vous sûr de supprimer cet évènement?')) {
-                    arg.event.remove()
+                    //arg.event.remove()
+                    console.log(arg.event.id);
+                    rdvForm.action = "/user/rdv/delete";
+                    rdvForm.id_rdv.value = arg.event.id;
+                    rdvForm.submit();
                 }
             },
             locale: 'fr',
-            events: [],
+            events: rdvs,
         });
     }
 

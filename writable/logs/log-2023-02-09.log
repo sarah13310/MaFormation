@@ -1,0 +1,381 @@
+CRITICAL - 2023-02-09 12:29:36 --> Array to string conversion
+in APPPATH\Views\User\rdv.php on line 120.
+ 1 APPPATH\Views\User\rdv.php(120): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Views\\User\\rdv.php', 120)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\rdv.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv.php', [], true)
+ 5 APPPATH\Controllers\User.php(1096): view('User/rdv.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 12:32:57 --> Array to string conversion
+in APPPATH\Views\User\rdv.php on line 120.
+ 1 APPPATH\Views\User\rdv.php(120): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Views\\User\\rdv.php', 120)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\rdv.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv.php', [], true)
+ 5 APPPATH\Controllers\User.php(1096): view('User/rdv.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 12:33:06 --> Array to string conversion
+in APPPATH\Views\User\rdv.php on line 120.
+ 1 APPPATH\Views\User\rdv.php(120): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'APPPATH\\Views\\User\\rdv.php', 120)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\rdv.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv.php', [], true)
+ 5 APPPATH\Controllers\User.php(1096): view('User/rdv.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->edit_rdv()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 12:54:21 --> Invalid file: User/rdv_list.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('User/rdv_list.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv_list.php', [], true)
+ 3 APPPATH\Controllers\User.php(1103): view('User/rdv_list.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_rdv()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 12:55:40 --> Invalid file: User/rdv_list.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('User/rdv_list.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv_list.php', [], true)
+ 3 APPPATH\Controllers\User.php(1103): view('User/rdv_list.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_rdv()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 13:09:02 --> Invalid file: User/rdv_list.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('User/rdv_list.php')
+ 2 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/rdv_list.php', [], true)
+ 3 APPPATH\Controllers\User.php(1103): view('User/rdv_list.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_rdv()
+ 5 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-09 13:17:38 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(997): App\Models\UserModel->getUserbyType(9, '39')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-02-09 13:17:38 --> Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `id` = :id:
+AND `type` = :type:', [...], false)
+ 5 APPPATH\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(997): App\Models\UserModel->getUserbyType(9, '39')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-09 13:17:48 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(1014): App\Models\UserModel->getUserbyType(11, '39')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->list_user('company')
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-02-09 13:17:48 --> Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 11', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 11')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 11')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `id` = :id:
+AND `type` = :type:', [...], false)
+ 5 APPPATH\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(1014): App\Models\UserModel->getUserbyType(11, '39')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('company')
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 15:08:01 --> Undefined variable $headerColor
+in APPPATH\Views\Media\list_medias_user.php on line 5.
+ 1 APPPATH\Views\Media\list_medias_user.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $headerColor', 'APPPATH\\Views\\Media\\list_medias_user.php', 5)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias_user.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Media/list_medias_user.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(436): view('Media/list_medias_user.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->listmedias('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-09 15:14:23 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(1014): App\Models\UserModel->getUserbyType(11, '39')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->list_user('company')
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-02-09 15:14:23 --> Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 11', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 11')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 11')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `id` = :id:
+AND `type` = :type:', [...], false)
+ 5 APPPATH\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(1014): App\Models\UserModel->getUserbyType(11, '39')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('company')
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-09 15:14:29 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(997): App\Models\UserModel->getUserbyType(9, '39')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-02-09 15:14:29 --> Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `id` = :id:
+AND `type` = :type:', [...], false)
+ 5 APPPATH\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(997): App\Models\UserModel->getUserbyType(9, '39')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 16:59:04 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 16:59:36 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 16:59:37 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 16:59:37 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 16:59:37 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 17:00:42 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 17:01:03 --> Undefined array key "name"
+in APPPATH\Views\Media\list_medias.php on line 9.
+ 1 APPPATH\Views\Media\list_medias.php(9): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'APPPATH\\Views\\Media\\list_medias.php', 9)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Media\\list_medias.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('/Media/list_medias.php', [], true)
+ 5 APPPATH\Controllers\Media.php(155): view('/Media/list_medias.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Media->list_media_home('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Media))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+ERROR - 2023-02-09 17:48:55 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:292
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\User.php(997): App\Models\UserModel->getUserbyType(9, '39')
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2023-02-09 17:48:55 --> Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(666): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9')
+ 3 SYSTEMPATH\Database\BaseConnection.php(593): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `id` = \'39\'
+AND `type` = 9')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `id` = :id:
+AND `type` = :type:', [...], false)
+ 5 APPPATH\Models\UserModel.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\User.php(997): App\Models\UserModel->getUserbyType(9, '39')
+ 7 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+ 8 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 17:51:06 --> Call to undefined method App\Models\ArticleModel::returnDataArticles
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\News.php(221): CodeIgniter\Model->__call('returnDataArticles', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 18:26:08 --> Call to undefined method App\Models\PublicationModel::returnDataPublishes
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\News.php(307): CodeIgniter\Model->__call('returnDataPublishes', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_publishes_home()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-09 18:28:03 --> Call to undefined method App\Models\PublicationModel::getFilterArticles
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\News.php(339): CodeIgniter\Model->__call('getFilterArticles', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->details_publishes_home()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
