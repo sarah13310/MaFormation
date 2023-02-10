@@ -5,7 +5,7 @@ namespace App\Controllers;
 class Search extends BaseController
 {
     public function resultdata()
-    {
+    {        
         helper(['form', 'url', 'help']);
         $listmedias = [];
         $listformers = [];
@@ -14,7 +14,7 @@ class Search extends BaseController
         $listtrainings = [];
         if ($this->isGet()) {
             
-            $research = $this->request->getVar('research');
+           $research = $this->request->getVar('research');
             if ($research == "") {
                 $listmedias = [];
                 $listformers = [];

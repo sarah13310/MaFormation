@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
 <!-- <div class="title3 ms-1 mb-2"><?= $title ?></div> -->
-<div class='ms-2'><h1><?= $subtitle ?></h1></div>
+<div class='ms-2'><h1><i class="bi bi-stoplights"></i>&nbsp;&nbsp;<?= $subtitle ?></h1></div>
 <div class='container px-2 my-3'>
     <form id='contactForm' action='/superadmin/add/admin'method="post">
         <div class='row'>

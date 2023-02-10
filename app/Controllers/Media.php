@@ -26,7 +26,7 @@ class Media extends BaseController
                 $n = "&nbsp;Nom de la vidéo (*)";
                 $u = "&nbsp;Url de la vidéo (*)";
                 $ucm = "&nbsp;Url de la miniature de la vidéo (*)";
-                $troute= "videos";
+                $troute = "videos";
                 break;
             case BOOK:
                 $title = "Poster un livre";
@@ -36,7 +36,7 @@ class Media extends BaseController
                 $n = "&nbsp;Nom du livre (*)";
                 $u = "&nbsp;Url du livre (*)";
                 $ucm = "&nbsp;Url de la couverture du livre (*)";
-                $troute= "books";
+                $troute = "books";
                 break;
         }
 
@@ -55,7 +55,7 @@ class Media extends BaseController
             "na" => $na,
             "u" => $u,
             "ucm" => $ucm,
-            "troute"=>$troute,            
+            "troute" => $troute,
         ];
 
         if (isset($data['warning'])) {
@@ -142,14 +142,19 @@ class Media extends BaseController
         $medias = $this->media_model->ValidatedMedias($type);
         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
 
-        $authors=$this->media_model->triAuthorMedia($medias);
-
+        $authors = $this->media_model->triAuthorMedia($medias);
+        $media_json = json_encode($listmedias);
+        //$media_json=str_replace("'", "\'",$media_json);
+        file_put_contents("media.json",$media_json);
+        //$media_json=str_replace("[", "",$media_json);
+        //$media_json=str_replace("]", "",$media_json);
         $data = [
             "title" => $title,
-            "listmedias" => $listmedias,
+            
             "p" => $p,
             "b" => $b,
-            "authors"=>$authors,
+            "authors" => $authors,
+            "media_json"=>base_url()."/media.json",
 
         ];
         return view('/Media/list_medias.php', $data);

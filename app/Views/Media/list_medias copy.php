@@ -11,7 +11,19 @@
         </select>
     </div>
     <div id='main' class="row align-items-center justify-content-center">
-
+        <?php foreach ($listmedias as $medias) : ?>
+            <div class="card mb-2 flex-row w-75">
+                <img src="<?= $medias['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 33%;">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $medias['name'] ?></h5>
+                    <small><?= $p . " " . $medias['author'] ?></small>
+                    <div class="mt-3">
+                        <p class="card-description" style="height: 6rem;"><?= $medias['description'] ?></p>
+                    </div>
+                    <a class="btn mr-2 float-end" href="<?= $medias['url'] ?>" role="button"><?= $b ?></a>
+                </div>
+            </div>
+        <?php endforeach ?>
     </div>
 </div>
 
@@ -20,96 +32,66 @@
 
 <?= $this->section('js') ?>
 <script>
-    let buffer = null;
-
-    const main = document.getElementById("main");
-    fetch("<?= $media_json ?>")
-        .then(res => res.json())
-        .then(data => {
-            buffer = data;
-            for (let i = 0; i < data.length; i++) {
-                cardinfo = data[i];
-                CreateCard(main, cardinfo);
-            }
-        });
-
-    function clearAllCard() {
-        while (main.lastElementChild) {
-            main.removeChild(main.lastElementChild);
-        }
-    }
-
-    function trie( reverse=false) {
-        clearAllCard();
-        cards = buffer;
-        if (reverse){
-            cards.reverse();
-        }
-        else{
-            cards.sort();
-        }
-        for (let i = 0; i < cards.length; i++) {
-            cardinfo = cards[i];
-            CreateCard(main, cardinfo);
-        }
-    }
-
-    function selectCardByAuthor(cardName) {
-        clearAllCard();
-        cards = buffer;
-        cards = cards.filter(item => {
-            return (item.author == cardName);           
-        });
-        for (let i = 0; i < cards.length; i++) {
-            cardinfo = cards[i];
-            CreateCard(main, cardinfo);
-        }
-    }
-
-    function showAll(){
-        clearAllCard();
-        cards = buffer;        
-        for (let i = 0; i < cards.length; i++) {
-            cardinfo = cards[i];
-            CreateCard(main, cardinfo);
-        }
-    }
-
     let select_authors = document.getElementById('authors');
     select_authors.addEventListener('change', (event) => {
         let sel = select_authors[select_authors.selectedIndex].value;
         if (sel === "Tous") {
-            showAll();
-        } else {        
-            selectCardByAuthor(sel);
+            allSelection();
+        } else {
+            detectCard(sel);
         }
     })
 
-    
-    function CreateCard(parent, cardinfos) {
+    function unAllSelection() {
+        const cards = document.querySelectorAll(".card");
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].classList.toggle('collapse');
+        }
+    }
+
+    function allSelection() {
+        const cards = document.querySelectorAll(".card");
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].classList.remove('collapse');
+        }
+    }
+
+    function detectCard(nom) {
+        unAllSelection();
+        const cards = document.querySelectorAll(".card-body");
+        for (let i = 0; i < cards.length; i++) {
+            let author = cards[i].children[1].innerText;
+            if (author.search(nom) !== -1) {
+                cards[i].parentElement.classList.remove('collapse');
+                break;
+            }
+        }
+    }
+
+
+    function CreateCard(parent, cardinfos = null) {
         let card = document.createElement("div");
         card.classList.add(["card"], ["mb-2"], ["flex-row"], ["w-75"]);
         let img = document.createElement("img");
         img.classList.add(["mt-2"], ["mb-2"], ["card-img-left"], ["p-4"]);
         img.style = "width:28%";
-        img.src = cardinfos.image_url;
         let body = document.createElement("div");
         body.classList.add("card-body");
         let title = document.createElement("h5");
         title.classList.add("card-title");
-        title.innerText = cardinfos.name;
+        title.innerText = "Titre";
         let author = document.createElement("small");
-        author.innerText = cardinfos.author;
+        author.innerText = "Auteur";
         let div = document.createElement("div");
         div.classList.add("mt-3");
         let description = document.createElement("p");
-        description.innerText = cardinfos.description;
+        description.innerText = "description";
         description.classList.add('card-description');
 
         description.style = "height: 6rem";
         let button = document.createElement("a");
-        button.href = cardinfos.url;
-        button.classList.add(["btn"], ["mr-2"], ["float-end"]);
+        button.href="/";
+        button.classList.add(["btn"],["mr-2"], ["float-end"]);
         button.setAttribute("role", "button");
         button.innerHTML = "Voir plus";
         //
@@ -123,8 +105,7 @@
         parent.appendChild(card);
     }
 
-    /* setTimeout(() => {
-         trie();
-     }, 8000)*/
+    const main = document.getElementById("main");
+    CreateCard(main);
 </script>
 <?= $this->endSection() ?>

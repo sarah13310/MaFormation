@@ -21,7 +21,7 @@
         </form>
     </div>
 </div>
-<h1 class="mb-2"><?= $title ?></h1>
+<h1 class="mb-2"><i class="bi bi-stoplights"></i>&nbsp;&nbsp;<?= $title ?></h1>
 <table class="table border">
     <thead class="<?= $headerColor ?>">
         <tr>
