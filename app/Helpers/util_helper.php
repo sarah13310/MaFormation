@@ -1,11 +1,12 @@
 <?php
 
 
-function defaultImage($data, $img='DEFAULT_IMG_BLANK', $url='image_url'){
+function defaultImage($data, $img = 'DEFAULT_IMG_BLANK', $url = 'image_url')
+{
     if ($data[$url] == null) {
         $data[$url] = constant($img);
     }
-    if (strlen($data[$url]) <MIN_LENGTH_URL) {
+    if (strlen($data[$url]) < MIN_LENGTH_URL) {
         $data[$url] = constant($img);
     }
     return $data[$url];
@@ -233,7 +234,7 @@ function dateFormat($date)
 {
     $strDate = "Aucune date renseignée";
     if ($date !== null) {
-    
+
         $data = explode('-', $date);
         $strDate = $data[2] . " " . getMonth($data[1]) . " " . $data[0];
     }
@@ -244,7 +245,7 @@ function dateTimeFormat($date)
 {
     $strDate = "Aucune date renseignée";
     if ($date != null) {
-    
+
         $data = explode(' ', $date);
         $hm = explode(':', $data[1]);
         $date = explode('-', $data[0]);

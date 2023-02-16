@@ -141,21 +141,15 @@ class Media extends BaseController
         $listmedias = [];
         $medias = $this->media_model->ValidatedMedias($type);
         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
-
         $authors = $this->media_model->triAuthorMedia($medias);
         $media_json = json_encode($listmedias);
-        //$media_json=str_replace("'", "\'",$media_json);
         file_put_contents("media.json",$media_json);
-        //$media_json=str_replace("[", "",$media_json);
-        //$media_json=str_replace("]", "",$media_json);
         $data = [
-            "title" => $title,
-            
+            "title" => $title,            
             "p" => $p,
             "b" => $b,
             "authors" => $authors,
             "media_json"=>base_url()."/media.json",
-
         ];
         return view('/Media/list_medias.php', $data);
     }
@@ -168,7 +162,6 @@ class Media extends BaseController
     {
         if ($this->isPost() == 'post') {
             $id = $this->request->getVar('id_media');
-
             $this->media_model->deleteMedia($id);
         }
         return redirect()->to(previous_url());

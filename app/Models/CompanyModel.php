@@ -2,7 +2,7 @@
 
 namespace App\Models;
 use CodeIgniter\Model;
-
+// le 05/02/2023
 class CompanyModel extends Model
 {
     protected $table = 'company';

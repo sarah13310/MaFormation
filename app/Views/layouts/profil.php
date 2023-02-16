@@ -44,7 +44,7 @@
                     <button class="noselect btn <?= getTheme($user['type'], "button") ?>" type="submit">Chercher</button>
                 </form>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="noselect collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="noselect navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a id="btn_home2" class="noselect nav-link active" aria-current="page">Accueil</a>
@@ -102,14 +102,14 @@
                     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 <?= getTheme($user['type'], "nav_left") ?>">
                         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                             <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
-                            <span class="fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
+                            <span class="noselect fs-5 d-none d-sm-inline relief mb-3">Bienvenue</span>
                             <!-- </a> -->
-                            <div class=" pb-4">
+                            <div class="noselect pb-4">
                                 <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none" > -->
-                                <span class="d-none d-sm-inline "><?= $user['name'] ?></span>
-                                <span class="d-none d-sm-inline "><?= $user['firstname']  ?></span>
+                                <span class=" d-none d-sm-inline "><?= $user['name']?></span>&nbsp;
+                                <span class=" d-none d-sm-inline "><?= $user['firstname']?></span>
                                 <p></p>
-                                <p><small><i>( <?= getTypeName(session()->type) ?> )</i></small></p>
+                                <p class="noselect"><small><i>( <?= getTypeName(session()->type) ?> )</i></small></p>
                             </div>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                 <?= fillMenuDashBoard($user['type']) ?>

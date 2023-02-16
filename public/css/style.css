@@ -957,4 +957,12 @@ hr {
  right:10px;
  top:18px;
 }
-
+.w-10{
+	width: 15%;
+}
+.w-15{
+	width: 15%;
+}
+.w-20{
+	width: 20%;
+}

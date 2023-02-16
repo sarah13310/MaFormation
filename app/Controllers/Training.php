@@ -27,19 +27,21 @@ class Training extends BaseController
         $user = $this->getUserSession();
         $trainings = $this->training_model->getFilterTrainings();
         $list_training = [];
-
-        foreach ($trainings as $training) {
+        $training_json = json_encode($trainings);
+        file_put_contents("training.json",$training_json);
+        /*foreach ($trainings as $training) {
             $list_training[] = [
                 "id_training" => $training['id_training'],
                 "title" => $training['title'],
                 "date" => dateTimeFormat($training['date']),
                 "description" => textEllipsis($training['description'], 20),
             ];
-        }
+        }*/
         $data = [
+            "user" => $user,
             "title" => "Liste des formations",
             "trainings" => $list_training,
-            "user" => $user,
+            "training_json" =>base_url()."/training.json",
             "theme_button" => getTheme($user['type'], "button"),
             "headerColor" => getTheme($user['type'], "header"),
         ];

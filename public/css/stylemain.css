@@ -314,6 +314,7 @@ html code {
     flex: 1 0 auto;
     font-size: 1.125rem;
     padding: 1em;
+    padding-top: 0;
 }
 
 .Content> :first-child {

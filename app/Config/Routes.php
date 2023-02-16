@@ -120,7 +120,7 @@ $routes->group('/training', static function ($routes) {
     $routes->add('details/(:num)', 'Training::details/$1'); // Détails de la formation hors connexion (page home)
     $routes->add('payment', 'Training::payment', ['filter' => 'auth']); // paiement
     $routes->add('view', 'Training::view'); // Contenu de la formation payante
-    $routes->add('preview', 'Dashboard::preview_training', ['filter' => 'auth']); // Contenu des pages 
+    $routes->add('preview', 'Dashboard::preview_training', ['filter' => 'auth']); // Contenu des pages (lecture ou dashboard)    
     $routes->add('dashboard', 'Training::dashboard_training', ['filter' => 'auth']); // liste des formations (user profil)
     $routes->add('add', 'Training::training_add', ['filter' => 'auth']); // add training
     $routes->add('delete', 'Training::delete_training', ['filter' => 'auth']); //delete training (user profil)  
@@ -128,6 +128,7 @@ $routes->group('/training', static function ($routes) {
     $routes->add('page/modify', 'Training::modify_page', ['filter' => 'auth']); //modify page (user profil)
     $routes->add('page/save', 'Training::save_page', ['filter' => 'auth']); //modify page (user profil)  
     $routes->add('page/delete', 'Training::delete_page', ['filter' => 'auth']); //delete page (user profil)  
+    $routes->add('page/view', 'Dashboard::preview_page', ['filter' => 'auth']); //view page (user profil)  
 });
 
 // Articles 

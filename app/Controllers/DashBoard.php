@@ -198,10 +198,13 @@ class DashBoard extends BaseController
 
         $listarticles = [];
         $listarticles = $this->article_model->MapArticles($listarticles, $articles);
+        $articles_json = json_encode($listarticles);
+        file_put_contents("article.json", $articles_json);
 
         $data = [
             "title" => $title,
             "listarticles" => $listarticles,
+            "article_json" => base_url() . "/article.json",
             "user" => $user,
             "type" => session()->type,
             "headerColor" => getTheme(session()->type, "header"),
@@ -227,9 +230,12 @@ class DashBoard extends BaseController
         //
         $listpublishes = $this->publication_model->getFilterPublishesArticles($listpublishes, $user['id_user']);
         //
+        $publishe_json = json_encode($listpublishes);
+        file_put_contents("publishe.json", $publishe_json);
+
         $data = [
             "title" => $title,
-            "publishes" => $listpublishes,
+            "publishe_json" => base_url() . "/publishe.json",
             "user" => $user,
             "headerColor" => getTheme(session()->type, "header"),
             "buttonColor" => getTheme(session()->type, "button"),
@@ -310,7 +316,7 @@ class DashBoard extends BaseController
             $article = $public['article'];
 
             $user = $this->user_model->getUserSession();
-          
+
             $article['image_url'] = defaultImage($article, 'DEFAULT_IMG_ARTICLES');
 
             $data = [
@@ -338,7 +344,7 @@ class DashBoard extends BaseController
             $id = $this->request->getVar('id_publication');
             $publication = $this->publication_model->getPublisheById($id);
             $user = $this->user_model->getUserSession();
-                        
+
             $user['image_url'] = defaultImage($user, 'DEFAULT_IMG_BLANK');
             $publication['image_url'] = defaultImage($publication, 'DEFAULT_IMG_PUBLISHES');
 
@@ -385,7 +391,7 @@ class DashBoard extends BaseController
             "listmedias" => $listmedias,
             "user" => $user,
             "type" => session()->type,
-            "typeofmedia"=>$type,
+            "typeofmedia" => $type,
             "headerColor" => getTheme(session()->type, "header"),
             "buttonColor" => getTheme(session()->type, "button"),
         ];
@@ -425,7 +431,7 @@ class DashBoard extends BaseController
             "listmedias" => $listmedias,
             "user" => $session,
             "type" => session()->type,
-            "headerColor"=>getTheme(session()->type, "header"),
+            "headerColor" => getTheme(session()->type, "header"),
         ];
         return view('Media/list_medias_user.php', $data);
     }
@@ -440,13 +446,20 @@ class DashBoard extends BaseController
         $title = "Gestion des pages";
         $user = $this->user_model->getUserSession();
         $listPages = [];
-
+        $actions = "";
+        $id_training = null;
+        $title_training = "";
         if ($this->isPost()) {
             $id_training = $this->request->getVar('id_training');
+            $title_training = $this->request->getVar('title');
+            session()->id_training = $id_training;
+            session()->title_training = $title_training;
+
             $pages = $this->training_model->getFilterPages($id_training);
+            $actions = $this->request->getVar('actions');
+
             // map sur le tableau si nécessaire
             foreach ($pages as $page) {
-
                 $listPages[] = [
                     "id_page" => $page['id_page'],
                     "title" => $page['title'],
@@ -463,7 +476,60 @@ class DashBoard extends BaseController
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
             "id_training" => $id_training,
+            "title_training" => $title_training,
+            "modalDelete" => "",
         ];
+        if ($actions === "list") {
+            $data['title'] = "Liste des pages";
+            return view('Training/page_list.php', $data);
+            die();
+        }
         return view('Admin/dashboard_page.php', $data);
+    }
+
+    public function preview_page()
+    {
+        $title = "Page ";
+        $user = $this->user_model->getUserSession();
+        $listPages = [];
+        $actions = "";
+        if ($this->isPost()) {
+            $id_page = $this->request->getVar('id_page');
+            $id_training = $this->request->getVar('id_training');
+
+            $pages = $this->page_model->getPageById($id_page);
+
+            // map sur le tableau si nécessaire
+            foreach ($pages as $page) {
+
+                $listPages[] = [
+                    "id_page" => $page['id_page'],
+                    "title" => $page['title'],
+                    "content" => $page['content'],
+                    "image_url" => $page['image_url'],
+                    "video_url" => $page['video_url'],
+                ];
+            }
+            $page = null;
+            if (count($listPages) > 0) {
+                $page = $listPages[0];
+                session()->page_id = $page['id_page'];
+                session()->title_page = $page['title'];
+                session()->image_page = $page['image_url'];
+                session()->content = $page['content'];
+            }
+        }
+        $data = [
+            "title" => $title,
+            "page" => $page,
+            "user" => $user,
+            "buttonColor" => getTheme(session()->type, "button"),
+            "headerColor" => getTheme(session()->type, "header"),
+            "id_page" => $id_page,
+            "id_training" => $id_training,
+            "modalDelete" => "",
+        ];
+
+        return view('Training/page_view.php', $data);
     }
 }

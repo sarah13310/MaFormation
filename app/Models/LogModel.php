@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-
+// le 05/02/2023
 class LogModel extends Model
 {
     protected $table = 'log';

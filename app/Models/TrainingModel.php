@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-
+// Le 16/02/2023
 class TrainingModel extends Model
 {
     protected $table = 'training';
@@ -27,10 +27,9 @@ class TrainingModel extends Model
 
     function add($post_data)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training');
+        $builder = $this->db->table('training');
         $builder->insert($post_data);
-        return $db->insertID();
+        return $this->db->insertID();
     }
 
     function getTrainingSession()
@@ -61,8 +60,8 @@ class TrainingModel extends Model
 
     function getTrainingById($id)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training');
+        //$db      = \Config\Database::connect();
+        $builder = $this->db->table('training');
         $builder->where("id_training", $id);
         $query = $builder->get();
         return $query->getResultArray();
@@ -70,8 +69,8 @@ class TrainingModel extends Model
 
     function getTrainingsTitle($status = ALL)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training');
+        //$db      = \Config\Database::connect();
+        $builder = $this->db->table('training');
         $builder->select("id_training, title");
         $query = $builder->get();
         return $query->getResultArray();
@@ -79,8 +78,8 @@ class TrainingModel extends Model
 
     public function getFilterTrainings($status = ALL, $limit = -1)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training');
+        //$db      = \Config\Database::connect();
+        $builder = $this->db->table('training');
         $builder->select("id_training, title,date, description, image_url");
         if ($status != ALL) {
             $builder->where("status", $status);
@@ -94,8 +93,8 @@ class TrainingModel extends Model
 
     function isExist($title)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training');
+        //$db      = \Config\Database::connect();
+        $builder = $this->db->table('training');
         $builder->where("title", $title);
         $query = $builder->get();
         return ($query->getResultArray() == null) ? false : true;
@@ -116,8 +115,8 @@ class TrainingModel extends Model
 
     public function getFilterPages($id_training, $limit = -1)
     {
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training_has_page');
+        //$db      = \Config\Database::connect();
+        $builder = $this->db->table('training_has_page');
         $builder->select("page.id_page, page.title, page.content, page.image_url,page.video_url");
         $builder->join('page', 'page.id_page=training_has_page.id_page');
         $builder->where("training_has_page.id_training", $id_training);
@@ -130,8 +129,8 @@ class TrainingModel extends Model
     }
 
     public function deleteTraining($id_training){
-        $db      = \Config\Database::connect();
-        $builder = $db->table('training');
+        //$db      = \Config\Database::connect();
+        $builder = $this->db->table('training');
         $builder->where("id_training", $id_training);
         $builder->delete();
     }
