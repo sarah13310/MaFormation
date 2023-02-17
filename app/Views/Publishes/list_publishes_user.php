@@ -50,7 +50,7 @@
 
     option.append(OptionPagination());
 
-    function NbTitle(count, title="articles") {
+    function NbTitle(count, title = "articles") {
         if (buffer !== null) {
             let h6 = document.getElementsByTagName("h6");
             if (count == 0) {

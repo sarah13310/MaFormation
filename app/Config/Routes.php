@@ -91,6 +91,7 @@ $routes->group('/user', static function ($routes) {
     $routes->add('company', 'User::confirmation'); //signin create user profil
     $routes->add('profil', 'User::profileuser', ['filter' => 'auth']); //profil (user profil)    
     $routes->add('bill', 'User::bill', ['filter' => 'auth']); //bill (user profil)   
+    $routes->add('bill/preview', 'User::preview_bill', ['filter' => 'auth']); //bill (user profil)   
     $routes->add('profil/contact', 'User::modif_contact', ['filter' => 'auth']); //modif contact (user profil) 
     $routes->add('profil/password', 'User::modif_password', ['filter' => 'auth']); //modif password (user profil)   
     $routes->add('profil/skill', 'User::modif_skill', ['filter' => 'auth']); //modif skills (user profil)   

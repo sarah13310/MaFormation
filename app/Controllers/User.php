@@ -540,9 +540,12 @@ class User extends BaseController
                 $bills = $this->bill_model->getFilterBill();
                 break;
         }
+        $bill_json = json_encode($bills);
+        file_put_contents("bill.json", $bill_json);
+
         $data = [
             "title" => "Factures",
-            "bills" => $bills,
+            "bill_json" => base_url() . "/bill.json",            
             "user" => $user,
             "buttonColor" => getTheme($user['type'], "button"),
             "headerColor" => getTheme($user['type'], "header"),
@@ -550,6 +553,19 @@ class User extends BaseController
         return view("Payment/bill.php", $data);
     }
 
+    public function preview_bill()
+    {
+        $user = $this->user_model->getUserSession();
+        $file=$this->request->getVar("ref_name");
+        $pdf_file=$file.".pdf";
+
+        $data = [
+            "title" => "Détail de la facture",
+            "pdf_file" => base_url() . "/pdf/".$pdf_file."#zoom=50",            
+            "user" => $user,           
+        ];
+        return view("Payment/preview_bill.php", $data);
+    }
     /**
      * modif_name
      * Modification du nom
@@ -1020,17 +1036,21 @@ class User extends BaseController
                     // die();
                     $listuser[] = [
                         'user' => $users[$i],
-                        'company' => $company[0],
+                        'company' => $company,
                     ];
                 }
                 break;
         }
         $user = $this->user_model->getUserSession();
+        $user_json = json_encode($listuser);
+        file_put_contents("user.json", $user_json);
+
         //
         $data = [
             "title" => $title,
             "user" => $user, // le profil 
-            "users" => $listuser, //la liste
+            "user_json" => base_url() . "/user.json",
+            //"users" => $listuser, //la liste
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
             "showDetails" => ($profil == "company" ? "" : "hidden"),

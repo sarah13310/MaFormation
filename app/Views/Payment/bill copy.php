@@ -1,18 +1,10 @@
 <?= $this->extend('layouts/profil') ?>
 <?= $this->section('content') ?>
-
-<div>
-    <div class="d-flex w-75">
-        <h1 class="col mb-2 noselect"><i class="bi bi-currency-euro"></i>&nbsp;&nbsp;<?= $title ?></h1>
-        <h6 class="col d-flex flex-row-reverse mt-2"></h6>
-    </div>
-    <hr class="mt-1 mb-2 w-75">
-    <div class="mb-1 col noselect " id="option"></div>
-</div>
+<h1 class="mb-3"><i class="bi bi-euro"></i>&nbsp;&nbsp;<?= $title ?></h1>
 
 <div class="row">
-    <div class="col">
-        <table class="table w-75 table-hover border">
+    <div class="col-12 col-md-8">
+        <table class="table table-hover border">
             <thead class="<?= $headerColor ?>">
                 <tr>
                     <th class="hidden" scope="col">Id</th>
@@ -23,11 +15,21 @@
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>
+            <?php foreach ($bills as $bill) : ?>
+                <tr>
+                    <td class="hidden"><?= $bill['id_bill'] ?></td>
+                    <td><?= $bill['ref_name'] ?></td>
+                    <td><?= $bill['datetime'] ?></td>
+                    <td><?= $bill['price'] . " €" ?></td>
+                    <td scope="col"><button>...</button> </td>
+                </tr>
+            <?php endforeach ?>
+
         </table>
     </div>
-    <form name="form_preview" action="/user/bill/preview" method="post">
+    <form name="form_preview" action="/bill/preview" method="post">
         <input type="hidden" name="id_bill">
-        <input type="hidden" name="ref_name">
+        <input type="hidden" name="ref">
     </form>
     <div class="pagination w-75">
         <ul class=""></ul>
@@ -51,7 +53,7 @@
         let items_display = null;
         let totalPages = 20;
 
-        function NbTitle(count, title = "factures") {
+        function NbTitle(count, title = "articles") {
             if (buffer !== null) {
                 let h6 = document.getElementsByTagName("h6");
                 if (count == 0) {
@@ -109,9 +111,9 @@
             .then(res => res.json())
             .then(data => {
                 buffer = data;
-                //RefreshPage();
+                RefreshPage();
                 totalPages = Math.ceil(buffer.length / items_per_page);;
-                element.innerHTML = createPagination(totalPages, 1); // le refresh se fait dans cette fonction
+                element.innerHTML = createPagination(totalPages, 1);
                 NbTitle(buffer.length);
             });
 
@@ -122,26 +124,19 @@
             a.innerHTML = "<i class='bi bi-eye'>";
             a.classList.add("btn");
             a.addEventListener("click", () => {
-                form_preview.id_bill.value = data.id_bill;
-                form_preview.ref_name.value = data.ref_name;
+                form_preview.id_training.value = data.id_training;
+                form_preview.title.value = data.title;
                 form_preview.submit();
             });
-            //
             let td2 = document.createElement("td");
-            td2.innerText = data.ref_name;
-            //
+            td2.innerText = data.title;
             let td3 = document.createElement("td");
-            td3.innerText = dateTimeFormat(data.datetime);
-            //          
-            let td4 = document.createElement("td");
-            td4.innerText = data.price + ' €';
-            //
+            td3.innerText = dateTimeFormat(data.date);
             tbody.append(tr);
             tr.append(td1);
             td1.append(a);
             tr.append(td2);
             tr.append(td3);
-            tr.append(td4);
         }
 
 
@@ -152,9 +147,6 @@
             let afterPage = page + 1;
             current_page = page;
             RefreshPage();
-            if (totalPages == 1) {
-                element.classList.add("collapse");
-            }
             if (page > 1) { //show the next button if the page value is greater than 1
                 liTag += `<li class="me-2 btn prev" onclick="createPagination(totalPages, ${page - 1})"><span><i class="'bi bi-chevron-left"></i> Préc</span></li>`;
             }

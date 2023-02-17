@@ -1,0 +1,32 @@
+CRITICAL - 2023-02-16 14:51:53 --> Undefined variable $bill_json
+in APPPATH\Views\Payment\bill.php on line 109.
+ 1 APPPATH\Views\Payment\bill.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $bill_json', 'APPPATH\\Views\\Payment\\bill.php', 109)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Payment\\bill.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Payment/bill.php', [], true)
+ 5 APPPATH\Controllers\User.php(550): view('Payment/bill.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-16 17:18:34 --> Undefined variable $user_json
+in APPPATH\Views\User\list_client.php on line 103.
+ 1 APPPATH\Views\User\list_client.php(103): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user_json', 'APPPATH\\Views\\User\\list_client.php', 103)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\User\\list_client.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('User/list_client.php', [], true)
+ 5 APPPATH\Controllers\User.php(1055): view('User/list_client.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('user')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-16 20:46:12 --> Undefined array key 0
+in APPPATH\Controllers\User.php on line 1039.
+ 1 APPPATH\Controllers\User.php(1039): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Controllers\\User.php', 1039)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->list_user('company')
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
