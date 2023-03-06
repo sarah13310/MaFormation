@@ -27,7 +27,7 @@
         <a href="/training/page/add" class="btn <?= $buttonColor ?> col-2 me-3"><i class="bi bi-plus-circle"></i>&nbsp;Ajouter Page</a>
     </div>
     <div class="mt-2 col">
-        <table class="table border table-hover">
+        <table class="table border table-hover rounded-1">
             <thead class=<?= $headerColor ?>>
                 <tr>
                     <th>Nom de la page</th>

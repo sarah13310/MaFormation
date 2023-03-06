@@ -125,14 +125,16 @@ class MediaModel extends Model
     function MapMedias($list,$data)
     {
         foreach ($data as $d) {
-            if($d['image_url']==null || $d['image_url']=""){
+
+            if($d['image_url']==null || $d['image_url']==""){
                 if ($d['type']==BOOK){
                     $d['image_url']=constant('DEFAULT_IMG_BOOK');
                 }
                 if ($d['type']==VIDEO){
                     $d['image_url']=constant('DEFAULT_IMG_VIDEO');
                 }
-            }            
+            }
+
             $list[] = [
                 "id_media" => $d['id_media'],
                 "name" => $d['name'],
@@ -140,6 +142,8 @@ class MediaModel extends Model
                 "author" => $d['author'],
                 "url" => $d['url'],
                 "image_url" => $d['image_url'],
+                "status" => $d['status'],
+                "id_tag" => $d['id_tag'],
             ];
         }
         return $list;
@@ -163,7 +167,7 @@ class MediaModel extends Model
             $builder->join('user', 'user_has_media.id_user = user.id_user');
             $query = $builder->get();
             $user = $query->getResultArray();
-
+            
             $authors = [];
             foreach ($user as $u) {
                 $authors[] = [
@@ -194,7 +198,8 @@ class MediaModel extends Model
         $query   = $builder->get();
         $medias = $query->getResultArray();
         return $medias;
-    }       
+    }
+        
 
     /**
      * ValidatedMedias
@@ -231,7 +236,13 @@ class MediaModel extends Model
         $items = $query->getResultArray();
         return (count($items) == 0) ? false : true;
     }
-
+    
+    /**
+     * triAuthorMedia
+     *
+     * @param  mixed $data
+     * @return void
+     */
     function triAuthorMedia($data){
         foreach($data as $d){
             $list[]=[
@@ -240,4 +251,66 @@ class MediaModel extends Model
         }
         return $list;
     }
+
+     /**
+     * getTagName
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    function getTagName($data)
+    {
+
+        $builder = $this->db->table('tag');
+
+        $category = [];
+
+        for ($i = 0; $i < count($data); $i++) {
+            $category = [];
+            $builder->where('id_tag', $data[$i]['id_tag']);
+            $builder->join('category', 'category.id_category = tag.id_category');
+            $query = $builder->get();
+            $tag = $query->getResultArray();
+
+            foreach ($tag as $t) {
+                $category[] = [
+                    "name" => $t['name'],
+                ];
+            }
+            $data[$i]['tag'] = $category;
+        }
+
+        return $data;
+    }
+    
+    /**
+     * triTagMedia
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    function triTagMedia($data)
+    {
+        $builder = $this->db->table('tag');
+
+        $category = [];
+
+        for ($i = 0; $i < count($data); $i++) {
+            $builder->where('id_tag', $data[$i]['id_tag']);
+            $builder->join('category', 'category.id_category = tag.id_category');
+            $query = $builder->get();
+            $tag = $query->getResultArray();
+
+            foreach ($tag as $t) {
+                $category[] = [
+                    "name" => $t['name'],
+                ];
+            }
+        }
+
+        $category = array_unique($category, SORT_REGULAR);
+        return $category;
+    }
+
+   
 }

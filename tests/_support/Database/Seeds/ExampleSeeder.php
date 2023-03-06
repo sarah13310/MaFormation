@@ -10,29 +10,29 @@ class ExampleSeeder extends Seeder
     {
         $factories = [
             [
-                'name'    => 'Test Factory',
-                'uid'     => 'test001',
-                'class'   => 'Factories\Tests\NewFactory',
-                'icon'    => 'fas fa-puzzle-piece',
-                'summary' => 'Longer sample text for testing',
+                'name'    => 'test001',
+                'firstname'     => 'test001',
+                'type'   => '44',
+                'password'=>'$2y$10$v4jEyeYBxzdwamHHvST5lukQE3j4OXEQDIBl5Mi06SaP587HJgctK',                
+                'status' => '1',
             ],
             [
-                'name'    => 'Widget Factory',
-                'uid'     => 'widget',
-                'class'   => 'Factories\Tests\WidgetPlant',
-                'icon'    => 'fas fa-puzzle-piece',
-                'summary' => 'Create widgets in your factory',
+                'name'    => 'test002',
+                'firstname'     => 'test002',
+                'type'   => '44',
+                'password'=>'$2y$10$v4jEyeYBxzdwamHHvST5lukQE3j4OXEQDIBl5Mi06SaP587HJgctK',                
+                'status' => '1',
             ],
             [
-                'name'    => 'Evil Factory',
-                'uid'     => 'evil-maker',
-                'class'   => 'Factories\Evil\MyFactory',
-                'icon'    => 'fas fa-book-dead',
-                'summary' => 'Abandon all hope, ye who enter here',
+                'name'    => 'test002',
+                'firstname'     => 'test002',
+                'type'   => '44',
+                'password'=>'$2y$10$v4jEyeYBxzdwamHHvST5lukQE3j4OXEQDIBl5Mi06SaP587HJgctK',                
+                'status' => '1',
             ],
         ];
 
-        $builder = $this->db->table('factories');
+        $builder = $this->db->table('user');
 
         foreach ($factories as $factory) {
             $builder->insert($factory);

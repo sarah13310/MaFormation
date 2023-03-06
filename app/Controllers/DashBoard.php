@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Predis\Command\Redis\SUBSTR;
 
 // Le 05/02/2023
 
@@ -80,9 +81,13 @@ class DashBoard extends BaseController
         }
 
         $user = $this->user_model->getUserSession();
+
+        $former_json = json_encode($listformers);
+        file_put_contents("former.json", $former_json);
+
         $data = [
             "title" => $title,
-            "listformers" => $listformers,
+            "former_json" => base_url() . "/former.json",
             "jobs" => $jobs,
             "user" => $user,
             "headerColor" => getTheme($user['type'], "header"),
@@ -127,7 +132,7 @@ class DashBoard extends BaseController
         }
         /* compétences certificats*/
         $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
-        $skills = [];
+        
 
         for ($i = 0; $i < count($listformers); $i++) {
             $builder->where('user.id_user', $listformers[$i]['id_user']);
@@ -169,10 +174,13 @@ class DashBoard extends BaseController
             ];
         }
         $user = $this->user_model->getUserSession();
+        $right_json = json_encode($listformers);    
+        file_put_contents("right.json", $right_json);        
         //
         $data = [
             "title" => $title,
             "listformers" => $listformers,
+            "right_json"=>base_url()."/right.json",
             "jobs" => $jobs,
             "user" => $user,
             "type=" => $user['type'],
@@ -198,6 +206,8 @@ class DashBoard extends BaseController
 
         $listarticles = [];
         $listarticles = $this->article_model->MapArticles($listarticles, $articles);
+        // Fonction select remplit les options
+        $tag = $this->article_model->triTagArticle($listarticles);
         $articles_json = json_encode($listarticles);
         file_put_contents("article.json", $articles_json);
 
@@ -208,6 +218,7 @@ class DashBoard extends BaseController
             "user" => $user,
             "type" => session()->type,
             "headerColor" => getTheme(session()->type, "header"),
+            "tag"=>$tag,
         ];
 
         return view('Articles/list_article_user.php', $data);
@@ -258,12 +269,14 @@ class DashBoard extends BaseController
         $articles = $public['articles'];
         //
         $listarticles = $this->article_model->MapArticles($listarticles, $articles);
-        //
         $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
-
+        $article_json = json_encode($listarticles);
+        //
+        file_put_contents("dashboard_article.json", $article_json);
         $data = [
             "title" => $title,
-            "articles" => $listarticles,
+            //"articles" => $listarticles,
+            "dashboard_article_json" => base_url() . "/dashboard_article.json",
             "user" => $user,
             "type" => session()->type,
             "headerColor" => getTheme(session()->type, "header"),
@@ -290,10 +303,13 @@ class DashBoard extends BaseController
         $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
         //
         $listpublishes = $this->publication_model->getFilterPublishesArticles($listpublishes, 0);
-
+        $publishe_json = json_encode($listpublishes);
+        //
+        file_put_contents("dashboard_publication.json", $publishe_json);
         $data = [
             "title" => $title,
             "publishes" => $listpublishes,
+            "dashboard_publication_json" => base_url() . "/dashboard_publication.json",
             "user" => $user,
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
@@ -364,7 +380,8 @@ class DashBoard extends BaseController
      * @param  mixed $type
      * @return void
      */
-    public function dashboard_media($type)
+
+    private function refresh_media($type)
     {
         switch ($type) {
             case VIDEO:
@@ -372,23 +389,30 @@ class DashBoard extends BaseController
                 $public = $this->media_model->getVideos();
                 $builder = $public['builder'];
                 $medias = $public['videos'];
+                $media = "video";
                 break;
             case BOOK:
                 $title = "Liste des livres";
                 $public = $this->media_model->getBooks();
                 $builder = $public['builder'];
                 $medias = $public['books'];
+                $media = "book";
                 break;
         }
 
         $listmedias = [];
         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
         $listmedias = $this->media_model->getAuthorsMedias($listmedias, $builder);
+        $media_json = json_encode($listmedias);
+
+        //
+        file_put_contents($media . ".json", $media_json);
 
         $user = $this->user_model->getUserSession();
         $data = [
             "title" => $title,
             "listmedias" => $listmedias,
+            "media_json" => base_url() . "/" . $media . ".json",
             "user" => $user,
             "type" => session()->type,
             "typeofmedia" => $type,
@@ -397,7 +421,29 @@ class DashBoard extends BaseController
         ];
         return view('Admin/dashboard_media_admin.php', $data);
     }
+    
+    public function dashboard_media($type)
+    {
+        return $this->refresh_media($type);
+    }
 
+    public function status_media($type)
+    {
+        //
+        if ($this->isPost()) {
+            //
+            $id_media = $this->getVar("id_media");
+            $status = $this->getVar("status");
+            //
+            $dataUpdate = [
+                "id_media" => $id_media,
+                "status" => $status,
+            ];            
+            $this->media_model->save($dataUpdate);
+            //
+            return $this->refresh_media($type);            
+        }
+    }
     /**
      * listmedias
      * Liste de tous les médias livres et vidéos associé au profil 
@@ -411,27 +457,57 @@ class DashBoard extends BaseController
         $session = $this->user_model->getUserSession();
         // on récupère la requete pour user
         $public = $this->user_model->getFilterUser();
-
+        //
         switch ($type) {
             case VIDEO:
                 $title = "Liste des vidéos";
+                $media = "video.json";
                 break;
             case BOOK:
                 $title = "Liste des livres";
+                $media = "book.json";
                 break;
         }
-
         $builder = $public['builder'];
         $medias = $this->media_model->getAuthorMedias($session, $builder, $type);
         $listmedias = [];
-        $listmedias = $this->media_model->MapMedias($listmedias, $medias);
+        //
+        switch (session()->type) {
+            case ADMIN:
+            case SUPER_ADMIN:
+                $listmedias = $this->media_model->ValidatedMedias($type);
+                break;
+            case FORMER:
+            case USER:
+            case COMPANY:
+                $listmedias = $this->media_model->MapMedias($listmedias, $medias);
+                break;
+        }
 
+        for ($i = 0; $i < count($listmedias); $i++) {
+            if ($type == BOOK)
+                $listmedias[$i]['image_url'] = defaultImage($listmedias[$i], 'DEFAULT_IMG_BOOK');
+            if ($type == VIDEO)
+                $listmedias[$i]['image_url'] = defaultImage($listmedias[$i], 'DEFAULT_IMG_VIDEO');
+        }
+        // récupère les tags associés au média
+        $listmedias = $this->media_model->getTagName($listmedias);
+        // Liste select pour effectuer le tri
+        $authors = $this->media_model->triAuthorMedia($listmedias);
+        $tag = $this->media_model->triTagMedia($listmedias); 
+        //
+        $media_json = json_encode($listmedias);
+        file_put_contents($media, $media_json);
+        //
         $data = [
             "title" => $title,
-            "listmedias" => $listmedias,
+            "media_json" => base_url() . "/" . $media,
             "user" => $session,
             "type" => session()->type,
             "headerColor" => getTheme(session()->type, "header"),
+            "buttonColor" => getTheme(session()->type, "button"),
+            "authors"=>$authors,
+            "tag"=>$tag,
         ];
         return view('Media/list_medias_user.php', $data);
     }

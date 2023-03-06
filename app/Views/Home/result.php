@@ -1,4 +1,3 @@
-<?php /* require_once($_SERVER['DOCUMENT_ROOT'] . '/php/functions/util.php') */ ?>
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('header') ?>
 <?= $this->endSection() ?>
@@ -6,19 +5,34 @@
 
 <h1 class="ms-4"><?= $title ?></h1>
 <hr class="mt-2 mb-2">
-<div class="container ">
+<div class="container">
+    <h2><?=$titlevideos?></h2>
     <div class="row m w-75 x-auto align-items-center justify-content-center">
-        <?php foreach ($listmedias as $medias) : ?>
+        <?php foreach ($listvideos as $videos) : ?>
             <div class="card mb-2 flex-row">
-                <img src="<?= $medias['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
+                <img src="<?= $videos['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
                 <div class="card-body">
-                    <h5 class="mb-2"><?= $medias['name'] ?></h5>
-                    <small><?= "Par " . $medias['author'] ?></small>
+                    <h5 class="mb-2"><?= $videos['name'] ?></h5>
+                    <small><?= "Par " . $videos['author'] ?></small>
                 </div>
-                <a class="btn mr-2 float-end" href="<?= $medias['url'] ?>" role="button">Voir</a>
+                <a class="btn mr-2 float-end" href="<?= $videos['url'] ?>" role="button">Voir</a>
             </div>
         <?php endforeach ?>
     </div>
+    <h2><?=$titlebooks?></h2>
+    <div class="row m w-75 x-auto align-items-center justify-content-center">
+        <?php foreach ($listbooks as $books) : ?>
+            <div class="card mb-2 flex-row">
+                <img src="<?= $books['image_url'] ?>" class="mt-2 mb-2 card-img-left p-4" style="width: 15%;">
+                <div class="card-body">
+                    <h5 class="mb-2"><?= $books['name'] ?></h5>
+                    <small><?= "Par " . $books['author'] ?></small>
+                </div>
+                <a class="btn mr-2 float-end" href="<?= $books['url'] ?>" role="button">Voir</a>
+            </div>
+        <?php endforeach ?>
+    </div>
+    <h2><?=$titleformers?></h2>
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listformers as $former) : ?>
             <form action="/former/list/cv" method="post">
@@ -33,6 +47,7 @@
             </form>
         <?php endforeach ?>
     </div>
+    <h2><?=$titlearticles?></h2>
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listarticles as $articles) : ?>
             <form action="/article/list/details" method="post">
@@ -47,6 +62,7 @@
             </form>
         <?php endforeach ?>
     </div>
+    <h2><?=$titlepublications?></h2>
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listpublications as $publication) : ?>
             <form action="/publishes/list/details" method="post">
@@ -61,6 +77,7 @@
             </form>
         <?php endforeach ?>
     </div>
+    <h2><?=$titletrainings?></h2>
     <div class="row align-items-center justify-content-center">
         <?php foreach ($listtrainings as $training) : ?>
             <form action="/trainig/details" method="post">

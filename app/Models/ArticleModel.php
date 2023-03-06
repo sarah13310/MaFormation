@@ -156,6 +156,8 @@ class ArticleModel extends Model
                 "description" => $d['description'],
                 "datetime" => $d['datetime'],
                 "image_url" => $d['image_url'],
+                "status" => $d['status'],
+                "id_tag" => $d['id_tag'],
             ];
         }
         return $list;
@@ -258,5 +260,64 @@ class ArticleModel extends Model
         $articles = $query->getResultArray();
 
         return $articles;
+    }    
+    /**
+     * getTagName
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    function getTagName($data)
+    {
+
+        $builder = $this->db->table('tag');
+
+        $category = [];
+
+        for ($i = 0; $i < count($data); $i++) {
+            $category = [];
+            $builder->where('id_tag', $data[$i]['id_tag']);
+            $builder->join('category', 'category.id_category = tag.id_category');
+            $query = $builder->get();
+            $tag = $query->getResultArray();
+
+            foreach ($tag as $t) {
+                $category[] = [
+                    "name" => $t['name'],
+                ];
+            }
+            $data[$i]['tag'] = $category;
+        }
+
+        return $data;
+    }
+    
+    /**
+     * triTagArticle
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    function triTagArticle($data)
+    {
+        $builder = $this->db->table('tag');
+
+        $category = [];
+
+        for ($i = 0; $i < count($data); $i++) {
+            $builder->where('id_tag', $data[$i]['id_tag']);
+            $builder->join('category', 'category.id_category = tag.id_category');
+            $query = $builder->get();
+            $tag = $query->getResultArray();
+
+            foreach ($tag as $t) {
+                $category[] = [
+                    "name" => $t['name'],
+                ];
+            }
+        }
+
+        $category = array_unique($category, SORT_REGULAR);
+        return $category;
     }
 }

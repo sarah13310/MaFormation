@@ -1,0 +1,90 @@
+CRITICAL - 2023-02-28 00:32:28 --> Undefined array key 0
+in APPPATH\Models\PublicationModel.php on line 59.
+ 1 APPPATH\Models\PublicationModel.php(59): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\PublicationModel.php', 59)
+ 2 APPPATH\Controllers\DashBoard.php(355): App\Models\PublicationModel->getPublisheById(null)
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->previewpublish()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 09:50:20 --> Undefined variable $media_json
+in APPPATH\Views\Payment\bill.php on line 46.
+ 1 APPPATH\Views\Payment\bill.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $media_json', 'APPPATH\\Views\\Payment\\bill.php', 46)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Payment\\bill.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Payment/bill.php', [], true)
+ 5 APPPATH\Controllers\User.php(553): view('Payment/bill.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\User->bill()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 10:02:46 --> Undefined variable $media_json
+in APPPATH\Views\Admin\dashboard_media_admin.php on line 83.
+ 1 APPPATH\Views\Admin\dashboard_media_admin.php(83): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $media_json', 'APPPATH\\Views\\Admin\\dashboard_media_admin.php', 83)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_media_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_media_admin.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(408): view('Admin/dashboard_media_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->dashboard_media('1')
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 13:29:59 --> Too few arguments to function App\Controllers\DashBoard::status_media(), 0 passed in C:\xampp\htdocs\MaFormation\system\CodeIgniter.php on line 927 and exactly 1 expected
+in APPPATH\Controllers\DashBoard.php on line 419.
+ 1 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->status_media()
+ 2 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 3 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 13:34:09 --> Too few arguments to function App\Controllers\DashBoard::status_media(), 0 passed in C:\xampp\htdocs\MaFormation\system\CodeIgniter.php on line 927 and exactly 1 expected
+in APPPATH\Controllers\DashBoard.php on line 419.
+ 1 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->status_media()
+ 2 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 3 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 14:06:07 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1598.
+ 1 SYSTEMPATH\BaseModel.php(1598): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(853): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(693): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\DashBoard.php(446): CodeIgniter\Model->update([...])
+ 5 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->status_media('1')
+ 6 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 7 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 17:26:38 --> Undefined variable $media_json
+in APPPATH\Views\Admin\dashboard_training_admin.php on line 115.
+ 1 APPPATH\Views\Admin\dashboard_training_admin.php(115): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $media_json', 'APPPATH\\Views\\Admin\\dashboard_training_admin.php', 115)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_training_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_training_admin.php', [], true)
+ 5 APPPATH\Controllers\Training.php(160): view('Admin/dashboard_training_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->dashboard_training()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 17:43:28 --> Undefined array key "status"
+in APPPATH\Controllers\Training.php on line 149.
+ 1 APPPATH\Controllers\Training.php(149): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "status"', 'APPPATH\\Controllers\\Training.php', 149)
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->dashboard_training()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-28 23:18:01 --> Undefined variable $training_json
+in APPPATH\Views\Admin\dashboard_training_admin.php on line 136.
+ 1 APPPATH\Views\Admin\dashboard_training_admin.php(136): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $training_json', 'APPPATH\\Views\\Admin\\dashboard_training_admin.php', 136)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_training_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_training_admin.php', [], true)
+ 5 APPPATH\Controllers\Training.php(611): view('Admin/dashboard_training_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Training->delete_training()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Training))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

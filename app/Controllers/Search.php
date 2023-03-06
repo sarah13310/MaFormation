@@ -5,47 +5,80 @@ namespace App\Controllers;
 class Search extends BaseController
 {
     public function resultdata()
-    {        
-        helper(['form', 'url', 'help']);
-        $listmedias = [];
+    {
+
+        $titlevideos = "";
+        $titlebooks = "";
+        $titleformers = "";
+        $titlearticles = "";
+        $titlepublications = "";
+        $titletrainings = "";
+        $listvideos = [];
+        $listbooks = [];
         $listformers = [];
         $listarticles = [];
         $listpublications = [];
         $listtrainings = [];
+
+        helper(['form', 'url', 'help']);
+
         if ($this->isGet()) {
-            
-           $research = $this->request->getVar('research');
+
+            $research = $this->request->getVar('research');
             if ($research == "") {
-                $listmedias = [];
+                $listvideos = [];
+                $listbooks = [];
                 $listformers = [];
                 $listarticles = [];
                 $listpublications = [];
                 $listtrainings = [];
+                $title = "Aucun Résultat Trouvé";
             } else {
 
                 $db = \Config\Database::connect();
+
                 $builder = $db->table('media');
+                $builder->where('status', VALIDE);
+                $builder->where('type', VIDEO);
                 $builder->like('name', $research);
                 $builder->orLike('author', $research);
-                $builder->where('status', VALIDE);
-                $query   = $builder->get();
-                $medias = $query->getResultArray();
 
-                foreach ($medias as $media) {
-                    if ($media['image_url'] == null) {
-                        if ($media['type'] == BOOK) {
-                            $media['image_url'] = constant('DEFAULT_IMG_BOOK');
-                        }
-                        if ($media['type'] == VIDEO) {
-                            $media['image_url'] = constant('DEFAULT_IMG_VIDEO');
-                        }
+                $query   = $builder->get();
+                $videos = $query->getResultArray();
+
+                $listvideos = [];
+                foreach ($videos as $video) {
+                    if ($video['image_url'] == null) {
+                        $video['image_url'] = constant('DEFAULT_IMG_VIDEO');
                     }
-                    $listmedias[] = [
-                        "id_media" => $media['id_media'],
-                        "name" => $media['name'],
-                        "author" => $media['author'],
-                        "url" => $media['url'],
-                        "image_url" => $media['image_url'],
+                    $listvideos[] = [
+                        "id_media" => $video['id_media'],
+                        "name" => $video['name'],
+                        "author" => $video['author'],
+                        "url" => $video['url'],
+                        "image_url" => $video['image_url'],
+                    ];
+                }
+
+                $builder = $db->table('media');
+                $builder->where('status', VALIDE);
+                $builder->where('type', BOOK);
+                $builder->like('name', $research);
+                $builder->orLike('author', $research);
+                $query   = $builder->get();
+                $books = $query->getResultArray();
+
+                $listbooks = [];
+                foreach ($books as $book) {
+                    if ($book['image_url'] == null) {
+                        $book['image_url'] = constant('DEFAULT_IMG_VIDEO');
+                    }
+                    $listbooks[] = [
+                        "id_media" => $book['id_media'],
+                        "name" => $book['name'],
+                        "author" => $book['author'],
+                        "url" => $book['url'],
+                        "image_url" => $book['image_url'],
                     ];
                 }
 
@@ -105,30 +138,49 @@ class Search extends BaseController
                     $listtrainings[] = [
                         "id_training" => $training['id_training'],
                         "title" => $training['title'],
+                        "image_url" => $training['image_url'],
                     ];
                 }
-            }
-        }
-        if (count($listtrainings) == 0 && count($listpublications) == 0 && count($listarticles) == 0 && count($listformers) == 0 && count($listmedias) == 0) {
 
-            $title = "Aucun Résultat Trouvé";
-        } else {
-            $title = "Résultat";
+                $nb = count($listtrainings) + count($listpublications) + count($listarticles) + count($listformers) + count($listvideos) + count($listbooks);
+                $title = "Résultat(s) : " . $nb;
+                if (count($listtrainings)) {
+                    $titletrainings = "Formations";
+                }
+                if (count($listpublications)) {
+                    $titlepublications = "Publications";
+                }
+                if (count($listarticles)) {
+                    $titlearticles = "Articles";
+                }
+                if (count($listformers)) {
+                    $titleformers = "Formateurs";
+                }
+                if (count($listvideos)) {
+                    $titlevideos = "Vidéos";
+                }
+                if (count($listbooks)) {
+                    $titlebooks = "Livres";
+                }
+            }
         }
 
         $data = [
             "title" => $title,
-            "listmedias" => $listmedias,
+            "listvideos" => $listvideos,
+            "listbooks" => $listbooks,
             "listformers" => $listformers,
             "listarticles" => $listarticles,
             "listpublications" => $listpublications,
             "listtrainings" => $listtrainings,
+            "titlevideos" => $titlevideos,
+            "titlebooks" => $titlebooks,
+            "titleformers" => $titleformers,
+            "titlearticles" => $titlearticles,
+            "titlepublications" => $titlepublications,
+            "titletrainings" => $titletrainings,
         ];
 
         return view('Home/result.php', $data);
-    }
-
-    public function tridata()
-    {
     }
 }

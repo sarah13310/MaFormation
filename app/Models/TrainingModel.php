@@ -80,7 +80,7 @@ class TrainingModel extends Model
     {
         //$db      = \Config\Database::connect();
         $builder = $this->db->table('training');
-        $builder->select("id_training, title,date, description, image_url");
+        $builder->select("id_training, title,date, description, image_url, status");
         if ($status != ALL) {
             $builder->where("status", $status);
         }

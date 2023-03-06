@@ -14,7 +14,7 @@ class Training extends BaseController
      */
     public function __construct()
     {
-       helper(['util']); // déclaration des fonctions helper
+        helper(['util']); // déclaration des fonctions helper
     }
 
     /**
@@ -28,7 +28,7 @@ class Training extends BaseController
         $trainings = $this->training_model->getFilterTrainings();
         $list_training = [];
         $training_json = json_encode($trainings);
-        file_put_contents("training.json",$training_json);
+        file_put_contents("training.json", $training_json);
         /*foreach ($trainings as $training) {
             $list_training[] = [
                 "id_training" => $training['id_training'],
@@ -41,7 +41,7 @@ class Training extends BaseController
             "user" => $user,
             "title" => "Liste des formations",
             "trainings" => $list_training,
-            "training_json" =>base_url()."/training.json",
+            "training_json" => base_url() . "/training.json",
             "theme_button" => getTheme($user['type'], "button"),
             "headerColor" => getTheme($user['type'], "header"),
         ];
@@ -124,13 +124,7 @@ class Training extends BaseController
         return view('Payment/paymentcard.php', $data);
     }
 
-
-    /**
-     * training
-     * Tableau des formations (dashboard)
-     * @return void
-     */
-    public function dashboard_training()
+    private function refresh_training()
     {
         $title = "Tableau des formations";
         $user = $this->user_model->getUserSession();
@@ -146,18 +140,35 @@ class Training extends BaseController
                 "title" => $training['title'],
                 "description" => $training['description'],
                 "image_url" => $training['image_url'],
+                "status" => $training['status'],
                 "date" => dateTimeFormat($training['date']),
                 "pages" => $pages,
             ];
         }
+        $training_json = json_encode($listraining);
+        //
+        file_put_contents("training.json", $training_json);
+        //
         $data = [
             "title" => $title,
             "trainings" => $listraining,
             "user" => $user,
+            "training_json" => base_url() . "/training.json",
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
         ];
         return view('Admin/dashboard_training_admin.php', $data);
+    }
+
+
+    /**
+     * training
+     * Tableau des formations (dashboard)
+     * @return void
+     */
+    public function dashboard_training()
+    {
+        return $this->refresh_training();
     }
 
 
@@ -296,10 +307,10 @@ class Training extends BaseController
 
             //
             // on recupère la page par l'id dans la table            
-            $page=$this->page_model->getPageById($id_page);
-            $page=$page[0];
-            if (!$content){
-                $content=$page['content'];
+            $page = $this->page_model->getPageById($id_page);
+            $page = $page[0];
+            if (!$content) {
+                $content = $page['content'];
             }
             /*if ($page) {
                 $page = $page[0]; // on prend juste la page désirée
@@ -565,40 +576,25 @@ class Training extends BaseController
      * @return void
      */
     public function delete_training()
-    {
-        $title = "Tableau des formations";
-        // on récupère les informations utilisateur de la session active    
-        $user = $this->getUserSession();
-
+    {        
         if ($this->isPost()) {
             $id_training = $this->request->getVar('id_training');
             $this->training_model->deleteTraining($id_training);
-        }
-        /* on rafaichit la liste des formations */
-        $trainings = $this->training_model->getFilterTrainings();
-        /** on mappe la liste */
-        $listraining = [];
-        foreach ($trainings as $training) {
-            $pages = [];
-            $listraining[] = [
-                "id_training" => $training['id_training'],
-                "title" => $training['title'],
-                "description" => $training['description'],
-                "image_url" => $training['image_url'],
-                "date" => $training['date'],
-                "pages" => $pages,
-            ];
-        }
-        /** on prépare les données pour la page html */
-        $data = [
-            "title" => $title,
-            "trainings" => $listraining,
-            "user" => $user,
-            "buttonColor" => getTheme(session()->type, "button"),
-            "headerColor" => getTheme(session()->type, "header"),
-        ];
-        return view('Admin/dashboard_training_admin.php', $data);
+            return $this->refresh_training();
+        }        
     }
 
-    
+    public function training_status()
+    {
+        if ($this->isPost()){
+            $id_training=$this->getVar('id_training');
+            $status=$this->getVar('status');
+            $dataUpdate=[
+                'id_training'=>$id_training,
+                'status'=>$status,
+            ];
+            $this->training_model->save($dataUpdate);
+            return $this->refresh_training();
+        }
+    }
 }

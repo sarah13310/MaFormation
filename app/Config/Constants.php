@@ -128,3 +128,4 @@ define ("DEFAULT_IMG_TRAINING", BASE_URL."/assets/training.svg");
 define ("DEFAULT_IMG_BLANK", BASE_URL."/assets/blank.png");
 define ("DEFAULT_IMG_VIDEO", BASE_URL."/assets/video2.svg");
 define ("DEFAULT_IMG_BOOK", BASE_URL."/assets/book2.svg");
+define ("NO_ITEMS", BASE_URL."/assets/sad-face.svg");

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\xampp\htdocs\MaFormation\app\Models</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">C:\xampp\htdocs\MaFormation\app</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Models</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BillModel.php.html#9">App\Models\BillModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryModel.php.html#7">App\Models\CategoryModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#9">App\Models\MediaModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#7">App\Models\PageModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#7">App\Models\PublicationModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingHasPageModel.php.html#6">App\Models\TrainingHasPageModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserHasTrainingModel.php.html#7">App\Models\UserHasTrainingModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#10">App\Models\UserModel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#7">App\Models\TrainingModel</a></td><td class="text-right">10%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#8">App\Models\ArticleModel</a></td><td class="text-right">44%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="UserModel.php.html#10">App\Models\UserModel</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="PublicationModel.php.html#7">App\Models\PublicationModel</a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="MediaModel.php.html#9">App\Models\MediaModel</a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="TrainingModel.php.html#7">App\Models\TrainingModel</a></td><td class="text-right">200</td></tr>
+       <tr><td><a href="PageModel.php.html#7">App\Models\PageModel</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="ArticleModel.php.html#8">App\Models\ArticleModel</a></td><td class="text-right">115</td></tr>
+       <tr><td><a href="BillModel.php.html#9">App\Models\BillModel</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ArticleModel.php.html#54"><abbr title="App\Models\ArticleModel::getArticlesbyId">getArticlesbyId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#74"><abbr title="App\Models\ArticleModel::getTitleAllArticles">getTitleAllArticles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#116"><abbr title="App\Models\ArticleModel::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#132"><abbr title="App\Models\ArticleModel::deleteArticle">deleteArticle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#213"><abbr title="App\Models\ArticleModel::getAuthorArticles">getAuthorArticles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#252"><abbr title="App\Models\ArticleModel::getArticlesbyAuthor">getArticlesbyAuthor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BillModel.php.html#19"><abbr title="App\Models\BillModel::getFilterBill">getFilterBill</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryModel.php.html#19"><abbr title="App\Models\CategoryModel::getCategories">getCategories</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#38"><abbr title="App\Models\MediaModel::getVideos">getVideos</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#57"><abbr title="App\Models\MediaModel::getTitleAllVideos">getTitleAllVideos</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#75"><abbr title="App\Models\MediaModel::getBooks">getBooks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#94"><abbr title="App\Models\MediaModel::getTitleAllBooks">getTitleAllBooks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#110"><abbr title="App\Models\MediaModel::deleteMedia">deleteMedia</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#125"><abbr title="App\Models\MediaModel::MapMedias">MapMedias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#156"><abbr title="App\Models\MediaModel::getAuthorsMedias">getAuthorsMedias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#188"><abbr title="App\Models\MediaModel::getAuthorMedias">getAuthorMedias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#207"><abbr title="App\Models\MediaModel::ValidatedMedias">ValidatedMedias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#227"><abbr title="App\Models\MediaModel::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MediaModel.php.html#236"><abbr title="App\Models\MediaModel::triAuthorMedia">triAuthorMedia</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#24"><abbr title="App\Models\PageModel::modify">modify</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#41"><abbr title="App\Models\PageModel::getPageSession">getPageSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#53"><abbr title="App\Models\PageModel::setPageSession">setPageSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#72"><abbr title="App\Models\PageModel::getPageById">getPageById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#89"><abbr title="App\Models\PageModel::getPages">getPages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#98"><abbr title="App\Models\PageModel::getPageTitle">getPageTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#107"><abbr title="App\Models\PageModel::getFilterPage">getFilterPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageModel.php.html#121"><abbr title="App\Models\PageModel::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#34"><abbr title="App\Models\PublicationModel::getPublishes">getPublishes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#53"><abbr title="App\Models\PublicationModel::getPublisheById">getPublisheById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#68"><abbr title="App\Models\PublicationModel::getFilterPublishes">getFilterPublishes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#85"><abbr title="App\Models\PublicationModel::getArticlesByIdPublish">getArticlesByIdPublish</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#104"><abbr title="App\Models\PublicationModel::getFilterPublishesArticles">getFilterPublishesArticles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#145"><abbr title="App\Models\PublicationModel::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#160"><abbr title="App\Models\PublicationModel::deletePublishe">deletePublishe</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#174"><abbr title="App\Models\PublicationModel::MapPublishes">MapPublishes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#201"><abbr title="App\Models\PublicationModel::getAuthorsPublishes">getAuthorsPublishes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#235"><abbr title="App\Models\PublicationModel::getAuthorPublishes">getAuthorPublishes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PublicationModel.php.html#263"><abbr title="App\Models\PublicationModel::getPublishesbyAuthor">getPublishesbyAuthor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingHasPageModel.php.html#14"><abbr title="App\Models\TrainingHasPageModel::Remove">Remove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#28"><abbr title="App\Models\TrainingModel::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#35"><abbr title="App\Models\TrainingModel::getTrainingSession">getTrainingSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#48"><abbr title="App\Models\TrainingModel::setTrainingSession">setTrainingSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#61"><abbr title="App\Models\TrainingModel::getTrainingById">getTrainingById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#70"><abbr title="App\Models\TrainingModel::getTrainingsTitle">getTrainingsTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#94"><abbr title="App\Models\TrainingModel::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#103"><abbr title="App\Models\TrainingModel::fillOptionsTraining">fillOptionsTraining</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#116"><abbr title="App\Models\TrainingModel::getFilterPages">getFilterPages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#131"><abbr title="App\Models\TrainingModel::deleteTraining">deleteTraining</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserHasTrainingModel.php.html#19"><abbr title="App\Models\UserHasTrainingModel::getFormer">getFormer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserHasTrainingModel.php.html#27"><abbr title="App\Models\UserHasTrainingModel::getTraining">getTraining</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#43"><abbr title="App\Models\UserModel::beforeInsert">beforeInsert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#50"><abbr title="App\Models\UserModel::beforeUpdate">beforeUpdate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#63"><abbr title="App\Models\UserModel::passwordHash">passwordHash</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#81"><abbr title="App\Models\UserModel::getFilterUser">getFilterUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#98"><abbr title="App\Models\UserModel::getUserById">getUserById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#113"><abbr title="App\Models\UserModel::getUserSession">getUserSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#145"><abbr title="App\Models\UserModel::setUserSession">setUserSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#182"><abbr title="App\Models\UserModel::getInfosCertificates">getInfosCertificates</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#206"><abbr title="App\Models\UserModel::getCertificates">getCertificates</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#218"><abbr title="App\Models\UserModel::getCompanyById">getCompanyById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#237"><abbr title="App\Models\UserModel::getInfosCompany">getInfosCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#278"><abbr title="App\Models\UserModel::setCompanySession">setCompanySession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#301"><abbr title="App\Models\UserModel::removeCertificate">removeCertificate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#313"><abbr title="App\Models\UserModel::getFormers">getFormers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#328"><abbr title="App\Models\UserModel::getUserbyType">getUserbyType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#346"><abbr title="App\Models\UserModel::getUserByMail">getUserByMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserModel.php.html#361"><abbr title="App\Models\UserModel::modifyPassword">modifyPassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TrainingModel.php.html#79"><abbr title="App\Models\TrainingModel::getFilterTrainings">getFilterTrainings</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#89"><abbr title="App\Models\ArticleModel::getFilterArticles">getFilterArticles</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="ArticleModel.php.html#173"><abbr title="App\Models\ArticleModel::getAuthorsArticles">getAuthorsArticles</abbr></a></td><td class="text-right">80%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="MediaModel.php.html#125"><abbr title="App\Models\MediaModel::MapMedias">MapMedias</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ArticleModel.php.html#213"><abbr title="App\Models\ArticleModel::getAuthorArticles">getAuthorArticles</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="PublicationModel.php.html#104"><abbr title="App\Models\PublicationModel::getFilterPublishesArticles">getFilterPublishesArticles</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="UserModel.php.html#237"><abbr title="App\Models\UserModel::getInfosCompany">getInfosCompany</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="MediaModel.php.html#156"><abbr title="App\Models\MediaModel::getAuthorsMedias">getAuthorsMedias</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PageModel.php.html#24"><abbr title="App\Models\PageModel::modify">modify</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PageModel.php.html#107"><abbr title="App\Models\PageModel::getFilterPage">getFilterPage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PublicationModel.php.html#174"><abbr title="App\Models\PublicationModel::MapPublishes">MapPublishes</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PublicationModel.php.html#201"><abbr title="App\Models\PublicationModel::getAuthorsPublishes">getAuthorsPublishes</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TrainingModel.php.html#103"><abbr title="App\Models\TrainingModel::fillOptionsTraining">fillOptionsTraining</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ArticleModel.php.html#116"><abbr title="App\Models\ArticleModel::isExist">isExist</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="BillModel.php.html#19"><abbr title="App\Models\BillModel::getFilterBill">getFilterBill</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MediaModel.php.html#227"><abbr title="App\Models\MediaModel::isExist">isExist</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MediaModel.php.html#236"><abbr title="App\Models\MediaModel::triAuthorMedia">triAuthorMedia</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PageModel.php.html#121"><abbr title="App\Models\PageModel::isExist">isExist</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PublicationModel.php.html#68"><abbr title="App\Models\PublicationModel::getFilterPublishes">getFilterPublishes</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PublicationModel.php.html#145"><abbr title="App\Models\PublicationModel::isExist">isExist</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PublicationModel.php.html#235"><abbr title="App\Models\PublicationModel::getAuthorPublishes">getAuthorPublishes</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TrainingModel.php.html#94"><abbr title="App\Models\TrainingModel::isExist">isExist</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TrainingModel.php.html#116"><abbr title="App\Models\TrainingModel::getFilterPages">getFilterPages</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UserModel.php.html#63"><abbr title="App\Models\UserModel::passwordHash">passwordHash</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UserModel.php.html#81"><abbr title="App\Models\UserModel::getFilterUser">getFilterUser</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UserModel.php.html#182"><abbr title="App\Models\UserModel::getInfosCertificates">getInfosCertificates</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UserModel.php.html#328"><abbr title="App\Models\UserModel::getUserbyType">getUserbyType</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleModel.php.html#89"><abbr title="App\Models\ArticleModel::getFilterArticles">getFilterArticles</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="ArticleModel.php.html#173"><abbr title="App\Models\ArticleModel::getAuthorsArticles">getAuthorsArticles</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="TrainingModel.php.html#79"><abbr title="App\Models\TrainingModel::getFilterTrainings">getFilterTrainings</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.23</a> using <a href="https://secure.php.net/" target="_top">PHPDBG 8.1.6</a> and <a href="https://phpunit.de/">PHPUnit 9.6.3</a> at Mon Feb 27 13:06:04 CET 2023.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([8,0,1,0,0,1,0,0,0,0,0,18], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([67,0,0,0,0,0,0,0,1,2,0,2], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,0,"<a href=\"ArticleHasPublicationModel.php.html#6\">App\\Models\\ArticleHasPublicationModel<\/a>"],[44,23,"<a href=\"ArticleModel.php.html#8\">App\\Models\\ArticleModel<\/a>"],[0,2,"<a href=\"BillModel.php.html#9\">App\\Models\\BillModel<\/a>"],[100,0,"<a href=\"CategoryHasMediaModel.php.html#6\">App\\Models\\CategoryHasMediaModel<\/a>"],[0,1,"<a href=\"CategoryModel.php.html#7\">App\\Models\\CategoryModel<\/a>"],[100,0,"<a href=\"CertificateModel.php.html#7\">App\\Models\\CertificateModel<\/a>"],[100,0,"<a href=\"CompanyModel.php.html#6\">App\\Models\\CompanyModel<\/a>"],[100,0,"<a href=\"ContactModel.php.html#7\">App\\Models\\ContactModel<\/a>"],[100,0,"<a href=\"LettersModel.php.html#6\">App\\Models\\LettersModel<\/a>"],[100,0,"<a href=\"LogModel.php.html#7\">App\\Models\\LogModel<\/a>"],[0,20,"<a href=\"MediaModel.php.html#9\">App\\Models\\MediaModel<\/a>"],[0,13,"<a href=\"PageModel.php.html#7\">App\\Models\\PageModel<\/a>"],[100,0,"<a href=\"PublicationHasArticleModel.php.html#7\">App\\Models\\PublicationHasArticleModel<\/a>"],[0,21,"<a href=\"PublicationModel.php.html#7\">App\\Models\\PublicationModel<\/a>"],[100,0,"<a href=\"RdvModel.php.html#7\">App\\Models\\RdvModel<\/a>"],[100,0,"<a href=\"StatusModel.php.html#6\">App\\Models\\StatusModel<\/a>"],[100,0,"<a href=\"TagModel.php.html#7\">App\\Models\\TagModel<\/a>"],[0,1,"<a href=\"TrainingHasPageModel.php.html#6\">App\\Models\\TrainingHasPageModel<\/a>"],[10.344827586206897,16,"<a href=\"TrainingModel.php.html#7\">App\\Models\\TrainingModel<\/a>"],[100,0,"<a href=\"TypeSlideModel.php.html#6\">App\\Models\\TypeSlideModel<\/a>"],[100,0,"<a href=\"UserHasArticleModel.php.html#7\">App\\Models\\UserHasArticleModel<\/a>"],[100,0,"<a href=\"UserHasCertificateModel.php.html#6\">App\\Models\\UserHasCertificateModel<\/a>"],[100,0,"<a href=\"UserHasCompanyModel.php.html#6\">App\\Models\\UserHasCompanyModel<\/a>"],[100,0,"<a href=\"UserHasMediaModel.php.html#6\">App\\Models\\UserHasMediaModel<\/a>"],[100,0,"<a href=\"UserHasRdvModel.php.html#7\">App\\Models\\UserHasRdvModel<\/a>"],[0,2,"<a href=\"UserHasTrainingModel.php.html#7\">App\\Models\\UserHasTrainingModel<\/a>"],[100,0,"<a href=\"UserHasUserModel.php.html#7\">App\\Models\\UserHasUserModel<\/a>"],[0,24,"<a href=\"UserModel.php.html#10\">App\\Models\\UserModel<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"ArticleModel.php.html#34\">App\\Models\\ArticleModel::getArticles<\/a>"],[0,1,"<a href=\"ArticleModel.php.html#54\">App\\Models\\ArticleModel::getArticlesbyId<\/a>"],[0,1,"<a href=\"ArticleModel.php.html#74\">App\\Models\\ArticleModel::getTitleAllArticles<\/a>"],[80,4,"<a href=\"ArticleModel.php.html#89\">App\\Models\\ArticleModel::getFilterArticles<\/a>"],[0,2,"<a href=\"ArticleModel.php.html#116\">App\\Models\\ArticleModel::isExist<\/a>"],[0,1,"<a href=\"ArticleModel.php.html#132\">App\\Models\\ArticleModel::deleteArticle<\/a>"],[100,3,"<a href=\"ArticleModel.php.html#147\">App\\Models\\ArticleModel::MapArticles<\/a>"],[80.95238095238095,4,"<a href=\"ArticleModel.php.html#173\">App\\Models\\ArticleModel::getAuthorsArticles<\/a>"],[0,5,"<a href=\"ArticleModel.php.html#213\">App\\Models\\ArticleModel::getAuthorArticles<\/a>"],[0,1,"<a href=\"ArticleModel.php.html#252\">App\\Models\\ArticleModel::getArticlesbyAuthor<\/a>"],[0,2,"<a href=\"BillModel.php.html#19\">App\\Models\\BillModel::getFilterBill<\/a>"],[0,1,"<a href=\"CategoryModel.php.html#19\">App\\Models\\CategoryModel::getCategories<\/a>"],[0,1,"<a href=\"MediaModel.php.html#38\">App\\Models\\MediaModel::getVideos<\/a>"],[0,1,"<a href=\"MediaModel.php.html#57\">App\\Models\\MediaModel::getTitleAllVideos<\/a>"],[0,1,"<a href=\"MediaModel.php.html#75\">App\\Models\\MediaModel::getBooks<\/a>"],[0,1,"<a href=\"MediaModel.php.html#94\">App\\Models\\MediaModel::getTitleAllBooks<\/a>"],[0,1,"<a href=\"MediaModel.php.html#110\">App\\Models\\MediaModel::deleteMedia<\/a>"],[0,6,"<a href=\"MediaModel.php.html#125\">App\\Models\\MediaModel::MapMedias<\/a>"],[0,3,"<a href=\"MediaModel.php.html#156\">App\\Models\\MediaModel::getAuthorsMedias<\/a>"],[0,1,"<a href=\"MediaModel.php.html#188\">App\\Models\\MediaModel::getAuthorMedias<\/a>"],[0,1,"<a href=\"MediaModel.php.html#207\">App\\Models\\MediaModel::ValidatedMedias<\/a>"],[0,2,"<a href=\"MediaModel.php.html#227\">App\\Models\\MediaModel::isExist<\/a>"],[0,2,"<a href=\"MediaModel.php.html#236\">App\\Models\\MediaModel::triAuthorMedia<\/a>"],[0,3,"<a href=\"PageModel.php.html#24\">App\\Models\\PageModel::modify<\/a>"],[0,1,"<a href=\"PageModel.php.html#41\">App\\Models\\PageModel::getPageSession<\/a>"],[0,1,"<a href=\"PageModel.php.html#53\">App\\Models\\PageModel::setPageSession<\/a>"],[0,1,"<a href=\"PageModel.php.html#72\">App\\Models\\PageModel::getPageById<\/a>"],[0,1,"<a href=\"PageModel.php.html#89\">App\\Models\\PageModel::getPages<\/a>"],[0,1,"<a href=\"PageModel.php.html#98\">App\\Models\\PageModel::getPageTitle<\/a>"],[0,3,"<a href=\"PageModel.php.html#107\">App\\Models\\PageModel::getFilterPage<\/a>"],[0,2,"<a href=\"PageModel.php.html#121\">App\\Models\\PageModel::isExist<\/a>"],[0,1,"<a href=\"PublicationModel.php.html#34\">App\\Models\\PublicationModel::getPublishes<\/a>"],[0,1,"<a href=\"PublicationModel.php.html#53\">App\\Models\\PublicationModel::getPublisheById<\/a>"],[0,2,"<a href=\"PublicationModel.php.html#68\">App\\Models\\PublicationModel::getFilterPublishes<\/a>"],[0,1,"<a href=\"PublicationModel.php.html#85\">App\\Models\\PublicationModel::getArticlesByIdPublish<\/a>"],[0,4,"<a href=\"PublicationModel.php.html#104\">App\\Models\\PublicationModel::getFilterPublishesArticles<\/a>"],[0,2,"<a href=\"PublicationModel.php.html#145\">App\\Models\\PublicationModel::isExist<\/a>"],[0,1,"<a href=\"PublicationModel.php.html#160\">App\\Models\\PublicationModel::deletePublishe<\/a>"],[0,3,"<a href=\"PublicationModel.php.html#174\">App\\Models\\PublicationModel::MapPublishes<\/a>"],[0,3,"<a href=\"PublicationModel.php.html#201\">App\\Models\\PublicationModel::getAuthorsPublishes<\/a>"],[0,2,"<a href=\"PublicationModel.php.html#235\">App\\Models\\PublicationModel::getAuthorPublishes<\/a>"],[0,1,"<a href=\"PublicationModel.php.html#263\">App\\Models\\PublicationModel::getPublishesbyAuthor<\/a>"],[0,1,"<a href=\"TrainingHasPageModel.php.html#14\">App\\Models\\TrainingHasPageModel::Remove<\/a>"],[0,1,"<a href=\"TrainingModel.php.html#28\">App\\Models\\TrainingModel::add<\/a>"],[0,1,"<a href=\"TrainingModel.php.html#35\">App\\Models\\TrainingModel::getTrainingSession<\/a>"],[0,1,"<a href=\"TrainingModel.php.html#48\">App\\Models\\TrainingModel::setTrainingSession<\/a>"],[0,1,"<a href=\"TrainingModel.php.html#61\">App\\Models\\TrainingModel::getTrainingById<\/a>"],[0,1,"<a href=\"TrainingModel.php.html#70\">App\\Models\\TrainingModel::getTrainingsTitle<\/a>"],[75,3,"<a href=\"TrainingModel.php.html#79\">App\\Models\\TrainingModel::getFilterTrainings<\/a>"],[0,2,"<a href=\"TrainingModel.php.html#94\">App\\Models\\TrainingModel::isExist<\/a>"],[0,3,"<a href=\"TrainingModel.php.html#103\">App\\Models\\TrainingModel::fillOptionsTraining<\/a>"],[0,2,"<a href=\"TrainingModel.php.html#116\">App\\Models\\TrainingModel::getFilterPages<\/a>"],[0,1,"<a href=\"TrainingModel.php.html#131\">App\\Models\\TrainingModel::deleteTraining<\/a>"],[0,1,"<a href=\"UserHasTrainingModel.php.html#19\">App\\Models\\UserHasTrainingModel::getFormer<\/a>"],[0,1,"<a href=\"UserHasTrainingModel.php.html#27\">App\\Models\\UserHasTrainingModel::getTraining<\/a>"],[0,1,"<a href=\"UserModel.php.html#43\">App\\Models\\UserModel::beforeInsert<\/a>"],[0,1,"<a href=\"UserModel.php.html#50\">App\\Models\\UserModel::beforeUpdate<\/a>"],[0,2,"<a href=\"UserModel.php.html#63\">App\\Models\\UserModel::passwordHash<\/a>"],[0,2,"<a href=\"UserModel.php.html#81\">App\\Models\\UserModel::getFilterUser<\/a>"],[0,1,"<a href=\"UserModel.php.html#98\">App\\Models\\UserModel::getUserById<\/a>"],[0,1,"<a href=\"UserModel.php.html#113\">App\\Models\\UserModel::getUserSession<\/a>"],[0,1,"<a href=\"UserModel.php.html#145\">App\\Models\\UserModel::setUserSession<\/a>"],[0,2,"<a href=\"UserModel.php.html#182\">App\\Models\\UserModel::getInfosCertificates<\/a>"],[0,1,"<a href=\"UserModel.php.html#206\">App\\Models\\UserModel::getCertificates<\/a>"],[0,1,"<a href=\"UserModel.php.html#218\">App\\Models\\UserModel::getCompanyById<\/a>"],[0,4,"<a href=\"UserModel.php.html#237\">App\\Models\\UserModel::getInfosCompany<\/a>"],[0,1,"<a href=\"UserModel.php.html#278\">App\\Models\\UserModel::setCompanySession<\/a>"],[0,1,"<a href=\"UserModel.php.html#301\">App\\Models\\UserModel::removeCertificate<\/a>"],[0,1,"<a href=\"UserModel.php.html#313\">App\\Models\\UserModel::getFormers<\/a>"],[0,2,"<a href=\"UserModel.php.html#328\">App\\Models\\UserModel::getUserbyType<\/a>"],[0,1,"<a href=\"UserModel.php.html#346\">App\\Models\\UserModel::getUserByMail<\/a>"],[0,1,"<a href=\"UserModel.php.html#361\">App\\Models\\UserModel::modifyPassword<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

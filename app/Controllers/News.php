@@ -5,7 +5,7 @@ namespace App\Controllers;
 // le 20/01/2023
 // le 05/02/2023
 class News extends BaseController
-{    
+{
     /**
      * articles_edit
      * Edition de l'article
@@ -95,7 +95,7 @@ class News extends BaseController
                             'id_publication' => $id_publish,
                             'id_article' => $id_article,
                         ];
-                        $this->article_has_publication_model->save($datatemp2);
+                        $this->publication_has_article_model->save($datatemp2);
                     }
                     session()->setFlashdata('success', 'Article en cours de validation...');
                 }
@@ -103,7 +103,7 @@ class News extends BaseController
         }
         return view('Articles/articles_edit.php', $data);
     }
-    
+
     /**
      * publishes_edit
      * Edition de la publication
@@ -189,7 +189,7 @@ class News extends BaseController
                     if ($list_articles) {
                         foreach ($list_articles as $article) {
                             $data_temp['id_article'] = $article;
-                            $this->article_has_publication_model->insert($data_temp);
+                            $this->publication_has_article_model->insert($data_temp);
                         }
                     }
                     //
@@ -199,7 +199,7 @@ class News extends BaseController
         }
         return view('Publishes/publishes_edit.php', $data);
     }
-    
+
     /**
      * list_articles_home
      * Menu Articles => affiche de tous les articles validés
@@ -227,7 +227,7 @@ class News extends BaseController
         ];
         return view('Articles/list_article.php', $data);
     }
-        
+
     /**
      * home_article_details
      * fonction commune pour articles validés
@@ -260,7 +260,7 @@ class News extends BaseController
 
         return $data;
     }
-        
+
     /**
      * get_details_article_home
      * Carousel des articles validés (page home)
@@ -275,7 +275,7 @@ class News extends BaseController
         }
         return view('Articles/list_article_details.php', $data);
     }
-    
+
     /**
      * details_article_home
      * Détail de la liste article (page home)
@@ -285,13 +285,13 @@ class News extends BaseController
     {
         $title = "Détails de l'article";
 
-        if ($this->isPost() ) {
+        if ($this->isPost()) {
             $id = $this->request->getVar('id_article');
-            $data = $this->home_article_details($title, $id);            
+            $data = $this->home_article_details($title, $id);
             return view('Articles/list_article_details.php', $data);
         }
     }
-    
+
     /**
      * list_publishes_home
      * Menu publication =>La liste des publication 
@@ -301,7 +301,7 @@ class News extends BaseController
     {
         $listpublishes = [];
         $title = "Liste des publications";
-        
+
         $publishes = $this->publication_model->getFilterPublishes(VALIDE);
 
         $listpublishes = $this->publication_model->MapPublishes($listpublishes, $publishes);
@@ -315,7 +315,7 @@ class News extends BaseController
 
         return view('Publishes/list_publishes.php', $data);
     }
-    
+
     /**
      * details_publishes_home
      * Détails des publications
@@ -325,7 +325,7 @@ class News extends BaseController
     {
         $title = "Détails de la publication";
 
-        if ($this->isPost() ) {
+        if ($this->isPost()) {
 
             $id = $this->request->getVar('id_publication');
 
@@ -340,7 +340,7 @@ class News extends BaseController
 
             $listarticles = [];
 
-            $listarticles= $this->article_model->MapArticles($listarticles,$articles);
+            $listarticles = $this->article_model->MapArticles($listarticles, $articles);
 
             $id_user = $publication['id_user'];
 
@@ -356,7 +356,7 @@ class News extends BaseController
             return view('Publishes/list_publishes_details.php', $data);
         }
     }
-    
+
     /**
      * delete_article
      * suppression de l'article en fonction de son Id 
@@ -364,14 +364,14 @@ class News extends BaseController
      */
     public function delete_article()
     {
-        if ($this->isPost() ) {
+        if ($this->isPost()) {
             $id = $this->request->getVar('id_article');
 
             $this->article_model->deleteArticle($id);
         }
         return redirect()->to(previous_url());
     }
-     
+
     /**
      * delete_publish
      * suppression de la publication en fonction de son Id    
@@ -379,11 +379,91 @@ class News extends BaseController
      */
     public function delete_publish()
     {
-        if ($this->isPost() ) {
+        if ($this->isPost()) {
             $id = $this->request->getVar('id_publication');
             $this->publication_model->deletePublishe($id);
         }
         return redirect()->to(previous_url());
     }
 
+    public function status_article()
+    {
+        $listarticles = [];
+
+        if ($this->isPost()) {
+            $id_article = $this->request->getVar('id_article');
+            $status = $this->request->getVar('status');
+            //
+            $dataUpdate = [
+                'id_article' => $id_article,
+                'status' => $status,
+            ];
+            //
+            $this->article_model->save($dataUpdate);
+        }
+
+        $user = $this->getUserSession();
+        $title = "Tableau des articles";
+        $user = $this->user_model->getUserSession();
+        $public = $this->article_model->getArticles();
+        $builder = $public['builder'];
+        $articles = $public['articles'];
+        //
+        $listarticles = $this->article_model->MapArticles($listarticles, $articles);
+        $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
+        $article_json = json_encode($listarticles);
+        file_put_contents("dashboard_article.json", $article_json);
+        //
+        $data = [
+            'user' => $user,
+            'title' => $title,
+            "type" => session()->type,
+            "dashboard_article_json" => base_url() . "/dashboard_article.json",
+            'headerColor' => getTheme(session()->type, 'header'),
+            'buttonColor' => getTheme(session()->type, 'button'),
+        ];
+        return view("Admin/dashboard_article_admin.php", $data);
+    }
+
+    public function status_publish()
+    {
+        $listpublishes = [];
+
+        if ($this->isPost()) {
+            $id_publication = $this->request->getVar('id_publication');
+            $status = $this->request->getVar('status');
+            //
+            $dataUpdate = [
+                'id_publication' => $id_publication,
+                'status' => $status,
+            ];
+            //
+            $this->publication_model->save($dataUpdate);
+        }
+
+        $user = $this->getUserSession();
+        $title = "Tableau des publications";
+        $user = $this->getUserSession();
+        $user = $this->user_model->getUserSession();
+        //
+        $publishes = $this->publication_model->getFilterPublishes();
+        //
+        $listpublishes = $this->publication_model->MapPublishes($listpublishes, $publishes);
+        //
+        $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
+        //
+        $listpublishes = $this->publication_model->getFilterPublishesArticles($listpublishes, 0);
+        $publishe_json = json_encode($listpublishes);
+        file_put_contents("dashboard_publication.json", $publishe_json);
+        //
+        $data = [
+            'user' => $user,
+            'title' => $title,
+            "type" => session()->type,
+            "dashboard_publication_json" => base_url() . "/dashboard_publication.json",
+            'headerColor' => getTheme(session()->type, 'header'),
+            'buttonColor' => getTheme(session()->type, 'button'),
+        ];
+        return view("Admin/dashboard_publishes_admin.php", $data);
+    }
 }

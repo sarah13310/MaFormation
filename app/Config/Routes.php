@@ -31,6 +31,11 @@ $routes->setAutoRoute(false); // pour utliser les filtres
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+// Home déclaré en statique
+// Home::index <- méthode statique
+// $routes= new Routes(); je suis en dynamique
+// $routes->get <- méthode dynamique
+
 
 // Page d'acceuil
 $routes->get('/', 'Home::index');
@@ -130,6 +135,7 @@ $routes->group('/training', static function ($routes) {
     $routes->add('page/save', 'Training::save_page', ['filter' => 'auth']); //modify page (user profil)  
     $routes->add('page/delete', 'Training::delete_page', ['filter' => 'auth']); //delete page (user profil)  
     $routes->add('page/view', 'Dashboard::preview_page', ['filter' => 'auth']); //view page (user profil)  
+    $routes->add('status', 'Training::training_status', ['filter' => 'auth']); //view page (user profil)  
 });
 
 // Articles 
@@ -140,6 +146,8 @@ $routes->group('/article', static function ($routes) {
     $routes->add('preview', 'Dashboard::previewarticle'); //aperçu d'un article
     $routes->add('dashboard', 'Dashboard::dashboard_article', ['filter' => 'auth']); //tableau de bord des articles (page profil)   
     $routes->add('delete', 'News::delete_article', ['filter' => 'auth']); //delete article (page profil)  
+    $routes->add('status', 'News::status_article', ['filter' => 'auth']); //status article (page profil)  
+    
 });
 
 // Publications
@@ -149,6 +157,8 @@ $routes->group('/publishes', static function ($routes) {
     $routes->add('preview', 'Dashboard::previewpublish'); //aperçu d'une publication
     $routes->add('dashboard', 'Dashboard::dashboard_publishes', ['filter' => 'auth']); //tableau de bord des publications (page profil)  
     $routes->add('delete', 'News::delete_publish', ['filter' => 'auth']); //delete publishe (page profil)   
+    $routes->add('status', 'News::status_publish', ['filter' => 'auth']); //status publishe (page profil)  
+    
 });
 
 //Medias
@@ -159,6 +169,7 @@ $routes->group('/media', static function ($routes) {
     $routes->add('dashboard/videos', 'Dashboard::dashboard_media/1', ['filter' => 'auth']); // tableau de bord des vidéos (page profil)
     $routes->add('dashboard/books', 'Dashboard::dashboard_media/2', ['filter' => 'auth']); // tableau de bord des livres (page profil)
     $routes->add('delete', 'Media::delete_media', ['filter' => 'auth']); //delete vidéo/livre (page profil)
+    $routes->add('status/(:segment)', 'Dashboard::status_media/$1', ['filter' => 'auth']); //status media (page profil)  
 });
 
 /*

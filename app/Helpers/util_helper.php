@@ -249,6 +249,13 @@ function dateTimeFormat($date)
         $data = explode(' ', $date);
         $hm = explode(':', $data[1]);
         $date = explode('-', $data[0]);
+        if ($date[2] == "00")
+            $date[2] = 1;
+        if ($date[1] == "00")
+            $date[1] = 1;
+        if ($date[0] == "00")
+            $date[0] = 1971;
+
         $strDate = "Le " . $date[2] . " " . getMonth($date[1]) . " " . $date[0] . " à " . $hm[0] . "h" . $hm[1];
     }
     return $strDate;

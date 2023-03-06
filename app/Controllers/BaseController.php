@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ArticleHasPublicationModel;
+use App\Models\PublicationHasArticleModel;
 use App\Models\ArticleModel;
 use App\Models\BillModel;
 use App\Models\CategoryHasMediaModel;
@@ -68,7 +68,7 @@ abstract class BaseController extends Controller
    protected $training_model;
    protected $user_model;
    protected $page_model;
-   protected $article_has_publication_model;
+   protected $publication_has_article_model;
    protected $article_model;
    protected $bill_model;
    protected $category_model;
@@ -117,6 +117,17 @@ abstract class BaseController extends Controller
    {
       return ($this->request->getMethod(TRUE) === "GET");
    }
+   
+   /**
+    * getVar
+    *
+    * @param  mixed $var
+    * @return void
+    */
+   public function getVar($var)
+   {
+      return ($this->request->getVar($var));
+   }
 
    /**
     * getUserSession
@@ -143,7 +154,7 @@ abstract class BaseController extends Controller
       parent::initController($request, $response, $logger);
 
       // Preload any models, libraries, etc, here.
-      $this->article_has_publication_model = new ArticleHasPublicationModel();
+      $this->publication_has_article_model = new PublicationHasArticleModel();
       $this->article_model = new ArticleModel();
       $this->bill_model = new BillModel();
       $this->category_model = new CategoryModel();

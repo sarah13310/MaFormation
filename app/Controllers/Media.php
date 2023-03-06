@@ -124,7 +124,6 @@ class Media extends BaseController
 
     public function list_media_home($type)
     {
-
         switch ($type) {
             case VIDEO:
                 $title = "Liste des vidéos";
@@ -142,6 +141,7 @@ class Media extends BaseController
         $medias = $this->media_model->ValidatedMedias($type);
         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
         $authors = $this->media_model->triAuthorMedia($medias);
+        $tag = $this->media_model->triTagMedia($medias);
         $media_json = json_encode($listmedias);
         file_put_contents("media.json",$media_json);
         $data = [
@@ -150,6 +150,7 @@ class Media extends BaseController
             "b" => $b,
             "authors" => $authors,
             "media_json"=>base_url()."/media.json",
+            "tag"=>$tag,
         ];
         return view('/Media/list_medias.php', $data);
     }
@@ -158,12 +159,55 @@ class Media extends BaseController
      * suppression du media en fonction de son Id 
      * @return void
      */
+
+     private function refresh_media($type)
+     {
+         switch ($type) {
+             case VIDEO:
+                 $title = "Liste des vidéos";
+                 $public = $this->media_model->getVideos();
+                 $builder = $public['builder'];
+                 $medias = $public['videos'];
+                 $media = "video";
+                 break;
+             case BOOK:
+                 $title = "Liste des livres";
+                 $public = $this->media_model->getBooks();
+                 $builder = $public['builder'];
+                 $medias = $public['books'];
+                 $media = "book";
+                 break;
+         }
+ 
+         $listmedias = [];
+         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
+         $listmedias = $this->media_model->getAuthorsMedias($listmedias, $builder);
+         $media_json = json_encode($listmedias);
+ 
+         //
+         file_put_contents($media . ".json", $media_json);
+ 
+         $user = $this->user_model->getUserSession();
+         $data = [
+             "title" => $title,
+             "listmedias" => $listmedias,
+             "media_json" => base_url() . "/" . $media . ".json",
+             "user" => $user,
+             "type" => session()->type,
+             "typeofmedia" => $type,
+             "headerColor" => getTheme(session()->type, "header"),
+             "buttonColor" => getTheme(session()->type, "button"),
+         ];
+         return view('Admin/dashboard_media_admin.php', $data);
+     }
+      
     public function delete_media()
     {
         if ($this->isPost() == 'post') {
             $id = $this->request->getVar('id_media');
+            $type=$this->getVar('type_media');
             $this->media_model->deleteMedia($id);
         }
-        return redirect()->to(previous_url());
+        return $this->refresh_media($type);
     }
 }

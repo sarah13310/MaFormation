@@ -64,7 +64,7 @@ class User extends BaseController
 
                     if (!$user) {
                         session()->setFlashdata('infos', 'Cet utilisateur n\'existe pas');
-                    } else {
+                    } else { 
                         $pw = $this->request->getVar('password');
                         $pwh = $user['password'];
 
@@ -1049,11 +1049,11 @@ class User extends BaseController
         $data = [
             "title" => $title,
             "user" => $user, // le profil 
-            "user_json" => base_url() . "/user.json",
-            //"users" => $listuser, //la liste
+            "user_json" => base_url() . "/user.json",            
             "buttonColor" => getTheme(session()->type, "button"),
             "headerColor" => getTheme(session()->type, "header"),
             "showDetails" => ($profil == "company" ? "" : "hidden"),
+            "company"=>($profil === "company")?"true":"false",
             "count" => count($company), // 
         ];
         return view("User/list_client.php", $data);

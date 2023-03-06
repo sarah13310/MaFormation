@@ -1,0 +1,53 @@
+CRITICAL - 2023-02-27 09:42:02 --> Undefined variable $i
+in APPPATH\Views\Admin\list_privileges.php on line 22.
+ 1 APPPATH\Views\Admin\list_privileges.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $i', 'APPPATH\\Views\\Admin\\list_privileges.php', 22)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\list_privileges.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/list_privileges.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(186): view('Admin/list_privileges.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->privileges()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-27 12:37:13 --> Undefined variable $dashboard_publishe_json
+in APPPATH\Views\Admin\dashboard_publishes_admin.php on line 91.
+ 1 APPPATH\Views\Admin\dashboard_publishes_admin.php(91): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dashboard_publishe_json', 'APPPATH\\Views\\Admin\\dashboard_publishes_admin.php', 91)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_publishes_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_publishes_admin.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(308): view('Admin/dashboard_publishes_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->dashboard_publishes()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-27 12:44:03 --> Undefined variable $dashboard_publishe_json
+in APPPATH\Views\Admin\dashboard_publishes_admin.php on line 91.
+ 1 APPPATH\Views\Admin\dashboard_publishes_admin.php(91): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dashboard_publishe_json', 'APPPATH\\Views\\Admin\\dashboard_publishes_admin.php', 91)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\Admin\\dashboard_publishes_admin.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('Admin/dashboard_publishes_admin.php', [], true)
+ 5 APPPATH\Controllers\DashBoard.php(311): view('Admin/dashboard_publishes_admin.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->dashboard_publishes()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-27 14:01:26 --> Undefined array key "id_status"
+in APPPATH\Models\PublicationModel.php on line 190.
+ 1 APPPATH\Models\PublicationModel.php(190): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id_status"', 'APPPATH\\Models\\PublicationModel.php', 190)
+ 2 APPPATH\Controllers\DashBoard.php(295): App\Models\PublicationModel->MapPublishes([], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\DashBoard->dashboard_publishes()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashBoard))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-02-27 18:07:20 --> Call to undefined method App\Models\ArticleModel::getArticlesByIdPublish
+in SYSTEMPATH\Model.php on line 774.
+ 1 APPPATH\Controllers\News.php(118): CodeIgniter\Model->__call('getArticlesByIdPublish', [])
+ 2 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->publishes_edit()
+ 3 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 4 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')

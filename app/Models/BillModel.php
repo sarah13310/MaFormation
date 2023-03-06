@@ -13,8 +13,7 @@ class BillModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $allowedFields = ['id_bill', 'ref_name', 'status', 'content', 'datetime', 'video_url', 'extern_link_id_media', 'media_id_media', 'status', 'status_id_status'];
-    protected $beforeInsert = ['beforeInsert'];
-    protected $beforeUpdate = ['beforeUpdate'];
+  
     protected $useSoftDeletes = false;
 
     function getFilterBill($id = ALL)

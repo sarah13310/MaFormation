@@ -314,3 +314,16 @@
     border: 1px solid darkgray;
     padding: 2px;
 }
+
+.modal-header{
+    width:100%;
+    font-size: 18px;    
+    /* background: lightgray; */
+    padding: 0.5rem 1rem;
+
+}
+
+.btn-close{
+
+ opacity: 0.35;
+}

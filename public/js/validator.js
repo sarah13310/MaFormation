@@ -5,7 +5,7 @@
  *
  * @return void
  */
-function isValideMail(mail, min = 6, max = 32) {
+function isValideMail(mail, min = 8, max = 32) {
 	let msg = "";
 	let validRegex =
 		/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

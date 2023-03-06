@@ -2,5 +2,14 @@
     "debug.javascript.defaultRuntimeExecutable": {
     
         "pwa-node": "node"
-    }
+    },
+    "editor.codeActionWidget.showHeaders": false,
+    "editor.parameterHints.cycle": false,
+    "npm.enableRunFromFolder": false,
+    "typescript.tsserver.watchOptions": {
+        
+
+    },
+    "editor.fontSize": 12,
+    "files.autoSave": "afterDelay"
 }

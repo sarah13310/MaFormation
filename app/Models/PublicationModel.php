@@ -51,7 +51,7 @@ class PublicationModel extends Model
      * clef publishes =>retourne les publications
      */
     function getPublisheById($id)
-    {        
+    {
         $builder = $this->db->table('publication');
         $builder->where("id_publication", $id);
         $query   = $builder->get();
@@ -92,7 +92,7 @@ class PublicationModel extends Model
         $articles = $query->getResultArray();
         return $articles;
     }
-    
+
     /**
      * getFilterPublishesArticles
      *
@@ -175,10 +175,11 @@ class PublicationModel extends Model
     {
         foreach ($data as $d) {
             $image_url = $d['image_url'];
-
-            if ($image_url == null ) {
+            //
+            if ($image_url == null) {
                 $d['image_url'] = constant('DEFAULT_IMG_PUBLISHES');
             }
+            //
             $list[] = [
                 "id_publication" => $d['id_publication'],
                 "subject" => $d['subject'],
@@ -186,6 +187,7 @@ class PublicationModel extends Model
                 "datetime" => $d['datetime'],
                 "image_url" => $d['image_url'],
                 "id_user" => $d['id_user'],
+                "status" => $d['status'],
             ];
         }
         return $list;
@@ -270,5 +272,4 @@ class PublicationModel extends Model
 
         return $publishes;
     }
-
 }

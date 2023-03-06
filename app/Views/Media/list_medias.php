@@ -11,10 +11,8 @@
         </select>
     </div>
     <div id='main' class="row align-items-center justify-content-center">
-
     </div>
 </div>
-
 <?= $this->endSection() ?>
 
 
