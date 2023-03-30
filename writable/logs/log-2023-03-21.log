@@ -1,0 +1,28 @@
+ERROR - 2023-03-21 13:15:14 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(27): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(99): App\Controllers\Home->home()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(27): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(99): App\Controllers\Home->home()
+#5 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#10 {main}

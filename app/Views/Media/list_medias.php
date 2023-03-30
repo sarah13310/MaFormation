@@ -2,13 +2,33 @@
 <?= $this->section('content') ?>
 <h1 class="mb-3  text-center"><?= $title ?></h1>
 <div class="container">
-    <div>
-        <select name="authors" id="authors">
-            <option selected="selected">Tous</option>
-            <?php foreach ($authors as $author) : ?>
-                <option value="<?= $author['author'] ?>"><?= $author['author'] ?></option>
-            <?php endforeach ?>
-        </select>
+    <div class="row w-75">
+        <div class="col">
+            <label>Auteurs : </label>
+            <select name="authors" id="authors">
+                <option selected="selected">Tous</option>
+                <?php foreach ($authors as $author) : ?>
+                    <option value="<?= $author['author'] ?>"><?= $author['author'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div class="col">
+            <label>Catégories : </label>
+            <select name="tag" id="tag">
+                <option selected="selected">Tous</option>
+                <?php foreach ($tag as $t) : ?>
+                    <option value="<?= $t['name'] ?>"><?= $t['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div class="col">
+            <label>Ordre alphabétique : </label>
+            <select name="az" id="az">
+                <option selected="selected">--</option>
+                <option>A-Z</option>
+                <option>Z-A</option>
+            </select>
+        </div>
     </div>
     <div id='main' class="row align-items-center justify-content-center">
     </div>
@@ -17,108 +37,98 @@
 
 
 <?= $this->section('js') ?>
+<script src="<?= base_url() ?>/js/filter.js"></script>
 <script>
-    let buffer = null;
 
-    const main = document.getElementById("main");
-    fetch("<?= $media_json ?>")
-        .then(res => res.json())
-        .then(data => {
-            buffer = data;
-            for (let i = 0; i < data.length; i++) {
-                cardinfo = data[i];
-                CreateCard(main, cardinfo);
-            }
-        });
 
-    function clearAllCard() {
-        while (main.lastElementChild) {
-            main.removeChild(main.lastElementChild);
-        }
-    }
-
-    function trie( reverse=false) {
-        clearAllCard();
-        cards = buffer;
-        if (reverse){
-            cards.reverse();
-        }
-        else{
-            cards.sort();
-        }
-        for (let i = 0; i < cards.length; i++) {
-            cardinfo = cards[i];
-            CreateCard(main, cardinfo);
-        }
-    }
-
-    function selectCardByAuthor(cardName) {
-        clearAllCard();
-        cards = buffer;
-        cards = cards.filter(item => {
-            return (item.author == cardName);           
-        });
-        for (let i = 0; i < cards.length; i++) {
-            cardinfo = cards[i];
-            CreateCard(main, cardinfo);
-        }
-    }
-
-    function showAll(){
-        clearAllCard();
-        cards = buffer;        
-        for (let i = 0; i < cards.length; i++) {
-            cardinfo = cards[i];
-            CreateCard(main, cardinfo);
-        }
-    }
+    loadData("<?= $media_json ?>");
 
     let select_authors = document.getElementById('authors');
+
+    let select_tag = document.getElementById('tag');
+
+    let select_az = document.getElementById('az');
+
+    let sel_author = "Tous";
+
+    let sel_tag = "Tous";
+
+
+    let selectors = {
+        "author": select_authors,
+        "tag": select_tag,
+        "status": null,
+        "distributor": null,
+        "former": null,
+        "company": null,
+        "city": null,
+        "cp": null,
+        "alpha": select_az,
+        "day": null,
+        "month": null,
+        "year": null
+    };
+
     select_authors.addEventListener('change', (event) => {
-        let sel = select_authors[select_authors.selectedIndex].value;
-        if (sel === "Tous") {
-            showAll();
-        } else {        
-            selectCardByAuthor(sel);
-        }
+        sel_author = select_authors[select_authors.selectedIndex].value;
+
+        filtre(selectors);
+
     })
 
-    
-    function CreateCard(parent, cardinfos) {
-        let card = document.createElement("div");
-        card.classList.add(["card"], ["mb-2"], ["flex-row"], ["w-75"]);
+    select_tag.addEventListener('change', (event) => {
+        sel_tag = select_tag[select_tag.selectedIndex].value;
+
+        filtre(selectors);
+
+    })
+
+
+    select_az.addEventListener('change', (event) => {
+        let sel = select_az[select_az.selectedIndex].value;
+        if (sel === "--") {
+            showAll();
+            return;
+        }
+        filtre(selectors);
+    })
+
+
+    function CreateItem(parent, items) {
+        let item = document.createElement("div");
+        item.classList.add(["card"], ["mb-2"], ["flex-row"], ["w-75"]);
         let img = document.createElement("img");
         img.classList.add(["mt-2"], ["mb-2"], ["card-img-left"], ["p-4"]);
         img.style = "width:28%";
-        img.src = cardinfos.image_url;
+        img.src = items.image_url;
         let body = document.createElement("div");
         body.classList.add("card-body");
         let title = document.createElement("h5");
         title.classList.add("card-title");
-        title.innerText = cardinfos.name;
+        title.innerText = items.name;
         let author = document.createElement("small");
-        author.innerText = cardinfos.author;
+        author.innerText = items.author;
         let div = document.createElement("div");
         div.classList.add("mt-3");
         let description = document.createElement("p");
-        description.innerText = cardinfos.description;
+        description.innerText = items.description;
         description.classList.add('card-description');
 
         description.style = "height: 6rem";
         let button = document.createElement("a");
-        button.href = cardinfos.url;
+        button.href = items.url;
         button.classList.add(["btn"], ["mr-2"], ["float-end"]);
         button.setAttribute("role", "button");
         button.innerHTML = "Voir plus";
         //
-        card.append(img);
-        card.append(body);
+        item.append(img);
+        item.append(body);
         body.append(title);
         body.append(author);
         body.append(div);
         body.append(button);
         div.append(description);
-        parent.appendChild(card);
+        parent.appendChild(item);
     }
 
     /* setTimeout(() => {

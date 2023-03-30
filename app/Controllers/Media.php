@@ -140,17 +140,22 @@ class Media extends BaseController
         $listmedias = [];
         $medias = $this->media_model->ValidatedMedias($type);
         $listmedias = $this->media_model->MapMedias($listmedias, $medias);
-        $authors = $this->media_model->triAuthorMedia($medias);
-        $tag = $this->media_model->triTagMedia($medias);
+
+        $listmedias = $this->tag_model->getTagName($listmedias);
+
+        $authors = $this->tag_model->FilterAuthor($listmedias);
+        $tag = $this->tag_model->FilterTag($listmedias);
+
         $media_json = json_encode($listmedias);
-        file_put_contents("media.json",$media_json);
+        file_put_contents("media.json", $media_json);
+
         $data = [
-            "title" => $title,            
+            "title" => $title,
             "p" => $p,
             "b" => $b,
             "authors" => $authors,
-            "media_json"=>base_url()."/media.json",
-            "tag"=>$tag,
+            "media_json" => base_url() . "/media.json",
+            "tag" => $tag,
         ];
         return view('/Media/list_medias.php', $data);
     }

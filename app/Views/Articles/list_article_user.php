@@ -76,18 +76,15 @@
         rows = rows.filter(item => {
             let rowdate = new Date(item.datetime).getDate();
             return (rowdate == d);
-        });
-
+        });        
         rows = rows.filter(item => {
             let rowmonth = new Date(item.datetime).getMonth();
             return (rowmonth + 1 == m);
         });
-
         rows = rows.filter(item => {
             let rowyear = new Date(item.datetime).getFullYear();
             return (rowyear == y);
         });
-
         FillRow();
     }
 

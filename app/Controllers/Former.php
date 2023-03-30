@@ -12,6 +12,7 @@ class Former extends BaseController
      * Liste des formateurs page home
      * @return void
      */
+   
     public function list_former_home()
     {
         $title = "Liste des formateurs";
@@ -20,48 +21,12 @@ class Former extends BaseController
         $formers = $public["formers"];
         $listformers = [];
 
-        foreach ($formers as $former) {
-            if ($former['image_url'] == null) {
-                $former['image_url'] = base_url() . "/assets/Blank_nogender.svg";
-            }
-            $listformers[] = [
-                "id_user" => $former['id_user'],
-                "name" => $former['name'],
-                "firstname" => $former['firstname'],
-                "address" => $former['address'],
-                "city" => $former['city'],
-                "cp" => $former['cp'],
-                "country" => $former['country'],
-                "mail" => $former['mail'],
-                "phone" => $former['phone'],
-                "image_url" => $former['image_url'],
-            ];
-        }
+        $listformers = $this->user_model->MapFormer($listformers, $formers);
+
         /* compétences certificats*/
-        $builder->select('certificate.name,certificate.content,certificate.date,certificate.organism,certificate.address,certificate.city,certificate.cp,certificate.country');
 
-        for ($i = 0; $i < count($listformers); $i++) {
-            $builder->where('user.id_user', $listformers[$i]['id_user']);
-            $builder->join('user_has_certificate', 'user_has_certificate.id_user = user.id_user');
-            $builder->join('certificate', 'user_has_certificate.id_certificate = certificate.id_certificate');
-            $query = $builder->get();
-            $certificates = $query->getResultArray();
+        $listformers = $this->user_model->getAllFormerCertificate($listformers, $builder);
 
-            $certi = [];
-            foreach ($certificates as $certificate) {
-                $certi[] = [
-                    "name" => $certificate['name'],
-                    "content" => $certificate['content'],
-                    "date" => $certificate['date'],
-                    "organism" => $certificate['organism'],
-                    "address" => $certificate['address'],
-                    "city" => $certificate['city'],
-                    "cp" => $certificate['cp'],
-                    "country" => $certificate['country'],
-                ];
-            }
-            $listformers[$i]["skills"] = $certi;
-        }
         $builder->select('company.name, company.address,company.city ,company.cp,company.country');
         $builder->join('user_has_company', 'user_has_company.id_user = user.id_user');
         $builder->join('company', 'user_has_company.id_company=company.id_company');
@@ -79,15 +44,27 @@ class Former extends BaseController
             ];
         }
 
+        $listformers = $this->tag_model->getTagName($listformers);
+
+        $tag = $this->tag_model->FilterTag($listformers);
+
+        $former = $this->tag_model->FilterFormer($listformers);
+
+        $former_json = json_encode($listformers);
+        file_put_contents("former.json", $former_json);
+
+
         $data = [
             "title" => $title,
             "formers" => $listformers,
             "jobs" => $jobs,
+            "tag" => $tag,
+            "former" => $former,
+            "former_json" => base_url() . "/former.json",
         ];
 
         return view('Former/list_former.php', $data);
     }
-
     /**
      * details_former_home
      * 

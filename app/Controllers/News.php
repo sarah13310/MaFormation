@@ -200,7 +200,7 @@ class News extends BaseController
         return view('Publishes/publishes_edit.php', $data);
     }
 
-    /**
+   /**
      * list_articles_home
      * Menu Articles => affiche de tous les articles validés
      * @return void
@@ -220,13 +220,27 @@ class News extends BaseController
         $listarticles = $this->article_model->MapArticles($listarticles, $articles);
 
         $listarticles = $this->article_model->getAuthorsArticles($listarticles, $builder);
+        
+
+        $listarticles = $this->tag_model->getTagName($listarticles);
+    // die(print_r($listarticles[0]));
+        $distributor = $this->tag_model->FilterDistributor($listarticles);
+
+        $tag = $this->tag_model->FilterTag($listarticles);
+
+        $article_json = json_encode($listarticles);
+        file_put_contents("article.json", $article_json);
 
         $data = [
             "title" => $title,
+            "tag" => $tag,
+            "distributor" => $distributor,
+            "article_json" => base_url() . "/article.json",
             "listarticles" => $listarticles,
         ];
         return view('Articles/list_article.php', $data);
     }
+
 
     /**
      * home_article_details
@@ -292,7 +306,7 @@ class News extends BaseController
         }
     }
 
-    /**
+   /**
      * list_publishes_home
      * Menu publication =>La liste des publication 
      * @return void
@@ -308,8 +322,20 @@ class News extends BaseController
 
         $listpublishes = $this->publication_model->getAuthorsPublishes($listpublishes);
 
+        $listpublishes = $this->tag_model->getTagName($listpublishes);
+
+        $distributor = $this->tag_model->FilterDistributor($listpublishes);
+
+        $tag = $this->tag_model->FilterTag($listpublishes);
+
+        $publish_json = json_encode($listpublishes);
+        file_put_contents("publish.json", $publish_json);
+
         $data = [
             "title" => $title,
+            "tag" => $tag,
+            "distributor" => $distributor,
+            "publish_json" => base_url() . "/publish.json",
             "listpublishes" => $listpublishes,
         ];
 

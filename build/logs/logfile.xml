@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="9" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="1.110812">
-    <testsuite name="App" tests="7" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.356779">
-      <testsuite name="ArticleDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\ArticleDatabaseTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.194171">
-        <testcase name="testModelFindAll" class="ArticleDatabaseTest" classname="ArticleDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\ArticleDatabaseTest.php" line="17" assertions="1" time="0.118562"/>
-        <testcase name="testDeleteLeavesRow" class="ArticleDatabaseTest" classname="ArticleDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\ArticleDatabaseTest.php" line="26" assertions="1" time="0.075609"/>
+  <testsuite name="" tests="12" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="1.965171">
+    <testsuite name="App" tests="9" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.537328">
+      <testsuite name="ArticleDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\ArticleDatabaseTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.209952">
+        <testcase name="testModelFindAll" class="ArticleDatabaseTest" classname="ArticleDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\ArticleDatabaseTest.php" line="17" assertions="1" time="0.119723"/>
+        <testcase name="testDeleteLeavesRow" class="ArticleDatabaseTest" classname="ArticleDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\ArticleDatabaseTest.php" line="26" assertions="1" time="0.090229"/>
       </testsuite>
-      <testsuite name="UserDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\UserDatabaseTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.150867">
-        <testcase name="testModelFindAll" class="UserDatabaseTest" classname="UserDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\UserDatabaseTest.php" line="17" assertions="1" time="0.071626"/>
-        <testcase name="testDeleteLeavesRow" class="UserDatabaseTest" classname="UserDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\UserDatabaseTest.php" line="26" assertions="1" time="0.079242"/>
+      <testsuite name="PublisheDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\PublisheDatabaseTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.179220">
+        <testcase name="testModelFindAll" class="PublisheDatabaseTest" classname="PublisheDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\PublisheDatabaseTest.php" line="17" assertions="1" time="0.072179"/>
+        <testcase name="testDeleteLeavesRow" class="PublisheDatabaseTest" classname="PublisheDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\PublisheDatabaseTest.php" line="26" assertions="1" time="0.107041"/>
       </testsuite>
-      <testsuite name="ExampleSessionTest" file="C:\xampp\htdocs\MaFormation\tests\session\ExampleSessionTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003108">
-        <testcase name="testSessionSimple" class="ExampleSessionTest" classname="ExampleSessionTest" file="C:\xampp\htdocs\MaFormation\tests\session\ExampleSessionTest.php" line="11" assertions="1" time="0.003108"/>
+      <testsuite name="UserDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\UserDatabaseTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.141491">
+        <testcase name="testModelFindAll" class="UserDatabaseTest" classname="UserDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\UserDatabaseTest.php" line="17" assertions="1" time="0.066969"/>
+        <testcase name="testDeleteLeavesRow" class="UserDatabaseTest" classname="UserDatabaseTest" file="C:\xampp\htdocs\MaFormation\tests\database\UserDatabaseTest.php" line="26" assertions="1" time="0.074522"/>
       </testsuite>
-      <testsuite name="HealthTest" file="C:\xampp\htdocs\MaFormation\tests\unit\HealthTest.php" tests="2" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.008633">
-        <testcase name="testIsDefinedAppPath" class="HealthTest" classname="HealthTest" file="C:\xampp\htdocs\MaFormation\tests\unit\HealthTest.php" line="13" assertions="1" time="0.003183"/>
-        <testcase name="testBaseUrlHasBeenSet" class="HealthTest" classname="HealthTest" file="C:\xampp\htdocs\MaFormation\tests\unit\HealthTest.php" line="18" assertions="2" time="0.005450"/>
+      <testsuite name="ExampleSessionTest" file="C:\xampp\htdocs\MaFormation\tests\session\ExampleSessionTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.002386">
+        <testcase name="testSessionSimple" class="ExampleSessionTest" classname="ExampleSessionTest" file="C:\xampp\htdocs\MaFormation\tests\session\ExampleSessionTest.php" line="11" assertions="1" time="0.002386"/>
+      </testsuite>
+      <testsuite name="HealthTest" file="C:\xampp\htdocs\MaFormation\tests\unit\HealthTest.php" tests="2" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.004279">
+        <testcase name="testIsDefinedAppPath" class="HealthTest" classname="HealthTest" file="C:\xampp\htdocs\MaFormation\tests\unit\HealthTest.php" line="13" assertions="1" time="0.001310"/>
+        <testcase name="testBaseUrlHasBeenSet" class="HealthTest" classname="HealthTest" file="C:\xampp\htdocs\MaFormation\tests\unit\HealthTest.php" line="18" assertions="2" time="0.002968"/>
       </testsuite>
     </testsuite>
-    <testsuite name="myApp" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.754032">
-      <testsuite name="CodeIgniter\TestControllerArticle" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerArticle.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.625384">
-        <testcase name="testPageArticle" class="CodeIgniter\TestControllerArticle" classname="CodeIgniter.TestControllerArticle" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerArticle.php" line="14" assertions="1" time="0.625384"/>
+    <testsuite name="myApp" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="1.427843">
+      <testsuite name="CodeIgniter\TestControllerArticle" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerArticle.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.549898">
+        <testcase name="testPageArticle" class="CodeIgniter\TestControllerArticle" classname="CodeIgniter.TestControllerArticle" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerArticle.php" line="14" assertions="1" time="0.549898"/>
       </testsuite>
-      <testsuite name="CodeIgniter\TestControllerHome" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerHome.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.128648">
-        <testcase name="testPageHome" class="CodeIgniter\TestControllerHome" classname="CodeIgniter.TestControllerHome" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerHome.php" line="14" assertions="1" time="0.128648"/>
+      <testsuite name="CodeIgniter\TestControllerHome" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerHome.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.512906">
+        <testcase name="testPageHome" class="CodeIgniter\TestControllerHome" classname="CodeIgniter.TestControllerHome" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerHome.php" line="14" assertions="1" time="0.512906"/>
+      </testsuite>
+      <testsuite name="CodeIgniter\TestControllerPublishe" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerPublishe.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.365040">
+        <testcase name="testPagePublishe" class="CodeIgniter\TestControllerPublishe" classname="CodeIgniter.TestControllerPublishe" file="C:\xampp\htdocs\MaFormation\tests\unit\TestControllerPublishe.php" line="14" assertions="1" time="0.365040"/>
       </testsuite>
     </testsuite>
   </testsuite>

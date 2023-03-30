@@ -1,0 +1,145 @@
+ERROR - 2023-03-29 14:55:47 --> Error connecting to the database: mysqli_sql_exception: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:171
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php(171): mysqli->real_connect('localhost', 'root', '', 'formation', 3306, '', 0)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(27): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(99): App\Controllers\Home->home()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée in C:\xampp\htdocs\MaFormation\system\Database\MySQLi\Connection.php:215
+Stack trace:
+#0 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(382): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\MaFormation\system\Database\BaseConnection.php(561): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\MaFormation\system\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(27): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\MaFormation\app\Controllers\Home.php(99): App\Controllers\Home->home()
+#5 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(927): App\Controllers\Home->index()
+#6 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\MaFormation\system\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\MaFormation\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\MaFormation\system\Commands\Server\rewrite.php(46): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2023-03-29 15:07:44 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(228): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 15:11:32 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(228): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 15:19:05 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 65.
+ 1 APPPATH\Models\TagModel.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 65)
+ 2 APPPATH\Controllers\News.php(228): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 15:19:46 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 65.
+ 1 APPPATH\Models\TagModel.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 65)
+ 2 APPPATH\Controllers\News.php(228): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 15:20:13 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 61.
+ 1 APPPATH\Models\TagModel.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 61)
+ 2 APPPATH\Controllers\News.php(228): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:14:52 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:16:19 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:16:23 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:35:41 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:36:54 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 62.
+ 1 APPPATH\Models\TagModel.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 62)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:54:34 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 63.
+ 1 APPPATH\Models\TagModel.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 63)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:55:35 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 63.
+ 1 APPPATH\Models\TagModel.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 63)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
+CRITICAL - 2023-03-29 16:55:37 --> Undefined array key 0
+in APPPATH\Models\TagModel.php on line 63.
+ 1 APPPATH\Models\TagModel.php(63): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'APPPATH\\Models\\TagModel.php', 63)
+ 2 APPPATH\Controllers\News.php(229): App\Models\TagModel->FilterTag([...])
+ 3 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\News->list_articles_home()
+ 4 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\News))
+ 5 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(46): require_once('FCPATH\\index.php')
